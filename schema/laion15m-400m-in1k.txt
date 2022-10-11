@@ -1,0 +1,12 @@
+{
+  "laion": {
+    "train_data": "/vast/work/public/ml-datasets/laion400m/{00000..41400}.tar",
+    "train_num_samples": 15000000,
+    "dataset_type": "auto"
+  },
+  "in1k": {
+    "train_data": "/scratch/bf996/datasets/imagenet-captions-split/imagenet-captions-split/{00000..00141}.tar",
+    "train_num_samples": 1280000,
+    "dataset_type": "auto"
+  }
+}
