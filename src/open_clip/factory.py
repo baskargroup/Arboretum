@@ -12,7 +12,7 @@ import torch
 from torch import nn
 
 from .constants import OPENAI_DATASET_MEAN, OPENAI_DATASET_STD
-from .model import CLIP, CustomTextCLIP, convert_weights_to_fp16, convert_to_custom_text_state_dict, resize_pos_embed, SIMCLR
+from .model import CLIP, convert_weights_to_fp16, resize_pos_embed, SIMCLR
 from .openai import load_openai_model
 from .pretrained import get_pretrained_cfg, download_pretrained
 from .transform import image_transform
@@ -87,9 +87,6 @@ def load_state_dict(checkpoint_path: str, map_location='cpu'):
 
 def load_checkpoint(model, checkpoint_path, strict=True):
     state_dict = load_state_dict(checkpoint_path)
-    # detect old format and make compatible with new format
-    if 'positional_embedding' in state_dict and not hasattr(model, 'positional_embedding'):
-        state_dict = convert_to_custom_text_state_dict(state_dict)
     resize_pos_embed(state_dict, model)
     incompatible_keys = model.load_state_dict(state_dict, strict=strict)
     return incompatible_keys
