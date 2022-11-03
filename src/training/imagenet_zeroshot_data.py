@@ -7,7 +7,7 @@ try:
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_OPENAI = Path("open_clip/metadata/imagenet1k_openclip.txt")
+    IN1K_OPENAI = Path("vlhub/metadata/imagenet1k_openclip.txt")
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_classnames = ast.literal_eval( file.read( ) )
 
@@ -19,7 +19,7 @@ try:
     with open( IN1K_ORDER, 'r' ) as file:
         imagenet_wrongorder_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_ORDER = Path("open_clip/metadata/imagenet1k_wrongorder.txt")
+    IN1K_ORDER = Path("vlhub/metadata/imagenet1k_wrongorder.txt")
     with open( IN1K_ORDER, 'r' ) as file:
         imagenet_wrongorder_classnames = ast.literal_eval( file.read( ) )
 
@@ -31,7 +31,7 @@ try:
     with open( IN1K_OURS, 'r' ) as file:
         imagenet_our_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_OURS = Path("open_clip/metadata/imagenet1k_ours.txt")
+    IN1K_OURS = Path("vlhub/metadata/imagenet1k_ours.txt")
     with open( IN1K_OURS, 'r' ) as file:
         imagenet_our_classnames = ast.literal_eval( file.read( ) )
 temp = []
@@ -48,7 +48,7 @@ try:
     with open( IN1K_DEF, 'r' ) as file:
         imagenet_def_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_DEF = Path("open_clip/metadata/imagenet1k_default.txt")
+    IN1K_DEF = Path("vlhub/metadata/imagenet1k_default.txt")
     with open( IN1K_DEF, 'r' ) as file:
         imagenet_def_classnames = ast.literal_eval( file.read( ) )
 temp = []
@@ -244,7 +244,7 @@ try:
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_cipher = ast.literal_eval( file.read( ) )
 except:
-    IN1K_OPENAI = Path("open_clip/metadata/imagenet1k_cipher.txt")
+    IN1K_OPENAI = Path("vlhub/metadata/imagenet1k_cipher.txt")
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_cipher = ast.literal_eval( file.read( ) )
 
