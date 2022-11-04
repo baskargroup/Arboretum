@@ -4,7 +4,7 @@ try:
     METPATH = "./metadata/inat2021-categories.csv"
     df = pd.read_csv(METPATH)
 except:
-    METPATH = "open_clip/metadata/inat2021-categories.csv"
+    METPATH = "vlhub/metadata/inat2021-categories.csv"
     df = pd.read_csv(METPATH)
 
 inat_classnames = df['label'].tolist()
