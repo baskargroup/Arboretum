@@ -70,7 +70,7 @@ def parse_args():
         "--ds-filter",
         type=str,
         default="",
-        help="Filter to only include samples in the batch whose captions contain a word in the filter list: options are ['imagenet_classnames', 'inat_classnames', 'cars_classnames', 'flowers_classnames', 'food_classnames', 'air_classnames']."
+        help="Filter to only include samples in the batch whose captions contain a word in the filter list: options are ['imagenet_classnames', 'inat_classnames', 'cars_classnames', 'food_classnames', 'air_classnames']."
     )
     parser.add_argument(
         "--strict",
