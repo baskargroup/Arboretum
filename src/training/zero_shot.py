@@ -19,7 +19,6 @@ from .metrics import *
 try:
     from .inat_zeroshot_data import inat_classnames, inat_template
     from .cars_zeroshot_data import cars_classnames, cars_template
-    from .flowers_zeroshot_data import flowers_classnames, flowers_template
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
 
@@ -329,22 +328,6 @@ def zero_shot_eval(model, data, epoch, args):
         results['stanfordcars-top5'] = top5
 
         logging.info('Finished zero-shot stanfordcars. Top1 was {}, top5 was {}'.format(top1, top5))
-
-    if 'flowers' in data:
-        # if args.zs_upper:
-        #     flowers_classnames = to_upper(flowers_classnames)
-        # elif args.zs_lower:
-        #     flowers_classnames = to_lower(flowers_classnames)
-        logging.info("Starting zero-shot flowers.")
-        logging.info('Building zero-shot classifier')
-        classifier = zero_shot_classifier(model, flowers_classnames, flowers_template, args)
-
-        logging.info('Using classifier')
-        top1, top5 = run(model, classifier, data['flowers'].dataloader, args)
-        results['flowers-top1'] = top1
-        results['flowers-top5'] = top5
-
-        logging.info('Finished zero-shot flowers. Top1 was {}, top5 was {}'.format(top1, top5))
 
     if 'air' in data:
         logging.info("Starting zero-shot FGVC-aircraft.")
