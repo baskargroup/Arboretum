@@ -1,8 +1,12 @@
 """
-Synset builder
-
-Dataset argument expects a list of class names as strings -- any dataset can be used
-Strict follows the methodology of Fang et al ... multiple matches -> no match
+Synset builder (string -> multi-type) takes as input a text string which is assumed to be a dataset caption, and produces as output a transformed caption.
+The nature of the transformation depends on the arguments passed to the function.
+The primary function of synset_ds is SUBSET MATCHING: matching caption strings to integer-valued classes.
+ds: expects a formatted list of classnames or a dict in which the keys are integer values and the values are lists of strings representing classnames. 
+ds is the set of terms which are used for subset matching. The terms are task-dependent and will vary for different evaluation datasets.
+strict: if this is set to True, then subset matching will be strict, following the methodology of Fang et al ... multiple matches -> no match
+cipher: if this is set to a non-zero integer value, then a Caesar cipher will be applied to the input string for that integer value.
+fuzzy: Levenstein distance fuzzy matching instead of strict 1 to 1 subset matching
 nva uses parts of speech for all of wordnet, instead of matching on some list from a dataset
 """
 
