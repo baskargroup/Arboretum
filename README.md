@@ -12,6 +12,8 @@ If you're new to CLIP, you might want to familiarize yourself with the basics of
 
 If you haven't worked with the OpenCLIP implementation of CLIP before, the best place to start is the OpenCLIP readme in the docs folder.
 
+If you're in need of a vision-language dataset for your training experiments, check out [CaptionNet](https://github.com/penfever/CaptionNet), a dataset designed precisely for that purpose.
+
 If you're planning to use one of the alternate architectures for training, we recommend using the links [above](#vl-hub) to familiarize yourself with the details of that architecture before proceeding.
 
 In this readme, we focus on features that are new in our implementation.

@@ -52,7 +52,6 @@ from .imagenet_zeroshot_data import *
 try:
     from .inat_zeroshot_data import inat_classnames, inat_template
     from .cars_zeroshot_data import cars_classnames, cars_template
-    from .flowers_zeroshot_data import flowers_classnames, flowers_template
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
 
