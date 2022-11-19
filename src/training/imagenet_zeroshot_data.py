@@ -121,6 +121,11 @@ def get_imagenet_r_our_classnames():
 
     return imagenet_classnames_arr[ir_idx].tolist()
 
+def get_imagenet_a_classnames():
+    imagenet_classnames_arr = np.array(imagenet_classnames)
+
+    return imagenet_classnames_arr[ia_idx].tolist()
+
 def get_imagenet_a_our_classnames():
 
     imagenet_classnames_arr = np.array(imagenet_our_classnames)
