@@ -5,6 +5,8 @@ features/
 results/
 yfcc-subsets/
 cmd.txt
+batch/
+src/script/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -231,40 +231,23 @@ def build_imagenet(args, model, in_type=""):
         if args.ds_cipher:
             classnames = get_imagenet_r_cipher()
         elif usecaps:
-            if bool(args.pretrained):
-                classnames = get_imagenet_common_ir_classnames()
-            else:
-                classnames = get_imagenet_common_ir_our_classnames()
-        elif bool(args.pretrained):
-            classnames = get_imagenet_r_classnames()
+            classnames = get_imagenet_common_ir_classnames()
         else:
-            classnames = get_imagenet_r_our_classnames()
+            classnames = get_imagenet_r_classnames()
     elif in_type == "a":
         if args.ds_cipher:
             classnames = get_imagenet_a_cipher()
         elif usecaps:
-            if bool(args.pretrained):
-                classnames = get_imagenet_common_ia_classnames()
-            else:
-                classnames = get_imagenet_common_ia_our_classnames()
-        elif bool(args.pretrained):
-            classnames = get_imagenet_a_classnames()
+            classnames = get_imagenet_common_ia_classnames()
         else:
-            classnames = get_imagenet_a_our_classnames()
+            classnames = get_imagenet_a_classnames()
     else:
         if args.ds_cipher:
             classnames = get_imagenet_cipher()
         elif usecaps:
-            if bool(args.pretrained):
-                classnames = get_imagenet_cap_classnames()
-            else:
-                classnames = get_imagenet_cap_our_classnames()
+            classnames = get_imagenet_cap_classnames()
         else:
-            if bool(args.pretrained):
-                classnames = get_imagenet_classnames()
-            else:
-                classnames = get_imagenet_our_classnames()
-
+            classnames = get_imagenet_classnames()
     if args.zs_upper:
         classnames = to_upper(classnames)
     elif args.zs_lower:
