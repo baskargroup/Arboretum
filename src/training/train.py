@@ -17,7 +17,7 @@ try:
 except ImportError:
     wandb = None
 
-from open_clip import ClipLoss, tokenize, SIMCLRLoss, IntLoss
+from open_clip import ClipLoss, tokenize, SIMCLRLoss, IntLoss, ClipLossIQE, ClipLossAlignUnif
 from .distributed import is_master
 from .zero_shot import zero_shot_eval
 from .data import get_total_obj
@@ -68,6 +68,28 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
         loss = IntLoss(
             args,
             device
+        )
+    elif args.iqe:
+        loss = ClipLossIQE(
+            img_weight=args.img_weight,
+            text_weight=args.text_weight,
+            local_loss=args.local_loss,
+            gather_with_grad=args.gather_with_grad,
+            cache_labels=True,
+            rank=args.rank,
+            world_size=args.world_size,
+            use_horovod=args.horovod
+        )
+    elif args.alignunif:
+        loss = ClipLossAlignUnif(
+            img_weight=args.img_weight,
+            text_weight=args.text_weight,
+            local_loss=args.local_loss,
+            gather_with_grad=args.gather_with_grad,
+            cache_labels=True,
+            rank=args.rank,
+            world_size=args.world_size,
+            use_horovod=args.horovod
         )
     else:
         loss = ClipLoss(
@@ -258,7 +280,7 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
                 optimizer.step()
 
         # Note: we clamp to 4.6052 = ln(100), as in the original paper.
-        if not args.alt:
+        if not args.alt and not args.iqe:
             with torch.no_grad():
                 unwrap_model(model).logit_scale.clamp_(0, math.log(100))
         batch_time_m.update(time.time() - end)

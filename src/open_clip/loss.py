@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.nn import functional as F
 import logging
 from torch.autograd import Variable
+import torchqmet
 
 try:
     import torch.distributed.nn
@@ -136,6 +137,83 @@ class ClipLoss(nn.Module):
             logging.warning("Leaving ClipLoss, NaN loss detected: {}".format(total_loss))
         return total_loss
 
+class ClipLossIQE(nn.Module):
+
+    def __init__(
+            self,
+            img_weight=.5,
+            text_weight=.5,
+            local_loss=False,
+            gather_with_grad=False,
+            cache_labels=False,
+            rank=0,
+            world_size=1,
+            use_horovod=False,
+    ):
+        super().__init__()
+        self.img_weight = img_weight
+        self.text_weight = text_weight
+        self.local_loss = local_loss
+        self.gather_with_grad = gather_with_grad
+        self.cache_labels = cache_labels
+        self.rank = rank
+        self.world_size = world_size
+        self.use_horovod = use_horovod
+
+        # cache state
+        self.prev_num_logits = 0
+        self.labels = {}
+
+    def forward(self, image_features, text_features, logit_scale):
+        device = image_features.device
+        d_iqe = torchqmet.IQE(
+                input_size=image_features.size(dim=1),
+                dim_per_component=16,      # split dimensions into 16-dimensional chunks, where each chunk
+                reduction="sum"              #    gives an IQE component (IQE paper recommends `dim_per_component >= 8`)
+            ).to(device)
+        if self.world_size > 1:
+            all_image_features, all_text_features = gather_features(
+                image_features, text_features,
+                self.local_loss, self.gather_with_grad, self.rank, self.world_size, self.use_horovod)
+            #FIXME: band-aid handling of nans
+            if torch.any(torch.isnan(all_image_features)):
+                logging.warning("found NaN in images, replacing with a small number")
+                all_image_features = torch.nan_to_num(all_image_features, nan=1e-10)
+            if torch.any(torch.isnan(all_text_features)):
+                logging.warning("found NaN in texts, replacing with a small number")
+                all_text_features = torch.nan_to_num(all_text_features, nan=1e-10)
+            logits = logit_scale * torch.outer(d_iqe(all_image_features, all_text_features) * self.img_weight, d_iqe(all_text_features, all_image_features) * self.text_weight)
+            # logits = logit_scale * (d_iqe(all_image_features[:, None], all_text_features) * self.img_weight + d_iqe(all_text_features[:, None], all_image_features) * self.text_weight)
+        else:
+            #FIXME: band-aid handling of nans
+            if torch.any(torch.isnan(image_features)):
+                logging.warning("found NaN in images, replacing with a small number")
+                image_features = torch.nan_to_num(image_features, nan=1e-10)
+            if torch.any(torch.isnan(text_features)):
+                logging.warning("found NaN in texts, replacing with a small number")
+                text_features = torch.nan_to_num(text_features, nan=1e-10)
+            logits = logit_scale * torch.outer(d_iqe(image_features, text_features) * self.img_weight,  d_iqe(text_features, image_features) * self.text_weight) 
+            # logits = logit_scale * (d_iqe(image_features[:, None], text_features) * self.img_weight + d_iqe(text_features[:, None], image_features) * self.text_weight)
+        # logging.debug("logits")
+        # logging.debug(logits)
+        # logging.debug("shape")
+        # logging.debug(str(logits.size()))
+        # calculated ground-truth and cache if enabled
+        num_logits = logits.shape[0]
+        if self.prev_num_logits != num_logits or device not in self.labels:
+            labels = torch.arange(num_logits, device=device, dtype=torch.long)
+            if self.world_size > 1 and self.local_loss:
+                labels = labels + num_logits * self.rank
+            if self.cache_labels:
+                self.labels[device] = labels
+                self.prev_num_logits = num_logits
+        else:
+            labels = self.labels[device]
+        total_loss = F.cross_entropy(logits, labels)
+        if torch.any(torch.isnan(total_loss)):
+            logging.warning("Leaving ClipLossIQE, NaN loss detected: {}".format(total_loss))
+        return total_loss
+
 class SIMCLRLoss(nn.Module):
     """
     This is the SimCLR loss in https://arxiv.org/abs/2002.05709
@@ -240,3 +318,94 @@ class IntLoss(nn.Module):
 
     #Other interesting loss functions
     #https://github.com/clcarwin/focal_loss_pytorch/blob/master/focalloss.py
+
+class ClipLossAlignUnif(nn.Module):
+
+    def __init__(
+            self,
+            img_weight=.5,
+            text_weight=.5,
+            local_loss=False,
+            gather_with_grad=False,
+            cache_labels=False,
+            rank=0,
+            world_size=1,
+            use_horovod=False,
+    ):
+        super().__init__()
+        self.img_weight = img_weight
+        self.text_weight = text_weight
+        self.local_loss = local_loss
+        self.gather_with_grad = gather_with_grad
+        self.cache_labels = cache_labels
+        self.rank = rank
+        self.world_size = world_size
+        self.use_horovod = use_horovod
+
+        # cache state
+        self.prev_num_logits = 0
+        self.labels = {}
+
+    def align_loss(self, x, y, alpha=2):
+        return (x - y).norm(p=2, dim=1).pow(alpha).mean()
+
+    def uniform_loss(self, x, t=2):
+        return torch.pdist(x, p=2).pow(2).mul(-t).exp().mean().log()
+
+    def forward(self, image_features, text_features, logit_scale):
+        device = image_features.device
+        if self.world_size > 1:
+            all_image_features, all_text_features = gather_features(
+                image_features, text_features,
+                self.local_loss, self.gather_with_grad, self.rank, self.world_size, self.use_horovod)
+            #FIXME: band-aid handling of nans
+            if torch.any(torch.isnan(all_image_features)):
+                logging.warning("found NaN in images, replacing with a small number")
+                all_image_features = torch.nan_to_num(all_image_features, nan=1e-10)
+            if torch.any(torch.isnan(all_text_features)):
+                logging.warning("found NaN in texts, replacing with a small number")
+                all_text_features = torch.nan_to_num(all_text_features, nan=1e-10)
+            if self.local_loss:
+                logits_per_image = logit_scale * image_features @ all_text_features.T
+                logits_per_text = logit_scale * text_features @ all_image_features.T
+            else:
+                logits_per_image = logit_scale * all_image_features @ all_text_features.T
+                logits_per_text = logits_per_image.T
+        else:
+            #FIXME: band-aid handling of nans
+            if torch.any(torch.isnan(image_features)):
+                logging.warning("found NaN in images, replacing with a small number")
+                image_features = torch.nan_to_num(image_features, nan=1e-10)
+            if torch.any(torch.isnan(text_features)):
+                logging.warning("found NaN in texts, replacing with a small number")
+                text_features = torch.nan_to_num(text_features, nan=1e-10)
+            logits_per_image = logit_scale * image_features @ text_features.T
+            logits_per_text = logit_scale * text_features @ image_features.T
+
+        # calculated ground-truth and cache if enabled
+        num_logits = logits_per_image.shape[0]
+        if self.prev_num_logits != num_logits or device not in self.labels:
+            labels = torch.diag(torch.ones(num_logits)).to(device)
+            # if self.world_size > 1 and self.local_loss:
+            #     labels = labels + num_logits * self.rank
+            if self.cache_labels:
+                self.labels[device] = labels
+                self.prev_num_logits = num_logits
+        else:
+            labels = self.labels[device]
+        #print("labels")
+        #print(labels)
+        #print("input sizes")
+        m = nn.Softmax(dim=1)
+        im_preds = m(logits_per_image)
+        txt_preds = m(logits_per_text)
+        #print(im_preds.size(), labels.size())
+        align_loss = self.align_loss(logits_per_image, logits_per_text)
+        unif_loss_img = self.uniform_loss(logits_per_image)
+        unif_loss_txt = self.uniform_loss(logits_per_text)
+        #print("losses")
+        #print(align_loss.size(), unif_loss_img.size(), unif_loss_txt.size())
+        total_loss = align_loss + unif_loss_img / 2 + unif_loss_txt / 2
+        if torch.any(torch.isnan(total_loss)):
+            logging.warning("NaN detected leaving loss function: {}".format(total_loss))
+        return total_loss

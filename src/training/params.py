@@ -403,6 +403,18 @@ def parse_args():
         help="Train on integer labels instead of text captions.",
     )
     parser.add_argument(
+        "--iqe",
+        default=False,
+        action='store_true',
+        help="Use quasimetric embedding distance when computing CLIP loss.",
+    )
+    parser.add_argument(
+        "--alignunif",
+        default=False,
+        action='store_true',
+        help="Use alignment + uniform loss.",
+    )
+    parser.add_argument(
         "--img-weight", type=float, default=.5, help="How heavily to weight image embedding"
     )
     parser.add_argument(

@@ -215,7 +215,8 @@ class Attention(nn.Module):
             qkv_bias=True,
             scaled_cosine=False,
             scale_heads=False,
-            logit_scale_max=math.log(1. / 0.01),
+            logit_scale_max=math.log(1. / 0.0001),
+            #logit_scale_max=math.log(1. / 0.01),
             attn_drop=0.,
             proj_drop=0.
     ):
