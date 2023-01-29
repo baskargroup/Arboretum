@@ -205,7 +205,7 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
 
     top1 = (top1 / n)
     top5 = (top5 / n)
-    #TODO: debug integer labels
+    #TODO: debug integer labels for extended metrics
     if args.extended_metrics:
         write_confusion_matrix(args, logits, target, args.classnames)
     return top1, top5

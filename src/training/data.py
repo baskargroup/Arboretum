@@ -24,7 +24,10 @@ from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, IterableD
 from torch.utils.data.distributed import DistributedSampler
 from webdataset.filters import _shuffle
 from webdataset.tariterators import base_plus_ext, url_opener, tar_file_expander, valid_sample
-from clean_filter_captions import *
+try:
+    from clean_filter_captions import *
+except ImportError:
+    from .clean_filter_captions import *
 
 try:
     import horovod.torch as hvd

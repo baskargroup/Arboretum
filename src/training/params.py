@@ -1,5 +1,6 @@
 import argparse
 
+import collections, yaml
 
 def get_default_params(model_name):
     # Params from paper (https://arxiv.org/pdf/2103.00020.pdf)
@@ -9,6 +10,11 @@ def get_default_params(model_name):
     else:
         return {"lr": 5.0e-4, "beta1": 0.9, "beta2": 0.999, "eps": 1.0e-8}
 
+def dict_representer(dumper, data):
+  return dumper.represent_mapping(_mapping_tag, data.iteritems())
+
+def dict_constructor(loader, node):
+  return collections.OrderedDict(loader.construct_pairs(node))
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -269,6 +275,12 @@ def parse_args():
         type=str,
         default=None,
         help="Optional identifier for the experiment when storing logs. Otherwise use current time.",
+    )
+    parser.add_argument(
+        "--project",
+        type=str,
+        default="vlhub",
+        help="Identifier for the wandb project. Default is vlhub."
     )
     parser.add_argument(
         "--workers", type=int, default=1, help="Number of dataloader workers per GPU."

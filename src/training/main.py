@@ -6,6 +6,8 @@ from datetime import datetime
 import numpy as np
 import torch
 import ast
+import collections, yaml
+from pathlib import Path
 
 from torch import optim
 from torch.cuda.amp import GradScaler
@@ -39,15 +41,32 @@ from training.params import parse_args
 from training.scheduler import cosine_lr
 from training.train import train_one_epoch, evaluate
 
+def dict_representer(dumper, data):
+  return dumper.represent_mapping(_mapping_tag, data.iteritems())
+
+def dict_constructor(loader, node):
+  return collections.OrderedDict(loader.construct_pairs(node))
 
 def random_seed(seed=42, rank=0):
     torch.manual_seed(seed + rank)
     np.random.seed(seed + rank)
     random.seed(seed + rank)
 
+def yaml_setup():
+    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
+    yaml.add_representer( collections.OrderedDict , dict_representer )
+    yaml.add_constructor( _mapping_tag, dict_constructor )	
 
-def main():
-    args = parse_args()
+def run_main(args = None):
+
+    yaml_setup()
+
+    if args is None:
+        args = parse_args()
+    
+    with open( Path('/scratch/bf996/vlhub/debug/config.yaml') , 'w' ) as outfile:
+	    yaml.dump( args , outfile , default_flow_style=False )
+
     eval_datasets = ['val', 'imagenet-val', 'imagenet-v2', 'inat2021', 'stanfordcars', 'imagenet-s', 'imagenet-r', 'imagenet-a', 'flowers', 'air', 'food', 'objectnet']
     if torch.cuda.is_available():
         # This enables tf32 on Ampere GPUs which is only 8% slower than
@@ -303,13 +322,13 @@ def main():
             args.val_sz = data["val"].dataloader.num_samples
         # you will have to configure this for your project!
         wandb.init(
-            project="open-clip",
+            project=args.project,
             name=args.name,
             notes=args.wandb_notes,
             tags=[],
             config=vars(args),
         )
-        wandb.run.name = str(args.model) + " " + str(args.train_data)
+        wandb.run.name = str(args.model) + " " + str(args.train_data) + ' ' + str(args.name)
         if args.debug:
             wandb.watch(model, log='all')
             torch.autograd.set_detect_anomaly(True)
@@ -401,4 +420,4 @@ def copy_codebase(args):
 
 
 if __name__ == "__main__":
-    main()
+    run_main()

@@ -4,8 +4,6 @@ vit-pytorch
 byol-pytorch
 fuzzywuzzy[speedup]
 x-clip
-torch>=1.9.0
-torchvision
 webdataset>=0.2.5
 regex
 ftfy

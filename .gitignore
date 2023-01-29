@@ -7,6 +7,8 @@ yfcc-subsets/
 cmd.txt
 batch/
 src/script/
+debug/
+config/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
