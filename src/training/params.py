@@ -175,6 +175,12 @@ def parse_args():
         help="Path to objectnet for conducting zero shot evaluation.",
     )
     parser.add_argument(
+        "--insecta",
+        type=str,
+        default=None,
+        help="Path to insecta for conducting zero shot evaluation.",
+    )
+    parser.add_argument(
         "--imagenet-s",
         type=str,
         default=None,

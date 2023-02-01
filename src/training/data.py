@@ -57,6 +57,7 @@ try:
     from .cars_zeroshot_data import cars_classnames, cars_template
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
+    from .insecta_zeroshot_data import get_insecta_classnames
 
 except Exception as e:
     logging.info("Import exception: ")
@@ -136,11 +137,13 @@ def token_strip_func(texts):
     texts = torch.tensor(tlist)
     return texts
 
-def clean_integer_label(label, singleclass, strict):
+def clean_integer_label(label, singleclass, strict, ds):
+    if ds is None:
+        ds = [0]*1000
     if isinstance(label, float):
         label = int(label)
     if isinstance(label, int):
-        if label < 0 or label > 999:
+        if label < 0 or label > len(ds) - 1:
             logging.info("Integer label {} out of acceptable range, mapping to 0".format(label))
             label = 0
         if singleclass:
@@ -156,7 +159,7 @@ def clean_integer_label(label, singleclass, strict):
             label_updated = []
             for l in label:
                 intl = int(l)
-                if intl < 0 or intl > 999:
+                if intl < 0 or intl > len(ds) - 1:
                     logging.info("Integer label {} out of acceptable range, mapping to 0".format(intl))
                     label_updated.append(0)
                 else:
@@ -258,7 +261,7 @@ class CsvDataset(Dataset):
             #if isinstance(texts, str) and not texts.is_numeric():
                 #assert(False, "Integer labels cannot be computed on the fly for a CSV dataset")
                 #texts = [synset_ds(clean_captions(str(texts)), 3, self.csvfilter, False, False, self.strict, False, True, None) for t in texts]
-            texts = clean_integer_label(self.captions[idx], not self.multiclass, self.strict)
+            texts = clean_integer_label(self.captions[idx], not self.multiclass, self.strict, self.csvfilter)
             return images, texts
         if self.scrambled:
             texts = scramble_txt(texts)
@@ -352,7 +355,7 @@ def filter_preprocess_txt(text, ds, scrambled, dscipher, simplecaptions, strict,
             text = clean_captions(str(text))
             text = synset_ds(text, 3, ds, False, False, strict, False, integer_labels, metacaptions)
             if text:
-                text = clean_integer_label(text, not multiclass, strict)
+                text = clean_integer_label(text, not multiclass, strict, ds)
             else:
                 text = ""
         else:
@@ -500,8 +503,19 @@ def get_dataset_size(shards):
     return total_size, num_shards
 
 def get_objectnet(args, preprocess_fns):
-    preprocess_train, preprocess_val = preprocess_fns
+    _, preprocess_val = preprocess_fns
     dataset = datasets.ImageFolder(args.objectnet, transform=preprocess_val)
+    dataloader = torch.utils.data.DataLoader(
+            dataset,
+            batch_size=args.batch_size,
+            num_workers=args.workers,
+            sampler=None
+        )
+    return DataInfo(dataloader=dataloader, sampler=None)
+
+def get_insecta(args, preprocess_fns):
+    _, preprocess_val = preprocess_fns
+    dataset = datasets.ImageFolder(args.insecta, transform=preprocess_val)
     dataloader = torch.utils.data.DataLoader(
             dataset,
             batch_size=args.batch_size,
@@ -1091,6 +1105,8 @@ def get_data(args, preprocess_fns, epoch=0):
             args.ds_filter = get_imagenet_our_classnames()
         elif args.ds_filter == "imagenet_def_classnames":
             args.ds_filter = get_imagenet_def_classnames()
+        elif args.ds_filter == "insecta":
+            args.ds_filter = get_insecta_classnames()
         else:
             var_names = globals()
             args.ds_filter = var_names[args.ds_filter]
@@ -1132,7 +1148,10 @@ def get_data(args, preprocess_fns, epoch=0):
         data["imagenet-a"] = get_imagenet(args, preprocess_fns, "a")
 
     if args.objectnet is not None:
-        data["objectnet"] = get_objectnet(args, preprocess_fns)   
+        data["objectnet"] = get_objectnet(args, preprocess_fns)
+
+    if args.insecta is not None:
+        data["insecta"] = get_insecta(args, preprocess_fns)
 
     if args.inat2021 is not None:
         data["inat2021"] = get_torchvision(args, preprocess_fns, "inat2021")

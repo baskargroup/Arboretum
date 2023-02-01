@@ -21,6 +21,7 @@ try:
     from .cars_zeroshot_data import cars_classnames, cars_template
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
+    from .insecta_zeroshot_data import get_insecta_classnames
 
 except Exception as e:
     print(e)
@@ -273,7 +274,7 @@ def zero_shot_eval(model, data, epoch, args):
     results = {}
     classifier = None
 
-    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data:
+    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data:
         return results
     if args.zeroshot_frequency == 0:
         return results
@@ -281,14 +282,17 @@ def zero_shot_eval(model, data, epoch, args):
         return results
 
     if 'inat2021' in data:
-        # if args.zs_upper:
-        #     inat_classnames = to_upper(inat_classnames)
-        # elif args.zs_lower:
-        #     inat_classnames = to_lower(inat_classnames)
-        logging.info("Starting zero-shot inat2021.")
-        logging.info('Building zero-shot classifier')
-        classifier = zero_shot_classifier(model, inat_classnames, inat_template, args)
-
+        isint = (args.integer_labels or args.linear_probe)
+        # usecaps = args.caption_subset and not isint
+        if isint:
+            args.classnames = inat_classnames
+            classifier = None
+            # return classifier
+        else:
+            logging.info('Building zero-shot classifier')
+            classifier = zero_shot_classifier(model, inat_classnames, inat_template, args)
+        # classifier = None
+            logging.info('Using classifier')
         logging.info('Using classifier')
         top1, top5 = run(model, classifier, data['inat2021'].dataloader, args)
         results['inat2021-top1'] = top1
@@ -315,10 +319,6 @@ def zero_shot_eval(model, data, epoch, args):
     if 'air' in data:
         logging.info("Starting zero-shot FGVC-aircraft.")
         logging.info('Building zero-shot classifier')
-        # if args.zs_upper:
-        #     air_classnames = to_upper(air_classnames)
-        # elif args.zs_lower:
-        #     air_classnames = to_lower(air_classnames)
         classifier = zero_shot_classifier(model, air_classnames, air_template, args)
 
         logging.info('Using classifier')
@@ -331,10 +331,6 @@ def zero_shot_eval(model, data, epoch, args):
     if 'food' in data:
             logging.info("Starting zero-shot food.")
             logging.info('Building zero-shot classifier')
-            # if args.zs_upper:
-            #     food_classnames = to_upper(food_classnames)
-            # elif args.zs_lower:
-            #     food_classnames = to_lower(food_classnames)
             classifier = zero_shot_classifier(model, food_classnames, food_template, args)
 
             logging.info('Using classifier')
@@ -343,7 +339,27 @@ def zero_shot_eval(model, data, epoch, args):
             results['food-top5'] = top5
 
             logging.info('Finished zero-shot food. Top1 was {}, top5 was {}'.format(top1, top5))
-            
+
+    if 'insecta' in data:
+
+            isint = (args.integer_labels or args.linear_probe)
+            # usecaps = args.caption_subset and not isint
+            if isint:
+                args.classnames = get_insecta_classnames()
+                classifier = None
+                # return classifier
+            else:
+                logging.info("Starting zero-shot insecta.")
+                logging.info('Building zero-shot classifier')
+                classifier = zero_shot_classifier(model, get_insecta_classnames(), inat_template, args)
+
+            logging.info('Using classifier')
+            top1, top5 = run(model, classifier, data['insecta'].dataloader, args)
+            results['insecta-top1'] = top1
+            results['insecta-top5'] = top5
+
+            logging.info('Finished zero-shot insecta. Top1 was {}, top5 was {}'.format(top1, top5))
+
     logging.info('Starting zero-shot imagenet.')
     if args.caption_subset:
         logging.info("Using caption subset")
