@@ -138,7 +138,7 @@ def token_strip_func(texts):
     return texts
 
 def clean_integer_label(label, singleclass, strict, ds):
-    if ds is None:
+    if ds is None or len(ds) == 0:
         ds = [0]*1000
     if isinstance(label, float):
         label = int(label)
