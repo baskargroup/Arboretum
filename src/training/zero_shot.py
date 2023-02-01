@@ -405,9 +405,14 @@ def zero_shot_eval(model, data, epoch, args):
         logging.info("computing effective robustness on imagenet")
         logging.info("len imagenets {}".format(len(imagenets)))
         try:
-            imagenets = np.array(imagenets)
-            results['imagenet-average-robustness'] = np.average(imagenets)
-            results['imagenet-effective-robustness'] = np.divide(np.average(imagenets), results['imagenet-zeroshot-val-top1'])
+            imagenet_shifts = []
+            for shift in ['imagenetr-zeroshot-val-top1', 'imageneta-zeroshot-val-top1', 'imagenets-zeroshot-val-top1', 'imagenetv2-zeroshot-val-top1']:
+                if results.get(shift):
+                    imagenet_shifts.append(results[shift])
+            if len(imagenet_shifts) > 0:
+                results['imagenet-average-robustness'] = np.average(imagenet_shifts)
+                results['imagenet-effective-robustness'] = np.divide(np.average(imagenet_shifts), results['imagenet-zeroshot-val-top1'])
+                logging.info("Average robustness over {} ImageNet shifts: {}".format(len(imagenet_shifts), results['imagenet-average-robustness']))
         except Exception as e:
             logging.info("error calculating effective robustness: ")
             logging.info(e)

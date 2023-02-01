@@ -566,25 +566,43 @@ def get_torchvision(args, preprocess_fns, ds):
     preprocess_fn = preprocess_val
     if ds == "stanfordcars":
         data_path = args.stanfordcars
-        dataset = datasets.StanfordCars(root = data_path, split = 'test', transform = preprocess_fn, download = False)
+        try:
+            dataset = datasets.StanfordCars(root = data_path, split = 'test', transform = preprocess_fn, download = False)
+        except:
+            dataset = datasets.StanfordCars(root = data_path, split = 'test', transform = preprocess_fn, download = True)
     elif ds == "flowers":
         data_path = args.flowers
         dataset = datasets.Flowers102(root = data_path, split = 'test', transform = preprocess_fn, download = False)
     elif ds == "air":
         data_path = args.air
-        dataset = datasets.FGVCAircraft(root=data_path, split = 'val', annotation_level = 'family', transform = preprocess_fn, download = False)
+        try:
+            dataset = datasets.FGVCAircraft(root=data_path, split = 'val', annotation_level = 'family', transform = preprocess_fn, download = False)
+        except:
+            dataset = datasets.FGVCAircraft(root=data_path, split = 'val', annotation_level = 'family', transform = preprocess_fn, download = True)
     elif ds == "food":
         data_path = args.food
-        dataset = datasets.Food101(root = data_path, split = 'test', transform = preprocess_fn, download = False)
+        try:
+            dataset = datasets.Food101(root = data_path, split = 'test', transform = preprocess_fn, download = False)
+        except:
+            dataset = datasets.Food101(root = data_path, split = 'test', transform = preprocess_fn, download = True)
     elif ds == "inat2021":
         data_path = args.inat2021
-        dataset = datasets.INaturalist(root = data_path, version = "2021_valid", transform = preprocess_fn, download = False)
+        try:
+            dataset = datasets.INaturalist(root = data_path, version = "2021_valid", transform = preprocess_fn, download = False)
+        except:
+            dataset = datasets.INaturalist(root = data_path, version = "2021_valid", transform = preprocess_fn, download = True)
     elif ds == "inat2018":
         data_path = args.inat2018
-        dataset = datasets.INaturalist(root = data_path, version = "2018", transform = preprocess_fn, download = False)
+        try:
+            dataset = datasets.INaturalist(root = data_path, version = "2018", transform = preprocess_fn, download = False)
+        except:
+            dataset = datasets.INaturalist(root = data_path, version = "2018", transform = preprocess_fn, download = True)
     elif ds == "inat2017":
         data_path = args.inat2017
-        dataset = datasets.INaturalist(root = data_path, version = "2017", transform = preprocess_fn, download = False)
+        try:
+            dataset = datasets.INaturalist(root = data_path, version = "2017", transform = preprocess_fn, download = False)
+        except:
+            dataset = datasets.INaturalist(root = data_path, version = "2017", transform = preprocess_fn, download = True)
     sampler = None
     dataloader = torch.utils.data.DataLoader(
     dataset,
@@ -592,7 +610,6 @@ def get_torchvision(args, preprocess_fns, ds):
         num_workers=args.workers,
         sampler=sampler
     )
-
     return DataInfo(dataloader, sampler)
 
 def count_samples(dataloader):
