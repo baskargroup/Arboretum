@@ -321,6 +321,7 @@ def create_model_and_transforms(
         mlm: bool = False,
         image_simclr: bool = False,
         simclr_trans: bool = False,
+        downsample_trans: bool = False,
         imsize: int = 224,
         cache_dir: Optional[str] = None,
         image_mean = None,
@@ -335,14 +336,14 @@ def create_model_and_transforms(
     image_mean = image_mean or getattr(model.visual, 'image_mean', None)
     image_std = image_std or getattr(model.visual, 'image_std', None)
     if model_name == "coca" or image_simclr or isinstance(model.visual, (SIMCLR, timm.models.vision_transformer.VisionTransformer)):
-        preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans)
-        preprocess_val = image_transform(224, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans)
+        preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
+        preprocess_val = image_transform(224, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
     elif model_name == "xclip" or any([image_filip, mlm, vssl, elp, dcl]):
-        preprocess_train = image_transform(model.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans)
-        preprocess_val = image_transform(model.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans)
+        preprocess_train = image_transform(model.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
+        preprocess_val = image_transform(model.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
     else:
-        preprocess_train = image_transform(model.visual.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans)
-        preprocess_val = image_transform(model.visual.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans)
+        preprocess_train = image_transform(model.visual.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
+        preprocess_val = image_transform(model.visual.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
     return model, preprocess_train, preprocess_val
 
 def list_models():

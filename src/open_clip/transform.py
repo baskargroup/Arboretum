@@ -1,4 +1,6 @@
 from typing import Optional, Sequence, Tuple
+from io import BytesIO
+from PIL import Image
 
 import torch
 import torch.nn as nn
@@ -40,11 +42,16 @@ class ResizeMaxSize(nn.Module):
 def _convert_to_rgb(image):
     return image.convert('RGB')
 
+def _downsample(img):
+    temp = BytesIO()
+    img.save(temp, format="jpeg", quality=10)
+    return Image.open(temp)
 
 def image_transform(
         image_size: int,
         is_train: bool,
         simclr_trans: bool = False,
+        downsample_trans: bool = False,
         mean: Optional[Tuple[float, ...]] = None,
         std: Optional[Tuple[float, ...]] = None,
         resize_longest_max: bool = False,
@@ -63,6 +70,20 @@ def image_transform(
         image_size = image_size[0]
 
     normalize = Normalize(mean=mean, std=std)
+    if downsample_trans:
+        return Compose([
+                _convert_to_rgb,
+                _downsample,
+                torchvision.transforms.RandomResizedCrop(image_size, scale=(0.08, 1.)),
+                torchvision.transforms.RandomApply([
+                    torchvision.transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)  # not strengthened
+                ], p=0.8),
+                torchvision.transforms.RandomGrayscale(p=0.2),
+                torchvision.transforms.RandomApply([torchvision.transforms.GaussianBlur(5, sigma=(.1, 2.))], p=0.5),
+                torchvision.transforms.RandomHorizontalFlip(),
+                torchvision.transforms.ToTensor(),
+                normalize,
+        ])
     if simclr_trans:
         return Compose([
                 torchvision.transforms.RandomResizedCrop(image_size, scale=(0.08, 1.)),

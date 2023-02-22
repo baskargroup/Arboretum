@@ -105,11 +105,7 @@ def write_confusion_matrix(args, output, labels, classes):
     if len(classes) < 201:
         plt.figure(figsize = (72,40), dpi=200)
         sn.heatmap(df_cm, annot=True)
-        plt.savefig(os.path.join(args.conf_path, "confusion_matrix_{}.svg".format(res)), format='svg', dpi=200)
-    else:
-        plt.figure(figsize = (72,40), dpi=200)
-        sn.heatmap(df_cm, annot=True)
-        plt.savefig(os.path.join(args.conf_path, "confusion_matrix_{}.jpg".format(res)), format='jpg', dpi=200)        
+        plt.savefig(os.path.join(args.conf_path, "confusion_matrix_{}.svg".format(res)), format='svg', dpi=200)        
     plt.close('all')
     #class-class clustering matrix
     logging.info('Saving class-class clustering matrix')

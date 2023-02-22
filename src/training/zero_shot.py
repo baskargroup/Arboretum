@@ -13,7 +13,7 @@ from .precision import get_autocast
 from .imagenet_zeroshot_data import imagenet_classnames, openai_imagenet_template
 
 from .data import shift_cipher
-
+from .objectnet_eval import objectnet_accuracy, accuracy_topk_subselected_and_collapsed
 from .imagenet_zeroshot_data import *
 from .metrics import *
 try:
@@ -91,37 +91,51 @@ def accuracy(output, target, topk=(1,)):
     correct = pred.eq(target.view(1, -1).expand_as(pred))
     return [float(correct[:k].reshape(-1).float().sum(0, keepdim=True).cpu().numpy()) for k in topk]
 
-
 def run(model, classifier, dataloader, args, idx=None, split=None):
     autocast = get_autocast(args.precision)
     with torch.no_grad():
         top1, top5, n = 0., 0., 0.
+        args.isint = any([args.integer_labels, args.linear_probe])
         args.y_pred = []
         args.y_true = []
         args.logits = []
-        for images, target in tqdm(dataloader, unit_scale=args.batch_size):
-            if args.caption_subset:
-                if any([args.integer_labels, args.linear_probe]) and split == "r":
+        args.image_paths = []
+        for images, *target in tqdm(dataloader, unit_scale=args.batch_size):
+            if split == "objectnet":
+                args.img_paths = target[1]
+                target = target[0]
+            else:
+                target = target[0]
+            if args.caption_subset != "":
+                if args.isint and split == "r":
                     ir_idx = get_ir_idx().tolist()
                     match_idx = sum(target==ir_idx.index(i) for i in idx).bool().nonzero(as_tuple=True)[0]
-                elif any([args.integer_labels, args.linear_probe]) and split == "a":
+                elif args.isint and split == "a":
                     ia_idx = get_ia_idx().tolist()
+                    #keep only the samples which are in passed-in class subset, using correct imagenet-a indices 
                     match_idx = sum(target==ia_idx.index(i) for i in idx).bool().nonzero(as_tuple=True)[0]
+                elif args.isint and split == "objectnet":
+                    obj_idx = get_obj_index().tolist()
+                    match_idx = sum(target==obj_idx.index(i) for i in idx).bool().nonzero(as_tuple=True)[0]
                 else:
                     match_idx = sum(target==i for i in idx).bool().nonzero(as_tuple=True)[0]
+                #shave down target and images size so we skip irrelevant samples
                 target = target[match_idx].to(args.device)
-                images = images[match_idx].to(args.device)
+                images = images[match_idx].to(args.device)                
                 if images.size(0) == 0:
                     continue
-                if not any([args.integer_labels, args.linear_probe]):
+                if not args.isint:
                     idx_l = idx.tolist()
                     target = torch.tensor([idx_l.index(t) for t in target]).to(args.device)
-                elif any([args.integer_labels, args.linear_probe]) and split == "r":
+                elif args.isint and split == "r":
                     ir_idx = get_ir_idx()
                     target = torch.tensor(ir_idx[target.cpu()]).to(args.device)
-                elif any([args.integer_labels, args.linear_probe]) and split == "a":
+                elif args.isint and split == "a":
                     ia_idx = get_ia_idx()
-                    target = torch.tensor(ia_idx[target.cpu()]).to(args.device)             
+                    target = torch.tensor(ia_idx[target.cpu()]).to(args.device)
+                elif args.isint and split == "objectnet":
+                    obj_idx = get_obj_index()
+                    target = torch.tensor(obj_idx[target.cpu()]).to(args.device)
             else:
                 images = images.to(args.device)
                 try:
@@ -185,24 +199,53 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         logits = 100. * image_features @ classifier
             
             # measure accuracy with objectnet adjustments
-            if split == "objectnet" and args.integer_labels:
-                with open("./metadata/imagenet_to_objectnet.json","r") as f:
-                    mapping = json.load(f)
-                    # convert string keys to ints
-                    mapping = {int(k): v for k, v in mapping.items()}
-                pred = output.topk(max(topk), 1, True, True)[1].t()
-                pred = torch.tensor(imageNetIDToObjectNetID[pred.cpu().tolist()]).to(args.device)
-                #deal with the -1 wrong predictions, if need be
-                correct = pred.eq(target.view(1, -1).expand_as(pred))
-                acc1, acc5 = [float(correct[:k].reshape(-1).float().sum(0, keepdim=True).cpu().numpy()) for k in topk]          
+            if args.isint:
+                #zero out logits which are not being evaluated (in VL this is handled by changing the size of the classification problem)
+                if args.caption_subset != "":
+                    icap_idx = get_icap_idx(args.caption_subset)
+                    not_icap_idx = [i for i in range(1000) if i not in icap_idx]
+                    logits[:, not_icap_idx] = float("-inf")
+                if split == 'r':
+                    ir_idx = get_ir_idx()
+                    not_ir_idx = [i for i in range(1000) if i not in ir_idx]
+                    logits[:, not_ir_idx] = float("-inf")
+                if split == 'a':
+                    ia_idx = get_ia_idx()
+                    not_ia_idx = [i for i in range(1000) if i not in ia_idx]
+                    logits[:, not_ia_idx] = float("-inf")
+                if split == 'objectnet':
+                    obj_idx = get_obj_index()
+                    not_obj_idx = [i for i in range(1000) if i not in obj_idx]
+                    logits[:, not_obj_idx] = float("-inf")
+                    #TODO: for all multiclass classes, first class gets argmax of all multiclass options
+
+            if split == "objectnet" and not args.isint:
+                # if args.integer_labels:
+                #     acc1, acc5 = objectnet_integer_accuracy(logits, target, args.img_paths, True, args.caption_subset)
+                acc1 = objectnet_accuracy(logits, target, args.img_paths, True, args.caption_subset)
+                    # acc_dict = accuracy_topk_subselected_and_collapsed(logits, target)
+                if acc1 is None:
+                    continue
+                n += acc1[1]
+                top1 += acc1[0]
+                #print("top1", top1, "n", n)
+                top5 += 0
+                # print(acc_dict)
+                # acc1 += acc_dict[0]["top1"]
+                # acc5 += acc_dict[0]["top5"]
+                # n += acc_dict[1]
+
+                # acc5 = float(0.0) #TODO: implement
+        
             else:
                 args.logits.append(logits.cpu().detach().numpy())
                 if args.extended_metrics:
                     log_confusion_matrix(args, logits, target)
                 acc1, acc5 = accuracy(logits, target, topk=(1, 5))
-            top1 += acc1
-            top5 += acc5
-            n += images.size(0)
+                n += images.size(0)
+                top1 += acc1
+                top5 += acc5
+                #print("top1", top1, "n", n)
 
     top1 = (top1 / n)
     top5 = (top5 / n)
@@ -219,7 +262,7 @@ def to_lower(l):
 
 def build_imagenet(args, model, in_type=""):
     isint = (args.integer_labels or args.linear_probe)
-    usecaps = args.caption_subset and not isint
+    usecaps = args.caption_subset != "" and not isint
     if isint:
         args.classnames = get_imagenet_classnames()
         classifier = None
@@ -241,6 +284,13 @@ def build_imagenet(args, model, in_type=""):
             classnames = get_imagenet_common_ia_classnames()
         else:
             classnames = get_imagenet_a_classnames()
+    elif in_type == "objectnet":
+        if args.ds_cipher:
+            classnames = get_obj_cipher()
+        elif usecaps:
+            classnames = get_imagenet_common_obj_classnames()
+        else:
+            classnames = get_objectnet_classnames()
     else:
         if args.ds_cipher:
             classnames = get_imagenet_cipher()
@@ -260,13 +310,6 @@ def build_imagenet(args, model, in_type=""):
         logging.info('Building zero-shot classifier')
         classifier = zero_shot_classifier(model, classnames, template, args)
     return classifier
-
-def imageNetIDToObjectNetID(prediction_class):
-    for i in range(len(prediction_class)):
-        if prediction_class[i] in mapping:
-            prediction_class[i] = mapping[prediction_class[i]]
-        else:
-            prediction_class[i] = -1
 
 def zero_shot_eval(model, data, epoch, args):
     #logging.debug(data)
@@ -361,15 +404,15 @@ def zero_shot_eval(model, data, epoch, args):
             logging.info('Finished zero-shot insecta. Top1 was {}, top5 was {}'.format(top1, top5))
 
     logging.info('Starting zero-shot imagenet.')
-    if args.caption_subset:
-        logging.info("Using caption subset")
+    if args.caption_subset != "":
+        logging.info("Using caption subset {}".format(args.caption_subset))
     isint = args.linear_probe or args.integer_labels
     classifier = None
     imagenets = []
     if 'imagenet-val' in data:            
         if classifier is None:
             classifier = build_imagenet(args, model)
-        top1, top5 = run(model, classifier, data['imagenet-val'].dataloader, args, get_icap_idx() if args.caption_subset else None)
+        top1, top5 = run(model, classifier, data['imagenet-val'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None)
         results['imagenet-zeroshot-val-top1'] = top1
         imagenets.append(top1)
         results['imagenet-zeroshot-val-top5'] = top5
@@ -377,7 +420,7 @@ def zero_shot_eval(model, data, epoch, args):
     if 'imagenet-v2' in data:
         if classifier is None:
             classifier = build_imagenet(args, model)
-        top1, top5 = run(model, classifier, data['imagenet-v2'].dataloader, args, get_icap_idx() if args.caption_subset else None)
+        top1, top5 = run(model, classifier, data['imagenet-v2'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None)
         results['imagenetv2-zeroshot-val-top1'] = top1
         imagenets.append(top1)
         results['imagenetv2-zeroshot-val-top5'] = top5
@@ -385,7 +428,7 @@ def zero_shot_eval(model, data, epoch, args):
     if 'imagenet-s' in data:
         if classifier is None:
             classifier = build_imagenet(args, model)
-        top1, top5 = run(model, classifier, data['imagenet-s'].dataloader, args, get_icap_idx() if args.caption_subset else None)
+        top1, top5 = run(model, classifier, data['imagenet-s'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None)
         results['imagenets-zeroshot-val-top1'] = top1
         imagenets.append(top1)
         results['imagenets-zeroshot-val-top5'] = top5
@@ -393,9 +436,9 @@ def zero_shot_eval(model, data, epoch, args):
     if 'imagenet-r' in data:
         classifier = build_imagenet(args, model, "r")
         if isint:
-            top1, top5 = run(model, classifier, data['imagenet-r'].dataloader, args, get_common_ir_idx() if args.caption_subset else get_ir_idx(), "r")
+            top1, top5 = run(model, classifier, data['imagenet-r'].dataloader, args, get_common_ir_idx() if args.caption_subset != "" else get_ir_idx(), "r")
         else:
-            top1, top5 = run(model, classifier, data['imagenet-r'].dataloader, args, get_common_ir_idx_zeroindexed() if args.caption_subset else None, "r")
+            top1, top5 = run(model, classifier, data['imagenet-r'].dataloader, args, get_common_ir_idx_zeroindexed() if args.caption_subset != "" else None, "r")
         results['imagenetr-zeroshot-val-top1'] = top1
         imagenets.append(top1)
         results['imagenetr-zeroshot-val-top5'] = top5
@@ -403,18 +446,20 @@ def zero_shot_eval(model, data, epoch, args):
     if 'imagenet-a' in data:
         classifier = build_imagenet(args, model, "a")
         if isint:
-            top1, top5 = run(model, classifier, data['imagenet-a'].dataloader, args, get_common_ia_idx() if args.caption_subset else get_ia_idx(), "a")
+            top1, top5 = run(model, classifier, data['imagenet-a'].dataloader, args, get_common_ia_idx() if args.caption_subset != "" else get_ia_idx(), "a")
         else:
-            top1, top5 = run(model, classifier, data['imagenet-a'].dataloader, args, get_common_ia_idx_zeroindexed() if args.caption_subset else None, "a")
+            top1, top5 = run(model, classifier, data['imagenet-a'].dataloader, args, get_common_ia_idx_zeroindexed() if args.caption_subset != "" else None, "a")
         results['imageneta-zeroshot-val-top1'] = top1
         imagenets.append(top1)
         results['imageneta-zeroshot-val-top5'] = top5
         logging.info('Finished zero-shot imagenet-a. Top1 was {}, top5 was {}'.format(top1, top5))
     if 'objectnet' in data:
-        obj_classnames = ast.literal_eval(open("./metadata/objectnet_folder_to_label.txt", 'r').read())
-        obj_classnames = sorted(obj_classnames.values())
-        classifier = zero_shot_classifier(model, obj_classnames, openai_imagenet_template, args)
-        top1, top5 = run(model, classifier, data['objectnet'].dataloader, args, None, "objectnet")
+        if classifier is None:
+            classifier = build_imagenet(args, model, "objectnet")
+        if isint:
+            top1, top5 = run(model, classifier, data['objectnet'].dataloader, args, get_common_obj_idx() if args.caption_subset != "" else get_obj_index(), "objectnet")
+        else:
+            top1, top5 = run(model, classifier, data['objectnet'].dataloader, args, get_common_obj_idx_zeroindexed() if args.caption_subset != "" else None, "objectnet")
         results['objectnet-top1'] = top1
         results['objectnet-top5'] = top5        
     if results.get('imagenet-zeroshot-val-top1'):
@@ -433,5 +478,13 @@ def zero_shot_eval(model, data, epoch, args):
             logging.info("error calculating effective robustness: ")
             logging.info(e)
     logging.info('Finished zero-shot evals')
-
+    #save results to csv
+    if args.save_results_to_csv != "":
+        metrics_path = Path(args.save_results_to_csv)
+        metrics_df = pd.read_csv(metrics_path)
+        cols = list(metrics_df.columns)
+        results_row = {c : results[c] for c in cols if c in list(results.keys())}
+        results_row['name'] = args.model
+        metrics_df = metrics_df.append(pd.DataFrame(results_row,index=[len(metrics_df)+1])).fillna(0)
+        metrics_df.to_csv(metrics_path, index=False)
     return results

@@ -83,6 +83,10 @@ ia_idx = [6, 11, 13, 15, 17, 22, 23, 27, 30, 37, 39, 42, 47, 50, 57, 70, 71, 76,
 888, 890, 897, 900, 907, 913, 924, 932, 933, 934, 937, 943, 945, 947, 951, 954, 956, 957, 959, 971, 972, 980, 981, 984, 
 986, 987, 988]
 
+obj_idx_dict = {'alarm_clock': [409, 530], 'backpack': [414], 'banana': [954], 'band_aid': [419], 'basket': [790], 'full_sized_towel': [434], 'beer_bottle': [440], 'bench': [703], 'bicycle': [671, 444], 'binder_closed': [446], 'bottle_cap': [455], 'bread_loaf': [930], 'broom': [462], 'bucket': [463], 'butchers_knife': [499], 'can_opener': [473], 'candle': [470], 'cellphone': [487], 'chair': [423, 559, 765], 'clothes_hamper': [588], 'coffee_french_press': [550], 'combination_lock': [507], 'computer_mouse': [673], 'desk_lamp': [846], 'hand_towel_or_rag': [533], 'doormat': [539], 'dress_shoe_men': [630], 'drill': [740], 'drinking_cup': [968], 'drying_rack_for_dishes': [729], 'envelope': [549], 'fan': [545], 'frying_pan': [567], 'dress': [578], 'hair_dryer': [589], 'hammer': [587], 'helmet': [560, 518], 'iron_for_clothes': [606], 'jeans': [608], 'keyboard': [508], 'ladle': [618], 'lampshade': [619], 'laptop_open': [620], 'lemon': [951], 'letter_opener': [623], 'lighter': [626], 'lipstick': [629], 'match': [644], 'measuring_cup': [647], 'microwave': [651], 'mixing_salad_bowl': [659], 'monitor': [664], 'mug': [504], 'nail_fastener': [677], 'necklace': [679], 'orange': [950], 'padlock': [695], 'paintbrush': [696], 'paper_towel': [700], 'pen': [418, 749, 563], 'pill_bottle': [720], 'pillow': [721], 'pitcher': [725], 'plastic_bag': [728], 'plate': [923], 'plunger': [731], 'pop_can': [737], 'portable_heater': [811], 'printer': [742], 'remote_control': [761], 'ruler': [769], 'running_shoe': [770], 'safety_pin': [772], 'salt_shaker': [773], 'sandal': [774], 'screw': [783], 'shovel': [792], 'skirt': [601, 655, 689], 'sleeping_bag': [797], 'soap_dispenser': [804], 'sock': [806], 'soup_bowl': [809], 'spatula': [813], 'speaker': [632], 'still_camera': [732, 759], 'strainer': [828], 'stuffed_animal': [850], 'suit_jacket': [834], 'sunglasses': [837], 'sweater': [841], 'swimming_trunks': [842], 't-shirt': [610], 'tv': [851], 'teapot': [849], 'tennis_racket': [752], 'tie': [457, 906], 'toaster': [859], 'toilet_paper_roll': [999], 'trash_bin': [412], 'tray': [868], 'umbrella': [879], 'vacuum_cleaner': [882], 'vase': [883], 'wallet': [893], 'watch': [531], 'water_bottle': [898], 'weight_exercise': [543], 'weight_scale': [778], 'wheel': [479, 694], 'whistle': [902], 'wine_bottle': [907], 'winter_glove': [658], 'wok': [909]}
+
+obj_idx = [409, 530, 414, 954, 419, 790, 434, 440, 703, 671, 444, 446, 455, 930, 462, 463, 499, 473, 470, 487, 423, 559, 765, 588, 550, 507, 673, 846, 533, 539, 630, 740, 968, 729, 549, 545, 567, 578, 589, 587, 560, 518, 606, 608, 508, 618, 619, 620, 951, 623, 626, 629, 644, 647, 651, 659, 664, 504, 677, 679, 950, 695, 696, 700, 418, 749, 563, 720, 721, 725, 728, 923, 731, 737, 811, 742, 761, 769, 770, 772, 773, 774, 783, 792, 601, 655, 689, 797, 804, 806, 809, 813, 632, 732, 759, 828, 850, 834, 837, 841, 842, 610, 851, 849, 752, 457, 906, 859, 999, 412, 868, 879, 882, 883, 893, 531, 898, 543, 778, 479, 694, 902, 907, 658, 909]
+
 def get_ia_idx_zeroindexed():
     return np.arange(0, 200, dtype=int)
 
@@ -92,24 +96,118 @@ def get_ir_idx_zeroindexed():
 def get_ia_idx():
     return np.array(ia_idx)
 
-icap_idx = [386, 928, 931, 704, 907, 291, 454, 76, 952, 788, 245, 937, 924, 8, 983, 816, 920, 379, 204, 396, 929, 619, 815, 88, 84, 217, 118, 935, 987, 642, 950, 951, 954, 557, 18, 967, 945, 6, 440, 348, 22, 571, 23, 963, 104, 958, 579, 312, 534, 620, 115, 298, 284, 552, 373, 997, 182, 422, 308, 839, 13, 489, 805, 832, 85, 695, 2, 863, 310, 565, 886, 455, 988, 347, 580, 425, 99, 424, 105, 107, 343, 658, 721, 443, 421, 679, 19, 825, 130, 309, 849, 879, 496, 971, 922, 985, 286, 625, 637, 943]
+def get_obj_index():
+    return np.array(obj_idx)
+
+def get_obj_index_zeroindexed():
+    return np.arange(0, len(obj_idx), dtype=int)
+
+#./metadata/in100_rand_idx_{01 .. 09}.txt for a random 100-class index that is NOT in100 overlapping
+#./metadata/in100_true_idx.txt for the in100 index
+try:
+    ICAP_F = Path("./metadata/in100_true_idx.txt")
+    with open( ICAP_F, 'r' ) as file:
+        icap_idx = ast.literal_eval( file.read( ) )
+except:
+    ICAP_F = Path("vlhub/metadata/in100_true_idx.txt")
+    with open( ICAP_F, 'r' ) as file:
+        icap_idx = ast.literal_eval( file.read( ) )
+
+try:
+    IN100_DOGS = Path("./metadata/in100_dogs.txt")
+    with open( IN100_DOGS, 'r' ) as file:
+        dogs_idx = ast.literal_eval( file.read( ) )
+except:
+    IN100_DOGS = Path("vlhub/metadata/in100_dogs.txt")
+    with open( IN100_DOGS, 'r' ) as file:
+        dogs_idx = ast.literal_eval( file.read( ) )
+    
+try:
+    IN100_RANDOM_01 = Path("./metadata/in100_rand_idx_01.txt")
+    with open ( IN100_RANDOM_01, 'r' ) as file:
+        in100_random_01_idx = ast.literal_eval( file.read( ) )
+except:
+    IN100_RANDOM_01 = Path("vlhub/metadata/in100_rand_idx_01.txt")
+    with open ( IN100_RANDOM_01, 'r' ) as file:
+        in100_random_01_idx = ast.literal_eval( file.read( ) )
+
+try:
+    IN100_RANDOM_02 = Path("./metadata/in100_rand_idx_02.txt")
+    with open ( IN100_RANDOM_02, 'r' ) as file:
+        in100_random_02_idx = ast.literal_eval( file.read( ) )
+except:
+    IN100_RANDOM_02 = Path("vlhub/metadata/in100_rand_idx_02.txt")
+    with open ( IN100_RANDOM_02, 'r' ) as file:
+        in100_random_02_idx = ast.literal_eval( file.read( ) )
+
+try:
+    IN100_RANDOM_03 = Path("./metadata/in100_rand_idx_03.txt")
+    with open ( IN100_RANDOM_03, 'r' ) as file:
+        in100_random_03_idx = ast.literal_eval( file.read( ) )
+except:
+    IN100_RANDOM_03 = Path("vlhub/metadata/in100_rand_idx_03.txt")
+    with open ( IN100_RANDOM_03, 'r' ) as file:
+        in100_random_03_idx = ast.literal_eval( file.read( ) )
+
+def get_icap_idx(target):
+    global icap_idx
+    global dogs_idx
+    global in100_random_01_idx
+    global in100_random_02_idx
+    global in100_random_03_idx
+    # print("icap_idx", np.array(icap_idx))
+    if target == "in100":
+        icap_idx_rem = np.array(icap_idx)
+    elif target == "in100_dogs":
+        icap_idx_rem = np.array(dogs_idx)
+    elif target == "in100_random_01":
+        icap_idx_rem = np.array(in100_random_01_idx)
+    elif target == "in100_random_02":
+        icap_idx_rem = np.array(in100_random_02_idx)
+    elif target == "in100_random_03":
+        icap_idx_rem = np.array(in100_random_03_idx)
+    else:
+        print("no match found")
+    icap_idx = icap_idx_rem
+    return icap_idx_rem
+
 common_ia = [n for n in ia_idx if n in icap_idx]
 common_ir = [n for n in ir_idx if n in icap_idx]
-
-def get_icap_idx():
-    return np.array(icap_idx)
+common_obj = [n for n in obj_idx if n in icap_idx]
 
 def get_common_ia_idx():
-    return np.array(common_ia)
+    global common_ia
+    common_ia = np.array([n for n in ia_idx if n in icap_idx])
+    return common_ia
 
 def get_common_ir_idx():
-    return np.array(common_ir)
+    global common_ir
+    common_ir_loc = np.array([n for n in ir_idx if n in icap_idx])
+    common_ir = common_ir_loc
+    return common_ir_loc
+
+def get_common_obj_idx():
+    global common_obj
+    common_obj_loc = np.array([n for n in obj_idx if n in icap_idx])
+    common_obj = common_obj_loc
+    return common_obj_loc
 
 def get_common_ia_idx_zeroindexed():
+    global common_ia
     return np.array([ia_idx.index(k) for k in common_ia])
 
 def get_common_ir_idx_zeroindexed():
+    global common_ir
     return np.array([ir_idx.index(k) for k in common_ir])
+
+def get_common_obj_idx_zeroindexed():
+    global common_obj
+    return np.array([obj_idx.index(k) for k in common_obj])
+
+def get_objectnet_classnames():
+    imagenet_classnames_arr = np.array(imagenet_classnames)
+
+    return imagenet_classnames_arr[obj_idx].tolist()
 
 def get_imagenet_r_classnames():
     imagenet_classnames_arr = np.array(imagenet_classnames)
@@ -157,6 +255,10 @@ def get_imagenet_common_ir_classnames():
 def get_imagenet_common_ir_our_classnames():
     imagenet_classnames_arr = np.array(imagenet_our_classnames)
     return imagenet_classnames_arr[common_ir].tolist() 
+
+def get_imagenet_common_obj_classnames():
+    imagenet_classnames_arr = np.array(imagenet_classnames)
+    return imagenet_classnames_arr[common_obj].tolist()
 
 openai_imagenet_template = [
     lambda c: f'a bad photo of a {c}.',

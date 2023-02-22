@@ -132,10 +132,15 @@ def select_count(data, predicate, count):
 
 def token_strip_func(texts):
     ok_tokens = set(ast.literal_eval(open("/scratch/bf996/open_clip/metadata/in1k_ds_oai_tokens.txt", 'r').read()))
-    tlist = texts.tolist()
-    texts = [t if t in ok_tokens else 0 for t in tlist]
-    texts = torch.tensor(tlist)
+    texts = torch.tensor([t if t in ok_tokens else 0 for t in texts.tolist()])
     return texts
+
+def token_reduce(texts):
+    ret = [0 for t in texts.tolist()]
+    for t in texts.tolist():
+        if t != 0:
+            ret[0] = t
+            return torch.tensor(ret)
 
 def clean_integer_label(label, singleclass, strict, ds):
     if ds is None or len(ds) == 0:
@@ -190,15 +195,32 @@ def clean_integer_label(label, singleclass, strict, ds):
         logging.warning("Expected string or int or float, got {} -- ignoring".format(type(label)))
         return ""
 
+class ImageFolderWithPaths(datasets.ImageFolder):
+    """Custom dataset that includes image file paths. Extends
+    torchvision.datasets.ImageFolder
+    """
+
+    # override the __getitem__ method. this is the method that dataloader calls
+    def __getitem__(self, index):
+        # this is what ImageFolder normally returns 
+        original_tuple = super(ImageFolderWithPaths, self).__getitem__(index)
+        # the image file path
+        path = self.imgs[index][0]
+        # make a new tuple that includes original and the path
+        tuple_with_path = (original_tuple + (path,))
+        return tuple_with_path
+
 class CsvDataset(Dataset):
-    def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t"):
+    def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t", args=None):
         logging.debug(f'Loading csv data from {input_filename}')
         df = pd.read_csv(input_filename, sep=sep)
+        logging.info("Size of dataframe is {}".format(len(df)))
         df = df[df[caption_key].notnull()]
         df = df[df[caption_key] != "nan"]
         if integer_labels:
             df = df[df[caption_key] != -1]
             df = df[df[caption_key] != "-1"]
+        logging.info("Size of dataframe after NaN-removal is {}".format(len(df)))
         logging.debug("Columns of dataframe: {}".format(df.columns))
         if dscipher:
             csvcleaned=True
@@ -232,6 +254,8 @@ class CsvDataset(Dataset):
         self.multiclass = multiclass
         self.strict = strict
         self.token_strip = token_strip
+        self.args = args
+        self.imsize = 224
         logging.debug('Done loading data')
 
     def __len__(self):
@@ -240,6 +264,7 @@ class CsvDataset(Dataset):
     def __getitem__(self, idx):
         try:
             images = self.transforms(Image.open(str(self.images[idx])))
+            #self.imsize = images.size()
             # assert(images.size() == (3, 224, 224))
             torch.nan_to_num(images, nan=0.01, posinf=0.99, neginf=0.01)
             texts = str(self.captions[idx])
@@ -266,6 +291,8 @@ class CsvDataset(Dataset):
         if self.scrambled:
             texts = scramble_txt(texts)
         texts = tokenize(texts)[0]
+        if self.args.token_reduce:
+            texts = token_reduce(texts)
         if self.token_strip:
             texts = token_strip_func(texts)
         if self.token_scrambled:
@@ -278,8 +305,8 @@ def _convert_to_rgb(image):
     return image.convert('RGB')
     
 class ImageAugCSVDataset(CsvDataset):
-    def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, metacaptions, token_strip, sep="\t"):
-        super().__init__(input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, metacaptions, token_strip, sep)
+    def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, metacaptions, token_strip, sep="\t", args=None):
+        super().__init__(input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, metacaptions, token_strip, sep, args)
         self.augment = torchvision.transforms.Compose([
             torchvision.transforms.RandomResizedCrop(224, scale=(0.08, 1.)),
             torchvision.transforms.RandomApply([
@@ -296,11 +323,13 @@ class ImageAugCSVDataset(CsvDataset):
     def __getitem__(self, idx):
         try:
             img = Image.open(str(self.images[idx]))
+            #self.imsize = img.size()
         except Exception as e:
             logging.warning("Exception in csv dataset: {}".format(e))
             logging.warning("Missing or unreadable image at {}, attempting to skip.".format(str(self.images[idx])))
             try:
                 img = Image.open(str(self.images[idx+1]))
+                #self.imsize = img.size()
             except:
                 logging.warning("Skip failed. Generating dummy image and caption.".format(str(self.images[idx])))
                 imarray = np.random.rand(224,224,3) * 255
@@ -340,13 +369,15 @@ class DataInfo:
             self.sampler.set_epoch(epoch)
 
 
-def preprocess_txt(text, token_scrambled, token_strip):
+def preprocess_txt(text, token_scrambled, token_strip, token_reduce):
     text = str(text)
     tokentxt = tokenize([text])[0]
     if token_scrambled:
         random.shuffle(tokentxt)
     if token_strip:
         text = token_strip_func(text)
+    if token_reduce:
+        text = token_reduce(text)
     return tokentxt
 
 def filter_preprocess_txt(text, ds, scrambled, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions):
@@ -504,7 +535,7 @@ def get_dataset_size(shards):
 
 def get_objectnet(args, preprocess_fns):
     _, preprocess_val = preprocess_fns
-    dataset = datasets.ImageFolder(args.objectnet, transform=preprocess_val)
+    dataset = ImageFolderWithPaths(args.objectnet, transform=preprocess_val)
     dataloader = torch.utils.data.DataLoader(
             dataset,
             batch_size=args.batch_size,
@@ -922,7 +953,7 @@ def get_wds_dataset(args, preprocess_img, is_train, epoch=0, floor=False, total=
         ])
     else:
         pipeline.extend([
-            wds.map_dict(image=preprocess_img, text=lambda x : preprocess_txt(x, args.token_scrambled, args.token_strip), handler=log_and_continue),
+            wds.map_dict(image=preprocess_img, text=lambda x : preprocess_txt(x, args.token_scrambled, args.token_strip, args.token_reduce), handler=log_and_continue),
         ])
     pipeline.extend([
         wds.to_tuple("image", "text"),
@@ -992,7 +1023,8 @@ def get_csv_dataset(args, preprocess_fn, is_train, epoch=0, total=None):
             shift=args.shift_cipher,
             integer_labels=args.integer_labels,
             metacaptions=args.metacaptions,
-            sep=args.csv_separator)
+            sep=args.csv_separator,
+            args=args)
     else:
         dataset = CsvDataset(
             input_filename,
@@ -1011,7 +1043,8 @@ def get_csv_dataset(args, preprocess_fn, is_train, epoch=0, total=None):
             integer_labels=args.integer_labels,
             multiclass=args.multiclass,
             metacaptions=args.metacaptions,
-            sep=args.csv_separator)
+            sep=args.csv_separator,
+            args=args)
     num_samples = len(dataset)
     sampler = DistributedSampler(dataset) if args.distributed and is_train else None
     shuffle = is_train and sampler is None

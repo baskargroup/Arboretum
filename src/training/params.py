@@ -127,10 +127,22 @@ def parse_args():
         help="Strip tokens not in evaluation dataset during training"
     )
     parser.add_argument(
+        "--token-reduce",
+        type=bool,
+        default=False,
+        help="Keep only one non-zero token"
+    )
+    parser.add_argument(
         "--extended-metrics",
         type=bool,
         default=False,
         help="Confusion matrices and class-wise accuracy"
+    )
+    parser.add_argument(
+        "--save-results-to-csv",
+        type=str,
+        default="",
+        help="Save metrics to csv file"
     )
     parser.add_argument(
         "--zs-upper",
@@ -405,13 +417,19 @@ def parse_args():
         help="Use simclr image transforms",
     )
     parser.add_argument(
+        "--downsample-trans",
+        default=False,
+        help="Use simclr image transforms with downsampling (jpg quality = 10)",
+    )
+    parser.add_argument(
         "--add-trunk",
         default=False,
         help="Add the word, trunk, to the model state dict",
     )
     parser.add_argument(
         "--caption-subset",
-        default=False,
+        default = '',
+        type=str,
         help="Run inference only on the classes in the Imagenet-Captioned dataset",
     )
     parser.add_argument(

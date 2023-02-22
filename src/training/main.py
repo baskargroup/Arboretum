@@ -157,6 +157,7 @@ def run_main(args = None):
     assert not (args.pretrained and args.pretrained_head), "Cannot pass both pretrained and pretrained-head arguments"
     random_seed(args.seed, 0)
     if args.linear_probe:
+        print("model is {}".format(args.model))
         model = timm.create_model(args.model, pretrained=True).to(device=device)
         preprocess_train = image_transform(args.image_size, is_train=True)
         preprocess_val = image_transform(args.image_size, is_train=False)
@@ -176,6 +177,7 @@ def run_main(args = None):
             mlm=args.mlm,
             image_simclr=args.sim_clr,
             simclr_trans=args.sim_clr_trans,
+            downsample_trans=args.downsample_trans,
             imsize=args.image_size if args.image_size else 224,
             image_mean=args.image_mean,
             image_std=args.image_std,

@@ -1,11 +1,15 @@
 {
     "embed_dim": 1024,
     "vision_cfg": {
-        "timm_model_name": "beit_large_patch16_224",
-        "timm_model_pretrained": false,
-        "timm_pool": "",
-        "timm_proj": "linear",
-        "image_size": 224
+        "image_size": 384,
+        "layers": [
+            3,
+            4,
+            6,
+            3
+        ],
+        "width": 64,
+        "patch_size": null
     },
     "text_cfg": {
         "context_length": 77,
