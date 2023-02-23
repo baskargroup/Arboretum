@@ -155,7 +155,7 @@ def get_icap_idx(target):
     global in100_random_01_idx
     global in100_random_02_idx
     global in100_random_03_idx
-    # print("icap_idx", np.array(icap_idx))
+    icap_idx_rem = None
     if target == "in100":
         icap_idx_rem = np.array(icap_idx)
     elif target == "in100_dogs":

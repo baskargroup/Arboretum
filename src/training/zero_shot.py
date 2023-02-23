@@ -304,7 +304,8 @@ def build_imagenet(args, model, in_type=""):
         classnames = to_lower(classnames)
     elif args.shift_cipher:
         classnames = [shift_cipher(s, args.shift_cipher) for s in classnames]
-    #logging.info("imagenet classnames first 15: {}".format(classnames[:15]))
+    logging.info("imagenet classnames first 15: {}".format(classnames[:15]))
+    logging.info("length of imagenet clasnames: {}".format(len(classnames)))
     args.classnames = classnames
     if not isint:
         logging.info('Building zero-shot classifier')
@@ -406,6 +407,7 @@ def zero_shot_eval(model, data, epoch, args):
     logging.info('Starting zero-shot imagenet.')
     if args.caption_subset != "":
         logging.info("Using caption subset {}".format(args.caption_subset))
+        get_icap_idx(args.caption_subset)
     isint = args.linear_probe or args.integer_labels
     classifier = None
     imagenets = []
