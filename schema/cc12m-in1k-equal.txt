@@ -5,7 +5,7 @@
     "dataset_type": "auto"
   },
   "in1k": {
-    "train_data": "/scratch/bf996/datasets/imagenet-captions-split/imagenet-captions-split/{00000..00141}.tar",
+    "train_data": "/scratch/bf996/datasets/ImageNet/imagenet-captions/imagenet-captions-{000000..000141}.tar",
     "train_num_samples": 1280000,
     "dataset_type": "auto"
   }

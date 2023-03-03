@@ -213,7 +213,7 @@ class ImageFolderWithPaths(datasets.ImageFolder):
 class CsvDataset(Dataset):
     def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t", args=None):
         logging.debug(f'Loading csv data from {input_filename}')
-        df = pd.read_csv(input_filename, sep=sep)
+        df = pd.read_csv(input_filename, sep=sep, error_bad_lines=False, warn_bad_lines=False)
         logging.info("Size of dataframe is {}".format(len(df)))
         df = df[df[caption_key].notnull()]
         df = df[df[caption_key] != "nan"]

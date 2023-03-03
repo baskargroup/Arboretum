@@ -7,7 +7,7 @@ try:
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_OPENAI = Path("vlhub/metadata/imagenet1k_openclip.txt")
+    IN1K_OPENAI = Path("/scratch/bf996/vlhub/metadata/imagenet1k_openclip.txt")
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_classnames = ast.literal_eval( file.read( ) )
 
@@ -19,7 +19,7 @@ try:
     with open( IN1K_ORDER, 'r' ) as file:
         imagenet_wrongorder_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_ORDER = Path("vlhub/metadata/imagenet1k_wrongorder.txt")
+    IN1K_ORDER = Path("/scratch/bf996/vlhub/metadata/imagenet1k_wrongorder.txt")
     with open( IN1K_ORDER, 'r' ) as file:
         imagenet_wrongorder_classnames = ast.literal_eval( file.read( ) )
 
@@ -31,7 +31,7 @@ try:
     with open( IN1K_OURS, 'r' ) as file:
         imagenet_our_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_OURS = Path("vlhub/metadata/imagenet1k_ours.txt")
+    IN1K_OURS = Path("/scratch/bf996/vlhub/metadata/imagenet1k_ours.txt")
     with open( IN1K_OURS, 'r' ) as file:
         imagenet_our_classnames = ast.literal_eval( file.read( ) )
 temp = []
@@ -48,7 +48,7 @@ try:
     with open( IN1K_DEF, 'r' ) as file:
         imagenet_def_classnames = ast.literal_eval( file.read( ) )
 except:
-    IN1K_DEF = Path("vlhub/metadata/imagenet1k_default.txt")
+    IN1K_DEF = Path("/scratch/bf996/vlhub/metadata/imagenet1k_default.txt")
     with open( IN1K_DEF, 'r' ) as file:
         imagenet_def_classnames = ast.literal_eval( file.read( ) )
 temp = []
@@ -109,7 +109,7 @@ try:
     with open( ICAP_F, 'r' ) as file:
         icap_idx = ast.literal_eval( file.read( ) )
 except:
-    ICAP_F = Path("vlhub/metadata/in100_true_idx.txt")
+    ICAP_F = Path("/scratch/bf996/vlhub/metadata/in100_true_idx.txt")
     with open( ICAP_F, 'r' ) as file:
         icap_idx = ast.literal_eval( file.read( ) )
 
@@ -118,7 +118,7 @@ try:
     with open( IN100_DOGS, 'r' ) as file:
         dogs_idx = ast.literal_eval( file.read( ) )
 except:
-    IN100_DOGS = Path("vlhub/metadata/in100_dogs.txt")
+    IN100_DOGS = Path("/scratch/bf996/vlhub/metadata/in100_dogs.txt")
     with open( IN100_DOGS, 'r' ) as file:
         dogs_idx = ast.literal_eval( file.read( ) )
     
@@ -127,7 +127,7 @@ try:
     with open ( IN100_RANDOM_01, 'r' ) as file:
         in100_random_01_idx = ast.literal_eval( file.read( ) )
 except:
-    IN100_RANDOM_01 = Path("vlhub/metadata/in100_rand_idx_01.txt")
+    IN100_RANDOM_01 = Path("/scratch/bf996/vlhub/metadata/in100_rand_idx_01.txt")
     with open ( IN100_RANDOM_01, 'r' ) as file:
         in100_random_01_idx = ast.literal_eval( file.read( ) )
 
@@ -136,7 +136,7 @@ try:
     with open ( IN100_RANDOM_02, 'r' ) as file:
         in100_random_02_idx = ast.literal_eval( file.read( ) )
 except:
-    IN100_RANDOM_02 = Path("vlhub/metadata/in100_rand_idx_02.txt")
+    IN100_RANDOM_02 = Path("/scratch/bf996/vlhub/metadata/in100_rand_idx_02.txt")
     with open ( IN100_RANDOM_02, 'r' ) as file:
         in100_random_02_idx = ast.literal_eval( file.read( ) )
 
@@ -145,7 +145,7 @@ try:
     with open ( IN100_RANDOM_03, 'r' ) as file:
         in100_random_03_idx = ast.literal_eval( file.read( ) )
 except:
-    IN100_RANDOM_03 = Path("vlhub/metadata/in100_rand_idx_03.txt")
+    IN100_RANDOM_03 = Path("/scratch/bf996/vlhub/metadata/in100_rand_idx_03.txt")
     with open ( IN100_RANDOM_03, 'r' ) as file:
         in100_random_03_idx = ast.literal_eval( file.read( ) )
 
@@ -351,7 +351,7 @@ try:
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_cipher = ast.literal_eval( file.read( ) )
 except:
-    IN1K_OPENAI = Path("vlhub/metadata/imagenet1k_cipher.txt")
+    IN1K_OPENAI = Path("/scratch/bf996/vlhub/metadata/imagenet1k_cipher.txt")
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_cipher = ast.literal_eval( file.read( ) )
 

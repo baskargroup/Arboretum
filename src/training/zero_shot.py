@@ -10,14 +10,13 @@ import numpy as np
 
 from open_clip import tokenize
 from .precision import get_autocast
-from .imagenet_zeroshot_data import imagenet_classnames, openai_imagenet_template
 
 from .data import shift_cipher
 from .objectnet_eval import objectnet_accuracy, accuracy_topk_subselected_and_collapsed
 from .imagenet_zeroshot_data import *
 from .metrics import *
 try:
-    from .inat_zeroshot_data import inat_classnames, inat_template
+    from .inat_zeroshot_data import *
     from .cars_zeroshot_data import cars_classnames, cars_template
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
@@ -96,10 +95,11 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
     with torch.no_grad():
         top1, top5, n = 0., 0., 0.
         args.isint = any([args.integer_labels, args.linear_probe])
-        args.y_pred = []
-        args.y_true = []
-        args.logits = []
-        args.image_paths = []
+        if args.extended_metrics:
+            args.y_pred = []
+            args.y_true = []
+            args.logits = []
+            args.image_paths = []
         for images, *target in tqdm(dataloader, unit_scale=args.batch_size):
             if split == "objectnet":
                 args.img_paths = target[1]
@@ -198,13 +198,19 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         image_features = F.normalize(image_features, dim=-1)
                         logits = 100. * image_features @ classifier
             
-            # measure accuracy with objectnet adjustments
+            # measure accuracy with adjustments
             if args.isint:
                 #zero out logits which are not being evaluated (in VL this is handled by changing the size of the classification problem)
                 if args.caption_subset != "":
-                    icap_idx = get_icap_idx(args.caption_subset)
-                    not_icap_idx = [i for i in range(1000) if i not in icap_idx]
-                    logits[:, not_icap_idx] = float("-inf")
+                    if args.caption_subset == "insects":
+                        #TODO: this is an inat to insecta class idx remap -- this should only happen if the model was trained on insecta
+                        id_dict = get_insecta_id_dict()
+                        id_dict = {v: k for k, v in id_dict.items()}
+                        target = torch.tensor([id_dict[t] for t in target.cpu()]).to(args.device)
+                    else:
+                        icap_idx = get_icap_idx(args.caption_subset)
+                        not_icap_idx = [i for i in range(1000) if i not in icap_idx]
+                        logits[:, not_icap_idx] = float("-inf")
                 if split == 'r':
                     ir_idx = get_ir_idx()
                     not_ir_idx = [i for i in range(1000) if i not in ir_idx]
@@ -238,10 +244,10 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 # acc5 = float(0.0) #TODO: implement
         
             else:
-                args.logits.append(logits.cpu().detach().numpy())
                 if args.extended_metrics:
+                    args.logits.append(logits.cpu().detach().numpy())
                     log_confusion_matrix(args, logits, target)
-                acc1, acc5 = accuracy(logits, target, topk=(1, 5))
+                acc1, acc5 = accuracy(logits, target, topk=(1, min(5, len(args.classnames))))
                 n += images.size(0)
                 top1 += acc1
                 top5 += acc5
@@ -327,15 +333,19 @@ def zero_shot_eval(model, data, epoch, args):
 
     if 'inat2021' in data:
         isint = (args.integer_labels or args.linear_probe)
-        # usecaps = args.caption_subset and not isint
+        usecaps = args.caption_subset and not isint
+        if args.caption_subset != "":
+            if args.caption_subset == "insects":
+                args.classnames = inat_insects_classnames
+                args.capsub_idx = inat_insects_idx if isint else [i for i in range(len(inat_insects_idx))]
+            else:
+                print("caption subset not implemented")
+                raise(NotImplementedError)
         if isint:
-            args.classnames = inat_classnames
             classifier = None
-            # return classifier
         else:
             logging.info('Building zero-shot classifier')
-            classifier = zero_shot_classifier(model, inat_classnames, inat_template, args)
-        # classifier = None
+            classifier = zero_shot_classifier(model, args.classnames, inat_template, args, args.capsub_idx)
             logging.info('Using classifier')
         logging.info('Using classifier')
         top1, top5 = run(model, classifier, data['inat2021'].dataloader, args)
@@ -408,6 +418,12 @@ def zero_shot_eval(model, data, epoch, args):
     if args.caption_subset != "":
         logging.info("Using caption subset {}".format(args.caption_subset))
         get_icap_idx(args.caption_subset)
+        get_common_ir_idx()
+        get_common_ir_idx_zeroindexed()
+        get_common_ia_idx()
+        get_common_ia_idx_zeroindexed()
+        get_common_obj_idx()
+        get_common_obj_idx_zeroindexed()
     isint = args.linear_probe or args.integer_labels
     classifier = None
     imagenets = []

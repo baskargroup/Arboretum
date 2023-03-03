@@ -35,6 +35,7 @@ except ImportError:
 from open_clip import create_model_and_transforms, trace_model
 from open_clip.transform import image_transform
 from training.data import get_data
+from training.model_data import noisystudent_loader, efficientnet_loader
 from training.distributed import is_master, init_distributed_device, world_info_from_env
 from training.logger import setup_logging
 from training.params import parse_args
@@ -157,10 +158,15 @@ def run_main(args = None):
     assert not (args.pretrained and args.pretrained_head), "Cannot pass both pretrained and pretrained-head arguments"
     random_seed(args.seed, 0)
     if args.linear_probe:
-        print("model is {}".format(args.model))
-        model = timm.create_model(args.model, pretrained=True).to(device=device)
-        preprocess_train = image_transform(args.image_size, is_train=True)
-        preprocess_val = image_transform(args.image_size, is_train=False)
+        if args.model in ["tf_efficientnet_l2_ns"]:
+            model, preprocess_train, preprocess_val = noisystudent_loader()
+        elif args.model in ["efficientnet-b0", "efficientnet-b1", "efficientnet-b2", "efficientnet-b3", "efficientnet-b4", "efficientnet-b5"]:
+            model, preprocess_train, preprocess_val = efficientnet_loader(args.model)  
+        else:
+            model = timm.create_model(args.model, pretrained=True)
+            preprocess_train = image_transform(args.image_size, is_train=True)
+            preprocess_val = image_transform(args.image_size, is_train=False)
+        model.to(device=device)
     else:
         model, preprocess_train, preprocess_val = create_model_and_transforms(
             args.model,

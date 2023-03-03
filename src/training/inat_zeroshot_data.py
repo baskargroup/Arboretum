@@ -8,6 +8,8 @@ except:
     df = pd.read_csv(METPATH)
 
 inat_classnames = df['label'].tolist()
+inat_insects_classnames = df[df["supercategory"] == "Insects"]['label'].tolist()
+inat_insects_idx = df[df["supercategory"] == "Insects"]['id'].tolist()
 
 inat_template = [
     lambda c: f'a bad photo of a {c}.',
