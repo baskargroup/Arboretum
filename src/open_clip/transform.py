@@ -70,7 +70,7 @@ def image_transform(
         image_size = image_size[0]
 
     normalize = Normalize(mean=mean, std=std)
-    if downsample_trans:
+    if downsample_trans and is_train:
         return Compose([
                 _convert_to_rgb,
                 _downsample,
@@ -84,7 +84,7 @@ def image_transform(
                 torchvision.transforms.ToTensor(),
                 normalize,
         ])
-    if simclr_trans:
+    elif simclr_trans and is_train:
         return Compose([
                 torchvision.transforms.RandomResizedCrop(image_size, scale=(0.08, 1.)),
                 torchvision.transforms.RandomApply([

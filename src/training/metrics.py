@@ -6,6 +6,7 @@ import os
 import torch
 import logging
 from datetime import datetime
+import time
 
 try:
     from sklearn.metrics import confusion_matrix
@@ -102,18 +103,21 @@ def write_confusion_matrix(args, output, labels, classes):
     if font_size < 0.1:
         font_size = 0.1
     sn.set(font_scale=font_size)
-    if len(classes) < 201:
-        plt.figure(figsize = (72,40), dpi=200)
-        sn.heatmap(df_cm, annot=True)
-        plt.savefig(os.path.join(args.conf_path, "confusion_matrix_{}.svg".format(res)), format='svg', dpi=200)        
+    #if len(classes) < 201:
+    start = time.time()
+    print("Saving confusion matrix: this might take a while...")
+    plt.figure(figsize = (168,80), dpi=200)
+    sn.heatmap(df_cm, annot=True)
+    plt.savefig(os.path.join(args.conf_path, "confusion_matrix_{}.svg".format(res)), format='svg', dpi=200)        
     plt.close('all')
+    print("Saving confusion matrix: done in {} seconds".format(time.time() - start))
     #class-class clustering matrix
     logging.info('Saving class-class clustering matrix')
     logit_concat = np.concatenate(args.logits, axis=0)
     corr_mat_logits = np.corrcoef(logit_concat, rowvar=False)
     corr_mat_logits[corr_mat_logits < 0] = 0 # not quite necessary, but helps sharpen the blocks
-    corr_mat_logits, indices_logits = reorder_matrix(corr_mat_logits)
     try:
+        corr_mat_logits, indices_logits = reorder_matrix(corr_mat_logits)
         show_matrix(args, corr_mat_logits, 'Logit-based Similarity Matrix')
     except Exception as e:
         logging.warning("Clustering matrix did not save")
