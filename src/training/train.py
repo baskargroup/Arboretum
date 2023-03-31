@@ -51,6 +51,7 @@ def unwrap_model(model):
 
 def train_integer_labels(model, images, labels, device, loss):
     logits = model(images)
+    #print("\n in train_integer_labels, logits are {}, labels are {} \n".format(logits.shape, labels))
     return loss(logits, labels)
 
 def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_writer=None, sim_clr=False):

@@ -203,6 +203,7 @@ def run_main(args = None):
 
     if args.lock_text and not args.alt:
         # lock text tower as per LiT - https://arxiv.org/abs/2111.07991
+        # Note, this is also called by integer_labels models that have text towers
         model.lock_text_tower(
             unlocked_groups=args.lock_image_unlocked_groups)
 

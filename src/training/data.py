@@ -195,6 +195,17 @@ def clean_integer_label(label, singleclass, strict, ds):
         logging.warning("Expected string or int or float, got {} -- ignoring".format(type(label)))
         return ""
 
+def cast_to_int(var):
+    if not var:
+        return -1
+    elif isinstance(var, str):
+        try:
+            return int(float(var))
+        except:
+            return -1
+    else:
+        return int(var)
+
 class ImageFolderWithPaths(datasets.ImageFolder):
     """Custom dataset that includes image file paths. Extends
     torchvision.datasets.ImageFolder
@@ -213,13 +224,15 @@ class ImageFolderWithPaths(datasets.ImageFolder):
 class CsvDataset(Dataset):
     def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t", args=None):
         logging.debug(f'Loading csv data from {input_filename}')
-        df = pd.read_csv(input_filename, sep=sep, error_bad_lines=False, warn_bad_lines=False)
+        df = pd.read_csv(input_filename, sep=sep, on_bad_lines='skip')
         logging.info("Size of dataframe is {}".format(len(df)))
         df = df[df[caption_key].notnull()]
         df = df[df[caption_key] != "nan"]
         if integer_labels:
+            df[caption_key] = df[caption_key].apply(cast_to_int)
             df = df[df[caption_key] != -1]
             df = df[df[caption_key] != "-1"]
+            self.label_set = [i for i in range(df[caption_key].astype(int).max() + 1)]
         logging.info("Size of dataframe after NaN-removal is {}".format(len(df)))
         logging.debug("Columns of dataframe: {}".format(df.columns))
         if dscipher:
@@ -286,7 +299,7 @@ class CsvDataset(Dataset):
             #if isinstance(texts, str) and not texts.is_numeric():
                 #assert(False, "Integer labels cannot be computed on the fly for a CSV dataset")
                 #texts = [synset_ds(clean_captions(str(texts)), 3, self.csvfilter, False, False, self.strict, False, True, None) for t in texts]
-            texts = clean_integer_label(self.captions[idx], not self.multiclass, self.strict, self.csvfilter)
+            texts = clean_integer_label(self.captions[idx], not self.multiclass, self.strict, self.label_set)
             return images, texts
         if self.scrambled:
             texts = scramble_txt(texts)
