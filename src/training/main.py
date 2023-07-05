@@ -29,10 +29,14 @@ except ImportError:
 
 try:
     import timm
+    # from timm.optim import Lookahead as Lookahead
+    # from timm.optim import AdamP as AdamP
 except ImportError:
     print("Timm was not found")
 
+from open_clip.model import TimmModel
 from open_clip import create_model_and_transforms, trace_model
+from open_clip.factory import apply_random_weights_skipping_first_k_layers_vit
 from open_clip.transform import image_transform
 from training.data import get_data
 from training.model_data import noisystudent_loader, efficientnet_loader
@@ -40,7 +44,9 @@ from training.distributed import is_master, init_distributed_device, world_info_
 from training.logger import setup_logging
 from training.params import parse_args
 from training.scheduler import cosine_lr
-from training.train import train_one_epoch, evaluate
+from training.train import train_one_epoch, evaluate, unwrap_model
+from training.lsuv import LSUV_
+from gsam import CosineScheduler, GSAM
 
 def dict_representer(dumper, data):
   return dumper.represent_mapping(_mapping_tag, data.iteritems())
@@ -184,10 +190,20 @@ def run_main(args = None):
             image_simclr=args.sim_clr,
             simclr_trans=args.sim_clr_trans,
             downsample_trans=args.downsample_trans,
+            augreg_trans=args.augreg_trans,
             imsize=args.image_size if args.image_size else 224,
             image_mean=args.image_mean,
             image_std=args.image_std,
         )
+
+    if args.load_first_k > 0:
+        print("Loading first {} layers".format(args.load_first_k))
+        if isinstance(model.visual, TimmModel):
+            print("Model type: {}".format(type(model.visual.trunk)))
+            if isinstance(model.visual.trunk, timm.models.vision_transformer.VisionTransformer):
+                apply_random_weights_skipping_first_k_layers_vit(model.visual, args.load_first_k)
+        else:
+            raise ValueError("Model of type {} does not support load_first_k".format(type(model)))
 
     if any([args.filip, args.mlm, args.vssl, args.elp, args.dcl]):
         args.model = "xclip"
@@ -248,7 +264,6 @@ def run_main(args = None):
         named_parameters = list(model.named_parameters())
         gain_or_bias_params = [p for n, p in named_parameters if exclude(n, p) and p.requires_grad]
         rest_params = [p for n, p in named_parameters if include(n, p) and p.requires_grad]
-
         optimizer = optim.AdamW(
             [
                 {"params": gain_or_bias_params, "weight_decay": 0.},
@@ -262,7 +277,6 @@ def run_main(args = None):
             optimizer = hvd.DistributedOptimizer(optimizer, named_parameters=model.named_parameters())
             hvd.broadcast_parameters(model.state_dict(), root_rank=0)
             hvd.broadcast_optimizer_state(optimizer, root_rank=0)
-
         scaler = GradScaler() if args.precision == "amp" else None
 
     # optionally resume from a checkpoint
@@ -284,6 +298,7 @@ def run_main(args = None):
                 print("add trunk")
                 print(sd.keys())
             if args.fine_tune:
+                # resuming a train checkpoint w/o epoch and optimizer state
                 if not args.distributed and next(iter(sd.items()))[0].startswith('module'):
                     sd = {k[len('module.'):]: v for k, v in sd.items()}
                 model.load_state_dict(sd)
@@ -309,11 +324,38 @@ def run_main(args = None):
     data = get_data(args, (preprocess_train, preprocess_val), epoch=start_epoch)
     assert len(data), 'At least one train or eval dataset must be specified.'
 
+    #LSUV weight initialization
+    if args.resume is None and 'train' in data and args.lsuv:
+        print("Using LSUV initialization")
+        LSUV_(unwrap_model(model).visual, 
+              next(iter(data["train"].dataloader))[0].to(device=device, non_blocking=True), 
+              apply_only_to=['Conv', 'Linear', 'Bilinear'])    
+
     # create scheduler if train
     scheduler = None
     if 'train' in data and optimizer is not None:
         total_steps = data["train"].dataloader.num_batches * args.epochs
-        scheduler = cosine_lr(optimizer, args.lr, args.warmup, total_steps)
+        if args.gsam:
+            args.lr_scheduler = CosineScheduler(T_max=total_steps,
+                                        max_value=args.lr, 
+                                        min_value=args.lr*0.01,
+                                        optimizer=optimizer, 
+                                        warmup_steps=args.warmup,
+                                        )
+            args.rho_scheduler = CosineScheduler(T_max=total_steps, 
+                                            max_value=0.1, 
+                                            min_value=0.01)
+            args.gsam_optimizer = GSAM([
+                                            {"params": gain_or_bias_params, "weight_decay": 0.},
+                                            {"params": rest_params, "weight_decay": args.wd},
+                                        ], 
+                                  base_optimizer=optimizer, 
+                                  model=model, 
+                                  gsam_alpha=0.05, 
+                                  rho_scheduler=args.rho_scheduler, 
+                                  adaptive=False)
+        else:
+            scheduler = cosine_lr(optimizer, args.lr, args.warmup, total_steps)
 
     # determine if this worker should save logs and checkpoints. only do so if it is rank == 0
     args.save_logs = args.logs and args.logs.lower() != 'none' and is_master(args)

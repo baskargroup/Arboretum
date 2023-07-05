@@ -1,7 +1,7 @@
 {
     "embed_dim": 1000,
     "vision_cfg": {
-        "image_size": 288,
+        "image_size": 224,
         "layers": [
             4,
             6,

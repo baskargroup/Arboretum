@@ -499,10 +499,17 @@ def zero_shot_eval(model, data, epoch, args):
     #save results to csv
     if args.save_results_to_csv != "":
         metrics_path = Path(args.save_results_to_csv)
-        metrics_df = pd.read_csv(metrics_path)
-        cols = list(metrics_df.columns)
-        results_row = {c : results[c] for c in cols if c in list(results.keys())}
+        try:
+            metrics_df = pd.read_csv(metrics_path)
+            cols = list(metrics_df.columns)
+        except:
+            metrics_df = pd.DataFrame()
+        results_row = {c : results[c] for c in list(results.keys())}
+        # results_row = {c : results[c] for c in cols if c in list(results.keys())}
         results_row['name'] = args.model
-        metrics_df = metrics_df.append(pd.DataFrame(results_row,index=[len(metrics_df)+1])).fillna(0)
+        if len(metrics_df) > 0:
+            metrics_df = metrics_df.append(pd.DataFrame(results_row,index=[len(metrics_df)+1])).fillna(0)
+        else:
+            metrics_df = metrics_df.append(pd.DataFrame(results_row,index=[1])).fillna(0)
         metrics_df.to_csv(metrics_path, index=False)
     return results

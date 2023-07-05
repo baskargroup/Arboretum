@@ -91,7 +91,7 @@ class ClipLoss(nn.Module):
         self.prev_num_logits = 0
         self.labels = {}
 
-    def forward(self, image_features, text_features, logit_scale):
+    def forward(self, image_features, text_features, logit_scale=1.0):
         device = image_features.device
         if self.world_size > 1:
             all_image_features, all_text_features = gather_features(

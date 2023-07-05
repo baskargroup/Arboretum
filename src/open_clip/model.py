@@ -430,6 +430,7 @@ class CLIPVisionCfg:
     timm_model_pretrained: bool = False  # use (imagenet) pretrained weights for named model
     timm_pool: str = 'avg'  # feature pooling for timm model ('abs_attn', 'rot_attn', 'avg', '')
     timm_proj: str = 'linear'  # linear projection for timm model output ('linear', 'mlp', '')
+    drop_rate: float = 0.0 # dropout rate
 
 
 @dataclass
@@ -470,7 +471,8 @@ class CLIP(nn.Module):
                 pool=vision_cfg.timm_pool,
                 proj=vision_cfg.timm_proj,
                 embed_dim=embed_dim,
-                image_size=vision_cfg.image_size
+                image_size=vision_cfg.image_size,
+                drop=vision_cfg.drop_rate,
             )
             act_layer = nn.GELU  # so that text transformer doesn't use QuickGELU w/ timm models
         elif isinstance(vision_cfg.layers, (tuple, list)):

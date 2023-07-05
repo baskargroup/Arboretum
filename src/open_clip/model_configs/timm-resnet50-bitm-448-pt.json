@@ -1,11 +1,11 @@
 {
-    "embed_dim": 1024,
+    "embed_dim": 1000,
     "vision_cfg": {
-        "timm_model_name": "vit_large_patch16_224_in21k",
+        "timm_model_name": "resnetv2_50x1_bitm",
         "timm_model_pretrained": true,
         "timm_pool": "",
         "timm_proj": "linear",
-        "image_size": 224
+        "image_size": 448
     },
     "text_cfg": {
         "context_length": 77,

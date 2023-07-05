@@ -12,7 +12,10 @@ from torchvision.transforms import Normalize, Compose, RandomResizedCrop, Interp
 
 from .constants import OPENAI_DATASET_MEAN, OPENAI_DATASET_STD
 
-
+try:
+    from timm.data.auto_augment import rand_augment_transform
+except:
+    pass
 class ResizeMaxSize(nn.Module):
 
     def __init__(self, max_size, interpolation=InterpolationMode.BICUBIC, fn='max', fill=0):
@@ -52,6 +55,7 @@ def image_transform(
         is_train: bool,
         simclr_trans: bool = False,
         downsample_trans: bool = False,
+        augreg_trans: bool = False,
         mean: Optional[Tuple[float, ...]] = None,
         std: Optional[Tuple[float, ...]] = None,
         resize_longest_max: bool = False,
@@ -68,55 +72,35 @@ def image_transform(
     if isinstance(image_size, (list, tuple)) and image_size[0] == image_size[1]:
         # for square size, pass size as int so that Resize() uses aspect preserving shortest edge
         image_size = image_size[0]
-
     normalize = Normalize(mean=mean, std=std)
+
+    transforms = []
+    if simclr_trans and is_train:
+        transforms.append(torchvision.transforms.RandomResizedCrop(image_size, 
+                                                                   #scale=(0.08, 1.), 
+                                                                   scale=(0.7, 1.),
+                                                                   interpolation=InterpolationMode.BICUBIC,
+                                                                   ))
+        transforms.append(torchvision.transforms.RandomApply([
+                    torchvision.transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)  # not strengthened
+                ], p=0.8))
+        transforms.append(torchvision.transforms.RandomGrayscale(p=0.2))
+        transforms.append(torchvision.transforms.RandomApply([torchvision.transforms.GaussianBlur(5, sigma=(.1, 2.))], p=0.5))
+        transforms.append(torchvision.transforms.RandomHorizontalFlip())
+    if is_train:
+        transforms.append(_convert_to_rgb)
     if downsample_trans and is_train:
-        return Compose([
-                _convert_to_rgb,
-                _downsample,
-                torchvision.transforms.RandomResizedCrop(image_size, scale=(0.08, 1.)),
-                torchvision.transforms.RandomApply([
-                    torchvision.transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)  # not strengthened
-                ], p=0.8),
-                torchvision.transforms.RandomGrayscale(p=0.2),
-                torchvision.transforms.RandomApply([torchvision.transforms.GaussianBlur(5, sigma=(.1, 2.))], p=0.5),
-                torchvision.transforms.RandomHorizontalFlip(),
-                torchvision.transforms.ToTensor(),
-                normalize,
-        ])
-    elif simclr_trans and is_train:
-        return Compose([
-                torchvision.transforms.RandomResizedCrop(image_size, scale=(0.08, 1.)),
-                torchvision.transforms.RandomApply([
-                    torchvision.transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)  # not strengthened
-                ], p=0.8),
-                torchvision.transforms.RandomGrayscale(p=0.2),
-                torchvision.transforms.RandomApply([torchvision.transforms.GaussianBlur(5, sigma=(.1, 2.))], p=0.5),
-                torchvision.transforms.RandomHorizontalFlip(),
-                _convert_to_rgb,
-                torchvision.transforms.ToTensor(),
-                normalize,
-        ])
-    elif is_train:
-        return Compose([
-            RandomResizedCrop(image_size, scale=(0.9, 1.0), interpolation=InterpolationMode.BICUBIC),
-            _convert_to_rgb,
-            ToTensor(),
-            normalize,
-        ])
+        transforms.append(_downsample)
+    if resize_longest_max:
+        transforms.append(ResizeMaxSize(image_size, fill=fill_color))
     else:
-        if resize_longest_max:
-            transforms = [
-                ResizeMaxSize(image_size, fill=fill_color)
-            ]
-        else:
-            transforms = [
-                Resize(image_size, interpolation=InterpolationMode.BICUBIC),
-                CenterCrop(image_size),
-            ]
         transforms.extend([
-            _convert_to_rgb,
-            ToTensor(),
-            normalize,
+            Resize(image_size, interpolation=InterpolationMode.BICUBIC),
+            CenterCrop(image_size),
         ])
-        return Compose(transforms)
+    transforms.extend([
+        _convert_to_rgb,
+        ToTensor(),
+        normalize,
+    ])
+    return Compose(transforms)

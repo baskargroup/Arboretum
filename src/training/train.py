@@ -3,10 +3,6 @@ import logging
 import math
 import os
 import time
-import datetime
-from contextlib import suppress
-from itertools import chain
-import random
 
 import numpy as np
 import torch
@@ -179,8 +175,9 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
         #             batchset.append(b)
 
         #PREP BATCH
-        step = num_batches_per_epoch * epoch + i
-        scheduler(step)
+        if not args.gsam:
+            step = num_batches_per_epoch * epoch + i
+            scheduler(step)
         images, texts = batch
         #logging.info(texts)
         texts = texts.to(device=device, non_blocking=True)
@@ -204,81 +201,98 @@ def train_one_epoch(model, data, epoch, optimizer, scaler, scheduler, args, tb_w
 
         # LOSS
         with autocast():
-            if args.sim_clr:
-                #"TEXTS" is actually another image file, in the case of SIMCLR                    
-                outputs = unwrap_model(model)(images, texts)
-                total_loss = loss(outputs)
-                ssl_loss = total_loss['ssl_loss']
-                acc = total_loss['ssl_acc']
-                if i % 100 == 0:
-                    logging.info("SSL ACC: {}".format(acc))
-                total_loss = total_loss['loss']
-            elif args.integer_labels:
-                total_loss = train_integer_labels(unwrap_model(model).visual, images, texts, device, loss)
-            elif args.gc:
-                if args.alt:
-                    raise("gradient caching not supported yet for this model, sorry!")
-                total_loss, logit_scale_scalar = gc([images, texts], vl_model=True, no_sync_except_last=args.distributed, lock_img=(args.lock_image_freeze_bn_stats or args.lock_image), scaler=scaler)
-            elif args.alt:
-                if args.model == "xclip":
-                    total_loss = model(
-                        texts,
-                        images,
-                        freeze_image_encoder = args.lock_image,
-                        return_loss = True  # set this to True to get the full caption + contrastive loss
-                    )                
+            if args.gsam:
+                if scaler is not None:
+                    print("Use FP32 for SAM")
+                    raise NotImplementedError
+                if args.integer_labels:
+                    args.gsam_optimizer.set_closure(loss, images, texts)
                 else:
-                    total_loss = model(
-                        text = texts,
-                        images = images,
-                        return_loss = True  # set this to True to get the full caption + contrastive loss
-                    )
-            else:                    
-                image_features, text_features, logit_scale = model(images, texts)
-                total_loss = loss(image_features, text_features, logit_scale)
-
-            #BACKWARD           
-            if scaler is not None:
-                if args.gc:
-                    scaler.step(optimizer)
-                    scaler.update()
-                else:
-                    scaler.scale(total_loss).backward()
-                    if not torch.isfinite(total_loss):
-                        logging.info("Loss is NaN -- skipping batch {}".format(i))
-                        optimizer.zero_grad()
-                        try:
-                            torch.cuda.empty_cache()
-                        except:
-                            print("No cuda cache to free")
-                        continue
-                    if args.horovod:
-                        optimizer.synchronize()
-                        scaler.unscale_(optimizer)
-                        if args.norm_gradient_clip is not None:
-                            torch.nn.utils.clip_grad_norm_(model.parameters(), args.norm_gradient_clip, norm_type=2.0)
-                        with optimizer.skip_synchronize():
-                            scaler.step(optimizer)
-                    else:
-                        if args.norm_gradient_clip is not None:
-                            scaler.unscale_(optimizer)
-                            torch.nn.utils.clip_grad_norm_(model.parameters(), args.norm_gradient_clip, norm_type=2.0)
-                        scaler.step(optimizer)
-                    scaler.update()
+                    args.gsam_optimizer.set_closure(loss, image_features, text_features)  
+                predictions, total_loss = args.gsam_optimizer.step()
+                args.lr_scheduler.step()
+                args.gsam_optimizer.update_rho_t()
             else:
-                if not args.gc:
-                    total_loss.backward()
-                    if args.norm_gradient_clip is not None:
-                        torch.nn.utils.clip_grad_norm_(model.parameters(), args.norm_gradient_clip, norm_type=2.0)
-                    if not torch.isfinite(total_loss):
-                        logging.info("Loss is NaN -- skipping batch {}".format(i))
-                        optimizer.zero_grad()
-                        try:
-                            torch.cuda.empty_cache()
-                        except:
-                            print("No cuda cache to free")
-                        continue
-                optimizer.step()
+                if args.sim_clr:
+                    #"TEXTS" is actually another image file, in the case of SIMCLR                    
+                    outputs = unwrap_model(model)(images, texts)
+                    total_loss = loss(outputs)
+                    ssl_loss = total_loss['ssl_loss']
+                    acc = total_loss['ssl_acc']
+                    if i % 100 == 0:
+                        logging.info("SSL ACC: {}".format(acc))
+                    total_loss = total_loss['loss']
+                elif args.integer_labels:
+                    logits = unwrap_model(model).visual(images)
+        #print("\n in train_integer_labels, logits are {}, labels are {} \n".format(logits.shape, labels))
+                    total_loss = loss(logits, texts)
+                elif args.gc:
+                    if args.alt:
+                        raise("gradient caching not supported yet for this model, sorry!")
+                    total_loss, logit_scale_scalar = gc([images, texts], vl_model=True, no_sync_except_last=args.distributed, lock_img=(args.lock_image_freeze_bn_stats or args.lock_image), scaler=scaler)
+                elif args.alt:
+                    if args.model == "xclip":
+                        total_loss = model(
+                            texts,
+                            images,
+                            freeze_image_encoder = args.lock_image,
+                            return_loss = True  # set this to True to get the full caption + contrastive loss
+                        )                
+                    else:
+                        total_loss = model(
+                            text = texts,
+                            images = images,
+                            return_loss = True  # set this to True to get the full caption + contrastive loss
+                        )
+                else:                    
+                    image_features, text_features, logit_scale = model(images, texts)
+                    total_loss = loss(image_features, text_features, logit_scale=logit_scale)
+
+            #BACKWARD
+            if args.gsam:
+                pass
+            else:
+                if scaler is not None:
+                    if args.gc:
+                        scaler.step(optimizer)
+                        scaler.update()
+                    else:
+                        scaler.scale(total_loss).backward()
+                        if not torch.isfinite(total_loss):
+                            logging.info("Loss is NaN -- skipping batch {}".format(i))
+                            optimizer.zero_grad()
+                            try:
+                                torch.cuda.empty_cache()
+                            except:
+                                print("No cuda cache to free")
+                            continue
+                        if args.horovod:
+                            optimizer.synchronize()
+                            scaler.unscale_(optimizer)
+                            if args.norm_gradient_clip is not None:
+                                torch.nn.utils.clip_grad_norm_(model.parameters(), args.norm_gradient_clip, norm_type=2.0)
+                            with optimizer.skip_synchronize():
+                                scaler.step(optimizer)
+                        else:
+                            if args.norm_gradient_clip is not None:
+                                scaler.unscale_(optimizer)
+                                torch.nn.utils.clip_grad_norm_(model.parameters(), args.norm_gradient_clip, norm_type=2.0)
+                            scaler.step(optimizer)
+                        scaler.update()
+                else:
+                    if not args.gc:
+                        total_loss.backward()
+                        if args.norm_gradient_clip is not None:
+                            torch.nn.utils.clip_grad_norm_(model.parameters(), args.norm_gradient_clip, norm_type=2.0)
+                        if not torch.isfinite(total_loss):
+                            logging.info("Loss is NaN -- skipping batch {}".format(i))
+                            optimizer.zero_grad()
+                            try:
+                                torch.cuda.empty_cache()
+                            except:
+                                print("No cuda cache to free")
+                            continue
+                    optimizer.step()
 
         # Note: we clamp to 4.6052 = ln(100), as in the original paper.
         if not args.alt and not args.iqe:

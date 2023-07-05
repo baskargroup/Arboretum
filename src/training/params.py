@@ -317,6 +317,7 @@ def parse_args():
     parser.add_argument(
         "--warmup", type=int, default=10000, help="Number of steps to warmup for."
     )
+    parser.add_argument("--gsam", action="store_true", default=False, help="Use GSAM.")
     parser.add_argument("--clamp", type=float, default=0, help="Gradient clamping.")
     parser.add_argument(
         "--use-bn-sync",
@@ -417,6 +418,12 @@ def parse_args():
         help="Use simclr image transforms",
     )
     parser.add_argument(
+        "--augreg-trans",
+        default=False,
+        action='store_true',
+        help="Use simclr image transforms",
+    )
+    parser.add_argument(
         "--downsample-trans",
         default=False,
         help="Use simclr image transforms with downsampling (jpg quality = 10)",
@@ -467,6 +474,12 @@ def parse_args():
         default=False,
         action='store_true',
         help="Resume checkpoint for fine tuning (ignore optimizer and scaler, if they exist)",
+    )
+    parser.add_argument(
+       "--load-first-k",
+       type=int,
+       default=0,
+       help="Load only the first k weights of the model",
     )
     parser.add_argument(
         "--lock-image-unlocked-groups",
@@ -592,6 +605,12 @@ def parse_args():
         "--linear-probe",
         default=False,
         help="Linear probing of timm models",
+    )
+    parser.add_argument(
+        "--lsuv",
+        default=False,
+        action="store_true",
+        help="Use LSUV initialization"        
     )
     parser.add_argument(
         "--image-size",

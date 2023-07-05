@@ -32,7 +32,9 @@ except:
 
 try:
     import timm
-except ImportError:
+    from timm.models.vision_transformer import Block
+except ImportError as e:
+    print(e)
     logging.debug("timm is not installed")
 
 _MODEL_CONFIG_PATHS = [Path(__file__).parent / f"model_configs/"]
@@ -78,6 +80,17 @@ def load_state_dict(checkpoint_path: str, map_location='cpu'):
     checkpoint = torch.load(checkpoint_path, map_location=map_location)
     if isinstance(checkpoint, dict) and 'state_dict' in checkpoint:
         state_dict = checkpoint['state_dict']
+    elif isinstance(checkpoint, dict) and 'model' in checkpoint:
+        #This converts from "Hydra" format into "Timm" format
+        state_dict = checkpoint['model']
+        for k in list(state_dict.keys()):
+            state_dict["visual.trunk."+k] = state_dict[k]
+            del state_dict[k]
+        state_dict["visual.head.proj.weight"] = state_dict["visual.trunk.head.weight"]
+        state_dict["visual.head.proj.bias"] = state_dict["visual.trunk.head.bias"]
+        del state_dict["visual.trunk.head.weight"]
+        del state_dict["visual.trunk.head.bias"]
+        state_dict["logit_scale"] = torch.tensor([1.0])
     else:
         state_dict = checkpoint
     if next(iter(state_dict.items()))[0].startswith('module'):
@@ -86,6 +99,7 @@ def load_state_dict(checkpoint_path: str, map_location='cpu'):
 
 
 def load_checkpoint(model, checkpoint_path, strict=True):
+    print(f"Loading checkpoint from {checkpoint_path}")
     state_dict = load_state_dict(checkpoint_path)
     resize_pos_embed(state_dict, model)
     incompatible_keys = model.load_state_dict(state_dict, strict=strict)
@@ -272,27 +286,26 @@ def create_model(
 
             if checkpoint_path:
                 logging.info(f'Loading pretrained {model_name} weights ({pretrained}).')
-                try:
-                    load_checkpoint(model, checkpoint_path)
-                except:
-                    enc = timm.create_model("vit_base_patch16_224", num_classes=0).to(device=device)
-                    #TODO: check these settings
-                    mlp = build_mlp(in_dim=768, mlp_dim=2048, out_dim=1000).to(device=device)
-                    model.visual = SIMCLR(
-                        vision_width = 768,
-                        vision_model = enc,
-                        build_mlp = mlp
-                    )
-                    checkpoint = torch.load(pretrained, map_location=device)
-                    sd = checkpoint["state_dict"]
-                    if next(iter(sd.items()))[0].startswith('module'):
-                        sd = {k[len('module.'):]: v for k, v in sd.items()}
-                    model.visual.load_state_dict(sd)
-                    model.visual = model.visual.visual
+                # try:
+                load_checkpoint(model, checkpoint_path)
+                # except:
+                #     enc = timm.create_model("vit_base_patch16_224", num_classes=0).to(device=device)
+                #     #TODO: check these settings
+                #     mlp = build_mlp(in_dim=768, mlp_dim=2048, out_dim=1000).to(device=device)
+                #     model.visual = SIMCLR(
+                #         vision_width = 768,
+                #         vision_model = enc,
+                #         build_mlp = mlp
+                #     )
+                #     checkpoint = torch.load(pretrained, map_location=device)
+                #     sd = checkpoint["state_dict"]
+                #     if next(iter(sd.items()))[0].startswith('module'):
+                #         sd = {k[len('module.'):]: v for k, v in sd.items()}
+                #     model.visual.load_state_dict(sd)
+                #     model.visual = model.visual.visual
             else:
                 logging.warning(f'Pretrained weights ({pretrained}) not found for model {model_name}.')
-                raise RuntimeError(f'Pretrained weights ({pretrained}) not found for model {model_name}.')
-
+                raise RuntimeError(f'Pretrained weights ({pretrained}) not found for model {model_name}.')        
         model.to(device=device)
         if precision == "fp16":
             assert device.type != 'cpu', "CPU training is not supported for fp16"
@@ -306,6 +319,49 @@ def create_model(
             model = torch.jit.script(model)
 
     return model
+
+def init_weights_vit_jax(module: nn.Module, name: str = '', head_bias: float = 0.):
+    """ ViT weight initialization, matching JAX (Flax) impl """
+    if isinstance(module, nn.Linear):
+        if name.startswith('head'):
+            nn.init.zeros_(module.weight)
+            nn.init.constant_(module.bias, head_bias)
+        else:
+            nn.init.xavier_uniform_(module.weight)
+            if module.bias is not None:
+                nn.init.normal_(module.bias, std=1e-6) if 'mlp' in name else nn.init.zeros_(module.bias)
+    elif isinstance(module, nn.Conv2d):
+        lecun_normal_(module.weight)
+        if module.bias is not None:
+            nn.init.zeros_(module.bias)
+    elif hasattr(module, 'init_weights'):
+        module.init_weights()
+
+def apply_random_weights_skipping_first_k_layers_vit(model, k):
+    i = 0
+    sequentials = []
+    for child in model.children():
+        if isinstance(child, torch.nn.modules.container.Sequential):
+          sequentials.append(child)
+    print("This method will randomize weights of all Conv2D, Block and Linear layers after the first {} layers, in all sequentials \n".format(k))
+    print("There are {} sequentials \n".format(len(sequentials)))
+    for sequential in sequentials:
+        for child in sequential.children():
+          print("Child number {} is {} \n".format(i, type(child)))
+          if i <= k:
+              i += 1
+              continue
+          if isinstance(child, nn.Linear) or isinstance(child, nn.Conv2d):
+              child.weight.data = torch.randn(child.weight.size())
+              if child.bias is not None:
+                  child.bias.data = torch.randn(child.bias.size())
+          #timm vit blocks
+          if isinstance(child, Block):
+              child.attn.qkv.weight.data = torch.randn(child.attn.qkv.weight.size())
+              child.attn.proj.weight.data = torch.randn(child.attn.proj.weight.size())
+              child.mlp.fc1.weight.data = torch.randn(child.mlp.fc1.weight.size())
+              child.mlp.fc2.weight.data = torch.randn(child.mlp.fc2.weight.size())
+          i += 1
 
 def create_model_and_transforms(
         model_name: str,
@@ -323,6 +379,7 @@ def create_model_and_transforms(
         image_simclr: bool = False,
         simclr_trans: bool = False,
         downsample_trans: bool = False,
+        augreg_trans: bool = False,
         imsize: int = 224,
         cache_dir: Optional[str] = None,
         image_mean = None,
@@ -336,15 +393,15 @@ def create_model_and_transforms(
     #FIXME hardcoded size
     image_mean = image_mean or getattr(model.visual, 'image_mean', None)
     image_std = image_std or getattr(model.visual, 'image_std', None)
-    if model_name == "coca" or image_simclr or isinstance(model.visual, (SIMCLR, timm.models.vision_transformer.VisionTransformer)):
-        preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
-        preprocess_val = image_transform(224, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
+    if model_name == "coca" or image_simclr:
+        preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_val = image_transform(224, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     elif model_name == "xclip" or any([image_filip, mlm, vssl, elp, dcl]):
-        preprocess_train = image_transform(model.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
-        preprocess_val = image_transform(model.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
+        preprocess_train = image_transform(model.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_val = image_transform(model.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     else:
-        preprocess_train = image_transform(model.visual.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
-        preprocess_val = image_transform(model.visual.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans)
+        preprocess_train = image_transform(model.visual.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_val = image_transform(model.visual.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     return model, preprocess_train, preprocess_val
 
 def list_models():
