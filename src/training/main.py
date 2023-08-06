@@ -201,7 +201,8 @@ def run_main(args = None):
         if isinstance(model.visual, TimmModel):
             print("Model type: {}".format(type(model.visual.trunk)))
             if isinstance(model.visual.trunk, timm.models.vision_transformer.VisionTransformer):
-                apply_random_weights_skipping_first_k_layers_vit(model.visual, args.load_first_k)
+                apply_random_weights_skipping_first_k_layers_vit(model.visual.trunk, args.load_first_k)
+                model.visual.trunk.to(device=device)
         else:
             raise ValueError("Model of type {} does not support load_first_k".format(type(model)))
 

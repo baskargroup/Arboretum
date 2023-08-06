@@ -95,7 +95,7 @@ def image_transform(
         transforms.append(ResizeMaxSize(image_size, fill=fill_color))
     else:
         transforms.extend([
-            Resize(image_size, interpolation=InterpolationMode.BICUBIC),
+            Resize(image_size),
             CenterCrop(image_size),
         ])
     transforms.extend([
@@ -103,4 +103,5 @@ def image_transform(
         ToTensor(),
         normalize,
     ])
+    print("transforms: ", transforms)
     return Compose(transforms)

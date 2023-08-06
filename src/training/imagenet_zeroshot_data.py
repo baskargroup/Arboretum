@@ -60,6 +60,20 @@ imagenet_def_classnames = temp
 def get_imagenet_def_classnames():
     return imagenet_def_classnames
 
+def hex_to_decimal(hex_string):
+    return int(hex_string, 16)
+
+start_d = hex_to_decimal('4E00')
+end_d = hex_to_decimal('9FFF')
+
+ideograms = [''.join(chr(i+j) for j in range(5)) for i in range(start_d, end_d, 5)]
+
+def get_ideogram_dict():
+    return {i: ideograms[i] for i in range(len(ideograms))}
+
+def get_imagenet_ideo_classnames():
+    return [ideograms[i] for i in range(1000)]
+
 ir_idx = [1, 2, 4, 6, 8, 9, 11, 13, 22, 23, 26, 29, 31, 39, 47, 63, 71, 76, 79, 84, 90, 94, 96, 97, 99, 100, 105, 107, 113, 122, 
 125, 130, 132, 144, 145, 147, 148, 150, 151, 155, 160, 161, 162, 163, 171, 172, 178, 187, 195, 199, 203, 207, 208, 219, 
 231, 232, 234, 235, 242, 245, 247, 250, 251, 254, 259, 260, 263, 265, 267, 269, 276, 277, 281, 288, 289, 291, 292, 293, 
@@ -219,6 +233,9 @@ def get_imagenet_r_our_classnames():
 
     return imagenet_classnames_arr[ir_idx].tolist()
 
+def get_imagenet_r_ideo_classnames():
+    return [ideograms[i] for i in ir_idx]
+
 def get_imagenet_a_classnames():
     imagenet_classnames_arr = np.array(imagenet_classnames)
 
@@ -230,6 +247,9 @@ def get_imagenet_a_our_classnames():
 
     return imagenet_classnames_arr[ia_idx].tolist()
 
+def get_imagenet_a_ideo_classnames():
+    return [ideograms[i] for i in ia_idx]
+
 def get_imagenet_cap_classnames():
     imagenet_classnames_arr = np.array(imagenet_classnames)
 
@@ -240,6 +260,9 @@ def get_imagenet_cap_our_classnames():
 
     return imagenet_classnames_arr[icap_idx].tolist()
 
+def get_imagenet_cap_ideo_classnames():
+    return [ideograms[i] for i in icap_idx]
+
 def get_imagenet_common_ia_classnames():
     imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_ia].tolist()  
@@ -248,13 +271,19 @@ def get_imagenet_common_ia_our_classnames():
     imagenet_classnames_arr = np.array(imagenet_our_classnames)
     return imagenet_classnames_arr[common_ia].tolist()   
 
+def get_imagenet_common_ia_ideo_classnames():
+    return [ideograms[i] for i in common_ia]
+
 def get_imagenet_common_ir_classnames():
     imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_ir].tolist() 
 
 def get_imagenet_common_ir_our_classnames():
     imagenet_classnames_arr = np.array(imagenet_our_classnames)
-    return imagenet_classnames_arr[common_ir].tolist() 
+    return imagenet_classnames_arr[common_ir].tolist()
+
+def get_imagenet_common_ir_ideo_classnames():
+    return [ideograms[i] for i in common_ir]
 
 def get_imagenet_common_obj_classnames():
     imagenet_classnames_arr = np.array(imagenet_classnames)

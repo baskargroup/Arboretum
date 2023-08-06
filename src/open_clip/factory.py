@@ -340,14 +340,15 @@ def init_weights_vit_jax(module: nn.Module, name: str = '', head_bias: float = 0
 def apply_random_weights_skipping_first_k_layers_vit(model, k):
     i = 0
     sequentials = []
-    for child in model.children():
+    for idxch, child in enumerate(model.children()):
+        print("Model child number {} is {} \n".format(idxch, type(child)))
         if isinstance(child, torch.nn.modules.container.Sequential):
           sequentials.append(child)
     print("This method will randomize weights of all Conv2D, Block and Linear layers after the first {} layers, in all sequentials \n".format(k))
     print("There are {} sequentials \n".format(len(sequentials)))
     for sequential in sequentials:
         for child in sequential.children():
-          print("Child number {} is {} \n".format(i, type(child)))
+          print("Sequential child number {} is {} \n".format(i, type(child)))
           if i <= k:
               i += 1
               continue
@@ -396,12 +397,9 @@ def create_model_and_transforms(
     if model_name == "coca" or image_simclr:
         preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
         preprocess_val = image_transform(224, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
-    elif model_name == "xclip" or any([image_filip, mlm, vssl, elp, dcl]):
-        preprocess_train = image_transform(model.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
-        preprocess_val = image_transform(model.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     else:
-        preprocess_train = image_transform(model.visual.image_size, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
-        preprocess_val = image_transform(model.visual.image_size, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_train = image_transform(imsize, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_val = image_transform(imsize, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     return model, preprocess_train, preprocess_val
 
 def list_models():

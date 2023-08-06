@@ -9,6 +9,7 @@ import time
 from dataclasses import dataclass
 from multiprocessing import Value
 from functools import partial
+from torchvision.datasets import ImageFolder
 
 import braceexpand
 import numpy as np
@@ -131,7 +132,7 @@ def select_count(data, predicate, count):
             yield sample
 
 def token_strip_func(texts):
-    ok_tokens = set(ast.literal_eval(open("/scratch/bf996/open_clip/metadata/in1k_ds_oai_tokens.txt", 'r').read()))
+    ok_tokens = set(ast.literal_eval(open("/scratch/bf996/vlhub/metadata/in1k_ds_oai_tokens.txt", 'r').read()))
     texts = torch.tensor([t if t in ok_tokens else 0 for t in texts.tolist()])
     return texts
 
@@ -146,7 +147,11 @@ def clean_integer_label(label, singleclass, strict, ds):
     if ds is None or len(ds) == 0:
         ds = [0]*1000
     if isinstance(label, float):
-        label = int(label)
+        try:
+            label = int(label)
+        except Exception as e:
+            logging.warning("Error converting float to integer, {}".format(e))
+            return ""
     if isinstance(label, int):
         if label < 0 or label > len(ds) - 1:
             logging.info("Integer label {} out of acceptable range, mapping to 0".format(label))
@@ -159,7 +164,10 @@ def clean_integer_label(label, singleclass, strict, ds):
     elif isinstance(label, str) and label == "":
         return ""
     elif isinstance(label, str):
-        label = label.split(", ")
+        try:
+            label = ast.literal_eval(label)
+        except:
+            label = label.split(", ")
         try:
             label_updated = []
             for l in label:
@@ -206,6 +214,23 @@ def cast_to_int(var):
     else:
         return int(var)
 
+def ideo_transform(text):
+    in_text = text
+    ideograms = get_ideogram_dict()
+    METADATA = Path("./metadata")
+    with open(METADATA / 'imagenet_to_labels.json', 'r') as f:
+        imagenet_map = json.load(f)
+        imagenet_map = {k : v.split(", ") for k, v in imagenet_map.items()}
+    for k, v in imagenet_map.items():
+        words = text.split(" ")
+        for word in words:
+            if word in v:
+                text = text.replace(word, ideograms.get(k, word))
+    if in_text != text:
+        logging.debug("ideo_transform: {} -> {}".format(in_text, text))
+    return text
+
+
 class ImageFolderWithPaths(datasets.ImageFolder):
     """Custom dataset that includes image file paths. Extends
     torchvision.datasets.ImageFolder
@@ -222,34 +247,58 @@ class ImageFolderWithPaths(datasets.ImageFolder):
         return tuple_with_path
 
 class CsvDataset(Dataset):
-    def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t", args=None):
-        logging.debug(f'Loading csv data from {input_filename}')
-        df = pd.read_csv(input_filename, sep=sep, on_bad_lines='skip')
+
+    def read_and_preprocess(self, args):
+        fn = args['input_filename']
+        logging.debug(f'Loading csv data from {fn}')
+        try:
+            df = pd.read_csv(fn, sep=args['sep'], on_bad_lines='skip')
+        except:
+            df = pd.read_excel(fn)
         logging.info("Size of dataframe is {}".format(len(df)))
-        df = df[df[caption_key].notnull()]
-        df = df[df[caption_key] != "nan"]
-        if integer_labels:
-            df[caption_key] = df[caption_key].apply(cast_to_int)
-            df = df[df[caption_key] != -1]
-            df = df[df[caption_key] != "-1"]
-            self.label_set = [i for i in range(df[caption_key].astype(int).max() + 1)]
+        df = df[["path", args['caption_key']]]
+        df = df[df[args['caption_key']].notnull()]
+        df = df[df[args['caption_key']] != "nan"]
+        mask = df[args['caption_key']].apply(lambda x: isinstance(x, float))
+        df = df[~mask]
+        if args['integer_labels'] and not args['multiclass']:
+            df[args['caption_key']] = df[args['caption_key']].apply(cast_to_int)
+            df = df[df[args['caption_key']] != -1]
+            df = df[df[args['caption_key']] != "-1"]
+            self.label_set = [i for i in range(df[args['caption_key']].astype(int).max() + 1)]
+        elif args['integer_labels'] and args['multiclass']:
+            df = df[df[args['caption_key']] != -1]
+            df = df[df[args['caption_key']] != "-1"]
+            #FIXME: this is a hack to get the label set for multiclass integer labels
+            self.label_set = [i for i in range(1000)]
         logging.info("Size of dataframe after NaN-removal is {}".format(len(df)))
         logging.debug("Columns of dataframe: {}".format(df.columns))
+        self.df = df
+
+    def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t", args=None):
+        self.read_and_preprocess(locals())
+        df = self.df
         if dscipher:
             csvcleaned=True
         if csvcleaned:
             logging.debug('Cleaning captions. Original dataset size is {}'.format(len(df)))
-            df.loc[:, caption_key] = df.title.progress_apply(clean_captions)
-            df = df[df['title'].str.len() > 0]
+            logging.debug("Head of old dataframe: ")
+            logging.debug(df.head())
+            df[caption_key] = df[caption_key].progress_apply(clean_captions)
+            #df.loc[:, caption_key] = df.caption_key.progress_apply(clean_captions)
+            df = df[df[caption_key].str.len() > 0]
             logging.debug("Done. Length is now {}".format(len(df)))
+            logging.debug("Head of new dataframe: ")
             logging.debug(df.head())
         if dscipher or simplecaptions or shift:
-            logging.debug('Transforming or encoding captions. Original dataset size is {}'.format(len(df)))
-            df['title'] = df[caption_key].progress_apply(synset_ds, ngram=3, ds=csvfilter, cipher=dscipher, simplecaptions=simplecaptions, strict=strict, shift=shift, metacaptions=metacaptions)
-            logging.debug(df['title'].head())
-            df = df[df['title'].str.len() > 0]
-            logging.debug("Done. Length is now {}".format(len(df)))
-            logging.debug(df.head())            
+            logging.info('Transforming or encoding captions. Original dataset size is {}'.format(len(df)))
+            logging.debug("Head of old dataframe: ")
+            logging.info(df.head())
+            df[caption_key] = df[caption_key].progress_apply(synset_ds, ngram=3, ds=csvfilter, cipher=dscipher, simplecaptions=simplecaptions, strict=strict, shift=shift, metacaptions=metacaptions)
+            df = df[df[caption_key].str.len() > 0]
+            logging.info("Done. Length is now {}".format(len(df)))
+            logging.debug("Head of new dataframe: ")
+            logging.info(df.head())            
         elif csvfilter != "":
             logging.debug('Filtering captions. Original dataset size is {}'.format(len(df)))
             df['is_synset'] = df[caption_key].progress_apply(synset_ds, ngram=3, ds=csvfilter, cipher=False, simplecaptions=False, strict=strict, shift=shift, metacaptions=metacaptions)
@@ -257,6 +306,8 @@ class CsvDataset(Dataset):
             df = df[df['is_synset']].drop(columns=['is_synset'])
             logging.debug("Done. Length is now {}".format(len(df)))
             logging.debug(df.head())
+        if args.ideo:
+            df[caption_key] = df[caption_key].progress_apply(ideo_transform)
         self.images = df[img_key].tolist()
         self.captions = df[caption_key].tolist()
         self.transforms = transforms
@@ -295,6 +346,7 @@ class CsvDataset(Dataset):
                     Image.fromarray(imarray.astype('uint8')).convert('RGBA')
                     )
                 texts = "NONE"
+        logging.debug("CSV: Text before: {}".format(texts))
         if self.integer_labels:
             #if isinstance(texts, str) and not texts.is_numeric():
                 #assert(False, "Integer labels cannot be computed on the fly for a CSV dataset")
@@ -303,15 +355,16 @@ class CsvDataset(Dataset):
             return images, texts
         if self.scrambled:
             texts = scramble_txt(texts)
+        logging.debug("CSV: Text after: {}".format(texts))
         texts = tokenize(texts)[0]
+        logging.debug("CSV: Tokens before: {}".format(texts))
         if self.args.token_reduce:
             texts = token_reduce(texts)
         if self.token_strip:
             texts = token_strip_func(texts)
         if self.token_scrambled:
-            #logging.info("before: {}".format(texts))
             random.shuffle(texts)
-            #logging.info("after: {}".format(texts))
+        logging.debug("CSV: Tokens after: {}".format(texts))
         return images, texts
 
 def _convert_to_rgb(image):
@@ -450,6 +503,7 @@ def synset_ds(s, ngram=3, ds=None, cipher=False, simplecaptions=False, strict=Fa
     flag = False
     s = list(lemmatizer.lemmatize(t) for t in s.split(" "))
     str_s = " ".join(w for w in s)
+    logging.debug("Synset: Text before: {}".format(str_s))
     if ds:
         ds_values = ds_val_getter(ds, False)
     for count, word in enumerate(s):
@@ -500,7 +554,6 @@ def synset_ds(s, ngram=3, ds=None, cipher=False, simplecaptions=False, strict=Fa
                         flag = True
                         if cipher:
                             str_s = str_s.replace(gram, k)
-
             elif simplecaptions and not ds:
                 d = wordnet.synsets(gram)
                 if d in stopwords.words('english'):
@@ -517,6 +570,7 @@ def synset_ds(s, ngram=3, ds=None, cipher=False, simplecaptions=False, strict=Fa
     if cipher or simplecaptions or integer_labels:
         if not flag:
             str_s = ""
+        logging.debug("In synset_ds with cipher or simplecaptions or integerlabels, returning {}".format(str_s))
         return str_s
 
     elif shift:
@@ -1115,11 +1169,75 @@ def get_synthetic_dataset(args, preprocess_fn, is_train, epoch=0):
 
     return DataInfo(dataloader, sampler)
 
+class ImageFolderDataset(Dataset):
+
+    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption"):
+        self.transform = transform
+        self.image_size = image_size
+        self.caption = caption
+        self.images = ImageFolder(root=fs_path, transform=self.transform)  # loading images using ImageFolder
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, idx):
+        try:
+            image, texts = self.images[idx]
+        except Exception as e:
+            logging.warning("Exception in ImageFolder dataset: {}".format(e))
+            logging.warning("Missing or unreadable image at {}, attempting to skip.".format(str(self.images[idx])))
+            try:
+                image, texts = self.images[idx+1]
+            except:
+                logging.warning("Skip failed. Generating dummy image and label.".format(str(self.images[idx])))
+                imarray = np.random.rand(self.image_size[0], self.image_size[1],3) * 255
+                images = self.transforms(
+                    Image.fromarray(imarray.astype('uint8')).convert('RGBA')
+                    )
+                texts = 0
+        if self.integer_labels:
+            #if isinstance(texts, str) and not texts.is_numeric():
+                #assert(False, "Integer labels cannot be computed on the fly for a CSV dataset")
+                #texts = [synset_ds(clean_captions(str(texts)), 3, self.csvfilter, False, False, self.strict, False, True, None) for t in texts]
+            # texts = clean_integer_label(self.captions[idx], not self.multiclass, self.strict, self.label_set)
+            return images, texts
+        else:
+            raise ValueError("Integer labels must be enabled for ImageFolder dataset")
+
+    # def __getitem__(self, idx):
+    #     # Get image from the list based on idx
+    #     image, _ = self.images[idx]  # discarding label
+    #     return image, self.caption
+
+def get_imagefolder_dataset(args, preprocess_fn, is_train, epoch=0):
+    image_size = preprocess_fn.transforms[0].size
+    dataset = ImageFolderDataset(
+        transform=preprocess_fn, image_size=image_size)
+    num_samples = len(dataset)
+    sampler = DistributedSampler(dataset) if args.distributed and is_train else None
+    shuffle = is_train and sampler is None
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=args.batch_size,
+        shuffle=shuffle,
+        num_workers=args.workers,
+        pin_memory=True,
+        sampler=sampler,
+        drop_last=is_train,
+    )
+    dataloader.num_samples = num_samples
+    dataloader.num_batches = len(dataloader)
+
+    return DataInfo(dataloader, sampler)
+
 def get_dataset_fn(data_path, dataset_type):
     if dataset_type == "webdataset":
         return get_wds_dataset
     elif dataset_type in ["csv"]:
         return get_csv_dataset
+    elif dataset_type == "imagefolder":
+        return get_imagefolder_dataset
     elif dataset_type == "synthetic":
         return get_synthetic_dataset
     elif dataset_type == "auto":
@@ -1169,8 +1287,7 @@ def get_data(args, preprocess_fns, epoch=0):
             args, preprocess_train, is_train=True, epoch=epoch, total=total)
     elif args.schema:
         data["train"] = get_dataset_fn(args.schema, "webdataset")(
-            args, preprocess_train, is_train=True, epoch=epoch, total=total) 
-           
+            args, preprocess_train, is_train=True, epoch=epoch, total=total)        
     if args.val_data:
         data["val"] = get_dataset_fn(args.val_data, args.dataset_type)(
             args, preprocess_val, is_train=False, total=None)

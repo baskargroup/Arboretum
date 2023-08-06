@@ -279,6 +279,8 @@ def build_imagenet(args, model, in_type=""):
     if in_type == "r":
         if args.ds_cipher:
             classnames = get_imagenet_r_cipher()
+        elif args.ideo:
+            classnames = get_imagenet_r_ideo_classnames()
         elif usecaps:
             classnames = get_imagenet_common_ir_classnames()
         else:
@@ -286,6 +288,8 @@ def build_imagenet(args, model, in_type=""):
     elif in_type == "a":
         if args.ds_cipher:
             classnames = get_imagenet_a_cipher()
+        elif args.ideo:
+            classnames = get_imagenet_a_ideo_classnames()
         elif usecaps:
             classnames = get_imagenet_common_ia_classnames()
         else:
@@ -293,6 +297,8 @@ def build_imagenet(args, model, in_type=""):
     elif in_type == "objectnet":
         if args.ds_cipher:
             classnames = get_obj_cipher()
+        elif args.ideo:
+            classnames = get_imagenet_obj_ideo_classnames()
         elif usecaps:
             classnames = get_imagenet_common_obj_classnames()
         else:
@@ -300,6 +306,8 @@ def build_imagenet(args, model, in_type=""):
     else:
         if args.ds_cipher:
             classnames = get_imagenet_cipher()
+        elif args.ideo:
+            classnames = get_imagenet_ideo_classnames()
         elif usecaps:
             classnames = get_imagenet_cap_classnames()
         else:

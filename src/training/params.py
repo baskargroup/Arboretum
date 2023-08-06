@@ -50,7 +50,7 @@ def parse_args():
     )
     parser.add_argument(
         "--dataset-type",
-        choices=["webdataset", "csv", "synthetic", "auto"],
+        choices=["webdataset", "csv", "synthetic", "imagefolder", "auto"],
         default="auto",
         help="Which type of dataset to process."
     )
@@ -83,6 +83,12 @@ def parse_args():
         type=bool,
         default=False,
         help="Strict filtering"
+    )
+    parser.add_argument(
+        "--ideo",
+        type=bool,
+        default=False,
+        help="Use ideogram classnames"
     )
     parser.add_argument(
         "--ds-cipher",
