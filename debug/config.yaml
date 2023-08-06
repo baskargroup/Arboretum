@@ -73,7 +73,7 @@ lr: 0.0005
 lsuv: false
 metacaptions: ''
 mlm: false
-model: timm-deit_tiny_patch16_224_insecta
+model: timm-deit_tiny_patch16_224
 multiclass: false
 name: null
 no_ensembling: false
@@ -97,6 +97,7 @@ shift_cipher: null
 sim_clr: false
 sim_clr_trans: 'True'
 simplecaptions: false
+size_controlled: 1100000, 1000
 skip_scheduler: false
 stanfordcars: null
 strict: false

@@ -61,6 +61,12 @@ def parse_args():
         help="Whether to use sampling with replacement for webdataset shard selection."
     )
     parser.add_argument(
+        "--size-controlled",
+        type=str,
+        default="",
+        help="Limit the maximum sample and class size of an ImageFolder dataset. Expected format is 'max_sample_size, max_class_size' in integers."
+    )   
+    parser.add_argument(
         "--csv-separator",
         type=str,
         default="\t",

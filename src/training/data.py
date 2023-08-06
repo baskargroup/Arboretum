@@ -3,14 +3,15 @@ import json
 import logging
 import math
 import os
+import shutil
 import random
 import sys
 import time
 from dataclasses import dataclass
 from multiprocessing import Value
 from functools import partial
-from torchvision.datasets import ImageFolder
 
+import numpy as np
 import braceexpand
 import numpy as np
 import pandas as pd
@@ -21,7 +22,8 @@ import torchvision
 import torchvision.datasets as datasets
 import webdataset as wds
 from PIL import Image
-from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, IterableDataset, get_worker_info
+from torchvision.datasets import ImageFolder
+from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, IterableDataset, get_worker_info, Subset
 from torch.utils.data.distributed import DistributedSampler
 from webdataset.filters import _shuffle
 from webdataset.tariterators import base_plus_ext, url_opener, tar_file_expander, valid_sample
@@ -1169,16 +1171,79 @@ def get_synthetic_dataset(args, preprocess_fn, is_train, epoch=0):
 
     return DataInfo(dataloader, sampler)
 
+class FilteredImageFolder:
+    def __init__(self, root, transform, k=1100000, n=1000):
+        self.root = root
+        self.temp_dir = os.path.join(str(Path(self.root).parent), "temp")
+        os.makedirs(self.temp_dir, exist_ok=True)
+        self.transform = transform
+        self.k = k
+        self.n = n
+
+        # Get all subdirectories in the root directory
+        all_classes = [d.name for d in os.scandir(self.root) if d.is_dir()]
+        logging.info("{} is the number of classes in the dataset before move".format(len(all_classes)))
+        if len(all_classes) > n:
+            self.selected_classes = random.sample(all_classes, self.n)
+            self.non_selected_classes = [cls for cls in all_classes if cls not in self.selected_classes]
+            #logging.info("{} is the number of classes to move".format(len(self.non_selected_classes)))
+            # Move non-selected classes to temporary directory
+            for class_name in self.non_selected_classes:
+                #print(os.path.join(self.root, class_name))
+                #print(os.path.join(self.temp_dir, class_name))
+                shutil.move(os.path.join(self.root, class_name), os.path.join(self.temp_dir, class_name))
+        else:
+            self.selected_classes=all_classes
+            self.non_selected_classes = []
+        self.images = ImageFolder(root=self.root, transform=self.transform)
+        logging.info("{} is the number of classes in the dataset after move".format(len(self.images.classes)))
+        # Reduce the dataset to only contain k samples
+        indices = np.arange(len(self.images))
+        np.random.shuffle(indices)
+        indices = indices[:min(self.k, len(self.images))]
+        self.images = Subset(self.images, indices)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __del__(self):
+        # Move classes back to original directory when done
+        for class_name in self.non_selected_classes:
+            shutil.move(os.path.join(self.temp_dir, class_name), os.path.join(self.root, class_name))
+
+        # Remove the temporary directory
+        # os.rmdir(self.temp_dir)
+
+    # def _is_valid_file(self, path):
+    #     # Only accept files that are in one of the selected classes
+    #     pathp = Path(path)
+    #     class_name = pathp.parts[-3]
+    #     return class_name in self.selected_classes
+
 class ImageFolderDataset(Dataset):
 
-    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption", integer_labels=True):
+    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption", integer_labels=True, size_controlled=""):
         self.transform = transform
         self.image_size = image_size
         self.caption = caption
         self.integer_labels=integer_labels
-        self.images = ImageFolder(root=fs_path, transform=self.transform)  # loading images using ImageFolder
-        self.num_classes = len(self.images.classes)
-        logging.info("Loading ImageFolder Dataset. Number of classes: {}".format(self.num_classes))
+        self.size_controlled = size_controlled
+        if self.size_controlled != "":
+            logging.info("Setting up size control, this may take a minute ...")
+            k, n = self.size_controlled.split(", ")
+            k = int(k)
+            n = int(n)
+            self.ifold = FilteredImageFolder(root=fs_path, transform=self.transform, k=k, n=n)
+            self.images = self.ifold.images
+            self.num_classes=len(self.ifold.selected_classes)
+            # self.num_classes = len(self.images.selected_classes)
+            logging.info("Done. Loading ImageFolder Dataset. Number of classes: {}".format(self.num_classes))
+            logging.info("First few class names: {}".format(self.ifold.selected_classes[:10]))
+            logging.info("Number of images: {}".format(len(self.images)))
+        else:
+            self.images = ImageFolder(root=fs_path, transform=self.transform)  # loading images using ImageFolder
+            self.num_classes = len(self.images.classes)
+            logging.info("Loading ImageFolder Dataset. Number of classes: {}".format(self.num_classes))
 
     def __len__(self):
         return len(self.images)
@@ -1188,11 +1253,11 @@ class ImageFolderDataset(Dataset):
             images, texts = self.images[idx]
         except Exception as e:
             logging.warning("Exception in ImageFolder dataset: {}".format(e))
-            logging.warning("Missing or unreadable image at {}, attempting to skip.".format(str(self.images[idx])))
+            logging.warning("Missing or unreadable image at {}, attempting to skip.".format(idx))
             try:
                 images, texts = self.images[idx+1]
             except:
-                logging.warning("Skip failed. Generating dummy image and label.".format(str(self.images[idx])))
+                logging.warning("Skip failed. Generating dummy image and label.".format(idx))
                 imarray = np.random.rand(self.image_size[0], self.image_size[1],3) * 255
                 images = self.transforms(
                     Image.fromarray(imarray.astype('uint8')).convert('RGBA')
@@ -1215,7 +1280,7 @@ class ImageFolderDataset(Dataset):
 def get_imagefolder_dataset(args, preprocess_fn, is_train, epoch=0, total=None):
     image_size = preprocess_fn.transforms[0].size
     dataset = ImageFolderDataset(
-        fs_path=args.train_data, transform=preprocess_fn, image_size=image_size, integer_labels=args.integer_labels)
+        fs_path=args.train_data, transform=preprocess_fn, image_size=image_size, integer_labels=args.integer_labels, size_controlled=args.size_controlled)
     num_samples = len(dataset)
     sampler = DistributedSampler(dataset) if args.distributed and is_train else None
     shuffle = is_train and sampler is None
