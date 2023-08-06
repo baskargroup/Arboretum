@@ -71,7 +71,7 @@ def run_main(args = None):
     if args is None:
         args = parse_args()
     
-    with open( Path('/scratch/bf996/vlhub/debug/config.yaml') , 'w' ) as outfile:
+    with open( Path('./debug/config.yaml') , 'w' ) as outfile:
 	    yaml.dump( args , outfile , default_flow_style=False )
 
     eval_datasets = ['val', 'imagenet-val', 'imagenet-v2', 'inat2021', 'stanfordcars', 'imagenet-s', 'imagenet-r', 'imagenet-a', 'flowers', 'air', 'food', 'objectnet', 'insecta']

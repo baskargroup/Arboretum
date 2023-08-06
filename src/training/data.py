@@ -1171,23 +1171,26 @@ def get_synthetic_dataset(args, preprocess_fn, is_train, epoch=0):
 
 class ImageFolderDataset(Dataset):
 
-    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption"):
+    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption", integer_labels=True):
         self.transform = transform
         self.image_size = image_size
         self.caption = caption
+        self.integer_labels=integer_labels
         self.images = ImageFolder(root=fs_path, transform=self.transform)  # loading images using ImageFolder
+        self.num_classes = len(self.images.classes)
+        logging.info("Loading ImageFolder Dataset. Number of classes: {}".format(self.num_classes))
 
     def __len__(self):
         return len(self.images)
 
     def __getitem__(self, idx):
         try:
-            image, texts = self.images[idx]
+            images, texts = self.images[idx]
         except Exception as e:
             logging.warning("Exception in ImageFolder dataset: {}".format(e))
             logging.warning("Missing or unreadable image at {}, attempting to skip.".format(str(self.images[idx])))
             try:
-                image, texts = self.images[idx+1]
+                images, texts = self.images[idx+1]
             except:
                 logging.warning("Skip failed. Generating dummy image and label.".format(str(self.images[idx])))
                 imarray = np.random.rand(self.image_size[0], self.image_size[1],3) * 255
@@ -1209,10 +1212,10 @@ class ImageFolderDataset(Dataset):
     #     image, _ = self.images[idx]  # discarding label
     #     return image, self.caption
 
-def get_imagefolder_dataset(args, preprocess_fn, is_train, epoch=0):
+def get_imagefolder_dataset(args, preprocess_fn, is_train, epoch=0, total=None):
     image_size = preprocess_fn.transforms[0].size
     dataset = ImageFolderDataset(
-        transform=preprocess_fn, image_size=image_size)
+        fs_path=args.train_data, transform=preprocess_fn, image_size=image_size, integer_labels=args.integer_labels)
     num_samples = len(dataset)
     sampler = DistributedSampler(dataset) if args.distributed and is_train else None
     shuffle = is_train and sampler is None
@@ -1281,7 +1284,6 @@ def get_data(args, preprocess_fns, epoch=0):
             args.metacaptions.fillna('', inplace=True)
         else:
             args.metacaptions = pd.DataFrame()
-
     if args.train_data or args.dataset_type == "synthetic":
         data["train"] = get_dataset_fn(args.train_data, args.dataset_type)(
             args, preprocess_train, is_train=True, epoch=epoch, total=total)
