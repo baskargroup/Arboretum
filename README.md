@@ -33,6 +33,10 @@ If you're planning to use one of the alternate architectures for training, we re
 
 In this readme, we focus on features that are new in our implementation.
 
+# Data
+
+While it is possible to use any well-formatted image-only or image-caption dataset with this repository, we have tested most extensively on the dataset associated with our paper, JANuS, which can be downloaded [from Huggingface](https://huggingface.co/datasets/penfever/JANuS_dataset).
+
 # Evaluation
 
 ## Extended Evaluation Metrics[](#extended-evaluation-metrics)
