@@ -6,6 +6,21 @@
 
 This software is heavily indebted to all of the above listed packages, and particularly to [open clip](https://github.com/mlfoundations/open_clip).
 
+If you find this repository useful, please cite the accompanying paper --
+
+```latex
+@article{
+feuer2023distributionally,
+title={Distributionally Robust Classification on a Data Budget},
+author={Benjamin Feuer and Ameya Joshi and Minh Pham and Chinmay Hegde},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2023},
+url={https://openreview.net/forum?id=D5Z2E8CNsD},
+note={}
+}
+```
+
 ## How to use this repository
 
 If you're new to CLIP, you might want to familiarize yourself with the basics of the architecture.
