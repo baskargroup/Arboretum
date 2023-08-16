@@ -1,6 +1,45 @@
 import numpy as np
 import ast
+import json
 from pathlib import Path
+
+try:
+    IN21K_TO_1K = Path("./metadata/imagenet21k_to_1k_index.txt")
+    with open( IN21K_TO_1K, 'r' ) as file:
+        in21k_to_1k = ast.literal_eval( file.read( ) )
+except:
+    IN21K_TO_1K = Path("/scratch/bf996/vlhub/metadata/imagenet21k_to_1k_index.txt")
+    with open( IN21K_TO_1K, 'r' ) as file:
+        in21k_to_1k = ast.literal_eval( file.read( ) )
+
+def get_in21k_to_1k():
+    return in21k_to_1k
+
+import json
+
+try:
+    IN1K_WNID_IDX = Path("./metadata/in1k_wnid_to_idx.json")
+    with open( IN1K_WNID_IDX, 'r' ) as file:
+        in1k_wnid_idx = json.load( file )
+except:
+    IN1K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/in1k_wnid_to_idx.json")
+    with open( IN1K_WNID_IDX, 'r' ) as file:
+        in1k_wnid_idx = json.load( file )
+
+def get_in1k_wnid_to_idx():
+    return in1k_wnid_idx
+
+try:
+    IN21K_WNID_IDX = Path("./metadata/in21k_wnid_to_idx.json")
+    with open( IN21K_WNID_IDX, 'r' ) as file:
+        in21k_wnid_idx = json.load( file )
+except:
+    IN21K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/in21k_wnid_to_idx.json")
+    with open( IN21K_WNID_IDX, 'r' ) as file:
+        in21k_wnid_idx = json.load( file )
+
+def get_in21k_wnid_to_idx():
+    return in21k_wnid_idx
 
 try:
     IN1K_OPENAI = Path("./metadata/imagenet1k_openclip.txt")
@@ -11,7 +50,29 @@ except:
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_classnames = ast.literal_eval( file.read( ) )
 
-def get_imagenet_classnames():
+try:
+    IN1K_NO_OVERLAP = Path("./metadata/imagenet_no_overlap_classnames.json")
+    with open( IN1K_NO_OVERLAP, 'r' ) as file:
+        imagenet_no_overlap_classnames = json.load(file)
+except:
+    IN1K_NO_OVERLAP = Path("/scratch/bf996/vlhub/metadata/imagenet_no_overlap_classnames.json")
+    with open( IN1K_NO_OVERLAP, 'r' ) as file:
+        imagenet_no_overlap_classnames = json.load(file)
+
+try:
+    IN1K_NO_OVERLAP_SHORT = Path("./metadata/imagenet_no_overlap_short_classnames.json")
+    with open( IN1K_NO_OVERLAP_SHORT, 'r' ) as file:
+        imagenet_no_overlap_s_classnames = json.load(file)
+except:
+    IN1K_NO_OVERLAP_SHORT = Path("/scratch/bf996/vlhub/metadata/imagenet_no_overlap_short_classnames.json")
+    with open( IN1K_NO_OVERLAP_SHORT, 'r' ) as file:
+        imagenet_no_overlap_s_classnames = json.load(file)
+
+def get_imagenet_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        return imagenet_no_overlap_classnames
+    if short_no_overlap:
+        return imagenet_no_overlap_s_classnames
     return imagenet_classnames
 
 try:
@@ -40,6 +101,31 @@ for k,v in imagenet_our_classnames.items():
     temp.append("".join(v))
 imagenet_our_classnames = temp
 
+ia_idx = [6, 11, 13, 15, 17, 22, 23, 27, 30, 37, 39, 42, 47, 50, 57, 70, 71, 76, 79, 89, 90, 94, 96, 97, 99, 105, 107, 108, 110, 
+113, 124, 125, 130, 132, 143, 144, 150, 151, 207, 234, 235, 254, 277, 283, 287, 291, 295, 298, 301, 306, 307, 308, 309, 
+310, 311, 313, 314, 315, 317, 319, 323, 324, 326, 327, 330, 334, 335, 336, 347, 361, 363, 372, 378, 386, 397, 400, 401, 
+402, 404, 407, 411, 416, 417, 420, 425, 428, 430, 437, 438, 445, 456, 457, 461, 462, 470, 472, 483, 486, 488, 492, 496, 
+514, 516, 528, 530, 539, 542, 543, 549, 552, 557, 561, 562, 569, 572, 573, 575, 579, 589, 606, 607, 609, 614, 626, 627, 
+640, 641, 642, 643, 658, 668, 677, 682, 684, 687, 701, 704, 719, 736, 746, 749, 752, 758, 763, 765, 768, 773, 774, 776, 
+779, 780, 786, 792, 797, 802, 803, 804, 813, 815, 820, 823, 831, 833, 835, 839, 845, 847, 850, 859, 862, 870, 879, 880, 
+888, 890, 897, 900, 907, 913, 924, 932, 933, 934, 937, 943, 945, 947, 951, 954, 956, 957, 959, 971, 972, 980, 981, 984, 
+986, 987, 988]
+
+
+ir_idx = [1, 2, 4, 6, 8, 9, 11, 13, 22, 23, 26, 29, 31, 39, 47, 63, 71, 76, 79, 84, 90, 94, 96, 97, 99, 100, 105, 107, 113, 122, 
+125, 130, 132, 144, 145, 147, 148, 150, 151, 155, 160, 161, 162, 163, 171, 172, 178, 187, 195, 199, 203, 207, 208, 219, 
+231, 232, 234, 235, 242, 245, 247, 250, 251, 254, 259, 260, 263, 265, 267, 269, 276, 277, 281, 288, 289, 291, 292, 293, 
+296, 299, 301, 308, 309, 310, 311, 314, 315, 319, 323, 327, 330, 334, 335, 337, 338, 340, 341, 344, 347, 353, 355, 361, 
+362, 365, 366, 367, 368, 372, 388, 390, 393, 397, 401, 407, 413, 414, 425, 428, 430, 435, 437, 441, 447, 448, 457, 462, 
+463, 469, 470, 471, 472, 476, 483, 487, 515, 546, 555, 558, 570, 579, 583, 587, 593, 594, 596, 609, 613, 617, 621, 629, 
+637, 657, 658, 701, 717, 724, 763, 768, 774, 776, 779, 780, 787, 805, 812, 815, 820, 824, 833, 847, 852, 866, 875, 883, 
+889, 895, 907, 928, 931, 932, 933, 934, 936, 937, 943, 945, 947, 948, 949, 951, 953, 954, 957, 963, 965, 967, 980, 981, 
+983, 988]
+
+obj_idx_dict = {'alarm_clock': [409, 530], 'backpack': [414], 'banana': [954], 'band_aid': [419], 'basket': [790], 'full_sized_towel': [434], 'beer_bottle': [440], 'bench': [703], 'bicycle': [671, 444], 'binder_closed': [446], 'bottle_cap': [455], 'bread_loaf': [930], 'broom': [462], 'bucket': [463], 'butchers_knife': [499], 'can_opener': [473], 'candle': [470], 'cellphone': [487], 'chair': [423, 559, 765], 'clothes_hamper': [588], 'coffee_french_press': [550], 'combination_lock': [507], 'computer_mouse': [673], 'desk_lamp': [846], 'hand_towel_or_rag': [533], 'doormat': [539], 'dress_shoe_men': [630], 'drill': [740], 'drinking_cup': [968], 'drying_rack_for_dishes': [729], 'envelope': [549], 'fan': [545], 'frying_pan': [567], 'dress': [578], 'hair_dryer': [589], 'hammer': [587], 'helmet': [560, 518], 'iron_for_clothes': [606], 'jeans': [608], 'keyboard': [508], 'ladle': [618], 'lampshade': [619], 'laptop_open': [620], 'lemon': [951], 'letter_opener': [623], 'lighter': [626], 'lipstick': [629], 'match': [644], 'measuring_cup': [647], 'microwave': [651], 'mixing_salad_bowl': [659], 'monitor': [664], 'mug': [504], 'nail_fastener': [677], 'necklace': [679], 'orange': [950], 'padlock': [695], 'paintbrush': [696], 'paper_towel': [700], 'pen': [418, 749, 563], 'pill_bottle': [720], 'pillow': [721], 'pitcher': [725], 'plastic_bag': [728], 'plate': [923], 'plunger': [731], 'pop_can': [737], 'portable_heater': [811], 'printer': [742], 'remote_control': [761], 'ruler': [769], 'running_shoe': [770], 'safety_pin': [772], 'salt_shaker': [773], 'sandal': [774], 'screw': [783], 'shovel': [792], 'skirt': [601, 655, 689], 'sleeping_bag': [797], 'soap_dispenser': [804], 'sock': [806], 'soup_bowl': [809], 'spatula': [813], 'speaker': [632], 'still_camera': [732, 759], 'strainer': [828], 'stuffed_animal': [850], 'suit_jacket': [834], 'sunglasses': [837], 'sweater': [841], 'swimming_trunks': [842], 't-shirt': [610], 'tv': [851], 'teapot': [849], 'tennis_racket': [752], 'tie': [457, 906], 'toaster': [859], 'toilet_paper_roll': [999], 'trash_bin': [412], 'tray': [868], 'umbrella': [879], 'vacuum_cleaner': [882], 'vase': [883], 'wallet': [893], 'watch': [531], 'water_bottle': [898], 'weight_exercise': [543], 'weight_scale': [778], 'wheel': [479, 694], 'whistle': [902], 'wine_bottle': [907], 'winter_glove': [658], 'wok': [909]}
+
+obj_idx = [409, 530, 414, 954, 419, 790, 434, 440, 703, 671, 444, 446, 455, 930, 462, 463, 499, 473, 470, 487, 423, 559, 765, 588, 550, 507, 673, 846, 533, 539, 630, 740, 968, 729, 549, 545, 567, 578, 589, 587, 560, 518, 606, 608, 508, 618, 619, 620, 951, 623, 626, 629, 644, 647, 651, 659, 664, 504, 677, 679, 950, 695, 696, 700, 418, 749, 563, 720, 721, 725, 728, 923, 731, 737, 811, 742, 761, 769, 770, 772, 773, 774, 783, 792, 601, 655, 689, 797, 804, 806, 809, 813, 632, 732, 759, 828, 850, 834, 837, 841, 842, 610, 851, 849, 752, 457, 906, 859, 999, 412, 868, 879, 882, 883, 893, 531, 898, 543, 778, 479, 694, 902, 907, 658, 909]
+
 def get_imagenet_our_classnames():
     return imagenet_our_classnames
 
@@ -66,7 +152,8 @@ def hex_to_decimal(hex_string):
 start_d = hex_to_decimal('4E00')
 end_d = hex_to_decimal('9FFF')
 
-ideograms = [''.join(chr(i+j) for j in range(5)) for i in range(start_d, end_d, 5)]
+#ideograms = [''.join(chr(i+j) for j in range(2)) for i in range(start_d, end_d, 2)]
+ideograms = [chr(i) for i in range(start_d, end_d)]
 
 def get_ideogram_dict():
     return {i: ideograms[i] for i in range(len(ideograms))}
@@ -74,32 +161,8 @@ def get_ideogram_dict():
 def get_imagenet_ideo_classnames():
     return [ideograms[i] for i in range(1000)]
 
-ir_idx = [1, 2, 4, 6, 8, 9, 11, 13, 22, 23, 26, 29, 31, 39, 47, 63, 71, 76, 79, 84, 90, 94, 96, 97, 99, 100, 105, 107, 113, 122, 
-125, 130, 132, 144, 145, 147, 148, 150, 151, 155, 160, 161, 162, 163, 171, 172, 178, 187, 195, 199, 203, 207, 208, 219, 
-231, 232, 234, 235, 242, 245, 247, 250, 251, 254, 259, 260, 263, 265, 267, 269, 276, 277, 281, 288, 289, 291, 292, 293, 
-296, 299, 301, 308, 309, 310, 311, 314, 315, 319, 323, 327, 330, 334, 335, 337, 338, 340, 341, 344, 347, 353, 355, 361, 
-362, 365, 366, 367, 368, 372, 388, 390, 393, 397, 401, 407, 413, 414, 425, 428, 430, 435, 437, 441, 447, 448, 457, 462, 
-463, 469, 470, 471, 472, 476, 483, 487, 515, 546, 555, 558, 570, 579, 583, 587, 593, 594, 596, 609, 613, 617, 621, 629, 
-637, 657, 658, 701, 717, 724, 763, 768, 774, 776, 779, 780, 787, 805, 812, 815, 820, 824, 833, 847, 852, 866, 875, 883, 
-889, 895, 907, 928, 931, 932, 933, 934, 936, 937, 943, 945, 947, 948, 949, 951, 953, 954, 957, 963, 965, 967, 980, 981, 
-983, 988]
-
 def get_ir_idx():
     return np.array(ir_idx)
-
-ia_idx = [6, 11, 13, 15, 17, 22, 23, 27, 30, 37, 39, 42, 47, 50, 57, 70, 71, 76, 79, 89, 90, 94, 96, 97, 99, 105, 107, 108, 110, 
-113, 124, 125, 130, 132, 143, 144, 150, 151, 207, 234, 235, 254, 277, 283, 287, 291, 295, 298, 301, 306, 307, 308, 309, 
-310, 311, 313, 314, 315, 317, 319, 323, 324, 326, 327, 330, 334, 335, 336, 347, 361, 363, 372, 378, 386, 397, 400, 401, 
-402, 404, 407, 411, 416, 417, 420, 425, 428, 430, 437, 438, 445, 456, 457, 461, 462, 470, 472, 483, 486, 488, 492, 496, 
-514, 516, 528, 530, 539, 542, 543, 549, 552, 557, 561, 562, 569, 572, 573, 575, 579, 589, 606, 607, 609, 614, 626, 627, 
-640, 641, 642, 643, 658, 668, 677, 682, 684, 687, 701, 704, 719, 736, 746, 749, 752, 758, 763, 765, 768, 773, 774, 776, 
-779, 780, 786, 792, 797, 802, 803, 804, 813, 815, 820, 823, 831, 833, 835, 839, 845, 847, 850, 859, 862, 870, 879, 880, 
-888, 890, 897, 900, 907, 913, 924, 932, 933, 934, 937, 943, 945, 947, 951, 954, 956, 957, 959, 971, 972, 980, 981, 984, 
-986, 987, 988]
-
-obj_idx_dict = {'alarm_clock': [409, 530], 'backpack': [414], 'banana': [954], 'band_aid': [419], 'basket': [790], 'full_sized_towel': [434], 'beer_bottle': [440], 'bench': [703], 'bicycle': [671, 444], 'binder_closed': [446], 'bottle_cap': [455], 'bread_loaf': [930], 'broom': [462], 'bucket': [463], 'butchers_knife': [499], 'can_opener': [473], 'candle': [470], 'cellphone': [487], 'chair': [423, 559, 765], 'clothes_hamper': [588], 'coffee_french_press': [550], 'combination_lock': [507], 'computer_mouse': [673], 'desk_lamp': [846], 'hand_towel_or_rag': [533], 'doormat': [539], 'dress_shoe_men': [630], 'drill': [740], 'drinking_cup': [968], 'drying_rack_for_dishes': [729], 'envelope': [549], 'fan': [545], 'frying_pan': [567], 'dress': [578], 'hair_dryer': [589], 'hammer': [587], 'helmet': [560, 518], 'iron_for_clothes': [606], 'jeans': [608], 'keyboard': [508], 'ladle': [618], 'lampshade': [619], 'laptop_open': [620], 'lemon': [951], 'letter_opener': [623], 'lighter': [626], 'lipstick': [629], 'match': [644], 'measuring_cup': [647], 'microwave': [651], 'mixing_salad_bowl': [659], 'monitor': [664], 'mug': [504], 'nail_fastener': [677], 'necklace': [679], 'orange': [950], 'padlock': [695], 'paintbrush': [696], 'paper_towel': [700], 'pen': [418, 749, 563], 'pill_bottle': [720], 'pillow': [721], 'pitcher': [725], 'plastic_bag': [728], 'plate': [923], 'plunger': [731], 'pop_can': [737], 'portable_heater': [811], 'printer': [742], 'remote_control': [761], 'ruler': [769], 'running_shoe': [770], 'safety_pin': [772], 'salt_shaker': [773], 'sandal': [774], 'screw': [783], 'shovel': [792], 'skirt': [601, 655, 689], 'sleeping_bag': [797], 'soap_dispenser': [804], 'sock': [806], 'soup_bowl': [809], 'spatula': [813], 'speaker': [632], 'still_camera': [732, 759], 'strainer': [828], 'stuffed_animal': [850], 'suit_jacket': [834], 'sunglasses': [837], 'sweater': [841], 'swimming_trunks': [842], 't-shirt': [610], 'tv': [851], 'teapot': [849], 'tennis_racket': [752], 'tie': [457, 906], 'toaster': [859], 'toilet_paper_roll': [999], 'trash_bin': [412], 'tray': [868], 'umbrella': [879], 'vacuum_cleaner': [882], 'vase': [883], 'wallet': [893], 'watch': [531], 'water_bottle': [898], 'weight_exercise': [543], 'weight_scale': [778], 'wheel': [479, 694], 'whistle': [902], 'wine_bottle': [907], 'winter_glove': [658], 'wok': [909]}
-
-obj_idx = [409, 530, 414, 954, 419, 790, 434, 440, 703, 671, 444, 446, 455, 930, 462, 463, 499, 473, 470, 487, 423, 559, 765, 588, 550, 507, 673, 846, 533, 539, 630, 740, 968, 729, 549, 545, 567, 578, 589, 587, 560, 518, 606, 608, 508, 618, 619, 620, 951, 623, 626, 629, 644, 647, 651, 659, 664, 504, 677, 679, 950, 695, 696, 700, 418, 749, 563, 720, 721, 725, 728, 923, 731, 737, 811, 742, 761, 769, 770, 772, 773, 774, 783, 792, 601, 655, 689, 797, 804, 806, 809, 813, 632, 732, 759, 828, 850, 834, 837, 841, 842, 610, 851, 849, 752, 457, 906, 859, 999, 412, 868, 879, 882, 883, 893, 531, 898, 543, 778, 479, 694, 902, 907, 658, 909]
 
 def get_ia_idx_zeroindexed():
     return np.arange(0, 200, dtype=int)
@@ -223,8 +286,13 @@ def get_objectnet_classnames():
 
     return imagenet_classnames_arr[obj_idx].tolist()
 
-def get_imagenet_r_classnames():
-    imagenet_classnames_arr = np.array(imagenet_classnames)
+def get_imagenet_r_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
+    elif short_no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    else:
+        imagenet_classnames_arr = np.array(imagenet_classnames)
 
     return imagenet_classnames_arr[ir_idx].tolist()
 
@@ -236,8 +304,13 @@ def get_imagenet_r_our_classnames():
 def get_imagenet_r_ideo_classnames():
     return [ideograms[i] for i in ir_idx]
 
-def get_imagenet_a_classnames():
-    imagenet_classnames_arr = np.array(imagenet_classnames)
+def get_imagenet_a_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
+    elif short_no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    else:
+        imagenet_classnames_arr = np.array(imagenet_classnames)
 
     return imagenet_classnames_arr[ia_idx].tolist()
 
@@ -250,8 +323,13 @@ def get_imagenet_a_our_classnames():
 def get_imagenet_a_ideo_classnames():
     return [ideograms[i] for i in ia_idx]
 
-def get_imagenet_cap_classnames():
-    imagenet_classnames_arr = np.array(imagenet_classnames)
+def get_imagenet_cap_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
+    elif short_no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    else:
+        imagenet_classnames_arr = np.array(imagenet_classnames)
 
     return imagenet_classnames_arr[icap_idx].tolist()
 
@@ -263,8 +341,13 @@ def get_imagenet_cap_our_classnames():
 def get_imagenet_cap_ideo_classnames():
     return [ideograms[i] for i in icap_idx]
 
-def get_imagenet_common_ia_classnames():
-    imagenet_classnames_arr = np.array(imagenet_classnames)
+def get_imagenet_common_ia_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
+    elif short_no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    else:
+        imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_ia].tolist()  
 
 def get_imagenet_common_ia_our_classnames():
@@ -274,8 +357,13 @@ def get_imagenet_common_ia_our_classnames():
 def get_imagenet_common_ia_ideo_classnames():
     return [ideograms[i] for i in common_ia]
 
-def get_imagenet_common_ir_classnames():
-    imagenet_classnames_arr = np.array(imagenet_classnames)
+def get_imagenet_common_ir_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
+    elif short_no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    else:
+        imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_ir].tolist() 
 
 def get_imagenet_common_ir_our_classnames():
@@ -285,8 +373,13 @@ def get_imagenet_common_ir_our_classnames():
 def get_imagenet_common_ir_ideo_classnames():
     return [ideograms[i] for i in common_ir]
 
-def get_imagenet_common_obj_classnames():
-    imagenet_classnames_arr = np.array(imagenet_classnames)
+def get_imagenet_common_obj_classnames(no_overlap=False, short_no_overlap=False):
+    if no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
+    elif short_no_overlap:
+        imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    else:
+        imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_obj].tolist()
 
 openai_imagenet_template = [
@@ -394,3 +487,27 @@ def get_imagenet_r_cipher():
 def get_imagenet_a_cipher():
     imagenet_classnames_cipher = np.array(imagenet_cipher)
     return imagenet_classnames_cipher[ia_idx].tolist()
+
+def get_imagenet_synonym_classnames(seed=0):
+    import random
+    random.seed(seed)
+    s = random.randint(0, 9)
+    import json
+    with open('/scratch/bf996/vlhub/metadata/in1k_gpt_synonyms_indexed.json','r') as f:
+        gpt_syns = json.load(f)
+        counter = 0
+        for k, v in gpt_syns.items():
+            counter += 1
+            gpt_syns[k] = str(v[(s + counter) % 10])
+        gpt_syns = np.array(list(gpt_syns.values()))
+        gpt_r_classnames = gpt_syns[ir_idx].tolist()
+        gpt_a_classnames = gpt_syns[ia_idx].tolist()
+        gpt_cap_classnames = gpt_syns[icap_idx].tolist()
+        gpt_common_ia_classnames = gpt_syns[common_ia].tolist()
+        gpt_common_ir_classnames = gpt_syns[common_ir].tolist()
+        return gpt_syns, gpt_r_classnames, gpt_a_classnames, gpt_cap_classnames, gpt_common_ir_classnames, gpt_common_ia_classnames
+    
+def get_all_imagenet_default_classnames():
+    imagenet_def_classnames = get_imagenet_def_classnames()
+    imagenet_def_classnames = np.array(imagenet_def_classnames)
+    return imagenet_def_classnames, imagenet_def_classnames[ir_idx].tolist(),imagenet_def_classnames[ia_idx].tolist(), imagenet_def_classnames[icap_idx].tolist(), imagenet_def_classnames[common_ir].tolist(), imagenet_def_classnames[common_ia].tolist()

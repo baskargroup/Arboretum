@@ -198,8 +198,27 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         image_features = F.normalize(image_features, dim=-1)
                         logits = 100. * image_features @ classifier
             
+            # remap imagenet21k pretrained model indices
+            if args.isint and args.model.endswith("_in21k"):
+                args.in1k_wnid = get_in1k_wnid_to_idx()
+                args.in1k_wnid_rev = {v: k for k, v in args.in1k_wnid.items()}
+                decoded_preds = imagenet.decode_predictions_imagenet21k(logits.cpu().detach().numpy(), top=21800)
+                true_preds = []
+                for pred in decoded_preds:
+                    true_pred = [0 for _ in range(len(args.classnames))]
+                    for poss in pred:
+                        if args.in1k_wnid.get(poss[0], -1) != -1:
+                            true_pred[args.in1k_wnid[poss[0]]]=poss[2]
+                    true_preds.append(true_pred)
+                acc1, acc5 = accuracy(torch.tensor(true_preds).to(args.device), target, topk=(1, min(5, len(args.classnames))))
+                n += images.size(0)
+                top1 += acc1
+                top5 += acc5
+                continue
+
             # measure accuracy with adjustments
-            if args.isint:
+            elif args.isint:
+                args.prob_size = len(logits[0])
                 #zero out logits which are not being evaluated (in VL this is handled by changing the size of the classification problem)
                 if args.caption_subset != "":
                     if args.caption_subset == "insects":
@@ -209,19 +228,19 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         target = torch.tensor([id_dict[t] for t in target.cpu()]).to(args.device)
                     else:
                         icap_idx = get_icap_idx(args.caption_subset)
-                        not_icap_idx = [i for i in range(1000) if i not in icap_idx]
+                        not_icap_idx = [i for i in range(args.prob_size) if i not in icap_idx]
                         logits[:, not_icap_idx] = float("-inf")
                 if split == 'r':
                     ir_idx = get_ir_idx()
-                    not_ir_idx = [i for i in range(1000) if i not in ir_idx]
+                    not_ir_idx = [i for i in range(args.prob_size) if i not in ir_idx]
                     logits[:, not_ir_idx] = float("-inf")
                 if split == 'a':
                     ia_idx = get_ia_idx()
-                    not_ia_idx = [i for i in range(1000) if i not in ia_idx]
+                    not_ia_idx = [i for i in range(args.prob_size) if i not in ia_idx]
                     logits[:, not_ia_idx] = float("-inf")
                 if split == 'objectnet':
                     obj_idx = get_obj_index()
-                    not_obj_idx = [i for i in range(1000) if i not in obj_idx]
+                    not_obj_idx = [i for i in range(args.prob_size) if i not in obj_idx]
                     logits[:, not_obj_idx] = float("-inf")
                     #TODO: for all multiclass classes, first class gets argmax of all multiclass options
 
@@ -269,61 +288,90 @@ def to_lower(l):
 def build_imagenet(args, model, in_type=""):
     isint = (args.integer_labels or args.linear_probe)
     usecaps = args.caption_subset != "" and not isint
-    if isint:
-        args.classnames = get_imagenet_classnames()
-        classifier = None
-        return classifier
+    logging.debug("in build_imagenet, isint is {}, usecaps is {}".format(isint, usecaps))
     template = get_openai_imagenet_template()
     if args.no_ensembling:
         template = [template[0]]
+    if isint:
+        args.classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+        classifier = None
+        return classifier
+    if args.syn_filter:
+        logging.info("Using imagenet_syn_classnames")
+        base_classnames, r_classnames, a_classnames, cap_classnames, cap_r_classnames, cap_a_classnames = get_imagenet_synonym_classnames(seed=args.seed)
+        if in_type == "r":
+            c = cap_r_classnames if usecaps else r_classnames
+        elif in_type == "a":
+            c = cap_a_classnames if usecaps else a_classnames
+        else:
+            c = cap_classnames if usecaps else base_classnames
+        return classnames_to_classifier(c, template, args, model)
+    if args.def_class:
+        logging.info("Using ImageNet default classnames")
+        base_classnames, r_classnames, a_classnames, cap_classnames, cap_r_classnames, cap_a_classnames = get_all_imagenet_default_classnames()
+        if in_type == "r":
+            c = cap_r_classnames if usecaps else r_classnames
+        elif in_type == "a":
+            c = cap_a_classnames if usecaps else a_classnames
+        else:
+            c = cap_classnames if usecaps else base_classnames
+        return classnames_to_classifier(c, template, args, model)        
     if in_type == "r":
         if args.ds_cipher:
             classnames = get_imagenet_r_cipher()
+        elif args.ideo and usecaps:
+            classnames = get_imagenet_common_ir_ideo_classnames()
         elif args.ideo:
             classnames = get_imagenet_r_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_common_ir_classnames()
+            classnames = get_imagenet_common_ir_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
         else:
-            classnames = get_imagenet_r_classnames()
+            classnames = get_imagenet_r_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
     elif in_type == "a":
         if args.ds_cipher:
             classnames = get_imagenet_a_cipher()
+        elif args.ideo and usecaps:
+            classnames = get_imagenet_common_ia_ideo_classnames()
         elif args.ideo:
             classnames = get_imagenet_a_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_common_ia_classnames()
+            classnames = get_imagenet_common_ia_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
         else:
-            classnames = get_imagenet_a_classnames()
+            classnames = get_imagenet_a_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
     elif in_type == "objectnet":
         if args.ds_cipher:
             classnames = get_obj_cipher()
         elif args.ideo:
             classnames = get_imagenet_obj_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_common_obj_classnames()
+            classnames = get_imagenet_common_obj_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
         else:
-            classnames = get_objectnet_classnames()
+            classnames = get_objectnet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
     else:
         if args.ds_cipher:
             classnames = get_imagenet_cipher()
+        elif args.ideo and usecaps:
+            classnames = get_imagenet_cap_ideo_classnames()
         elif args.ideo:
             classnames = get_imagenet_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_cap_classnames()
+            classnames = get_imagenet_cap_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
         else:
-            classnames = get_imagenet_classnames()
+            classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
     if args.zs_upper:
         classnames = to_upper(classnames)
     elif args.zs_lower:
         classnames = to_lower(classnames)
     elif args.shift_cipher:
         classnames = [shift_cipher(s, args.shift_cipher) for s in classnames]
+    return classnames_to_classifier(classnames, template, args, model)
+
+def classnames_to_classifier(classnames, template, args, model):
     logging.info("imagenet classnames first 15: {}".format(classnames[:15]))
     logging.info("length of imagenet clasnames: {}".format(len(classnames)))
     args.classnames = classnames
-    if not isint:
-        logging.info('Building zero-shot classifier')
-        classifier = zero_shot_classifier(model, classnames, template, args)
+    logging.info('Building zero-shot classifier')
+    classifier = zero_shot_classifier(model, classnames, template, args)
     return classifier
 
 def zero_shot_eval(model, data, epoch, args):

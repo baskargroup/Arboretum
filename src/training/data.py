@@ -213,25 +213,13 @@ def cast_to_int(var):
             return int(float(var))
         except:
             return -1
+    elif isinstance(var, float):
+        try:
+            return int(var)
+        except:
+            return -1
     else:
         return int(var)
-
-def ideo_transform(text):
-    in_text = text
-    ideograms = get_ideogram_dict()
-    METADATA = Path("./metadata")
-    with open(METADATA / 'imagenet_to_labels.json', 'r') as f:
-        imagenet_map = json.load(f)
-        imagenet_map = {k : v.split(", ") for k, v in imagenet_map.items()}
-    for k, v in imagenet_map.items():
-        words = text.split(" ")
-        for word in words:
-            if word in v:
-                text = text.replace(word, ideograms.get(k, word))
-    if in_text != text:
-        logging.debug("ideo_transform: {} -> {}".format(in_text, text))
-    return text
-
 
 class ImageFolderWithPaths(datasets.ImageFolder):
     """Custom dataset that includes image file paths. Extends
@@ -252,27 +240,39 @@ class CsvDataset(Dataset):
 
     def read_and_preprocess(self, args):
         fn = args['input_filename']
-        logging.debug(f'Loading csv data from {fn}')
+        logging.debug('Loading csv data from {}'.format(fn))
+        load_val=False
         try:
             df = pd.read_csv(fn, sep=args['sep'], on_bad_lines='skip')
+            load_val=True
         except:
-            df = pd.read_excel(fn)
+            pass
+        if not load_val:
+            try:
+                df = pd.read_excel(fn)
+                load_val=True
+            except:
+                pass
+        if not load_val:
+            try:
+                df = pd.read_csv(fn, sep=args['sep'], on_bad_lines='skip', encoding="ISO-8859-1")
+                load_val=True
+            except:
+                raise Exception("Could not read csv file")
         logging.info("Size of dataframe is {}".format(len(df)))
         df = df[["path", args['caption_key']]]
+        df = df.dropna()
         df = df[df[args['caption_key']].notnull()]
         df = df[df[args['caption_key']] != "nan"]
-        mask = df[args['caption_key']].apply(lambda x: isinstance(x, float))
-        df = df[~mask]
-        if args['integer_labels'] and not args['multiclass']:
+        if args['integer_labels']:
+            logging.debug("Before integer transforms, caption key column datatype is {}".format(df[args['caption_key']].dtype))
+            logging.debug("caption key column head is {}".format(df[args['caption_key']].head()))
             df[args['caption_key']] = df[args['caption_key']].apply(cast_to_int)
             df = df[df[args['caption_key']] != -1]
             df = df[df[args['caption_key']] != "-1"]
-            self.label_set = [i for i in range(df[args['caption_key']].astype(int).max() + 1)]
-        elif args['integer_labels'] and args['multiclass']:
-            df = df[df[args['caption_key']] != -1]
-            df = df[df[args['caption_key']] != "-1"]
-            #FIXME: this is a hack to get the label set for multiclass integer labels
-            self.label_set = [i for i in range(1000)]
+            logging.debug("After integer transforms, caption key column datatype is {}".format(df[args['caption_key']].dtype))
+            logging.debug("caption key column head is {}".format(df[args['caption_key']].head()))
+            self.label_set = [i for i in range(df[args['caption_key']].max() + 1)]
         logging.info("Size of dataframe after NaN-removal is {}".format(len(df)))
         logging.debug("Columns of dataframe: {}".format(df.columns))
         self.df = df
@@ -287,7 +287,6 @@ class CsvDataset(Dataset):
             logging.debug("Head of old dataframe: ")
             logging.debug(df.head())
             df[caption_key] = df[caption_key].progress_apply(clean_captions)
-            #df.loc[:, caption_key] = df.caption_key.progress_apply(clean_captions)
             df = df[df[caption_key].str.len() > 0]
             logging.debug("Done. Length is now {}".format(len(df)))
             logging.debug("Head of new dataframe: ")
@@ -307,9 +306,7 @@ class CsvDataset(Dataset):
             logging.debug(df['is_synset'].head())
             df = df[df['is_synset']].drop(columns=['is_synset'])
             logging.debug("Done. Length is now {}".format(len(df)))
-            logging.debug(df.head())
-        if args.ideo:
-            df[caption_key] = df[caption_key].progress_apply(ideo_transform)
+            logging.debug(df.head())         
         self.images = df[img_key].tolist()
         self.captions = df[caption_key].tolist()
         self.transforms = transforms
@@ -1325,18 +1322,31 @@ def get_data(args, preprocess_fns, epoch=0):
     preprocess_train, preprocess_val = preprocess_fns
     data = {}
     total = TotalSize()
-
+    args.syn_filter = False
+    args.no_overlap = False
+    args.short_no_overlap = False
+    args.def_class = False
     if args.ds_cipher:
         args.ds_filter = get_imagenet_cipher()
     elif args.ds_filter != "":
         if args.ds_filter == "imagenet_classnames":
-            args.ds_filter = get_imagenet_classnames()
+            args.ds_filter = get_imagenet_classnames(no_overlap=False)
+        elif args.ds_filter == "imagenet_classnames_no_overlap":
+            args.no_overlap=True
+            args.ds_filter = get_imagenet_classnames(no_overlap=True)
+        elif args.ds_filter == "imagenet_classnames_short_no_overlap":
+            args.short_no_overlap=True
+            args.ds_filter = get_imagenet_classnames(short_no_overlap=True)
         elif args.ds_filter == "imagenet_wrongorder_classnames":
             args.ds_filter = get_imagenet_wrongorder_classnames()
         elif args.ds_filter == "imagenet_our_classnames":
             args.ds_filter = get_imagenet_our_classnames()
         elif args.ds_filter == "imagenet_def_classnames":
+            args.def_class = True
             args.ds_filter = get_imagenet_def_classnames()
+        elif args.ds_filter == "imagenet_syn_classnames":
+            args.syn_filter = True
+            args.ds_filter = get_imagenet_synonym_classnames(seed=args.seed)
         elif args.ds_filter == "insecta":
             args.ds_filter = get_insecta_classnames()
         else:

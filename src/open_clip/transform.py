@@ -45,6 +45,12 @@ class ResizeMaxSize(nn.Module):
 def _convert_to_rgb(image):
     return image.convert('RGB')
 
+def _convert_to_grayscale(image):
+    image = image.convert('L')
+    channels = image.split()
+    image_ggg = Image.merge('RGB', (channels[0], channels[0], channels[0]))
+    return image_ggg
+
 def _downsample(img):
     temp = BytesIO()
     img.save(temp, format="jpeg", quality=10)
@@ -56,6 +62,7 @@ def image_transform(
         simclr_trans: bool = False,
         downsample_trans: bool = False,
         augreg_trans: bool = False,
+        grayscale: bool = False,
         mean: Optional[Tuple[float, ...]] = None,
         std: Optional[Tuple[float, ...]] = None,
         resize_longest_max: bool = False,
@@ -87,8 +94,10 @@ def image_transform(
         transforms.append(torchvision.transforms.RandomGrayscale(p=0.2))
         transforms.append(torchvision.transforms.RandomApply([torchvision.transforms.GaussianBlur(5, sigma=(.1, 2.))], p=0.5))
         transforms.append(torchvision.transforms.RandomHorizontalFlip())
-    if is_train:
-        transforms.append(_convert_to_rgb)
+    if is_train and grayscale:
+        transforms.append(_convert_to_grayscale)
+    elif is_train:
+        transforms.append(_convert_to_rgb)  
     if downsample_trans and is_train:
         transforms.append(_downsample)
     if resize_longest_max:
