@@ -1335,6 +1335,7 @@ def get_data(args, preprocess_fns, epoch=0):
     args.no_overlap = False
     args.short_no_overlap = False
     args.def_class = False
+    args.first_only = False
     if args.ds_cipher:
         args.ds_filter = get_imagenet_cipher()
     elif args.ds_filter != "":
@@ -1352,6 +1353,10 @@ def get_data(args, preprocess_fns, epoch=0):
             args.ds_filter = get_imagenet_our_classnames()
         elif args.ds_filter == "imagenet_def_classnames":
             args.def_class = True
+            args.ds_filter = get_imagenet_def_classnames()
+        elif args.ds_filter == "imagenet_def_classnames_first":
+            args.def_class = True
+            args.first_only = True
             args.ds_filter = get_imagenet_def_classnames()
         elif args.ds_filter == "imagenet_syn_classnames":
             args.syn_filter = True

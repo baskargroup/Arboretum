@@ -308,7 +308,7 @@ def build_imagenet(args, model, in_type=""):
         return classnames_to_classifier(c, template, args, model)
     if args.def_class:
         logging.info("Using ImageNet default classnames")
-        base_classnames, r_classnames, a_classnames, cap_classnames, cap_r_classnames, cap_a_classnames = get_all_imagenet_default_classnames()
+        base_classnames, r_classnames, a_classnames, cap_classnames, cap_r_classnames, cap_a_classnames = get_all_imagenet_default_classnames(first_only=args.first_only)
         if in_type == "r":
             c = cap_r_classnames if usecaps else r_classnames
         elif in_type == "a":
@@ -358,15 +358,15 @@ def build_imagenet(args, model, in_type=""):
             classnames = get_imagenet_cap_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
         else:
             classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+    return classnames_to_classifier(classnames, template, args, model)
+
+def classnames_to_classifier(classnames, template, args, model):
     if args.zs_upper:
         classnames = to_upper(classnames)
     elif args.zs_lower:
         classnames = to_lower(classnames)
     elif args.shift_cipher:
-        classnames = [shift_cipher(s, args.shift_cipher) for s in classnames]
-    return classnames_to_classifier(classnames, template, args, model)
-
-def classnames_to_classifier(classnames, template, args, model):
+        classnames = [shift_cipher(s.lower(), args.shift_cipher) for s in classnames]
     logging.info("imagenet classnames first 15: {}".format(classnames[:15]))
     logging.info("length of imagenet clasnames: {}".format(len(classnames)))
     args.classnames = classnames

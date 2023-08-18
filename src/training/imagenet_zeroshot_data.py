@@ -507,7 +507,9 @@ def get_imagenet_synonym_classnames(seed=0):
         gpt_common_ir_classnames = gpt_syns[common_ir].tolist()
         return gpt_syns, gpt_r_classnames, gpt_a_classnames, gpt_cap_classnames, gpt_common_ir_classnames, gpt_common_ia_classnames
     
-def get_all_imagenet_default_classnames():
+def get_all_imagenet_default_classnames(first_only=False):
     imagenet_def_classnames = get_imagenet_def_classnames()
+    if first_only:
+        imagenet_def_classnames = [i.split(', ')[0].strip() for i in imagenet_def_classnames]
     imagenet_def_classnames = np.array(imagenet_def_classnames)
     return imagenet_def_classnames, imagenet_def_classnames[ir_idx].tolist(),imagenet_def_classnames[ia_idx].tolist(), imagenet_def_classnames[icap_idx].tolist(), imagenet_def_classnames[common_ir].tolist(), imagenet_def_classnames[common_ia].tolist()
