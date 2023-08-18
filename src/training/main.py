@@ -215,6 +215,7 @@ def run_main(args = None):
             mlm=args.mlm,
             image_simclr=args.sim_clr,
             simclr_trans=args.sim_clr_trans,
+            grayscale=args.grayscale,
             downsample_trans=args.downsample_trans,
             augreg_trans=args.augreg_trans,
             imsize=args.image_size if args.image_size else 224,

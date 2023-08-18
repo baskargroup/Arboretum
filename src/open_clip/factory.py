@@ -352,6 +352,7 @@ def create_model_and_transforms(
         mlm: bool = False,
         image_simclr: bool = False,
         simclr_trans: bool = False,
+        grayscale: bool = False,
         downsample_trans: bool = False,
         augreg_trans: bool = False,
         imsize: int = 224,
@@ -362,16 +363,18 @@ def create_model_and_transforms(
     model = create_model(
     model_name, pretrained, precision, device, jit,
     force_quick_gelu=force_quick_gelu,
-    pretrained_image=pretrained_image, filip=image_filip, dcl=dcl, elp=elp, vssl=vssl, mlm=mlm, imsize=imsize, simclr=image_simclr, cache_dir=cache_dir
+    pretrained_image=pretrained_image, filip=image_filip, 
+    dcl=dcl, elp=elp, vssl=vssl, mlm=mlm, imsize=imsize, 
+    simclr=image_simclr, cache_dir=cache_dir
     )
     #FIXME hardcoded size
     image_mean = image_mean or getattr(model.visual, 'image_mean', None)
     image_std = image_std or getattr(model.visual, 'image_std', None)
     if model_name == "coca" or image_simclr:
-        preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_train = image_transform(224, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, grayscale=grayscale, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
         preprocess_val = image_transform(224, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     else:
-        preprocess_train = image_transform(imsize, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
+        preprocess_train = image_transform(imsize, is_train=True, mean=image_mean, std=image_std, simclr_trans=simclr_trans, grayscale=grayscale, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
         preprocess_val = image_transform(imsize, is_train=False, mean=image_mean, std=image_std, simclr_trans=simclr_trans, downsample_trans=downsample_trans, augreg_trans=augreg_trans)
     return model, preprocess_train, preprocess_val
 

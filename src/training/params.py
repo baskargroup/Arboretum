@@ -430,6 +430,11 @@ def parse_args():
         help="Use simclr image transforms",
     )
     parser.add_argument(
+        "--grayscale",
+        default=False,
+        help="Transform images to grayscale",
+    )
+    parser.add_argument(
         "--augreg-trans",
         default=False,
         action='store_true',
