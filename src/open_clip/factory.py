@@ -337,6 +337,33 @@ def init_weights_vit_jax(module: nn.Module, name: str = '', head_bias: float = 0
     elif hasattr(module, 'init_weights'):
         module.init_weights()
 
+def apply_random_weights_skipping_first_k_layers_vit(model, k):
+    i = 0
+    sequentials = []
+    for idxch, child in enumerate(model.children()):
+        print("Model child number {} is {} \n".format(idxch, type(child)))
+        if isinstance(child, torch.nn.modules.container.Sequential):
+          sequentials.append(child)
+    print("This method will randomize weights of all Conv2D, Block and Linear layers after the first {} layers, in all sequentials \n".format(k))
+    print("There are {} sequentials \n".format(len(sequentials)))
+    for sequential in sequentials:
+        for child in sequential.children():
+          print("Sequential child number {} is {} \n".format(i, type(child)))
+          if i <= k:
+              i += 1
+              continue
+          if isinstance(child, nn.Linear) or isinstance(child, nn.Conv2d):
+              child.weight.data = torch.randn(child.weight.size())
+              if child.bias is not None:
+                  child.bias.data = torch.randn(child.bias.size())
+          #timm vit blocks
+          if isinstance(child, Block):
+              child.attn.qkv.weight.data = torch.randn(child.attn.qkv.weight.size())
+              child.attn.proj.weight.data = torch.randn(child.attn.proj.weight.size())
+              child.mlp.fc1.weight.data = torch.randn(child.mlp.fc1.weight.size())
+              child.mlp.fc2.weight.data = torch.randn(child.mlp.fc2.weight.size())
+          i += 1
+
 def create_model_and_transforms(
         model_name: str,
         pretrained: str = '',

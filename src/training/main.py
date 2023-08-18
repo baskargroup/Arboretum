@@ -36,6 +36,7 @@ except ImportError:
 
 from open_clip.model import TimmModel
 from open_clip import create_model_and_transforms, trace_model
+from open_clip.factory import apply_random_weights_skipping_first_k_layers_vit
 from open_clip.transform import image_transform
 from training.data import get_data
 from training.model_data import noisystudent_loader, efficientnet_loader
@@ -46,33 +47,6 @@ from training.scheduler import cosine_lr
 from training.train import train_one_epoch, evaluate, unwrap_model
 from training.lsuv import LSUV_
 from gsam import CosineScheduler, GSAM
-
-def apply_random_weights_skipping_first_k_layers_vit(model, k):
-    i = 0
-    sequentials = []
-    for idxch, child in enumerate(model.children()):
-        print("Model child number {} is {} \n".format(idxch, type(child)))
-        if isinstance(child, torch.nn.modules.container.Sequential):
-          sequentials.append(child)
-    print("This method will randomize weights of all Conv2D, Block and Linear layers after the first {} layers, in all sequentials \n".format(k))
-    print("There are {} sequentials \n".format(len(sequentials)))
-    for sequential in sequentials:
-        for child in sequential.children():
-          print("Sequential child number {} is {} \n".format(i, type(child)))
-          if i <= k:
-              i += 1
-              continue
-          if isinstance(child, nn.Linear) or isinstance(child, nn.Conv2d):
-              child.weight.data = torch.randn(child.weight.size())
-              if child.bias is not None:
-                  child.bias.data = torch.randn(child.bias.size())
-          #timm vit blocks
-          if isinstance(child, Block):
-              child.attn.qkv.weight.data = torch.randn(child.attn.qkv.weight.size())
-              child.attn.proj.weight.data = torch.randn(child.attn.proj.weight.size())
-              child.mlp.fc1.weight.data = torch.randn(child.mlp.fc1.weight.size())
-              child.mlp.fc2.weight.data = torch.randn(child.mlp.fc2.weight.size())
-          i += 1
 
 def dict_representer(dumper, data):
   return dumper.represent_mapping(_mapping_tag, data.iteritems())

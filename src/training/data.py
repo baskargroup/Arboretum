@@ -21,10 +21,7 @@ import torch
 import torchvision
 import torchvision.datasets as datasets
 import webdataset as wds
-from PIL import Image, ImageFile
-
-ImageFile.LOAD_TRUNCATED_IMAGES = True
-
+from PIL import Image
 from torchvision.datasets import ImageFolder
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, IterableDataset, get_worker_info, Subset
 from torch.utils.data.distributed import DistributedSampler
@@ -286,30 +283,39 @@ class CsvDataset(Dataset):
         if dscipher:
             csvcleaned=True
         if csvcleaned:
-            logging.debug('Cleaning captions. Original dataset size is {}'.format(len(df)))
-            logging.debug("Head of old dataframe: ")
-            logging.debug(df.head())
+            logging.info('Cleaning captions. Original dataset size is {}'.format(len(df)))
+            logging.info("Sample of old dataframe: ")
+            dfs = df.sample(50)
+            logging.info(dfs.head(25))
             df[caption_key] = df[caption_key].progress_apply(clean_captions)
             df = df[df[caption_key].str.len() > 0]
-            logging.debug("Done. Length is now {}".format(len(df)))
-            logging.debug("Head of new dataframe: ")
-            logging.debug(df.head())
+            logging.info("Done. Length is now {}".format(len(df)))
+            logging.info("Sample of new dataframe: ")
+            dfs = df.sample(50)
+            logging.info(dfs.head(25))
         if dscipher or simplecaptions or shift:
             logging.info('Transforming or encoding captions. Original dataset size is {}'.format(len(df)))
-            logging.debug("Head of old dataframe: ")
-            logging.info(df.head())
+            logging.info("Sample of old dataframe: ")
+            dfs = df.sample(50)
+            logging.info(dfs.head(25))
             df[caption_key] = df[caption_key].progress_apply(synset_ds, ngram=3, ds=csvfilter, cipher=dscipher, simplecaptions=simplecaptions, strict=strict, shift=shift, metacaptions=metacaptions)
             df = df[df[caption_key].str.len() > 0]
             logging.info("Done. Length is now {}".format(len(df)))
-            logging.debug("Head of new dataframe: ")
-            logging.info(df.head())            
-        elif csvfilter != "":
-            logging.debug('Filtering captions. Original dataset size is {}'.format(len(df)))
+            logging.info("Sample of new dataframe: ")
+            dfs = df.sample(50)
+            logging.info(dfs.head(25))       
+        elif csvfilter in ["imagenet_classnames", "imagenet_our_classnames", "imagenet_def_classnames"]:
+            logging.info('Filtering captions. Original dataset size is {}'.format(len(df)))
+            logging.info("Sample of old dataframe: ")
+            dfs = df.sample(50)
+            logging.info(dfs.head(25))
             df['is_synset'] = df[caption_key].progress_apply(synset_ds, ngram=3, ds=csvfilter, cipher=False, simplecaptions=False, strict=strict, shift=shift, metacaptions=metacaptions)
             logging.debug(df['is_synset'].head())
             df = df[df['is_synset']].drop(columns=['is_synset'])
-            logging.debug("Done. Length is now {}".format(len(df)))
-            logging.debug(df.head())         
+            logging.info("Done. Length is now {}".format(len(df)))
+            logging.info("Sample of new dataframe: ")
+            dfs = df.sample(50)
+            logging.info(dfs.head(25))       
         self.images = df[img_key].tolist()
         self.captions = df[caption_key].tolist()
         self.transforms = transforms
@@ -1179,10 +1185,9 @@ class FilteredImageFolder:
         self.transform = transform
         self.k = k
         self.n = n
-        self.non_selected_classes=[]
+
         # Get all subdirectories in the root directory
         all_classes = [d.name for d in os.scandir(self.root) if d.is_dir()]
-        self.selected_classes=all_classes
         logging.info("{} is the number of classes in the dataset before move".format(len(all_classes)))
         if len(all_classes) > n:
             self.selected_classes = random.sample(all_classes, self.n)
@@ -1193,6 +1198,9 @@ class FilteredImageFolder:
                 #print(os.path.join(self.root, class_name))
                 #print(os.path.join(self.temp_dir, class_name))
                 shutil.move(os.path.join(self.root, class_name), os.path.join(self.temp_dir, class_name))
+        else:
+            self.selected_classes=all_classes
+            self.non_selected_classes = []
         self.images = ImageFolder(root=self.root, transform=self.transform)
         logging.info("{} is the number of classes in the dataset after move".format(len(self.images.classes)))
         # Reduce the dataset to only contain k samples
@@ -1206,11 +1214,9 @@ class FilteredImageFolder:
 
     def __del__(self):
         # Move classes back to original directory when done
-        try:
-            for class_name in self.non_selected_classes:
-                shutil.move(os.path.join(self.temp_dir, class_name), os.path.join(self.root, class_name))
-        except Exception as e:
-            logging.warning("Exception in FilteredImageFolder __del__: {}".format(e))
+        for class_name in self.non_selected_classes:
+            shutil.move(os.path.join(self.temp_dir, class_name), os.path.join(self.root, class_name))
+
         # Remove the temporary directory
         # os.rmdir(self.temp_dir)
 

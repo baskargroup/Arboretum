@@ -1,5 +1,0 @@
-
-
-python src/training/main.py --batch-size=128 --workers=8 --imagenet-val "/data/datasets/ImageNet/val/" --imagenet-v2 "/data/datasets/imagenetv2" --imagenet-r "/data/datasets/imagenet-r/imagenet-r" --imagenet-a "/data/datasets/imagenet-a/imagenet-a" --imagenet-s "/data/datasets/imagenet-sketch/imagenet-sketch" --zeroshot-frequency=1 --integer-labels --model=RN50-in1k --resume "/home/bf996/DICE_rws/vlhub/logs/oi100-supervised-integerlabels-class-bal-ep1-256/checkpoints/epoch_256.pt" --caption-subset="in100";
-
-sudo cp -r /home/bf996/vlhub/logs/2023_08_17-14_49_03-model_RN50-in1k-lr_0.0005-b_128-j_8-p_amp /home/bf996/DICE_rws/vlhub/logs/oi100-supervised-integerlabels-class-bal-ep1-256

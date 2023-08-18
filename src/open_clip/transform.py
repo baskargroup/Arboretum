@@ -1,8 +1,6 @@
 from typing import Optional, Sequence, Tuple
 from io import BytesIO
-from PIL import Image, ImageFile
-
-ImageFile.LOAD_TRUNCATED_IMAGES = True
+from PIL import Image
 
 import torch
 import torch.nn as nn

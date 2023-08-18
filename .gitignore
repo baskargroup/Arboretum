@@ -7,7 +7,9 @@ yfcc-subsets/
 cmd.txt
 batch/
 src/script/
+debug/
 config/
+JANuS_runs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

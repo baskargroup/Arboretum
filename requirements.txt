@@ -1,3 +1,4 @@
+open_clip_torch
 coca-pytorch
 vit-pytorch
 byol-pytorch
