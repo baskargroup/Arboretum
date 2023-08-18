@@ -3,6 +3,44 @@ import ast
 from pathlib import Path
 
 try:
+    IN21K_TO_1K = Path("./metadata/imagenet21k_to_1k_index.txt")
+    with open( IN21K_TO_1K, 'r' ) as file:
+        in21k_to_1k = ast.literal_eval( file.read( ) )
+except:
+    IN21K_TO_1K = Path("/scratch/bf996/vlhub/metadata/imagenet21k_to_1k_index.txt")
+    with open( IN21K_TO_1K, 'r' ) as file:
+        in21k_to_1k = ast.literal_eval( file.read( ) )
+
+def get_in21k_to_1k():
+    return in21k_to_1k
+
+import json
+
+try:
+    IN1K_WNID_IDX = Path("./metadata/in1k_wnid_to_idx.json")
+    with open( IN1K_WNID_IDX, 'r' ) as file:
+        in1k_wnid_idx = json.load( file )
+except:
+    IN1K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/in1k_wnid_to_idx.json")
+    with open( IN1K_WNID_IDX, 'r' ) as file:
+        in1k_wnid_idx = json.load( file )
+
+def get_in1k_wnid_to_idx():
+    return in1k_wnid_idx
+
+try:
+    IN21K_WNID_IDX = Path("./metadata/in21k_wnid_to_idx.json")
+    with open( IN21K_WNID_IDX, 'r' ) as file:
+        in21k_wnid_idx = json.load( file )
+except:
+    IN21K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/in21k_wnid_to_idx.json")
+    with open( IN21K_WNID_IDX, 'r' ) as file:
+        in21k_wnid_idx = json.load( file )
+
+def get_in21k_wnid_to_idx():
+    return in21k_wnid_idx
+
+try:
     IN1K_OPENAI = Path("./metadata/imagenet1k_openclip.txt")
     with open( IN1K_OPENAI, 'r' ) as file:
         imagenet_classnames = ast.literal_eval( file.read( ) )

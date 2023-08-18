@@ -21,7 +21,10 @@ import torch
 import torchvision
 import torchvision.datasets as datasets
 import webdataset as wds
-from PIL import Image
+from PIL import Image, ImageFile
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 from torchvision.datasets import ImageFolder
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, IterableDataset, get_worker_info, Subset
 from torch.utils.data.distributed import DistributedSampler
@@ -1179,9 +1182,10 @@ class FilteredImageFolder:
         self.transform = transform
         self.k = k
         self.n = n
-
+        self.non_selected_classes=[]
         # Get all subdirectories in the root directory
         all_classes = [d.name for d in os.scandir(self.root) if d.is_dir()]
+        self.selected_classes=all_classes
         logging.info("{} is the number of classes in the dataset before move".format(len(all_classes)))
         if len(all_classes) > n:
             self.selected_classes = random.sample(all_classes, self.n)
@@ -1192,9 +1196,6 @@ class FilteredImageFolder:
                 #print(os.path.join(self.root, class_name))
                 #print(os.path.join(self.temp_dir, class_name))
                 shutil.move(os.path.join(self.root, class_name), os.path.join(self.temp_dir, class_name))
-        else:
-            self.selected_classes=all_classes
-            self.non_selected_classes = []
         self.images = ImageFolder(root=self.root, transform=self.transform)
         logging.info("{} is the number of classes in the dataset after move".format(len(self.images.classes)))
         # Reduce the dataset to only contain k samples
@@ -1208,9 +1209,11 @@ class FilteredImageFolder:
 
     def __del__(self):
         # Move classes back to original directory when done
-        for class_name in self.non_selected_classes:
-            shutil.move(os.path.join(self.temp_dir, class_name), os.path.join(self.root, class_name))
-
+        try:
+            for class_name in self.non_selected_classes:
+                shutil.move(os.path.join(self.temp_dir, class_name), os.path.join(self.root, class_name))
+        except Exception as e:
+            logging.warning("Exception in FilteredImageFolder __del__: {}".format(e))
         # Remove the temporary directory
         # os.rmdir(self.temp_dir)
 

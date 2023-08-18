@@ -5,6 +5,10 @@ import torch
 from torch import einsum
 import torch.nn.functional as F
 from tqdm import tqdm
+try:
+    from keras_cv_attention_models import imagenet
+except ImportError:
+    logging.warning("Could not import keras_cv_attention_models, imagenet 21k eval will not work")
 
 import numpy as np
 
@@ -88,6 +92,8 @@ def zero_shot_classifier(model, classnames, templates, args):
 def accuracy(output, target, topk=(1,)):
     pred = output.topk(max(topk), 1, True, True)[1].t()
     correct = pred.eq(target.view(1, -1).expand_as(pred))
+    #print("pred", pred[0])
+    #print("correct", target)
     return [float(correct[:k].reshape(-1).float().sum(0, keepdim=True).cpu().numpy()) for k in topk]
 
 def run(model, classifier, dataloader, args, idx=None, split=None):
@@ -198,8 +204,27 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         image_features = F.normalize(image_features, dim=-1)
                         logits = 100. * image_features @ classifier
             
+            # remap imagenet21k pretrained model indices
+            if args.isint and args.model.endswith("_in21k"):
+                args.in1k_wnid = get_in1k_wnid_to_idx()
+                args.in1k_wnid_rev = {v: k for k, v in args.in1k_wnid.items()}
+                decoded_preds = imagenet.decode_predictions_imagenet21k(logits.cpu().detach().numpy(), top=21800)
+                true_preds = []
+                for pred in decoded_preds:
+                    true_pred = [0 for _ in range(len(args.classnames))]
+                    for poss in pred:
+                        if args.in1k_wnid.get(poss[0], -1) != -1:
+                            true_pred[args.in1k_wnid[poss[0]]]=poss[2]
+                    true_preds.append(true_pred)
+                acc1, acc5 = accuracy(torch.tensor(true_preds).to(args.device), target, topk=(1, min(5, len(args.classnames))))
+                n += images.size(0)
+                top1 += acc1
+                top5 += acc5
+                continue
+
             # measure accuracy with adjustments
-            if args.isint:
+            elif args.isint:
+                args.prob_size = len(logits[0])
                 #zero out logits which are not being evaluated (in VL this is handled by changing the size of the classification problem)
                 if args.caption_subset != "":
                     if args.caption_subset == "insects":
@@ -209,19 +234,19 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         target = torch.tensor([id_dict[t] for t in target.cpu()]).to(args.device)
                     else:
                         icap_idx = get_icap_idx(args.caption_subset)
-                        not_icap_idx = [i for i in range(1000) if i not in icap_idx]
+                        not_icap_idx = [i for i in range(args.prob_size) if i not in icap_idx]
                         logits[:, not_icap_idx] = float("-inf")
                 if split == 'r':
                     ir_idx = get_ir_idx()
-                    not_ir_idx = [i for i in range(1000) if i not in ir_idx]
+                    not_ir_idx = [i for i in range(args.prob_size) if i not in ir_idx]
                     logits[:, not_ir_idx] = float("-inf")
                 if split == 'a':
                     ia_idx = get_ia_idx()
-                    not_ia_idx = [i for i in range(1000) if i not in ia_idx]
+                    not_ia_idx = [i for i in range(args.prob_size) if i not in ia_idx]
                     logits[:, not_ia_idx] = float("-inf")
                 if split == 'objectnet':
                     obj_idx = get_obj_index()
-                    not_obj_idx = [i for i in range(1000) if i not in obj_idx]
+                    not_obj_idx = [i for i in range(args.prob_size) if i not in obj_idx]
                     logits[:, not_obj_idx] = float("-inf")
                     #TODO: for all multiclass classes, first class gets argmax of all multiclass options
 
