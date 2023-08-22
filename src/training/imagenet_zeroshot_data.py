@@ -68,11 +68,22 @@ except:
     with open( IN1K_NO_OVERLAP_SHORT, 'r' ) as file:
         imagenet_no_overlap_s_classnames = json.load(file)
 
-def get_imagenet_classnames(no_overlap=False, short_no_overlap=False):
+try:
+    IN1K_NO_PERM_SHORT = Path("./metadata/imagenet_no_perm_classnames.json")
+    with open( IN1K_NO_PERM_SHORT, 'r' ) as file:
+        imagenet_no_perm_classnames = json.load(file)
+except:
+    IN1K_NO_PERM_SHORT = Path("/scratch/bf996/vlhub/metadata/imagenet_no_perm_classnames.json")
+    with open( IN1K_NO_PERM_SHORT, 'r' ) as file:
+        imagenet_no_perm_classnames = json.load(file)
+
+def get_imagenet_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         return imagenet_no_overlap_classnames
-    if short_no_overlap:
+    elif short_no_overlap:
         return imagenet_no_overlap_s_classnames
+    elif no_perm:
+        return imagenet_no_perm_classnames
     return imagenet_classnames
 
 try:
@@ -286,11 +297,13 @@ def get_objectnet_classnames():
 
     return imagenet_classnames_arr[obj_idx].tolist()
 
-def get_imagenet_r_classnames(no_overlap=False, short_no_overlap=False):
+def get_imagenet_r_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
     elif short_no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    elif no_perm:
+        imagenet_classnames_arr = np.array(imagenet_no_perm_classnames)
     else:
         imagenet_classnames_arr = np.array(imagenet_classnames)
 
@@ -304,11 +317,13 @@ def get_imagenet_r_our_classnames():
 def get_imagenet_r_ideo_classnames():
     return [ideograms[i] for i in ir_idx]
 
-def get_imagenet_a_classnames(no_overlap=False, short_no_overlap=False):
+def get_imagenet_a_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
     elif short_no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    elif no_perm:
+        imagenet_classnames_arr = np.array(imagenet_no_perm_classnames)
     else:
         imagenet_classnames_arr = np.array(imagenet_classnames)
 
@@ -323,11 +338,13 @@ def get_imagenet_a_our_classnames():
 def get_imagenet_a_ideo_classnames():
     return [ideograms[i] for i in ia_idx]
 
-def get_imagenet_cap_classnames(no_overlap=False, short_no_overlap=False):
+def get_imagenet_cap_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
     elif short_no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    elif no_perm:
+        imagenet_classnames_arr = np.array(imagenet_no_perm_classnames)
     else:
         imagenet_classnames_arr = np.array(imagenet_classnames)
 
@@ -341,11 +358,13 @@ def get_imagenet_cap_our_classnames():
 def get_imagenet_cap_ideo_classnames():
     return [ideograms[i] for i in icap_idx]
 
-def get_imagenet_common_ia_classnames(no_overlap=False, short_no_overlap=False):
+def get_imagenet_common_ia_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
     elif short_no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    elif no_perm:
+        imagenet_classnames_arr = np.array(imagenet_no_perm_classnames)
     else:
         imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_ia].tolist()  
@@ -357,11 +376,13 @@ def get_imagenet_common_ia_our_classnames():
 def get_imagenet_common_ia_ideo_classnames():
     return [ideograms[i] for i in common_ia]
 
-def get_imagenet_common_ir_classnames(no_overlap=False, short_no_overlap=False):
+def get_imagenet_common_ir_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
     elif short_no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    elif no_perm:
+        imagenet_classnames_arr = np.array(imagenet_no_perm_classnames)
     else:
         imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_ir].tolist() 
@@ -373,11 +394,13 @@ def get_imagenet_common_ir_our_classnames():
 def get_imagenet_common_ir_ideo_classnames():
     return [ideograms[i] for i in common_ir]
 
-def get_imagenet_common_obj_classnames(no_overlap=False, short_no_overlap=False):
+def get_imagenet_common_obj_classnames(no_overlap=False, short_no_overlap=False, no_perm=False):
     if no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_classnames)
     elif short_no_overlap:
         imagenet_classnames_arr = np.array(imagenet_no_overlap_s_classnames)
+    elif no_perm:
+        imagenet_classnames_arr = np.array(imagenet_no_perm_classnames)
     else:
         imagenet_classnames_arr = np.array(imagenet_classnames)
     return imagenet_classnames_arr[common_obj].tolist()

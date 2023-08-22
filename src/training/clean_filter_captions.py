@@ -24,8 +24,8 @@ def clean_captions(x):
         .strip()
         c_list = list(cleaned.split(" "))
         c_list = [c for c in c_list if (len(c) < 30 and not c.isnumeric())]
-        if len(c_list) > 50:
-            c_list = c_list[:49]
+        # if len(c_list) > 50:
+        #     c_list = c_list[:49]
         return " ".join(c_list)
     except Exception as e:
         logging.info("Exception in clean captions: ")

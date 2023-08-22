@@ -85,6 +85,12 @@ def parse_args():
         help="Filter to only include samples in the batch whose captions contain a word in the filter list: options are ['imagenet_classnames', 'inat_classnames', 'cars_classnames', 'food_classnames', 'air_classnames']."
     )
     parser.add_argument(
+        "--verify",
+        type=bool,
+        default=False,
+        help="Verify each image in the ImageFolder dataset (will take a while)"
+    )
+    parser.add_argument(
         "--strict",
         type=bool,
         default=False,

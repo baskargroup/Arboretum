@@ -293,7 +293,7 @@ def build_imagenet(args, model, in_type=""):
     if args.no_ensembling:
         template = [template[0]]
     if isint:
-        args.classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+        args.classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
         classifier = None
         return classifier
     if args.syn_filter:
@@ -324,9 +324,9 @@ def build_imagenet(args, model, in_type=""):
         elif args.ideo:
             classnames = get_imagenet_r_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_common_ir_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_common_ir_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
         else:
-            classnames = get_imagenet_r_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_r_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
     elif in_type == "a":
         if args.ds_cipher:
             classnames = get_imagenet_a_cipher()
@@ -335,18 +335,18 @@ def build_imagenet(args, model, in_type=""):
         elif args.ideo:
             classnames = get_imagenet_a_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_common_ia_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_common_ia_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
         else:
-            classnames = get_imagenet_a_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_a_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
     elif in_type == "objectnet":
         if args.ds_cipher:
             classnames = get_obj_cipher()
         elif args.ideo:
             classnames = get_imagenet_obj_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_common_obj_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_common_obj_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
         else:
-            classnames = get_objectnet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_objectnet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
     else:
         if args.ds_cipher:
             classnames = get_imagenet_cipher()
@@ -355,9 +355,9 @@ def build_imagenet(args, model, in_type=""):
         elif args.ideo:
             classnames = get_imagenet_ideo_classnames()
         elif usecaps:
-            classnames = get_imagenet_cap_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_cap_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
         else:
-            classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap)
+            classnames = get_imagenet_classnames(no_overlap=args.no_overlap, short_no_overlap=args.short_no_overlap, no_perm=args.no_perm)
     return classnames_to_classifier(classnames, template, args, model)
 
 def classnames_to_classifier(classnames, template, args, model):

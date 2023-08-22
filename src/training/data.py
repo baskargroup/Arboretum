@@ -1228,12 +1228,13 @@ class FilteredImageFolder:
 
 class ImageFolderDataset(Dataset):
 
-    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption", integer_labels=True, size_controlled=""):
+    def __init__(self, fs_path="path/to/images", transform=None, image_size=(224, 224), caption="Dummy caption", integer_labels=True, size_controlled="", verify=False):
         self.transform = transform
         self.image_size = image_size
         self.caption = caption
         self.integer_labels=integer_labels
         self.size_controlled = size_controlled
+        self.verify = verify
         if self.size_controlled != "":
             logging.info("Setting up size control, this may take a minute ...")
             k, n = self.size_controlled.split(", ")
@@ -1250,6 +1251,10 @@ class ImageFolderDataset(Dataset):
             self.images = ImageFolder(root=fs_path, transform=self.transform)  # loading images using ImageFolder
             self.num_classes = len(self.images.classes)
             logging.info("Loading ImageFolder Dataset. Number of classes: {}".format(self.num_classes))
+        if self.verify:
+            logging.info("Verifying images ...")
+            valid_samples = [s for s in self.images if Image.verify(s[0])]
+            self.images = valid_samples
 
     def __len__(self):
         return len(self.images)
@@ -1286,7 +1291,7 @@ class ImageFolderDataset(Dataset):
 def get_imagefolder_dataset(args, preprocess_fn, is_train, epoch=0, total=None):
     image_size = preprocess_fn.transforms[0].size
     dataset = ImageFolderDataset(
-        fs_path=args.train_data, transform=preprocess_fn, image_size=image_size, integer_labels=args.integer_labels, size_controlled=args.size_controlled)
+        fs_path=args.train_data, transform=preprocess_fn, image_size=image_size, integer_labels=args.integer_labels, size_controlled=args.size_controlled, verify=args.verify)
     num_samples = len(dataset)
     sampler = DistributedSampler(dataset) if args.distributed and is_train else None
     shuffle = is_train and sampler is None
@@ -1336,6 +1341,7 @@ def get_data(args, preprocess_fns, epoch=0):
     args.short_no_overlap = False
     args.def_class = False
     args.first_only = False
+    args.no_perm = False
     if args.ds_cipher:
         args.ds_filter = get_imagenet_cipher()
     elif args.ds_filter != "":
@@ -1344,6 +1350,9 @@ def get_data(args, preprocess_fns, epoch=0):
         elif args.ds_filter == "imagenet_classnames_no_overlap":
             args.no_overlap=True
             args.ds_filter = get_imagenet_classnames(no_overlap=True)
+        elif args.ds_filter == "imagenet_classnames_no_perm":
+            args.no_perm=True
+            args.ds_filter = get_imagenet_classnames(no_perm=True)
         elif args.ds_filter == "imagenet_classnames_short_no_overlap":
             args.short_no_overlap=True
             args.ds_filter = get_imagenet_classnames(short_no_overlap=True)
