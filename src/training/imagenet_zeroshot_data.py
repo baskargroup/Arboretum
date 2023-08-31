@@ -18,11 +18,11 @@ def get_in21k_to_1k():
 import json
 
 try:
-    IN1K_WNID_IDX = Path("./metadata/in1k_wnid_to_idx.json")
+    IN1K_WNID_IDX = Path("./metadata/imagenet1k_wnid_to_index.json")
     with open( IN1K_WNID_IDX, 'r' ) as file:
         in1k_wnid_idx = json.load( file )
 except:
-    IN1K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/in1k_wnid_to_idx.json")
+    IN1K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/imagenet1k_wnid_to_index.json")
     with open( IN1K_WNID_IDX, 'r' ) as file:
         in1k_wnid_idx = json.load( file )
 
@@ -30,11 +30,11 @@ def get_in1k_wnid_to_idx():
     return in1k_wnid_idx
 
 try:
-    IN21K_WNID_IDX = Path("./metadata/in21k_wnid_to_idx.json")
+    IN21K_WNID_IDX = Path("./metadata/imagenet21k_wnid_to_idx.json")
     with open( IN21K_WNID_IDX, 'r' ) as file:
         in21k_wnid_idx = json.load( file )
 except:
-    IN21K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/in21k_wnid_to_idx.json")
+    IN21K_WNID_IDX = Path("/scratch/bf996/vlhub/metadata/imagenet21k_wnid_to_idx.json")
     with open( IN21K_WNID_IDX, 'r' ) as file:
         in21k_wnid_idx = json.load( file )
 

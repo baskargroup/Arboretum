@@ -121,7 +121,7 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                     match_idx = sum(target==i for i in idx).bool().nonzero(as_tuple=True)[0]
                 #shave down target and images size so we skip irrelevant samples
                 target = target[match_idx].to(args.device)
-                images = images[match_idx].to(args.device)                
+                images = images[match_idx].to(args.device)  
                 if images.size(0) == 0:
                     continue
                 if not args.isint:
@@ -376,11 +376,10 @@ def classnames_to_classifier(classnames, template, args, model):
 
 def zero_shot_eval(model, data, epoch, args):
     #logging.debug(data)
-    
     results = {}
     classifier = None
 
-    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data:
+    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data:
         return results
     if args.zeroshot_frequency == 0:
         return results
@@ -491,6 +490,14 @@ def zero_shot_eval(model, data, epoch, args):
         imagenets.append(top1)
         results['imagenet-zeroshot-val-top5'] = top5
         logging.info('Finished zero-shot val. Top1 was {}, top5 was {}'.format(top1, top5))
+    if 'openimages-val' in data:            
+        if classifier is None:
+            classifier = build_imagenet(args, model)
+        top1, top5 = run(model, classifier, data['openimages-val'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None)
+        results['openimages-zeroshot-val-top1'] = top1
+        imagenets.append(top1)
+        results['openimages-zeroshot-val-top5'] = top5
+        logging.info('Finished zero-shot openimages-val. Top1 was {}, top5 was {}'.format(top1, top5))
     if 'imagenet-v2' in data:
         if classifier is None:
             classifier = build_imagenet(args, model)

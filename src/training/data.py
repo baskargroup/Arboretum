@@ -133,6 +133,13 @@ def select_count(data, predicate, count):
             count = count + 1
             yield sample
 
+def token_trunc_func(texts, k):
+    if not k or k == 0 or k >= 75:
+        return texts
+    tc = texts[0].clone().detach()
+    mask = (tc != 49406) & (tc != 0) & (tc != 49407)
+    tcl = [49406] + tc[mask][:k].tolist() + [49407] + [0] * (77 - k - 2)
+
 def token_strip_func(texts):
     ok_tokens = set(ast.literal_eval(open("/scratch/bf996/vlhub/metadata/in1k_ds_oai_tokens.txt", 'r').read()))
     texts = torch.tensor([t if t in ok_tokens else 0 for t in texts.tolist()])
@@ -335,9 +342,8 @@ class CsvDataset(Dataset):
 
     def __getitem__(self, idx):
         try:
-            images = self.transforms(Image.open(str(self.images[idx])))
-            #self.imsize = images.size()
-            # assert(images.size() == (3, 224, 224))
+            im = Image.open(str(self.images[idx]))
+            images = self.transforms(im)
             torch.nan_to_num(images, nan=0.01, posinf=0.99, neginf=0.01)
             texts = str(self.captions[idx])
         except Exception as e:
@@ -370,6 +376,8 @@ class CsvDataset(Dataset):
             texts = token_reduce(texts)
         if self.token_strip:
             texts = token_strip_func(texts)
+        if self.args.token_trunc:
+            texts = token_trunc_func(texts, args.token_trunc)
         if self.token_scrambled:
             random.shuffle(texts)
         logging.debug("CSV: Tokens after: {}".format(texts))
@@ -443,13 +451,15 @@ class DataInfo:
             self.sampler.set_epoch(epoch)
 
 
-def preprocess_txt(text, token_scrambled, token_strip, token_reduce):
+def preprocess_txt(text, token_scrambled, token_strip, token_reduce, token_trunc):
     text = str(text)
     tokentxt = tokenize([text])[0]
     if token_scrambled:
         random.shuffle(tokentxt)
     if token_strip:
         text = token_strip_func(text)
+    if token_trunc:
+        text = token_trunc_func(text, token_trunc)
     if token_reduce:
         text = token_reduce(text)
     return tokentxt
@@ -631,7 +641,7 @@ def get_insecta(args, preprocess_fns):
     return DataInfo(dataloader=dataloader, sampler=None)
 
 def get_imagenet(args, preprocess_fns, split):
-    assert split in ["train", "val", "v2", "r", "a", "s"], "Not a recognized ImageNet split, {}".format(split)
+    assert split in ["train", "val", "v2", "r", "a", "s", 'oi'], "Not a recognized ImageNet split, {}".format(split)
     is_train = (split == "train")
     preprocess_train, preprocess_val = preprocess_fns
 
@@ -642,6 +652,26 @@ def get_imagenet(args, preprocess_fns, split):
         data_path = args.imagenet_train
         preprocess_fn = preprocess_train
         dataset = datasets.ImageFolder(data_path, transform=preprocess_train)
+    elif split == "oi":
+        dataset = CsvDataset(
+            args.openimages_val,
+            preprocess_val,
+            img_key="path",
+            caption_key="idx",
+            csvfilter=args.ds_filter,
+            csvscrambled=args.csv_scrambled,
+            tokenscrambled=args.token_scrambled,
+            token_strip=args.token_strip,
+            csvcleaned=args.csv_cleaned,
+            dscipher=args.ds_cipher,
+            simplecaptions=args.simplecaptions,
+            strict=args.strict,
+            shift=args.shift_cipher,
+            integer_labels=True,
+            multiclass=args.multiclass,
+            metacaptions=args.metacaptions,
+            sep=",",
+            args=args)
     else:
         if split == "val":
             data_path = args.imagenet_val
@@ -1028,7 +1058,7 @@ def get_wds_dataset(args, preprocess_img, is_train, epoch=0, floor=False, total=
         ])
     else:
         pipeline.extend([
-            wds.map_dict(image=preprocess_img, text=lambda x : preprocess_txt(x, args.token_scrambled, args.token_strip, args.token_reduce), handler=log_and_continue),
+            wds.map_dict(image=preprocess_img, text=lambda x : preprocess_txt(x, args.token_scrambled, args.token_strip, args.token_reduce, args.token_trunc), handler=log_and_continue),
         ])
     pipeline.extend([
         wds.to_tuple("image", "text"),
@@ -1289,7 +1319,10 @@ class ImageFolderDataset(Dataset):
     #     return image, self.caption
 
 def get_imagefolder_dataset(args, preprocess_fn, is_train, epoch=0, total=None):
-    image_size = preprocess_fn.transforms[0].size
+    try:
+        image_size = preprocess_fn.transforms[0].size
+    except:
+        image_size = 224
     dataset = ImageFolderDataset(
         fs_path=args.train_data, transform=preprocess_fn, image_size=image_size, integer_labels=args.integer_labels, size_controlled=args.size_controlled, verify=args.verify)
     num_samples = len(dataset)
@@ -1409,6 +1442,9 @@ def get_data(args, preprocess_fns, epoch=0):
     
     if args.imagenet_a is not None:
         data["imagenet-a"] = get_imagenet(args, preprocess_fns, "a")
+
+    if args.openimages_val is not None:
+        data["openimages-val"] = get_imagenet(args, preprocess_fns, "oi")
 
     if args.objectnet is not None:
         data["objectnet"] = get_objectnet(args, preprocess_fns)

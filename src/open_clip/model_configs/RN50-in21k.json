@@ -1,0 +1,14 @@
+{
+    "embed_dim": 21000,
+    "vision_cfg": {
+        "image_size": 224,
+        "layers": [
+            3,
+            4,
+            6,
+            3
+        ],
+        "width": 64,
+        "patch_size": null
+    }
+}

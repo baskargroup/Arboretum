@@ -145,6 +145,12 @@ def parse_args():
         help="Strip tokens not in evaluation dataset during training"
     )
     parser.add_argument(
+        "--token-trunc",
+        type=int,
+        default=None,
+        help="Truncate captions to a maximum number of tokens during training"
+    )
+    parser.add_argument(
         "--token-reduce",
         type=bool,
         default=False,
@@ -197,6 +203,12 @@ def parse_args():
         type=str,
         default=None,
         help="Path to imagenet v2 for conducting zero shot evaluation.",
+    )
+    parser.add_argument(
+        "--openimages-val",
+        type=str,
+        default=None,
+        help="Path to metadata CSV for OpenImages zero shot evaluation.",
     )
     parser.add_argument(
         "--objectnet",

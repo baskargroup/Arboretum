@@ -6,6 +6,9 @@ try:
     from fuzzywuzzy import fuzz
 except:
     print("Fuzzy matching not available")
+import logging
+import random
+
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
@@ -21,6 +24,42 @@ def clean_captions(x):
         .replace(" www ", " ").replace(" com ", " ")\
         .replace(" flickr ", " ").replace(" st ", " street ").replace(" de ", "")\
         .replace("http", " ").replace("href", " ")\
+        .strip()
+        c_list = list(cleaned.split(" "))
+        c_list = [c for c in c_list if (len(c) < 30 and not c.isnumeric())]
+        return " ".join(c_list)
+    except Exception as e:
+        logging.info("Exception in clean captions: ")
+        logging.info(e)
+        return ""
+
+def clean_captions_allow_long_and_numeric(x):
+    char_list = "!@#$%^&*()[];:,./<>?\|`~-=_+"
+    randints = random.sample(range(0, len(char_list)), 10)
+    try:
+        cleaned = str(x).lower().translate({ord(i): char_list[randints[0]] for i in '&<^*>\\|+=[]~`\"@/\'\©#)("'}).translate({ord(i): char_list[randints[1]] for i in ':;-_.,!?\n'})\
+        .replace(" www ", char_list[randints[2]]).replace(" com ", char_list[randints[3]])\
+        .replace(" flickr ", char_list[randints[4]]).replace(" st ", " street ").replace(" de ", char_list[randints[5]])\
+        .replace("http", char_list[randints[6]]).replace("href", char_list[randints[7]])\
+        .strip()
+        #c_list = list(cleaned.split(" "))
+        #c_list = [c for c in c_list if (len(c) < 30 and not c.isnumeric())]
+        # if len(c_list) > 50:
+        #     c_list = c_list[:49]
+        return " ".join(c_list)
+    except Exception as e:
+        logging.info("Exception in clean captions: ")
+        logging.info(e)
+        return ""
+
+def clean_captions_random(x):
+    char_list = "!@#$%^&*()[];:,./<>?\|`~-=_+"
+    randints = random.sample(range(0, len(char_list)), 10)
+    try:
+        cleaned = str(x).lower().translate({ord(i): char_list[randints[0]] for i in '&<^*>\\|+=[]~`\"@/\'\©#)("'}).translate({ord(i): char_list[randints[1]] for i in ':;-_.,!?\n'})\
+        .replace(" www ", char_list[randints[2]]).replace(" com ", char_list[randints[3]])\
+        .replace(" flickr ", char_list[randints[4]]).replace(" st ", " street ").replace(" de ", char_list[randints[5]])\
+        .replace("http", char_list[randints[6]]).replace("href", char_list[randints[7]])\
         .strip()
         c_list = list(cleaned.split(" "))
         c_list = [c for c in c_list if (len(c) < 30 and not c.isnumeric())]

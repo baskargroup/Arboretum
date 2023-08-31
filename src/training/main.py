@@ -74,7 +74,7 @@ def run_main(args = None):
     with open( Path('./debug/config.yaml') , 'w' ) as outfile:
 	    yaml.dump( args , outfile , default_flow_style=False )
 
-    eval_datasets = ['val', 'imagenet-val', 'imagenet-v2', 'inat2021', 'stanfordcars', 'imagenet-s', 'imagenet-r', 'imagenet-a', 'flowers', 'air', 'food', 'objectnet', 'insecta']
+    eval_datasets = ['val', 'imagenet-val', 'imagenet-v2', 'inat2021', 'stanfordcars', 'imagenet-s', 'imagenet-r', 'imagenet-a', 'flowers', 'air', 'food', 'objectnet', 'insecta', 'openimages-val']
     if torch.cuda.is_available():
         # This enables tf32 on Ampere GPUs which is only 8% slower than
         # float16 and almost as accurate as float32
