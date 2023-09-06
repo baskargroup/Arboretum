@@ -112,5 +112,4 @@ def image_transform(
         ToTensor(),
         normalize,
     ])
-    print("transforms: ", transforms)
     return Compose(transforms)

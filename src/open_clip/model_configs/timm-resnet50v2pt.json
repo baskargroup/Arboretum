@@ -1,0 +1,10 @@
+{
+    "embed_dim": 1000,
+    "vision_cfg": {
+        "timm_model_name": "resnetv2_50.a1h_in1k",
+        "timm_model_pretrained": true,
+        "timm_pool": "",
+        "timm_proj": "linear",
+        "image_size": 288
+    }
+}

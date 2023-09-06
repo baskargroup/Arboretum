@@ -136,13 +136,16 @@ def select_count(data, predicate, count):
 def token_trunc_func(texts, k):
     if not k or k == 0 or k >= 75:
         return texts
-    tc = texts[0].clone().detach()
+    tc = texts.clone().detach()
     mask = (tc != 49406) & (tc != 0) & (tc != 49407)
-    tcl = [49406] + tc[mask][:k].tolist() + [49407] + [0] * (77 - k - 2)
+    tc = tc[mask]
+    tcl = [49406] + tc.tolist()[:k] + [49407]
+    tcl = tcl + [0 for i in range(77 - len(tcl))]
+    assert len(tcl) == 77
+    return torch.tensor(tcl)
 
-def token_strip_func(texts):
-    ok_tokens = set(ast.literal_eval(open("/scratch/bf996/vlhub/metadata/in1k_ds_oai_tokens.txt", 'r').read()))
-    texts = torch.tensor([t if t in ok_tokens else 0 for t in texts.tolist()])
+def token_strip_func(texts, targs):
+    texts = torch.tensor([t if t in targs else 0 for t in texts.tolist()])
     return texts
 
 def token_reduce(texts):
@@ -182,16 +185,16 @@ def clean_integer_label(label, singleclass, strict, ds):
             for l in label:
                 intl = int(l)
                 if intl < 0 or intl > len(ds) - 1:
-                    logging.info("Integer label {} out of acceptable range, mapping to 0".format(intl))
+                    logging.debug("Integer label {} out of acceptable range, mapping to 0".format(intl))
                     label_updated.append(0)
                 else:
                     label_updated.append(intl)
             label = label_updated
         except Exception as e:
-            logging.warning("Error converting string to integer list, {}".format(e))
+            logging.debug("Error converting string to integer list, {}".format(e))
             return ""
         if label == []:
-            logging.warning("No integers found in {}. Returning false.".format(label))
+            logging.debug("No integers found in {}. Returning false.".format(label))
             return ""
         if 1 <= len(label) < 25:
             padding = [-1 for i in range(25 - len(label))]
@@ -215,6 +218,8 @@ def clean_integer_label(label, singleclass, strict, ds):
 def cast_to_int(var):
     if not var:
         return -1
+    elif isinstance(var, list):
+        return var
     elif isinstance(var, str):
         try:
             return int(float(var))
@@ -271,15 +276,21 @@ class CsvDataset(Dataset):
         df = df.dropna()
         df = df[df[args['caption_key']].notnull()]
         df = df[df[args['caption_key']] != "nan"]
+        df = df[df[args['caption_key']].apply(lambda x: x != [])]
+        df = df[df[args['caption_key']] != "[]"]
         if args['integer_labels']:
             logging.debug("Before integer transforms, caption key column datatype is {}".format(df[args['caption_key']].dtype))
             logging.debug("caption key column head is {}".format(df[args['caption_key']].head()))
-            df[args['caption_key']] = df[args['caption_key']].apply(cast_to_int)
+            # df[args['caption_key']] = df[args['caption_key']].apply(cast_to_int)
             df = df[df[args['caption_key']] != -1]
             df = df[df[args['caption_key']] != "-1"]
             logging.debug("After integer transforms, caption key column datatype is {}".format(df[args['caption_key']].dtype))
             logging.debug("caption key column head is {}".format(df[args['caption_key']].head()))
-            self.label_set = [i for i in range(df[args['caption_key']].max() + 1)]
+            try:
+                self.label_set = [i for i in range(df[args['caption_key']].max() + 1)]
+            except Exception as e:
+                logging.warning("Exception in label set generation: {}".format(e))
+                self.label_set = [i for i in range(1000)]
         logging.info("Size of dataframe after NaN-removal is {}".format(len(df)))
         logging.debug("Columns of dataframe: {}".format(df.columns))
         self.df = df
@@ -334,7 +345,7 @@ class CsvDataset(Dataset):
         self.strict = strict
         self.token_strip = token_strip
         self.args = args
-        self.imsize = 224
+        self.imsize = args.image_size
         logging.debug('Done loading data')
 
     def __len__(self):
@@ -366,6 +377,7 @@ class CsvDataset(Dataset):
                 #assert(False, "Integer labels cannot be computed on the fly for a CSV dataset")
                 #texts = [synset_ds(clean_captions(str(texts)), 3, self.csvfilter, False, False, self.strict, False, True, None) for t in texts]
             texts = clean_integer_label(self.captions[idx], not self.multiclass, self.strict, self.label_set)
+            logging.debug("CSV: Text after: {}".format(texts))
             return images, texts
         if self.scrambled:
             texts = scramble_txt(texts)
@@ -375,9 +387,9 @@ class CsvDataset(Dataset):
         if self.args.token_reduce:
             texts = token_reduce(texts)
         if self.token_strip:
-            texts = token_strip_func(texts)
+            texts = token_strip_func(texts, self.args.token_strip_targets)
         if self.args.token_trunc:
-            texts = token_trunc_func(texts, args.token_trunc)
+            texts = token_trunc_func(texts, self.args.token_trunc)
         if self.token_scrambled:
             random.shuffle(texts)
         logging.debug("CSV: Tokens after: {}".format(texts))
@@ -451,13 +463,13 @@ class DataInfo:
             self.sampler.set_epoch(epoch)
 
 
-def preprocess_txt(text, token_scrambled, token_strip, token_reduce, token_trunc):
+def preprocess_txt(text, token_scrambled, token_strip, token_reduce, token_trunc, token_strip_targets):
     text = str(text)
     tokentxt = tokenize([text])[0]
     if token_scrambled:
         random.shuffle(tokentxt)
     if token_strip:
-        text = token_strip_func(text)
+        text = token_strip_func(text, token_strip_targets)
     if token_trunc:
         text = token_trunc_func(text, token_trunc)
     if token_reduce:
@@ -641,7 +653,7 @@ def get_insecta(args, preprocess_fns):
     return DataInfo(dataloader=dataloader, sampler=None)
 
 def get_imagenet(args, preprocess_fns, split):
-    assert split in ["train", "val", "v2", "r", "a", "s", 'oi'], "Not a recognized ImageNet split, {}".format(split)
+    assert split in ["train", "val", "v2", "r", "a", "s", 'oi', 'real'], "Not a recognized ImageNet split, {}".format(split)
     is_train = (split == "train")
     preprocess_train, preprocess_val = preprocess_fns
 
@@ -658,6 +670,26 @@ def get_imagenet(args, preprocess_fns, split):
             preprocess_val,
             img_key="path",
             caption_key="idx",
+            csvfilter=args.ds_filter,
+            csvscrambled=args.csv_scrambled,
+            tokenscrambled=args.token_scrambled,
+            token_strip=args.token_strip,
+            csvcleaned=args.csv_cleaned,
+            dscipher=args.ds_cipher,
+            simplecaptions=args.simplecaptions,
+            strict=args.strict,
+            shift=args.shift_cipher,
+            integer_labels=True,
+            multiclass=args.multiclass,
+            metacaptions=args.metacaptions,
+            sep=",",
+            args=args)
+    elif split == "real":
+        dataset = CsvDataset(
+            args.imagenet_real,
+            preprocess_val,
+            img_key="path",
+            caption_key="idx_real",
             csvfilter=args.ds_filter,
             csvscrambled=args.csv_scrambled,
             tokenscrambled=args.token_scrambled,
@@ -1058,7 +1090,7 @@ def get_wds_dataset(args, preprocess_img, is_train, epoch=0, floor=False, total=
         ])
     else:
         pipeline.extend([
-            wds.map_dict(image=preprocess_img, text=lambda x : preprocess_txt(x, args.token_scrambled, args.token_strip, args.token_reduce, args.token_trunc), handler=log_and_continue),
+            wds.map_dict(image=preprocess_img, text=lambda x : preprocess_txt(x, args.token_scrambled, args.token_strip, args.token_reduce, args.token_trunc, args.token_strip_targets), handler=log_and_continue),
         ])
     pipeline.extend([
         wds.to_tuple("image", "text"),
@@ -1415,6 +1447,11 @@ def get_data(args, preprocess_fns, epoch=0):
             args.metacaptions.fillna('', inplace=True)
         else:
             args.metacaptions = pd.DataFrame()
+    try:
+        with open("/scratch/bf996/vlhub/metadata/openai_gtcap_toks.json", 'w') as f:
+            args.token_strip_targets = json.load(f)
+    except:
+        args.token_strip_targets = []
     if args.train_data or args.dataset_type == "synthetic":
         data["train"] = get_dataset_fn(args.train_data, args.dataset_type)(
             args, preprocess_train, is_train=True, epoch=epoch, total=total)
@@ -1445,6 +1482,9 @@ def get_data(args, preprocess_fns, epoch=0):
 
     if args.openimages_val is not None:
         data["openimages-val"] = get_imagenet(args, preprocess_fns, "oi")
+
+    if args.imagenet_real is not None:
+        data["imagenet-real"] = get_imagenet(args, preprocess_fns, "real")
 
     if args.objectnet is not None:
         data["objectnet"] = get_objectnet(args, preprocess_fns)

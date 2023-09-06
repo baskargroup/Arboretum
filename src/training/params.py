@@ -211,6 +211,12 @@ def parse_args():
         help="Path to metadata CSV for OpenImages zero shot evaluation.",
     )
     parser.add_argument(
+        "--imagenet-real",
+        type=str,
+        default=None,
+        help="Path to metadata CSV for Imagenet-real zero shot evaluation.",
+    )
+    parser.add_argument(
         "--objectnet",
         type=str,
         default=None,

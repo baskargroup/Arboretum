@@ -84,8 +84,37 @@ def zero_shot_classifier(model, classnames, templates, args):
         zeroshot_weights = torch.stack(zeroshot_weights, dim=1).to(args.device)
     return zeroshot_weights
 
+def multi_accuracy(output, target, topk=(1,)):
+    """Computes the accuracy over the k top predictions for the specified values of k"""
+    pred = output.topk(max(topk), 1, True, True)[1]  # shape [batch_size, max(topk)]
+    
+    # Handle case when target has one dimension and expand it
+    if len(target.shape) == 1:
+        target = target.view(-1, 1)
+    
+    # Shape: [batch_size, 1, k] if target is [batch_size, k]
+    target = target.unsqueeze(1).expand(-1, pred.shape[1], -1)
+    
+    # Shape: [batch_size, max(topk), k] if target is [batch_size, k]
+    pred = pred.unsqueeze(-1).expand(-1, -1, target.shape[-1])
+
+    # Check if preds are in targets. Shape: [batch_size, max(topk), k]
+    correct = pred.eq(target)
+    
+    # Sum over the last dimension to get [batch_size, max(topk)]
+    correct = correct.sum(dim=-1)
+    
+    # Check how many predictions are correct for top 1, top 2, ..., top k
+    res = []
+    for k in topk:
+        correct_k = correct[:, :k].max(1).values  # Take max along dim 1 to see if there's at least one correct prediction
+        correct_k = correct_k.float().sum(0, keepdim=True)
+        res.append(float(correct_k.cpu().numpy()))
+    return res
 
 def accuracy(output, target, topk=(1,)):
+    #logging.info("output size: {}".format(output.size()))
+    #logging.info("target size: {}".format(target.size()))
     pred = output.topk(max(topk), 1, True, True)[1].t()
     correct = pred.eq(target.view(1, -1).expand_as(pred))
     return [float(correct[:k].reshape(-1).float().sum(0, keepdim=True).cpu().numpy()) for k in topk]
@@ -93,7 +122,12 @@ def accuracy(output, target, topk=(1,)):
 def run(model, classifier, dataloader, args, idx=None, split=None):
     autocast = get_autocast(args.precision)
     with torch.no_grad():
-        top1, top5, n = 0., 0., 0.
+        if split == 'oi' or split == 'real':
+            if not idx:
+                idx = [i for i in range(len(args.classnames))]
+            top1, top5, n = np.array([0. for _ in idx]), np.array([0. for _ in idx]), np.array([0. for _ in idx])
+        else:
+            top1, top5, n = 0., 0., 0.
         args.isint = any([args.integer_labels, args.linear_probe])
         if args.extended_metrics:
             args.y_pred = []
@@ -106,7 +140,35 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 target = target[0]
             else:
                 target = target[0]
-            if args.caption_subset != "":
+            if split == 'real':
+                #logging.info("target size b4: {}".format(len(target)))
+                #logging.info("images size b4: {}".format(len(images)))
+                index_mask = []
+                target_list = []
+                for idr, t in enumerate(target):
+                    #logging.info("target idr: {}".format(target[idr]))
+                    #logging.info("idx: {}".format(idx))
+                    if t == '':
+                        index_mask.append(0)
+                    for tgt in target[idr]:
+                        tgt = tgt.item()
+                        if tgt == -1:
+                            index_mask.append(0)
+                            break
+                        if tgt in idx:
+                            index_mask.append(1)
+                            target_list.append(t)
+                            break
+                    else:
+                        index_mask.append(0)
+                mask = torch.tensor(index_mask, dtype=torch.bool)
+                images = images[mask].to(args.device)
+                target = torch.stack(target_list).to(args.device)
+                logging.debug("imagenet real: target size after: {}".format(target.size()))
+                logging.debug("images size after: {}".format(images.size()))
+                if images.size(0) == 0:
+                    continue
+            elif args.caption_subset != "":
                 if args.isint and split == "r":
                     ir_idx = get_ir_idx().tolist()
                     match_idx = sum(target==ir_idx.index(i) for i in idx).bool().nonzero(as_tuple=True)[0]
@@ -143,8 +205,9 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                     target = target.tolist()
                     target = torch.tensor(idx[target])
                 except Exception as e:
-                    pass
-                target = target.to(args.device)
+                    if isinstance(target, list):
+                        target = torch.tensor(target)
+                    target = target.to(args.device)
             #FIXME: handle larger batch sizes gracefully with gradient caching
             if args.gc:
                 images = images[:min(args.gpumaxbatch, len(images)-1)]
@@ -243,37 +306,55 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                     not_obj_idx = [i for i in range(args.prob_size) if i not in obj_idx]
                     logits[:, not_obj_idx] = float("-inf")
                     #TODO: for all multiclass classes, first class gets argmax of all multiclass options
-
+            if args.extended_metrics:
+                args.logits.append(logits.cpu().detach().numpy())
+                log_confusion_matrix(args, logits, target)
             if split == "objectnet" and not args.isint:
-                # if args.integer_labels:
-                #     acc1, acc5 = objectnet_integer_accuracy(logits, target, args.img_paths, True, args.caption_subset)
                 acc1 = objectnet_accuracy(logits, target, args.img_paths, True, args.caption_subset)
-                    # acc_dict = accuracy_topk_subselected_and_collapsed(logits, target)
                 if acc1 is None:
                     continue
                 n += acc1[1]
                 top1 += acc1[0]
-                #print("top1", top1, "n", n)
                 top5 += 0
-                # print(acc_dict)
-                # acc1 += acc_dict[0]["top1"]
-                # acc5 += acc_dict[0]["top5"]
-                # n += acc_dict[1]
-
-                # acc5 = float(0.0) #TODO: implement
-        
+            elif split == 'real':
+                acc1, acc5 = multi_accuracy(logits, target, topk=(1, min(5, len(args.classnames))))
+                n += images.size(0)
+                top1 += acc1
+                top5 += acc5
+            elif split == 'oi':
+                sizes = []
+                for i in idx:
+                    m = (target == i)
+                    sizes.append(target[m].size(0))
+                #logging.info(images[args.idx_masks[0]].squeeze(0).size())
+                #logging.info(images[args.idx_masks[1]].squeeze(0).size())
+                # logging.info("sizes: {}".format(sizes))
+                n += np.array(sizes)
+                acc1_l = []
+                acc5_l = []
+                for size_inst, i in zip(sizes, idx):
+                    if size_inst == 0:
+                        acc1_l.append(0)
+                        acc5_l.append(0)
+                        continue
+                    m = (target == i)
+                    acc1, acc5 = accuracy(logits[m], target[m], topk=(1, min(5, len(args.classnames))))
+                    acc1_l.append(acc1)
+                    acc5_l.append(acc5)
+                top1 += np.array(acc1_l)
+                top5 += np.array(acc5_l)
             else:
-                if args.extended_metrics:
-                    args.logits.append(logits.cpu().detach().numpy())
-                    log_confusion_matrix(args, logits, target)
                 acc1, acc5 = accuracy(logits, target, topk=(1, min(5, len(args.classnames))))
                 n += images.size(0)
                 top1 += acc1
                 top5 += acc5
-                #print("top1", top1, "n", n)
-
-    top1 = (top1 / n)
-    top5 = (top5 / n)
+    if split == 'oi':
+        mask = n > 1
+        top1 = np.mean(top1[mask] / n[mask])
+        top5 = np.mean(top5[mask] / n[mask])
+    else:
+        top1 = (top1 / n)
+        top5 = (top5 / n)
     #TODO: debug integer labels for extended metrics
     if args.extended_metrics:
         write_confusion_matrix(args, logits, target, args.classnames)
@@ -379,7 +460,7 @@ def zero_shot_eval(model, data, epoch, args):
     results = {}
     classifier = None
 
-    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data:
+    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data and 'imagenet-real' not in data:
         return results
     if args.zeroshot_frequency == 0:
         return results
@@ -493,11 +574,19 @@ def zero_shot_eval(model, data, epoch, args):
     if 'openimages-val' in data:            
         if classifier is None:
             classifier = build_imagenet(args, model)
-        top1, top5 = run(model, classifier, data['openimages-val'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None)
+        top1, top5 = run(model, classifier, data['openimages-val'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None, 'oi')
         results['openimages-zeroshot-val-top1'] = top1
         imagenets.append(top1)
         results['openimages-zeroshot-val-top5'] = top5
-        logging.info('Finished zero-shot openimages-val. Top1 was {}, top5 was {}'.format(top1, top5))
+        logging.info('Finished zero-shot openimages-val. Class-balanced top1 was {}, top5 was {}'.format(top1, top5))
+    if 'imagenet-real' in data:            
+        if classifier is None:
+            classifier = build_imagenet(args, model)
+        top1, top5 = run(model, classifier, data['imagenet-real'].dataloader, args, get_icap_idx(args.caption_subset) if args.caption_subset != "" else None, 'real')
+        results['imagenet-real-top1'] = top1
+        imagenets.append(top1)
+        results['imagenet-real-top5'] = top5
+        logging.info('Finished zero-shot imagenet-real. Top1 was {}, top5 was {}'.format(top1, top5))
     if 'imagenet-v2' in data:
         if classifier is None:
             classifier = build_imagenet(args, model)
