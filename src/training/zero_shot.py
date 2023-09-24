@@ -21,7 +21,12 @@ try:
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
     from .insecta_zeroshot_data import get_insecta_classnames
+    
+except Exception as e:
+    print(e)
 
+try:
+    from keras_cv_attention_models import imagenet
 except Exception as e:
     print(e)
 
@@ -207,7 +212,7 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 except Exception as e:
                     if isinstance(target, list):
                         target = torch.tensor(target)
-                    target = target.to(args.device)
+                target = target.to(args.device)
             #FIXME: handle larger batch sizes gracefully with gradient caching
             if args.gc:
                 images = images[:min(args.gpumaxbatch, len(images)-1)]
@@ -262,7 +267,10 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         logits = 100. * image_features @ classifier
             
             # remap imagenet21k pretrained model indices
-            if args.isint and args.model.endswith("_in21k"):
+            if args.isint and \
+            not "miil" in args.model and \
+            any([args.model.endswith("_in21k"), args.model.endswith("_in22k"), args.model.endswith("_in12k")]):
+                # logging.info("Using ImageNet-21k remapping")
                 args.in1k_wnid = get_in1k_wnid_to_idx()
                 args.in1k_wnid_rev = {v: k for k, v in args.in1k_wnid.items()}
                 decoded_preds = imagenet.decode_predictions_imagenet21k(logits.cpu().detach().numpy(), top=21800)
@@ -278,10 +286,22 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 top1 += acc1
                 top5 += acc5
                 continue
-
             # measure accuracy with adjustments
             elif args.isint:
-                args.prob_size = len(logits[0])
+                if not "miil" in args.model and \
+                any([args.model == "RN50-in2k", args.model == "RN50-in5k", args.model.endswith("22k"), args.model.endswith("12k"), args.model.endswith("21k")]):
+                    wnid_to_idx = get_in21k_wnid_to_idx()
+                    args.prob_size = len(wnid_to_idx)
+                    mapping = get_in21k_to_1k()
+                    in21k_valid_keys = mapping.keys()
+                    not_in21k_idx = [i for i in range(args.prob_size) if i not in in21k_valid_keys]
+                    logits[:, not_in21k_idx] = float("-inf")
+                    for key in in21k_valid_keys:
+                        logits[:, mapping[key]] = logits[:, key]
+                        logits[:, key] = float("-inf")
+                else:
+                    args.prob_size = len(logits[0])
+
                 #zero out logits which are not being evaluated (in VL this is handled by changing the size of the classification problem)
                 if args.caption_subset != "":
                     if args.caption_subset == "insects":
@@ -309,6 +329,8 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
             if args.extended_metrics:
                 args.logits.append(logits.cpu().detach().numpy())
                 log_confusion_matrix(args, logits, target)
+            logits = logits.to(args.device)
+            target = target.to(args.device)
             if split == "objectnet" and not args.isint:
                 acc1 = objectnet_accuracy(logits, target, args.img_paths, True, args.caption_subset)
                 if acc1 is None:
@@ -326,9 +348,6 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 for i in idx:
                     m = (target == i)
                     sizes.append(target[m].size(0))
-                #logging.info(images[args.idx_masks[0]].squeeze(0).size())
-                #logging.info(images[args.idx_masks[1]].squeeze(0).size())
-                # logging.info("sizes: {}".format(sizes))
                 n += np.array(sizes)
                 acc1_l = []
                 acc5_l = []
