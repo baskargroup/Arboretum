@@ -147,3 +147,20 @@ VL Hub supports many modifications to captions, both during inference and during
 "--simplecaptions" changes caption text to 'An image of CLASSNAME, CLASSNAME'
 
 --shift-cipher=3 applies a 3-step shift-cipher to the caption space.
+
+# Citations
+
+If you find this work useful, please consider citing our paper --
+
+```
+@article{
+feuer2023distributionally,
+title={Distributionally Robust Classification on a Data Budget},
+author={Benjamin Feuer and Ameya Joshi and Minh Pham and Chinmay Hegde},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2023},
+url={https://openreview.net/forum?id=D5Z2E8CNsD},
+note={}
+}
+```
