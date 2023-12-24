@@ -1,5 +1,5 @@
 from .constants import OPENAI_DATASET_MEAN, OPENAI_DATASET_STD
-from .factory import list_models, create_model, create_model_and_transforms, add_model_config
+from .factory import list_models, create_model, create_model_and_transforms, add_model_config, get_tokenizer
 from .loss import *
 from .model import CLIP, CLIPTextCfg, CLIPVisionCfg, convert_weights_to_fp16, trace_model, SIMCLR
 from .openai import load_openai_model, list_openai_models

@@ -82,6 +82,8 @@ def log_confusion_matrix(args, output, labels):
 def write_confusion_matrix(args, output, labels, classes):
     #confusion matrix
     cf_matrix = confusion_matrix(args.y_true, args.y_pred)
+    true_labels = np.unique(args.y_true).tolist()
+    frequency_pred = [round(args.y_pred.count(i) / len(args.y_pred), 3) for i in true_labels]
     if len(cf_matrix) != len(classes):
         classes = np.array(classes)
         classes = classes[np.unique(args.y_pred + args.y_true).tolist()].tolist()
@@ -96,8 +98,24 @@ def write_confusion_matrix(args, output, labels, classes):
     logging.info('Writing confusion matrix')
     df_cm.to_csv(os.path.join(args.conf_path, "confusion_matrix_{}.csv".format(res)), index=False)
     per_class_acc = pd.Series(np.diag(df_cm), index=[df_cm.index, df_cm.columns])
-    per_class_acc = pd.DataFrame(per_class_acc).transpose()
-    per_class_acc.columns = [''.join(col[1:]) for idx, col in enumerate(per_class_acc.columns.values)]
+    per_class_acc = pd.DataFrame(per_class_acc)
+    per_class_acc = per_class_acc.reset_index()
+    per_class_acc.columns = ['True Class', 'Predicted Class', 'Accuracy']
+    FN = []
+    FP = []
+    for idx, l in enumerate(true_labels):
+        FN.append(sum(cf_matrix[idx,:]) - cf_matrix[idx,idx])
+        FP.append(sum(cf_matrix[:,idx]) - cf_matrix[idx,idx])
+    per_class_acc['TP'] = np.diag(cf_matrix)
+    per_class_acc['FN'] = FN
+    per_class_acc['FP'] = FP
+    per_class_acc['Precision'] = round(per_class_acc['TP'] / (per_class_acc['TP'] + per_class_acc['FP']), 3)
+    per_class_acc['Recall'] = round(per_class_acc['TP'] / (per_class_acc['TP'] + per_class_acc['FN']), 3)
+    per_class_acc['Frequency'] = frequency_pred
+    per_class_acc['Balanced Accuracy'] = round((per_class_acc['Precision'] + per_class_acc['Recall']) / 2, 3)
+    per_class_acc = per_class_acc.drop(['TP', 'FN', 'FP', 'Predicted Class'], axis=1)
+    # per_class_acc = per_class_acc.transpose()
+    # per_class_acc.columns = [''.join(col[1:]) for idx, col in enumerate(per_class_acc.columns.values)]
     per_class_acc.to_csv(os.path.join(args.conf_path, "per_class_acc_{}.csv".format(res)), index=False)
     font_size = round(1 * 100//len(classes), 2)
     if font_size < 0.1:

@@ -17,10 +17,12 @@ try:
 except ImportError:
     wandb = None
 
-try:
-    import torch.utils.tensorboard as tensorboard
-except ImportError:
-    tensorboard = None
+# try:
+#     import torch.utils.tensorboard as tensorboard
+# except ImportError:
+#     tensorboard = None
+
+tensorboard = None
 
 try:
     import horovod.torch as hvd
@@ -46,6 +48,7 @@ from training.params import parse_args
 from training.scheduler import cosine_lr
 from training.train import train_one_epoch, evaluate, unwrap_model
 from training.lsuv import LSUV_
+from evals.datacomp_eval import datacomp_eval
 from gsam import CosineScheduler, GSAM
 
 def dict_representer(dumper, data):
@@ -127,6 +130,7 @@ def run_main(args = None):
     # fully initialize distributed device environment
     device = init_distributed_device(args)
     args.wandb = 'wandb' in args.report_to or 'all' in args.report_to
+    logging.info(f"Tensorboard is currently disabled for compatibility reasons.")
     args.tensorboard = 'tensorboard' in args.report_to or 'all' in args.report_to
     if is_master(args):
         args.tensorboard_path = os.path.join(args.logs, args.name, "tensorboard") if args.tensorboard else ''
@@ -160,6 +164,10 @@ def run_main(args = None):
         logging.info(f'Running with a single process. Device {args.device}.')
         args.gather_with_grad = False
         args.local_loss = False
+
+    if args.dc_eval:
+        datacomp_eval(args)
+        exit(0)
 
     assert not (args.pretrained and args.pretrained_head), "Cannot pass both pretrained and pretrained-head arguments"
     random_seed(args.seed, 0)
@@ -286,7 +294,11 @@ def run_main(args = None):
     if args.resume is not None:
         if os.path.isfile(args.resume):
             checkpoint = torch.load(args.resume, map_location=device)
-            sd = checkpoint["state_dict"]
+            try:
+                sd = checkpoint["state_dict"]
+            except KeyError:
+                #torchvision labeling
+                sd = checkpoint["model"]
             if args.add_trunk:
                 keys = list(sd.keys())
                 keys_mod = list()
@@ -324,7 +336,8 @@ def run_main(args = None):
 
     # initialize datasets
     data = get_data(args, (preprocess_train, preprocess_val), epoch=start_epoch)
-    assert len(data), 'At least one train or eval dataset must be specified.'
+    if not args.dc_eval:
+        assert len(data), 'At least one train or eval dataset must be specified.'
 
     #LSUV weight initialization
     if args.resume is None and 'train' in data and args.lsuv:
@@ -426,7 +439,6 @@ def run_main(args = None):
 
         if any(v in data for v in eval_datasets):
             evaluate(model, data, completed_epoch, args, writer)
-
         # Saving checkpoints.
         if args.save_logs:
             checkpoint_dict = {

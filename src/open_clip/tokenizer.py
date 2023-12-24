@@ -5,13 +5,17 @@ Copied from https://github.com/openai/CLIP. Originally MIT License, Copyright (c
 import gzip
 import html
 import os
-from functools import lru_cache
-from typing import Union, List
+import random
+import string
+from functools import lru_cache, partial
+from typing import Callable, Optional, List, Union
 
 import ftfy
+import numpy as np
 import regex as re
 import torch
 
+DEFAULT_CONTEXT_LENGTH = 77  # default context length for OpenAI CLIP
 
 @lru_cache()
 def default_bpe():
@@ -65,8 +69,64 @@ def whitespace_clean(text):
     return text
 
 
+def _clean_canonicalize(x):
+    # basic, remove whitespace, remove punctuation, lower case
+    return canonicalize_text(basic_clean(x))
+
+
+def _clean_lower(x):
+    # basic, remove whitespace, lower case
+    return whitespace_clean(basic_clean(x)).lower()
+
+
+def _clean_whitespace(x):
+    # basic, remove whitespace
+    return whitespace_clean(basic_clean(x))
+
+
+def get_clean_fn(type: str):
+    if type == 'canonicalize':
+        return _clean_canonicalize
+    elif type == 'lower':
+        return _clean_lower
+    elif type == 'whitespace':
+        return _clean_whitespace
+    else:
+        assert False, f"Invalid clean function ({type})."
+
+
+def canonicalize_text(text, *, keep_punctuation_exact_string=None):
+    """Returns canonicalized `text` (lowercase and punctuation removed).
+
+    From: https://github.com/google-research/big_vision/blob/53f18caf27a9419231bbf08d3388b07671616d3d/big_vision/evaluators/proj/image_text/prompt_engineering.py#L94
+
+    Args:
+      text: string to be canonicalized.
+      keep_punctuation_exact_string: If provided, then this exact string kept.
+        For example providing '{}' will keep any occurrences of '{}' (but will
+        still remove '{' and '}' that appear separately).
+    """
+    text = text.replace("_", " ")
+    if keep_punctuation_exact_string:
+        text = keep_punctuation_exact_string.join(
+            part.translate(str.maketrans("", "", string.punctuation))
+            for part in text.split(keep_punctuation_exact_string))
+    else:
+        text = text.translate(str.maketrans("", "", string.punctuation))
+    text = text.lower()
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
 class SimpleTokenizer(object):
-    def __init__(self, bpe_path: str = default_bpe(), special_tokens=None):
+    def __init__(
+            self,
+            bpe_path: str = default_bpe(),
+            additional_special_tokens: Optional[List[str]] = None,
+            context_length: Optional[int] = DEFAULT_CONTEXT_LENGTH,
+            clean: str = 'lower',
+            reduction_mask: str = ''
+    ):
         self.byte_encoder = bytes_to_unicode()
         self.byte_decoder = {v: k for k, v in self.byte_encoder.items()}
         merges = gzip.open(bpe_path).read().decode("utf-8").split('\n')
@@ -76,20 +136,26 @@ class SimpleTokenizer(object):
         vocab = vocab + [v+'</w>' for v in vocab]
         for merge in merges:
             vocab.append(''.join(merge))
-        if not special_tokens:
-            special_tokens = ['<start_of_text>', '<end_of_text>']
-        else:
-            special_tokens = ['<start_of_text>', '<end_of_text>'] + special_tokens
+        special_tokens = ['<start_of_text>', '<end_of_text>']
+        if additional_special_tokens:
+            special_tokens += additional_special_tokens
         vocab.extend(special_tokens)
         self.encoder = dict(zip(vocab, range(len(vocab))))
         self.decoder = {v: k for k, v in self.encoder.items()}
         self.bpe_ranks = dict(zip(merges, range(len(merges))))
         self.cache = {t:t for t in special_tokens}
         special = "|".join(special_tokens)
-        self.pat = re.compile(special + r"""|'s|'t|'re|'ve|'m|'ll|'d|[\p{L}]+|[\p{N}]|[^\s\p{L}\p{N}]+""", re.IGNORECASE)
-
+        self.pat = re.compile(
+            special + r"""|'s|'t|'re|'ve|'m|'ll|'d|[\p{L}]+|[\p{N}]|[^\s\p{L}\p{N}]+""",
+            re.IGNORECASE,
+        )
         self.vocab_size = len(self.encoder)
         self.all_special_ids = [self.encoder[t] for t in special_tokens]
+        self.sot_token_id = self.all_special_ids[0]
+        self.eot_token_id = self.all_special_ids[1]
+        self.context_length = context_length
+        self.clean_fn = get_clean_fn(clean)
+        self.reduction_fn = get_reduction_mask_fn(reduction_mask) if reduction_mask else None
 
     def bpe(self, token):
         if token in self.cache:
@@ -134,7 +200,7 @@ class SimpleTokenizer(object):
 
     def encode(self, text):
         bpe_tokens = []
-        text = whitespace_clean(basic_clean(text)).lower()
+        text = self.clean_fn(text)
         for token in re.findall(self.pat, text):
             token = ''.join(self.byte_encoder[b] for b in token.encode('utf-8'))
             bpe_tokens.extend(self.encoder[bpe_token] for bpe_token in self.bpe(token).split(' '))
@@ -144,6 +210,47 @@ class SimpleTokenizer(object):
         text = ''.join([self.decoder[token] for token in tokens])
         text = bytearray([self.byte_decoder[c] for c in text]).decode('utf-8', errors="replace").replace('</w>', ' ')
         return text
+
+    def __call__(self, texts: Union[str, List[str]], context_length: Optional[int] = None) -> torch.LongTensor:
+        """ Returns the tokenized representation of given input string(s)
+
+        Parameters
+        ----------
+        texts : Union[str, List[str]]
+            An input string or a list of input strings to tokenize
+        context_length : int
+            The context length to use; all CLIP models use 77 as the context length
+
+        Returns
+        -------
+        A two-dimensional tensor containing the resulting tokens, shape = [number of input strings, context_length]
+        """
+        if isinstance(texts, str):
+            texts = [texts]
+
+        context_length = context_length or self.context_length
+        assert context_length, 'Please set a valid context length'
+
+        if self.reduction_fn is not None:
+            # use reduction strategy for tokenize if set, otherwise default to truncation below
+            return self.reduction_fn(
+                texts,
+                context_length=context_length,
+                sot_token_id=self.sot_token_id,
+                eot_token_id=self.eot_token_id,
+                encode_fn=self.encode,
+            )
+
+        all_tokens = [[self.sot_token_id] + self.encode(text) + [self.eot_token_id] for text in texts]
+        result = torch.zeros(len(all_tokens), context_length, dtype=torch.long)
+
+        for i, tokens in enumerate(all_tokens):
+            if len(tokens) > context_length:
+                tokens = tokens[:context_length]  # Truncate
+                tokens[-1] = self.eot_token_id
+            result[i, :len(tokens)] = torch.tensor(tokens)
+
+        return result
 
 
 _tokenizer = SimpleTokenizer()

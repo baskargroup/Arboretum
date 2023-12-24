@@ -697,6 +697,12 @@ def parse_args():
     parser.add_argument(
         "--norm_gradient_clip", type=float, default=None, help="Gradient clip."
     )
+    parser.add_argument(
+        "--dc_eval", action="store_true", default=False, help="Run DC eval."
+    )
+    parser.add_argument(
+        "--dc_eval_data_dir", type=str, default=None, help="Data directory for DC eval."
+    )
     args = parser.parse_args()
 
     # If some params are not passed, we use the default values based on model name.

@@ -16,6 +16,7 @@ from .model import CLIP, VisionModel, convert_weights_to_fp16, resize_pos_embed,
 from .openai import load_openai_model
 from .pretrained import get_pretrained_cfg, download_pretrained
 from .transform import image_transform
+from .tokenizer import DEFAULT_CONTEXT_LENGTH, SimpleTokenizer
 
 try:
     from coca_pytorch.coca_pytorch import CoCa
@@ -37,8 +38,10 @@ except ImportError as e:
     print(e)
     logging.debug("timm is not installed")
 
+HF_HUB_PREFIX = 'hf-hub:'
 _MODEL_CONFIG_PATHS = [Path(__file__).parent / f"model_configs/"]
 _MODEL_CONFIGS = {}  # directory (model_name: config) of model architecture configs
+
 
 class View(nn.Module):
     def __init__(self, shape):
@@ -117,6 +120,55 @@ def build_mlp(in_dim, mlp_dim, out_dim):
         ("relu2", nn.ReLU(inplace=True)),
         ("layer3", nn.Linear(mlp_dim, out_dim)),
     ]))
+
+def get_model_config(model_name):
+    if model_name in _MODEL_CONFIGS:
+        return deepcopy(_MODEL_CONFIGS[model_name])
+    else:
+        return None
+
+def get_tokenizer(
+        model_name: str = '',
+        context_length: Optional[int] = None,
+        **kwargs,
+):
+    if model_name.startswith(HF_HUB_PREFIX):
+        model_name = model_name[len(HF_HUB_PREFIX):]
+        try:
+            config = _get_hf_config(model_name)['model_cfg']
+        except Exception:
+            tokenizer = HFTokenizer(
+                model_name,
+                context_length=context_length or DEFAULT_CONTEXT_LENGTH,
+                **kwargs,
+            )
+            return tokenizer
+    else:
+        config = get_model_config(model_name)
+        assert config is not None, f"No valid model config found for {model_name}."
+
+    text_config = config.get('text_cfg', {})
+    if 'tokenizer_kwargs' in text_config:
+        tokenizer_kwargs = dict(text_config['tokenizer_kwargs'], **kwargs)
+    else:
+        tokenizer_kwargs = kwargs
+
+    if context_length is None:
+        context_length = text_config.get('context_length', DEFAULT_CONTEXT_LENGTH)
+
+    if 'hf_tokenizer_name' in text_config:
+        tokenizer = HFTokenizer(
+            text_config['hf_tokenizer_name'],
+            context_length=context_length,
+            **tokenizer_kwargs,
+        )
+    else:
+        tokenizer = SimpleTokenizer(
+            context_length=context_length,
+            **tokenizer_kwargs,
+        )
+
+    return tokenizer
 
 def create_model(
         model_name: str,
