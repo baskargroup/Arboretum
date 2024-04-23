@@ -18,6 +18,23 @@ If you're planning to use one of the alternate architectures for training, we re
 
 In this readme, we focus on features that are new in our implementation.
 
+### First Run
+
+After cloning the VLHub repository and installing the requirements, run the following commands -- these commands must be run every time before executing a VLHub command.
+
+```bash
+cd vlhub
+export PYTHONPATH="$PYTHONPATH:$PWD/src";
+```
+
+### Sample Command
+
+Here is an example of an evaluation command in VLHub:
+
+```bash
+python src/training/main.py --batch-size=32 --workers=8 --imagenet-val "/imagenet/val/" --imagenet-v2 "/scratch/projects/hegdelab/bf996/datasets" --imagenet-s "/imagenet-sketch" --imagenet-a "/imagenet-a" --imagenet-r "/imagenet-r" --objectnet "/objectnet-1.0/images" --model="resnet50" --zeroshot-frequency=1 --linear-probe=True --image-size=224 --resume "/scratch/bf996/pytorch-image-models/output/train/20240219-081711-resnet50-192/model_best.pth.tar" --report-to wandb
+```
+
 # Evaluation
 
 ## Extended Evaluation Metrics[](#extended-evaluation-metrics)
