@@ -38,7 +38,7 @@ except ImportError:
 
 from open_clip.model import TimmModel
 from open_clip import create_model_and_transforms, trace_model
-from open_clip.factory import apply_random_weights_skipping_first_k_layers_vit
+from open_clip.factory import apply_random_weights_skipping_first_k_layers_vit, load_checkpoint
 from open_clip.transform import image_transform
 from training.data import get_data
 from training.model_data import noisystudent_loader, efficientnet_loader
@@ -177,7 +177,10 @@ def run_main(args = None):
         elif args.model in ["efficientnet-b0", "efficientnet-b1", "efficientnet-b2", "efficientnet-b3", "efficientnet-b4", "efficientnet-b5"]:
             model, preprocess_train, preprocess_val = efficientnet_loader(args.model)  
         else:
-            model = timm.create_model(args.model, pretrained=True)
+            if args.timm_classifier_head_size > -1:
+                model = timm.create_model(args.model, pretrained=True, num_classes=args.timm_classifier_head_size)
+            else:
+                model = timm.create_model(args.model, pretrained=True)
             preprocess_train = image_transform(args.image_size, is_train=True)
             preprocess_val = image_transform(args.image_size, is_train=False)
         model.to(device=device)
@@ -309,13 +312,14 @@ def run_main(args = None):
                         keys_mod.append(k)
                 vals = list(sd.values())
                 sd = {k : v for k, v in zip(keys_mod, vals)}
-                print("add trunk")
-                print(sd.keys())
             if args.fine_tune:
                 # resuming a train checkpoint w/o epoch and optimizer state
                 if not args.distributed and next(iter(sd.items()))[0].startswith('module'):
                     sd = {k[len('module.'):]: v for k, v in sd.items()}
-                model.load_state_dict(sd)
+                try:
+                    model.load_state_dict(sd)
+                except:
+                    load_checkpoint(model, args.resume)
             elif 'epoch' in checkpoint:
                 # resuming a train checkpoint w/ epoch and optimizer state
                 start_epoch = checkpoint["epoch"]
@@ -329,7 +333,10 @@ def run_main(args = None):
                 logging.info(f"=> resuming checkpoint '{args.resume}' (epoch {start_epoch})")
             else:
                 # loading a bare (model only) checkpoint for fine-tune or evaluation
-                model.load_state_dict(checkpoint)
+                try:
+                    model.load_state_dict(sd)
+                except:
+                    load_checkpoint(model, args.resume)
                 logging.info(f"=> loaded checkpoint '{args.resume}' (epoch {start_epoch})")
         else:
             logging.info("=> no checkpoint found at '{}'".format(args.resume))

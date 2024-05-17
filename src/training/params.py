@@ -703,6 +703,9 @@ def parse_args():
     parser.add_argument(
         "--dc_eval_data_dir", type=str, default=None, help="Data directory for DC eval."
     )
+    parser.add_argument(
+        "--timm_classifier_head_size", type=int, default=-1, help="Size of the classifier head in timm models."
+    )
     args = parser.parse_args()
 
     # If some params are not passed, we use the default values based on model name.

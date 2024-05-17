@@ -101,11 +101,19 @@ def load_state_dict(checkpoint_path: str, map_location='cpu'):
     return state_dict
 
 
-def load_checkpoint(model, checkpoint_path, strict=True):
+def load_checkpoint(model, checkpoint_path, strict=False):
     print(f"Loading checkpoint from {checkpoint_path}")
     state_dict = load_state_dict(checkpoint_path)
     resize_pos_embed(state_dict, model)
-    incompatible_keys = model.load_state_dict(state_dict, strict=strict)
+    try:
+        incompatible_keys = model.load_state_dict(state_dict, strict=strict)
+    except:
+        for k in list(state_dict.keys()):
+            state_dict["visual.trunk."+k] = state_dict[k]
+            del state_dict[k]
+        incompatible_keys = model.load_state_dict(state_dict, strict=strict)
+    if len(incompatible_keys.missing_keys) > 0:
+        logging.warning(f"Missing keys: {incompatible_keys.missing_keys}")
     return incompatible_keys
 
 #Changed from Sync
@@ -338,23 +346,8 @@ def create_model(
 
             if checkpoint_path:
                 logging.info(f'Loading pretrained {model_name} weights ({pretrained}).')
-                # try:
                 load_checkpoint(model, checkpoint_path)
-                # except:
-                #     enc = timm.create_model("vit_base_patch16_224", num_classes=0).to(device=device)
-                #     #TODO: check these settings
-                #     mlp = build_mlp(in_dim=768, mlp_dim=2048, out_dim=1000).to(device=device)
-                #     model.visual = SIMCLR(
-                #         vision_width = 768,
-                #         vision_model = enc,
-                #         build_mlp = mlp
-                #     )
-                #     checkpoint = torch.load(pretrained, map_location=device)
-                #     sd = checkpoint["state_dict"]
-                #     if next(iter(sd.items()))[0].startswith('module'):
-                #         sd = {k[len('module.'):]: v for k, v in sd.items()}
-                #     model.visual.load_state_dict(sd)
-                #     model.visual = model.visual.visual
+                
             else:
                 logging.warning(f'Pretrained weights ({pretrained}) not found for model {model_name}.')
                 raise RuntimeError(f'Pretrained weights ({pretrained}) not found for model {model_name}.')        

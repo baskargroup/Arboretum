@@ -118,14 +118,16 @@ def multi_accuracy(output, target, topk=(1,)):
     return res
 
 def accuracy(output, target, topk=(1,)):
-    #logging.info("output size: {}".format(output.size()))
-    #logging.info("target size: {}".format(target.size()))
     pred = output.topk(max(topk), 1, True, True)[1].t()
     correct = pred.eq(target.view(1, -1).expand_as(pred))
     return [float(correct[:k].reshape(-1).float().sum(0, keepdim=True).cpu().numpy()) for k in topk]
 
 def run(model, classifier, dataloader, args, idx=None, split=None):
     autocast = get_autocast(args.precision)
+
+    if not hasattr(args, 'prob_size'):
+        args.prob_size = len(args.classnames)
+
     with torch.no_grad():
         if split == 'oi' or split == 'real':
             if not idx:
@@ -266,7 +268,7 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         image_features = F.normalize(image_features, dim=-1)
                         logits = 100. * image_features @ classifier
             
-            # remap imagenet21k pretrained model indices
+            # remap model indices
             if args.isint and \
             not "miil" in args.model and \
             any([args.model.endswith("_in21k"), args.model.endswith("_in22k"), args.model.endswith("_in12k")]):
@@ -286,22 +288,11 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 top1 += acc1
                 top5 += acc5
                 continue
-            # measure accuracy with adjustments
-            elif args.isint:
-                if not "miil" in args.model and \
-                any([args.model == "RN50-in2k", args.model == "RN50-in5k", args.model.endswith("22k"), args.model.endswith("12k"), args.model.endswith("21k")]):
-                    wnid_to_idx = get_in21k_wnid_to_idx()
-                    args.prob_size = len(wnid_to_idx)
-                    mapping = get_in21k_to_1k()
-                    in21k_valid_keys = mapping.keys()
-                    not_in21k_idx = [i for i in range(args.prob_size) if i not in in21k_valid_keys]
-                    logits[:, not_in21k_idx] = float("-inf")
-                    for key in in21k_valid_keys:
-                        logits[:, mapping[key]] = logits[:, key]
-                        logits[:, key] = float("-inf")
-                else:
-                    args.prob_size = len(logits[0])
+            elif logits.size(1) != args.prob_size:
+                logits = logits[:, :args.prob_size]
 
+            # measure accuracy with adjustments
+            if args.isint:
                 #zero out logits which are not being evaluated (in VL this is handled by changing the size of the classification problem)
                 if args.caption_subset != "":
                     if args.caption_subset == "insects":
@@ -510,10 +501,6 @@ def zero_shot_eval(model, data, epoch, args):
         logging.info('Finished zero-shot inat2021. Top1 was {}, top5 was {}'.format(top1, top5))
 
     if 'stanfordcars' in data:
-        # if args.zs_upper:
-        #     cars_classnames = to_upper(cars_classnames)
-        # elif args.zs_lower:
-        #     cars_classnames = to_lower(cars_classnames)
         logging.info("Starting zero-shot stanfordcars.")
         logging.info('Building zero-shot classifier')
         classifier = zero_shot_classifier(model, cars_classnames, cars_template, args)

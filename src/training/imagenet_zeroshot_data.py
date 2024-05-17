@@ -4,6 +4,30 @@ import json
 from pathlib import Path
 
 try:
+    IN2K_LABEL_LMAP = Path("./metadata/in2k_map.json")
+    with open( IN2K_LABEL_LMAP, 'r' ) as file:
+        in2k_map = json.load( file )
+except:
+    IN2K_LABEL_LMAP = Path("/scratch/bf996/vlhub/metadata/in2k_map.json")
+    with open( IN2K_LABEL_LMAP, 'r' ) as file:
+        in2k_map = json.load( file )
+
+def get_in2k_map():
+    return in2k_map
+
+try:
+    in5k_LABEL_LMAP = Path("./metadata/in5k_map.json")
+    with open( in5k_LABEL_LMAP, 'r' ) as file:
+        in5k_map = json.load( file )
+except:
+    in5k_LABEL_LMAP = Path("/scratch/bf996/vlhub/metadata/in5k_map.json")
+    with open( in5k_LABEL_LMAP, 'r' ) as file:
+        in5k_map = json.load( file )
+
+def get_in5k_map():
+    return in5k_map
+
+try:
     IN21K_TO_1K = Path("./metadata/imagenet21k_to_1k_index.txt")
     with open( IN21K_TO_1K, 'r' ) as file:
         in21k_to_1k = ast.literal_eval( file.read( ) )
