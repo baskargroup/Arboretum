@@ -160,3 +160,10 @@ core.*
 !src/evaluation/misc/results_dbs/*
 src/training/temp
 batch/interactive_debug_commands.txt
+slurm/45891421_train.err
+slurm/45891421_train.out
+slurm/45892348_train.err
+slurm/45892348_train.out
+bird_categories.txt
+scripts/main_slurm.sh
+src/evals/eval_utils/inat_eval.py

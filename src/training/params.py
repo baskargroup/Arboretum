@@ -706,6 +706,13 @@ def parse_args():
     parser.add_argument(
         "--timm_classifier_head_size", type=int, default=-1, help="Size of the classifier head in timm models."
     )
+    parser.add_argument(
+        "--birds", type=str, default=None, help="Data directory for Birds-525 eval set"
+    )
+    parser.add_argument(
+        "--arbor_val", type=str, default=None, help="Data directory for ArborCLIP eval set"
+    )
+    parser.add_argument("--tokenizer_path", type=str, default=None, help="Path to tokenizer.")
     args = parser.parse_args()
 
     # If some params are not passed, we use the default values based on model name.

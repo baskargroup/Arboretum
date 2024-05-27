@@ -7,6 +7,8 @@ import torch.nn.functional as F
 from tqdm import tqdm
 
 import numpy as np
+import pandas as pd
+import pdb 
 
 from open_clip import tokenize
 from .precision import get_autocast
@@ -189,13 +191,18 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                 else:
                     match_idx = sum(target==i for i in idx).bool().nonzero(as_tuple=True)[0]
                 #shave down target and images size so we skip irrelevant samples
-                target = target[match_idx].to(args.device)
+                try:
+                    target = target[match_idx].to(args.device)
+                except:
+                    pdb.set_trace()
                 images = images[match_idx].to(args.device)  
                 if images.size(0) == 0:
                     continue
                 if not args.isint:
-                    idx_l = idx.tolist()
-                    target = torch.tensor([idx_l.index(t) for t in target]).to(args.device)
+                    try:
+                        idx_l = idx.tolist()
+                    except:
+                        target = torch.tensor([idx_l.index(t) for t in target]).to(args.device)
                 elif args.isint and split == "r":
                     ir_idx = get_ir_idx()
                     target = torch.tensor(ir_idx[target.cpu()]).to(args.device)
@@ -476,10 +483,17 @@ def zero_shot_eval(model, data, epoch, args):
         return results
     if (epoch % args.zeroshot_frequency) != 0 and epoch != args.epochs:
         return results
-
+    if 'birds' in data:
+        bird_template = [lambda c: c]
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['birds'].dataloader, args)
+        logging.info('Finished zero-shot Birds-525 for model {}.\n Top1 was {}, top5 was {}'.format(args.pretrained,top1, top5))
+        import sys; sys.exit()
     if 'inat2021' in data:
         isint = (args.integer_labels or args.linear_probe)
         usecaps = args.caption_subset and not isint
+        args.caption_subset=""
+        args.classnames = inat_classnames
         if args.caption_subset != "":
             if args.caption_subset == "insects":
                 args.classnames = inat_insects_classnames
@@ -491,7 +505,12 @@ def zero_shot_eval(model, data, epoch, args):
             classifier = None
         else:
             logging.info('Building zero-shot classifier')
-            classifier = zero_shot_classifier(model, args.classnames, inat_template, args, args.capsub_idx)
+            # categories_df = pd.read_csv("~/ag_clip/inat2021-categories.csv")
+            # names = ("common_name","supercategory","kingdom","phylum","class","order","family","genus","specific_epithet")
+            # classnames = [" ".join(categories_df[name][i] for name in names) for i in range(len(categories_df))]
+            # pdb.set_trace()
+            # classnames = os.listdir(args.inat2021)
+            classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
             logging.info('Using classifier')
         logging.info('Using classifier')
         top1, top5 = run(model, classifier, data['inat2021'].dataloader, args)

@@ -7,7 +7,9 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Optional, Tuple
 from collections import OrderedDict
-
+import pdb
+import pickle 
+from torchvision import transforms
 import torch
 from torch import nn
 
@@ -17,6 +19,8 @@ from .openai import load_openai_model
 from .pretrained import get_pretrained_cfg, download_pretrained
 from .transform import image_transform
 from .tokenizer import DEFAULT_CONTEXT_LENGTH, SimpleTokenizer
+
+import open_clip
 
 try:
     from coca_pytorch.coca_pytorch import CoCa
@@ -302,7 +306,6 @@ def create_model(
             convert_weights_to_fp16(model)
         model.to(device=device)
         return model
-
     #SIMCLR
     #https://dl.fbaipublicfiles.com/slip/simclr_base_25ep.pt
     
@@ -409,6 +412,13 @@ def apply_random_weights_skipping_first_k_layers_vit(model, k):
               child.mlp.fc2.weight.data = torch.randn(child.mlp.fc2.weight.size())
           i += 1
 
+def get_bioclip_preprocess():
+    #####PUT YOUR OWN PATH IN HERE
+    with open("/home/km3888/open_clip/transform.pkl", "rb") as f:
+        loaded_transforms = pickle.load(f)
+    loaded_transform = transforms.Compose(loaded_transforms)
+    return loaded_transform
+
 def create_model_and_transforms(
         model_name: str,
         pretrained: str = '',
@@ -432,6 +442,20 @@ def create_model_and_transforms(
         image_mean = None,
         image_std = None,
 ):
+    if pretrained=='bioclip':
+        model = load_openai_model(model_name, device=device, jit=jit, cache_dir=cache_dir)
+        ###########PUT YOUR OWN PATH IN HERE #############
+        # Reason for this code is that BioCLIP makes their model available through open_clip API
+        # VLHub already has a submodule called "open_clip" which makes it difficult to import the model
+        # Instead we load the model under a different python process and save the model + transform so
+        # that we can load them with torch.load()
+        state_dict = torch.load("/vast/km3888/arbor_evals/bioclip.pth")
+        model.load_state_dict(state_dict)
+        preprocess = get_bioclip_preprocess()
+        if precision == "amp" or precision == "fp32":
+            model = model.float()
+        return model, preprocess, preprocess
+
     model = create_model(
     model_name, pretrained, precision, device, jit,
     force_quick_gelu=force_quick_gelu,
