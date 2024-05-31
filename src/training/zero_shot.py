@@ -22,7 +22,7 @@ try:
     from .cars_zeroshot_data import cars_classnames, cars_template
     from .food_zeroshot_data import food_classnames, food_template
     from .air_zeroshot_data import air_classnames, air_template
-    from .insecta_zeroshot_data import get_insecta_classnames
+    from .insecta_zeroshot_data import *
     
 except Exception as e:
     print(e)
@@ -274,7 +274,6 @@ def run(model, classifier, dataloader, args, idx=None, split=None):
                         image_features = model.encode_image(images)
                         image_features = F.normalize(image_features, dim=-1)
                         logits = 100. * image_features @ classifier
-            
             # remap model indices
             if args.isint and \
             not "miil" in args.model and \
@@ -477,8 +476,8 @@ def zero_shot_eval(model, data, epoch, args):
     results = {}
     classifier = None
 
-    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data and 'imagenet-real' not in data:
-        return results
+    # if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data and 'imagenet-real' not in data:
+    #     return results
     if args.zeroshot_frequency == 0:
         return results
     if (epoch % args.zeroshot_frequency) != 0 and epoch != args.epochs:
@@ -489,6 +488,51 @@ def zero_shot_eval(model, data, epoch, args):
         top1, top5 = run(model, classifier, data['birds'].dataloader, args)
         logging.info('Finished zero-shot Birds-525 for model {}.\n Top1 was {}, top5 was {}'.format(args.pretrained,top1, top5))
         import sys; sys.exit()
+    if 'arbor-rare' in data:
+        logging.info("Starting zero-shot arbor-rare.")
+        args.classnames = get_arboretum_rare_classes(args.taxon)
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['arbor-rare'].dataloader, args)
+        results['arbor-rare-top1'] = top1
+        results['arbor-rare-top5'] = top5
+        logging.info('Finished zero-shot arbor-rare. Top1 was {}, top5 was {}'.format(top1, top5))
+    if 'arbor-test' in data:
+        logging.info("Starting zero-shot arbor-test.")
+        args.classnames = get_arboretum_test_classes(args.taxon)
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['arbor-test'].dataloader, args)
+        results['arbor-test-top1'] = top1
+        results['arbor-test-top5'] = top5
+        logging.info('Finished zero-shot arbor-test. Top1 was {}, top5 was {}'.format(top1, top5))
+    if 'bioclip-rare' in data:
+        logging.info("Starting zero-shot bioclip-rare.")
+        args.classnames = get_bioclip_rare_classes(args.taxon)
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['bioclip-rare'].dataloader, args)
+        results['bioclip-rare-top1'] = top1
+        results['bioclip-rare-top5'] = top5
+        logging.info('Finished zero-shot bioclip-rare. Top1 was {}, top5 was {}'.format(top1, top5))
+    if 'fungi' in data:
+        logging.info("Starting zero-shot fungi.")
+        args.classnames = get_fungi_classes()
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['fungi'].dataloader, args)
+        results['fungi-top1'] = top1
+        results['fungi-top5'] = top5
+        logging.info('Finished zero-shot fungi. Top1 was {}, top5 was {}'.format(top1, top5))
+    if 'insects2' in data:
+        logging.info("Starting zero-shot insects2.")
+        args.classnames = get_ins2_classes()
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['insects2'].dataloader, args)
+        results['insects2-top1'] = top1
+        results['insects2-top5'] = top5
+        logging.info('Finished zero-shot insects2. Top1 was {}, top5 was {}'.format(top1, top5))
     if 'inat2021' in data:
         isint = (args.integer_labels or args.linear_probe)
         usecaps = args.caption_subset and not isint

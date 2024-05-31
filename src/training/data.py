@@ -272,6 +272,12 @@ class CsvDataset(Dataset):
             except:
                 raise Exception("Could not read csv file")
         logging.info("Size of dataframe is {}".format(len(df)))
+        if "taxon!" in args['caption_key'] or "preproc!" in args['caption_key']:
+            logging.info(f"Caption key is {args['caption_key']}, attempting to generate ground truth column")
+            taxon_str = args['caption_key'].split("!")[-1]
+            possible_values = {tax_str : int(i) for i, tax_str in enumerate(df[taxon_str].unique())}
+            df["idx_key"] = df[taxon_str].apply(lambda x: possible_values[x])
+            args['caption_key'] = "idx_key"
         df = df[["path", args['caption_key']]]
         df = df.dropna()
         df = df[df[args['caption_key']].notnull()]
@@ -294,9 +300,11 @@ class CsvDataset(Dataset):
         logging.info("Size of dataframe after NaN-removal is {}".format(len(df)))
         logging.debug("Columns of dataframe: {}".format(df.columns))
         self.df = df
+        self.caption_key = args['caption_key']
 
     def __init__(self, input_filename, transforms, img_key, caption_key, csvfilter, csvscrambled, tokenscrambled, csvcleaned, dscipher, simplecaptions, strict, shift, integer_labels, multiclass, metacaptions, token_strip, sep="\t", args=None):
         self.read_and_preprocess(locals())
+        caption_key = self.caption_key
         df = self.df
         if dscipher:
             csvcleaned=True
@@ -644,6 +652,50 @@ def get_objectnet(args, preprocess_fns):
 def get_insecta(args, preprocess_fns):
     _, preprocess_val = preprocess_fns
     dataset = datasets.ImageFolder(args.insecta, transform=preprocess_val)
+    dataloader = torch.utils.data.DataLoader(
+            dataset,
+            batch_size=args.batch_size,
+            num_workers=args.workers,
+            sampler=None
+        )
+    return DataInfo(dataloader=dataloader, sampler=None)
+
+def get_csv_test(args, preprocess_fns, target_ds):
+    _, preprocess_val = preprocess_fns
+    if target_ds == "arbor-rare":
+        target_ds_path = "./metadata/arboretum_rare_combined_metadata.csv"
+        capkey = "taxon!" + args.taxon
+    elif target_ds == "arbor-test":
+        target_ds_path = "./metadata/arboretum_test_metadata.csv"
+        capkey = "taxon!" + args.taxon
+    elif target_ds == "bioclip-rare":
+        target_ds_path = "./metadata/bioclip_rare_metadata_n.csv"
+        capkey = "taxon!" + args.taxon
+    elif target_ds == "fungi":
+        target_ds_path = "./metadata/fungi_metadata_n.csv"
+        capkey = "preproc!class"
+    elif target_ds == "insects2":
+        target_ds_path = "./metadata/ins2_metadata_n.csv"
+        capkey = "preproc!class"
+    dataset = CsvDataset(
+            target_ds_path,
+            preprocess_val,
+            img_key="path",
+            caption_key=capkey,
+            csvfilter=args.ds_filter,
+            csvscrambled=args.csv_scrambled,
+            tokenscrambled=args.token_scrambled,
+            token_strip=args.token_strip,
+            csvcleaned=args.csv_cleaned,
+            dscipher=args.ds_cipher,
+            simplecaptions=args.simplecaptions,
+            strict=args.strict,
+            shift=args.shift_cipher,
+            integer_labels=True,
+            multiclass=args.multiclass,
+            metacaptions=args.metacaptions,
+            sep=",",
+            args=args)
     dataloader = torch.utils.data.DataLoader(
             dataset,
             batch_size=args.batch_size,
@@ -1488,6 +1540,21 @@ def get_data(args, preprocess_fns, epoch=0):
 
     if args.objectnet is not None:
         data["objectnet"] = get_objectnet(args, preprocess_fns)
+
+    if args.arbor_rare:
+        data["arbor-rare"] = get_csv_test(args, preprocess_fns, "arbor-rare")
+    
+    if args.arbor_val:
+        data["arbor-test"] = get_csv_test(args, preprocess_fns, "arbor-test")
+    
+    if args.bioclip_rare:
+        data["bioclip-rare"] = get_csv_test(args, preprocess_fns, "bioclip-rare")
+    
+    if args.fungi:
+        data["fungi"] = get_csv_test(args, preprocess_fns, "fungi")
+    
+    if args.insects2:
+        data["insects2"] = get_csv_test(args, preprocess_fns, "insects2")
 
     if args.insecta is not None:
         data["insecta"] = get_insecta(args, preprocess_fns)
