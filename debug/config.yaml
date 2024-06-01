@@ -41,7 +41,7 @@ fine_tune: false
 flowers: null
 food: null
 force_quick_gelu: false
-fungi: true
+fungi: false
 gather_with_grad: false
 gc: false
 gpumaxbatch: 32
@@ -67,7 +67,7 @@ inat2017: null
 inat2018: null
 inat2021: null
 insecta: null
-insects2: true
+insects2: false
 integer_labels: false
 iqe: false
 linear_probe: false
@@ -112,7 +112,7 @@ size_controlled: ''
 skip_scheduler: false
 stanfordcars: null
 strict: false
-taxon: common_name
+taxon: scientific_name
 text_ssl_loss_weight: 0.05
 text_weight: 0.5
 timm_classifier_head_size: -1
