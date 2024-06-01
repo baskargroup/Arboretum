@@ -476,8 +476,7 @@ def zero_shot_eval(model, data, epoch, args):
     #logging.debug(data)
     results = {}
     classifier = None
-
-    if 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data and 'imagenet-real' not in data:
+    if 'birds' not in data and 'arbor_val' not in data and 'imagenet-val' not in data and 'imagenet-v2' not in data and 'imagenet-r' not in data and 'imagenet-s' not in data and 'imagenet-a' not in data and 'inat2021' not in data and 'stanfordcars' not in data and 'flowers' not in data and 'food' not in data and 'objectnet' not in data and 'insecta' not in data and 'openimages-val' not in data and 'imagenet-real' not in data:
         return results
     if args.zeroshot_frequency == 0:
         return results

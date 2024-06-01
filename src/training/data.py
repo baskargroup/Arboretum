@@ -10,6 +10,7 @@ import time
 from dataclasses import dataclass
 from multiprocessing import Value
 from functools import partial
+import pdb
 
 import numpy as np
 import braceexpand
@@ -1396,6 +1397,69 @@ def get_dataset_fn(data_path, dataset_type):
     else:
         raise ValueError(f"Unsupported dataset type: {dataset_type}")
     
+class BirdDataset(Dataset):
+
+    def __init__(self,args,transform=None):
+        self.base_bird_dir = args.birds
+        csv = os.path.join(self.base_bird_dir, "birds.csv")
+        self.df = pd.read_csv(csv)
+        self.labels = []
+        self.image_paths = []
+        self.transform = transform
+        
+        class_names = [x for x in self.df['labels'].unique() if 'PARKETT  AKULET' not in x]
+        args.classnames = class_names
+        labels2idx = {class_name: idx for idx, class_name in enumerate(class_names)}
+
+        seen_labels = set()
+        labels = []
+        for idx in range(len(self.df)):
+            filepath = os.path.join(self.base_bird_dir,self.df['filepaths'][idx])
+            if 'PARAKETT  AKULET' in self.df['labels'][idx]:
+                continue
+            
+            self.image_paths.append(filepath)
+            self.labels.append(labels2idx[self.df['labels'][idx]])
+
+        print('done')
+
+    def __len__(self):
+        return len(self.labels)
+
+    def __getitem__(self, idx):
+        try:
+            image_path = self.image_paths[idx]
+        except:
+            print("Error in image path")
+            print(idx)
+        image = Image.open(image_path)
+        transformed_image = self.transform(image)
+        label = self.labels[idx]
+        # convert to float
+        # image_array = image_array.astype(np.float32)
+        return transformed_image, label
+
+
+def get_birds_data(args, preprocess_fn):
+    dataset = BirdDataset(args,preprocess_fn)
+    num_samples = len(dataset)
+    sampler = DistributedSampler(dataset) if args.distributed  else None
+    shuffle = False
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=args.batch_size,
+        shuffle=shuffle,
+        num_workers=args.workers,
+        pin_memory=True,
+        sampler=sampler,
+        drop_last=False,
+    )
+    dataloader.num_samples = num_samples
+    dataloader.num_batches = len(dataloader)
+
+    data_info = DataInfo(dataloader, sampler)
+    return data_info
 
 def get_data(args, preprocess_fns, epoch=0):
     preprocess_train, preprocess_val = preprocess_fns
@@ -1412,6 +1476,8 @@ def get_data(args, preprocess_fns, epoch=0):
     elif args.ds_filter != "":
         if args.ds_filter == "imagenet_classnames":
             args.ds_filter = get_imagenet_classnames(no_overlap=False)
+        elif args.ds_filter =="birds":
+            data["birds"] = get_birds_data(args,preprocess_val)
         elif args.ds_filter == "imagenet_classnames_no_overlap":
             args.no_overlap=True
             args.ds_filter = get_imagenet_classnames(no_overlap=True)
