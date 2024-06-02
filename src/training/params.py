@@ -710,7 +710,22 @@ def parse_args():
         "--birds", type=str, default=None, help="Data directory for Birds-525 eval set"
     )
     parser.add_argument(
-        "--arbor_val", type=str, default=None, help="Data directory for ArborCLIP eval set"
+        "--arbor-rare", action="store_true", help="Run ArborCLIP rare species eval"
+    )
+    parser.add_argument(
+        "--arbor-val", action="store_true", help="Run ArborCLIP test set"
+    )
+    parser.add_argument(
+        "--bioclip-rare", action="store_true", help="Run BioCLIP rare species test set"
+    )
+    parser.add_argument(
+        "--fungi", action="store_true", help="Run fungi test set"
+    )
+    parser.add_argument(
+        "--insects2", action="store_true", help="Run insects2 test set"
+    )
+    parser.add_argument(
+        "--taxon", type=str, default="kingdom", help="Taxon hierarchy level", choices=["kingdom", "phylum", "class", "order", "family", "genus", "species", "scientific_name", "common_name"]
     )
     parser.add_argument("--tokenizer_path", type=str, default=None, help="Path to tokenizer.")
     args = parser.parse_args()

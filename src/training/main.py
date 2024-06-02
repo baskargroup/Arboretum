@@ -301,7 +301,11 @@ def run_main(args = None):
                 sd = checkpoint["state_dict"]
             except KeyError:
                 #torchvision labeling
-                sd = checkpoint["model"]
+                try:
+                    sd = checkpoint["model"]
+                except KeyError:
+                    #bioclip/hf labeling
+                    sd = checkpoint
             if args.add_trunk:
                 keys = list(sd.keys())
                 keys_mod = list()

@@ -366,6 +366,7 @@ def evaluate(model, data, epoch, args, tb_writer=None):
     device = torch.device(args.device)
     model.eval()
 
+    #launch zero shot evaluation
     zero_shot_metrics = zero_shot_eval(model, data, epoch, args)
     metrics.update(zero_shot_metrics)
 
