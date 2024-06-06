@@ -1,6 +1,6 @@
 
 
-# [ArborCLIP webpage](https://baskargroup.github.io/arborclip.github.io/)
+# [ArborCLIP webpage](https://baskargroup.github.io/Arboretum.github.io/)
 
 
 ### Academic Project Page Template
