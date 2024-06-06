@@ -1,6 +1,6 @@
 
 
-# [Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity]
+# Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity
 ## [Prject page](https://baskargroup.github.io/Arboretum/)
 
 
