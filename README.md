@@ -1,6 +1,7 @@
 
 
-# [ArborCLIP webpage](https://baskargroup.github.io/Arboretum/)
+# [Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity]
+## [Prject page](https://baskargroup.github.io/Arboretum/)
 
 
 ### Academic Project Page Template
