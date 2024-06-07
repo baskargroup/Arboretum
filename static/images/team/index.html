@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="Project name: ArborCLIP dataset">
+  <meta name="description" content="Project name: Arboretum dataset">
   <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
   <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
   <meta property="og:url" content="URL OF THE WEBSITE"/>
@@ -160,25 +160,25 @@
               <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Benjamin Feuer*,</a>
             </span>
             <span class="author-block">
-              <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Nirmal Baishnab,</a>
-            </span>
-            <span class="author-block">
-              <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Kelly O. Marshall,</a>
-            </span>
-            <span class="author-block">
-              <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Talukder Zaki Jubery,</a>
-            </span>
-            <span class="author-block">
-              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Andre Nakkab,</a>
-            </span>
-            <span class="author-block">
-              <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Md Zahid Hasan,</a>
-            </span>
-            <span class="author-block">
-              <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Shivani Chiranjeevi,</a>
+              <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Talukder Zaki Jubery,</a>
             </span>
             <span class="author-block">
               <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Zi K. Deng,</a>
+            </span>
+            <span class="author-block">
+              <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Andre Nakkab,</a>
+            </span>
+            <span class="author-block">
+              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Md Zahid Hasan,</a>
+            </span>
+            <span class="author-block">
+              <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Shivani Chiranjeevi,</a>
+            </span>
+            <span class="author-block">
+              <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Kelly O. Marshall,</a>
+            </span>
+            <span class="author-block">
+              <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Nirmal Baishnab,</a>
             </span>
             <span class="author-block">
               <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Asheesh K Singh,</a>
@@ -291,35 +291,30 @@
 </section>
 <!-- End paper abstract -->
 
-
 <!-- Image carousel -->
-<section class="hero is-small">
+<!-- <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
-        <!-- Your image here -->
         <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
           First image description.
         </h2>
       </div>
       <div class="item">
-        <!-- Your image here -->
         <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
           Second image description.
         </h2>
       </div>
       <div class="item">
-        <!-- Your image here -->
         <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
          Third image description.
        </h2>
      </div>
      <div class="item">
-      <!-- Your image here -->
       <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
       <h2 class="subtitle has-text-centered">
         Fourth image description.
@@ -328,27 +323,64 @@
   </div>
 </div>
 </div>
-</section>
+</section> -->
 <!-- End image carousel -->
 
 
+<!-- data feature -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Dataset Features</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <!-- First Image -->
+          <div class="publication-image" id="image-container-1">
+            <img src="static/images/category_distribution.png" alt="Category Distribution" style="cursor: pointer; width: 100%;">
+          </div>
+          <p class="description">
+            Distribution of the Arboretum dataset. (a) Size of each taxonomic class in the Arboretum dataset. 
+            (b) Species counts for each taxonomic class. (c) The 40 highest occuring species.
+          </p>
+          
+          <!-- Second Image -->
+          <div class="publication-image" id="image-container-2">
+            <img src="static/images/treemap_134M_v1.png" alt="Sample Image 2" style="cursor: pointer; width: 100%;">
+          </div>
+          <p class="description">
+            Treemap diagram of the Arboretum Dataset, starting from Kingdom. The nested boxes represent phyla, 
+            (taxonomic) classes, orders, and families. Box size represents the relative number of samples.
+          </p>
+          
+          <!-- Third Image -->
+          <div class="publication-image" id="image-container-3">
+            <img src="static/images/comparison.png" alt="Sample Image 3" style="cursor: pointer; width: 100%;">
+          </div>
+          <p class="description">
+            Comparison of Arboretum Dataset with existing biodiversity datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end of data feature -->
 
 <!-- data prep work -->
 <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
-      <!-- Paper video. -->
       <h2 class="title is-3">Data Preparation Pipeline</h2>
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          
           <div class="publication-video" id="video-container">
-            <!-- Placeholder image -->
             <img src="static/images/carousel1.jpg" alt="Video placeholder" id="video-placeholder" style="cursor: pointer; width: 100%;">
           </div>
-          <!-- Text description -->
           <p class="description">
-            This section provides an overview of the data preparation pipeline. The video highlights the steps involved in collecting, processing, and preparing the data for analysis. It covers various techniques and tools used to ensure data quality and consistency.
+            This section provides an overview of the data preparation pipeline. The video highlights the steps involved in collecting, 
+            processing, and preparing the data for analysis. It covers various techniques and tools used to ensure data quality and consistency.
           </p>
         </div>
       </div>
@@ -395,7 +427,8 @@
           </div>
           <!-- Text description -->
           <p class="description">
-            This section provides an overview of Benchmark Lifestages. The steps involved in collecting, processing, and preparing the data for analysis. It covers various techniques and tools used to ensure data quality and consistency.
+            (a) Example images from Arboretum-Unseen. (b) ARBORETUM-LIFE-STAGES with 20 class labels: four life stages 
+            (egg, larva, pupa, and adult) for five distinct insect species
           </p>
         </div>
       </div>
@@ -471,35 +504,35 @@
                   <div class="columns" style="max-width: 95%; padding-left: 10%;">
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/chih-hsuan-yang-isu/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Bella1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Bella1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Chih-Hsuan Yang</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/benjaminfeuer/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Ben1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Ben1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Ben Feuer</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/nirmal-baishnab-446332a6/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Nirmal1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Nirmal1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Nirmal Baishnab</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://km3888.github.io/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Kelly1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Kelly1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Kelly Marshall</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/talukder-zaki-jubery-23322551/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Zaki1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Zaki1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Zaki Jubery</span>
                           </a>
                       </div>
@@ -510,34 +543,34 @@
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/andre-nakkab-2bb42b170/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Andre1.png" alt="" style="width: 92%;" /></span>
+                              <span class="image"><img src="static/images/team/Andre1.png" alt="" style="width: 92%;" /></span>
                               <span style="font-weight: bold;">Andre Nakkab</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/zahid-isu/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Zahid1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Zahid1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Md Zahid Hasan</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.linkedin.com/in/shivani-chiranjeevi/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Shivani1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Shivani1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Shivani Chiranjeevi</span>
                           </a>
                       </div>
 
                       <div class="column has-text-centered video-column">
                           <a href="https://www.arizona.edu/" target="_blank" style="border-bottom: none;">
-                              <span class="image"><img src="static/images/Zi1.png" alt="" style="width: 90%;" /></span>
+                              <span class="image"><img src="static/images/team/Zi1.png" alt="" style="width: 90%;" /></span>
                               <span style="font-weight: bold;">Zi K. Deng</span>
                           </a>
                       </div>
                       <div class="column has-text-centered video-column">
                         <a href="https://www.agron.iastate.edu/people/singh-asheesh/" target="_blank" style="border-bottom: none;">
-                            <span class="image"><img src="static/images/Asheesh1.png" alt="" style="width: 90%;" /></span>
+                            <span class="image"><img src="static/images/team/Asheesh1.png" alt="" style="width: 90%;" /></span>
                             <span style="font-weight: bold;">Asheesh K Singh</span>
                         </a>
                       </div>
@@ -548,31 +581,31 @@
 
                       <div class="column has-text-centered video-column">
                         <a href="https://www.agron.iastate.edu/people/singh-arti-2/" target="_blank" style="border-bottom: none;">
-                            <span class="image"><img src="static/images/Arti1.png" alt="" style="width: 92%;" /></span>
+                            <span class="image"><img src="static/images/team/Arti1.png" alt="" style="width: 92%;" /></span>
                             <span style="font-weight: bold;">Arti Singh</span>
                         </a>
                       </div>
                       <div class="column has-text-centered video-column">
                         <a href="https://www.engineering.iastate.edu/people/profile/soumiks/" target="_blank" style="border-bottom: none;">
-                            <span class="image"><img src="static/images/Soumik1.png" alt="" style="width: 92%;" /></span>
+                            <span class="image"><img src="static/images/team/Soumik1.png" alt="" style="width: 92%;" /></span>
                             <span style="font-weight: bold;">Soumik Sarkar</span>
                         </a>
                       </div>
                       <div class="column has-text-centered video-column">
                         <a href="https://datascience.arizona.edu/person/nirav-merchant" target="_blank" style="border-bottom: none;">
-                            <span class="image"><img src="static/images/Nirav1.png" alt="" style="width: 90%;" /></span>
+                            <span class="image"><img src="static/images/team/Nirav1.png" alt="" style="width: 90%;" /></span>
                             <span style="font-weight: bold;">Nirav Merchant</span>
                         </a>
                       </div>
                       <div class="column has-text-centered video-column">
                         <a href="https://chinmayhegde.github.io/" target="_blank" style="border-bottom: none;">
-                            <span class="image"><img src="static/images/Chinmay1.png" alt="" style="width: 95%;" /></span>
+                            <span class="image"><img src="static/images/team/Chinmay1.png" alt="" style="width: 95%;" /></span>
                             <span style="font-weight: bold;">Chinmay Hegde</span>
                         </a>
                       </div>
                       <div class="column has-text-centered video-column">
                         <a href="https://www.engineering.iastate.edu/people/profile/baskarg/" target="_blank" style="border-bottom: none;">
-                            <span class="image"><img src="static/images/Baskar1.png" alt="" style="width: 88%;" /></span>
+                            <span class="image"><img src="static/images/team/Baskar1.png" alt="" style="width: 88%;" /></span>
                             <span style="font-weight: bold;">Baskar Ganapathysubramanian</span>
                         </a>
                       </div>
