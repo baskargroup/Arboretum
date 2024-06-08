@@ -1,0 +1,17 @@
+{
+    "embed_dim": 768,
+    "vision_cfg": {
+        "timm_model_name": "tf_efficientnet_l2_ns_475",
+        "timm_model_pretrained": true,
+        "timm_pool": "abs_attn",
+        "timm_proj": "",
+        "image_size": 475
+    },
+    "text_cfg": {
+        "context_length": 77,
+        "vocab_size": 49408,
+        "width": 768,
+        "heads": 8,
+        "layers": 12
+    }
+}
