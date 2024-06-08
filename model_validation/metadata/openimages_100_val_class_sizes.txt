@@ -1,0 +1,100 @@
+pizza  :  76
+umbrella  :  23
+bell pepper  :  31
+broccoli  :  19
+orange  :  62
+stupa  :  20
+bubble  :  11
+banana  :  17
+lemon  :  71
+bison  :  15
+mashed potatoes  :  7
+cucumber  :  46
+lionfish  :  28
+bookstore  :  22
+mitten  :  42
+jellyfish  :  38
+quail  :  5
+chain link fence  :  9
+corn  :  29
+macaque  :  30
+bagel  :  19
+suspension bridge  :  27
+bee  :  108
+lhasa apso  :  38
+peafowl  :  14
+teapot  :  29
+vending machine  :  16
+beer bottle  :  63
+ice cream  :  93
+koala  :  13
+traffic light  :  19
+parking meter  :  2
+stone wall  :  12
+flagpole  :  61
+flamingo  :  13
+hen  :  45
+barbell  :  24
+feather boa  :  2
+cricket insect  :  19
+pillow  :  39
+warthog  :  14
+marimba  :  6
+popsicle  :  12
+junco  :  5
+chickadee  :  9
+guacamole  :  16
+border terrier  :  11
+bolete  :  45
+baluster  handrail  :  16
+sea slug  :  7
+mongoose  :  1
+cougar  :  20
+magpie  :  17
+christmas stocking  :  43
+bald eagle  :  10
+daisy  :  25
+espresso  :  84
+barbershop  :  9
+grand piano  :  87
+wallaby  :  18
+bottle cap  :  0
+soccer ball  :  43
+menu  :  14
+fly  :  15
+french bulldog  :  28
+great white shark  :  23
+padlock  :  14
+lifeboat  :  16
+totem pole  :  18
+dishwasher  :  2
+freight car  :  5
+shoe store  :  6
+siamese cat  :  15
+macaw  :  10
+spindle  :  0
+wine bottle  :  17
+spider web  :  22
+vulture  :  23
+english springer spaniel  :  23
+hay  :  13
+laptop computer  :  50
+fig  :  29
+scuba diver  :  19
+ram adult male sheep  :  62
+baby bib  :  0
+mailbox  :  16
+greenhouse  :  22
+stingray  :  5
+ant  :  10
+tarantula  :  15
+acorn  :  22
+barn  :  22
+dungeness crab  :  15
+lampshade  :  17
+lion  :  54
+gas pump  :  9
+howler monkey  :  0
+goose  :  27
+necklace  :  56
+african bush elephant  :  45
