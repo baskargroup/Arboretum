@@ -11,7 +11,7 @@ categories= ['Aves','Fungi'])
  
 # to do : notebook or gradio or plotly to interactively investigate the data
    
-
+'''
 # capped filtered metadata
 source = 'Dev_Folders/metadataChunks_w_common/'
 species_count_data = 'Dev_Folders/data_v0/meta_aves_fungi_counts/species_group_counts.csv'
@@ -22,20 +22,20 @@ capped_dir='Dev_Folders/data_v0/overthecap_cases', merged_dir='Dev_Folders/data_
 files_per_chunk=10, random_seed=42)
 
 # to do:  add # of species filter
- 
-# get images
 '''
+''' 
+# get images
+
 import asyncio
 asyncio.run(download_images(
-input_folder='merged_cases', 
+input_folder='Dev_Folders/data_v0/merged_cases', 
 output_folder='Dev_Folders/data_v0/img_txt',
  start_index=0, end_index=2, 
  concurrent_downloads=1000)) 
 '''
 
 # generate image_text 
-'''
+
 create_image_text_pairs(metadata='Dev_Folders/data_v0/merged_cases', 
 img_folder='Dev_Folders/data_v0/img_txt',
 output_base_folder='Dev_Folders/data_v0/img_txt_tar')
-'''
