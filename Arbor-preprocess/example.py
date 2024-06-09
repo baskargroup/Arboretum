@@ -3,10 +3,11 @@ from arbor_process import *
 # to do : download metadata from hugging face
 
 # get distribitions from metadata (source full path : /work/mech-ai-scratch/znjubery/2024/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/')
+source = '/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/'
+destination = '/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/outputs/'
+processor = MetadataProcessor(source, destination)
+processor.process_all_files()
 '''
-process_metadata_files(source='Dev_Folders/metadataChunks_w_common/',
-destination='Dev_Folders/data_v0/meta_aves_fungi_counts', 
-categories= ['Aves','Fungi'])
 '''
  
 # to do : notebook or gradio or plotly to interactively investigate the data
@@ -35,7 +36,8 @@ output_folder='Dev_Folders/data_v0/img_txt',
 '''
 
 # generate image_text 
-
+'''
 create_image_text_pairs(metadata='Dev_Folders/data_v0/merged_cases', 
 img_folder='Dev_Folders/data_v0/img_txt',
 output_base_folder='Dev_Folders/data_v0/img_txt_tar')
+'''

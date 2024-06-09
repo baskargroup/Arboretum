@@ -1,0 +1,7 @@
+{
+    "metadata_processor_info": {
+        "source_folder": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/",
+        "destination_folder": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/outputs/",
+        "categories": ["Aves", "Arachnida", "Insecta", "Plantae", "Fungi", "Mollusca", "Reptilia"]
+    }
+}
