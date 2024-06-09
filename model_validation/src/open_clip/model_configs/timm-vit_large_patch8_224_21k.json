@@ -1,0 +1,10 @@
+{
+    "embed_dim": 21843,
+    "vision_cfg": {
+        "timm_model_name": "vit_large_patch8_224",
+        "timm_model_pretrained": false,
+        "timm_pool": "",
+        "timm_proj": "linear",
+        "image_size": 224
+    }
+}

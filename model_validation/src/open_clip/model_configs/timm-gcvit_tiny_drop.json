@@ -1,0 +1,11 @@
+{
+    "embed_dim": 1000,
+    "vision_cfg": {
+        "timm_model_name": "gcvit_tiny",
+        "timm_model_pretrained": false,
+        "timm_pool": "",
+        "timm_proj": "linear",
+        "drop_rate": 0.1,
+        "image_size": 224
+    }
+}

@@ -1,7 +1,7 @@
 
 
 # Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity
-## [Prject page](https://baskargroup.github.io/Arboretum/)
+## [Project page](https://baskargroup.github.io/Arboretum/)
 
 
 ### Academic Project Page Template
@@ -34,6 +34,12 @@ To edit the websites contents edit the `index.html` file. It contains different 
 - Video Carousel
 - PDF Poster
 - Bibtex citation
+
+## Model validation
+
+For validating the zero-shot accuracy of our trained models and comparing to other benchmarks, we use the [VLHub](https://github.com/penfever/vlhub) repository with some slight modifications. See the README in the linked repo for basic instructions on usage of VLHub for evaluation.
+
+To use the open_clip model, you have to first run the `model_validation/load_openclip.py` script to get the model weights from Huggingface and save them locally. The Birds 525 dataset can be downloaded here [here](https://www.kaggle.com/datasets/gpiosenka/100-bird-species) and the IP102 Insects dataset can be found [here](https://drive.google.com/drive/folders/1svFSy2Da3cVMvekBwe13mzyx38XZ9xWo). Once you've downloaded the dataset you can reproduce our model evaluations by running `model_validation/src/training/main.py` with specifying the dataset with the `--ds-filter` argument.
 
 ## Tips:
 - The `index.html` file contains comments instructing you what to replace, you should follow these comments.
