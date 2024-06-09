@@ -254,8 +254,9 @@
     <div class="hero-body">
       <img src="static/images/7_categories.png" alt="ArborCLIP">
       <h2 class="subtitle has-text-centered">
-        This repository comprises scripts and sample data for processing and training a foundational model called "ArborCLIP," which builds upon the BioCLIP and OpenCLIP models,
-        and is specifically designed for agricultural-relevant images.
+        <b>The seven taxonomic classes in the Arboretum dataset.</b> Example images of the top 5 most frequent species 
+        in each category, including their counts, common names, and scientific names. For clarity, the word <b>class'</b>
+        used in this context is denoted <b>taxonomic class</b> in the rest of the paper to distinguish it from the other common ML definitions.
       </h2>
     </div>
   </div>
@@ -438,6 +439,142 @@
 <!-- end Benchmark Lifestages -->
 
 
+<head>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/7_categories.png" alt="ArborCLIP">
+      <h2 class="subtitle has-text-centered">
+        The seven taxonomic classes in the Arboretum dataset. Example images of the top 5 most frequent species 
+        in each category, including their counts, common names, and scientific names. For clarity, the word '<strong>class</strong>'
+        used in this context is denoted '<strong>taxonomic class</strong>' in the rest of the paper to distinguish it from the other common ML definitions.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Table Section -->
+<section class="hero is-light">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-3">Performance Benchmarks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Dataset</th>
+            <th>Arch</th>
+            <th>AU</th>
+            <th>AB</th>
+            <th>BCR</th>
+            <th>F</th>
+            <th>I2</th>
+            <th>B</th>
+            <th>LS</th>
+            <th>DW</th>
+            <th>Weighted Average</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OpenAI</td>
+            <td>ViT-B-16</td>
+            <td>12.9</td>
+            <td>7.3</td>
+            <td>10.9</td>
+            <td>11.5</td>
+            <td>10.2</td>
+            <td>50</td>
+            <td>56.5</td>
+            <td>10.3</td>
+            <td>14.7</td>
+          </tr>
+          <tr>
+            <td>BioCLIP</td>
+            <td>ViT-B-16</td>
+            <td><strong style="color:purple">68.2</strong></td>
+            <td><strong style="color:purple">62.2</strong></td>
+            <td><strong style="color:purple">30.2</strong></td>
+            <td>45.1</td>
+            <td>20.8</td>
+            <td><strong style="color:purple">68.7</strong></td>
+            <td>18</td>
+            <td><strong style="color:purple">19.9</strong></td>
+            <td>58.5</td>
+          </tr>
+          <tr>
+            <td>MetaCLIP-cc</td>
+            <td>ViT-L-14</td>
+            <td>24.9</td>
+            <td>15.4</td>
+            <td>20.5</td>
+            <td>24.6</td>
+            <td>16.1</td>
+            <td><strong style="color:purple">70.1</strong></td>
+            <td>64.3</td>
+            <td>14.7</td>
+            <td>25.0</td>
+          </tr>
+          <tr>
+            <td>ARBOCLIP from OpenAI</td>
+            <td>ViT-B-16</td>
+            <td>47.1</td>
+            <td><strong style="color:blue">91.1</strong></td>
+            <td>22.9</td>
+            <td>43.2</td>
+            <td>16.5</td>
+            <td>47.8</td>
+            <td>28</td>
+            <td>17</td>
+            <td><strong style="color:purple">70.8</strong></td>
+          </tr>
+          <tr>
+            <td>ARBOCLIP from BioCLIP</td>
+            <td>ViT-B-16</td>
+            <td><strong style="color:blue">53.8</strong></td>
+            <td><strong style="color:blue">82.2</strong></td>
+            <td>23.7</td>
+            <td>53.9</td>
+            <td>16.9</td>
+            <td>57.1</td>
+            <td>15</td>
+            <td>18.4</td>
+            <td><strong style="color:purple">67.2</strong></td>
+          </tr>
+          <tr>
+            <td>ARBOCLIP from MetaCLIP</td>
+            <td>ViT-L-14</td>
+            <td>44.3</td>
+            <td><strong style="color:blue">91.1</strong></td>
+            <td>21.8</td>
+            <td>54.7</td>
+            <td>5.1</td>
+            <td>42.5</td>
+            <td>26.3</td>
+            <td><strong style="color:blue">49.9</strong></td>
+            <td><strong style="color:purple">69.5</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 <!-- ArborCLIP model -->
 <section class="hero is-small">
