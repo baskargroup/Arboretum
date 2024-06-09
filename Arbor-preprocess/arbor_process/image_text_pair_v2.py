@@ -81,6 +81,8 @@ def process_subfolder(metadata_path,subfolder_path):
 def create_image_text_pairs(metadata = 'metadata', img_folder='img_folder', output_base_folder='output_folder'):
     subfolders = [os.path.join(img_folder, subfolder) for subfolder in os.listdir(img_folder) if os.path.isdir(os.path.join(img_folder, subfolder))]
     
+    os.makedirs(output_base_folder, exist_ok=True)
+    
     for subfolder in subfolders:
         subfolder_name = os.path.basename(subfolder)
         output_folder = os.path.join(output_base_folder, subfolder_name)
