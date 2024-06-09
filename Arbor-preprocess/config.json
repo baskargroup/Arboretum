@@ -3,5 +3,22 @@
         "source_folder": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/",
         "destination_folder": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/outputs/",
         "categories": ["Aves", "Arachnida", "Insecta", "Plantae", "Fungi", "Mollusca", "Reptilia"]
+    },
+
+    "metadata_filter_and_shuffle_info": {
+    "species_count_data": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/species_group_counts.csv",
+    "directory": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/",
+    "rare_threshold": 10,
+    "cap_threshold": 12,
+    "part_size": 50,
+    "rare_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/rare_cases",
+    "cap_filtered_dir_train": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/tmp_cap_filtered",
+    "capped_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/overthecap_cases",
+    "merged_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/merged_cases",
+    "files_per_chunk": 10,
+    "random_seed": 42
     }
+
+    
+
 }

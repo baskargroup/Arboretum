@@ -1,29 +1,30 @@
 from arbor_process import *
+import json
 
 # to do : download metadata from hugging face
 
 # get distribitions from metadata (source full path : /work/mech-ai-scratch/znjubery/2024/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/')
+'''
 source = '/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/'
 destination = '/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/outputs/'
 processor = MetadataProcessor(source, destination)
 processor.process_all_files()
 '''
-'''
  
 # to do : notebook or gradio or plotly to interactively investigate the data
    
-'''
 # capped filtered metadata
-source = 'Dev_Folders/metadataChunks_w_common/'
-species_count_data = 'Dev_Folders/data_v0/meta_aves_fungi_counts/species_group_counts.csv'
+config = load_config('config.json')
+processor = FileProcessor(**config)
+params = config.get('metadata_filter_and_shuffle_info', {})
+processor = FileProcessor(**params)
+processor.process_files()
 
-process_files(source, species_count_data, rare_threshold=1000, cap_threshold=5000, part_size=500, 
-rare_dir='Dev_Folders/data_v0/rare_cases', cap_filtered_dir_train='Dev_Folders/data_v0/tmp_cap_filtered', 
-capped_dir='Dev_Folders/data_v0/overthecap_cases', merged_dir='Dev_Folders/data_v0/merged_cases', save_config = 'Dev_Folders/data_v0/cap_th_chunk_config.yml',
-files_per_chunk=10, random_seed=42)
+'''
 
 # to do:  add # of species filter
 '''
+
 ''' 
 # get images
 

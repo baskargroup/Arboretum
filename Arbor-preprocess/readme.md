@@ -22,3 +22,44 @@ Metadata Processor:
     The process_all_files method processes all parquet files in the source folder.
     It uses multithreading to process multiple files concurrently.
     The results are saved in CSV files in the destination folder.
+
+File Processor
+    FileProcessor is a class to process data files. Filters rare cases, caps frequent cases, and shuffles the data into specified parts.
+
+    inputs:
+        - species_count_data: Path to the species count data file.
+        - directory: Path to the directory containing the original parquet files.
+        - rare_threshold: Threshold for rare cases (default: 10). If any species has less than this count, it will be considered rare.
+        - cap_threshold: Threshold for frequent cases (default: 1000). If any species has more than this count, it will be capped.
+        - part_size: Size of each part after shuffling (default: 500). The data will be shuffled and split into parts of this size.
+        - rare_dir: Directory to save rare cases (default: 'rare_cases'). 
+        - cap_filtered_dir_train: Directory to save capped and filtered cases (default: 'cap_filtered_train').
+        - capped_dir: Directory to save capped cases (default: 'capped_cases').
+        - merged_dir: Directory to save merged shuffled files (default: 'merged_cases').
+        - files_per_chunk: Number of files to merge into a single chunk (default: 5).
+        - random_seed: Random seed for shuffling (default: 42).
+    
+    outputs:
+        - Saves rare cases, capped cases, and shuffled parts in specified directories.
+
+    in config.json:
+        "metadata_filter_and_shuffle_info": {
+        "species_count_data": "path/to/species_counts.csv",
+        "directory": "path/to/data",
+        "rare_threshold": 10,
+        "cap_threshold": 12,
+        "part_size": 50,
+        "rare_dir": "path/to/rare_cases",
+        "cap_filtered_dir_train": "path/to/cap_filtered_train",
+        "capped_dir": "path/to/capped_cases",
+        "merged_dir": "path/to/merged_cases",
+        "files_per_chunk": 10,
+        "random_seed": 42
+    }
+        
+    Example usage:
+    config = load_config('config.json')
+    processor = FileProcessor(**config)
+    params = config.get('metadata_filter_and_shuffle_info', {})
+    processor = FileProcessor(**params)
+    processor.process_files()
