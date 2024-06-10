@@ -1,36 +1,36 @@
 {
     "metadata_processor_info": {
-        "source_folder": "Dev_Folders/metadata_samples_w_common/",
-        "destination_folder": "Dev_Folders/data_v2/species_count_data",
+        "source_folder": "Dev_Folders/Arboretum-Full-samples/",
+        "destination_folder": "Dev_Folders/data_v4/species_count_data",
         "categories": ["Aves", "Arachnida", "Insecta", "Plantae", "Fungi", "Mollusca", "Reptilia"]
     },
 
     "metadata_filter_and_shuffle_info": {
-    "species_count_data": "Dev_Folders/data_v2/species_count_data/combined_sample_counts_per_species.csv",
-    "directory": "Dev_Folders/metadata_samples_w_common/",
+    "species_count_data": "Dev_Folders/data_v4/species_count_data/combined_sample_counts_per_species.csv",
+    "directory": "Dev_Folders/Arboretum-Full-samples/",
     "rare_threshold": 10,
     "cap_threshold": 12,
     "part_size": 50,
-    "rare_dir": "Dev_Folders/data_v2/rare_cases",
-    "cap_filtered_dir_train": "Dev_Folders/data_v2/tmp_cap_filtered",
-    "capped_dir": "Dev_Folders/data_v2/overthecap_cases",
-    "merged_dir": "Dev_Folders/data_v2/processed_metadata",
+    "rare_dir": "Dev_Folders/data_v4/rare_cases",
+    "cap_filtered_dir_train": "Dev_Folders/data_v4/tmp_cap_filtered",
+    "capped_dir": "Dev_Folders/data_v4/overthecap_cases",
+    "merged_dir": "Dev_Folders/data_v4/processed_metadata",
     "files_per_chunk": 10,
     "random_seed": 42
     },
 
       "image_download_info": {
-        "processed_metadata_folder" : "Dev_Folders/data_v2/processed_metadata", 
-        "output_folder" :"Dev_Folders/data_v2/img_txt", 
+        "processed_metadata_folder" : "Dev_Folders/data_v4/processed_metadata", 
+        "output_folder" :"Dev_Folders/data_v4/img_txt", 
         "start_index" : 0,
-        "end_index" : 100,
+        "end_index" : 2,
         "concurrent_downloads" : 1000
         },
 
     "img_text_gen_info": {
-        "processed_metadata_folder" : "Dev_Folders/data_v2/processed_metadata", 
-        "img_folder" :"Dev_Folders/data_v2/img_txt",
-        "generate_tar" : false
+        "processed_metadata_folder" : "Dev_Folders/data_v4/processed_metadata", 
+        "img_folder" :"Dev_Folders/data_v4/img_txt",
+        "generate_tar" : true
         }
 
 }
