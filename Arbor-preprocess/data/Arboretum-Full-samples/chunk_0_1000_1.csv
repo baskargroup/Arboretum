@@ -1,0 +1,875 @@
+photo_id,scientificName,kingdom,phylum,class,order,family,genus,species,common_name,photo_url
+22295,Steatoda grossa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,grossa,False Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/22295/medium.JPG
+22296,Steatoda grossa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,grossa,False Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/22296/medium.jpg
+22617,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/22617/medium.jpg
+22704,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/22704/medium.jpg
+54196,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/54196/medium.JPG
+60963,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/60963/medium.JPG
+60978,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/60978/medium.JPG
+4745,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/4745/medium.jpg
+4746,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/4746/medium.jpg
+19363,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/19363/medium.jpg
+20626,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/20626/medium.png
+82557,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/82557/medium.jpg
+90490,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/90490/medium.jpg
+119308,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/119308/medium.jpg
+119655,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/119655/medium.jpg
+193297,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/193297/medium.jpg
+209173,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/209173/medium.jpg
+209174,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/209174/medium.jpg
+210859,Uroctonus mordax,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Uroctonus,mordax,Western Forest Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/210859/medium.jpg
+22618,Alopecosa kochi,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Alopecosa,kochi,Koch's Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/22618/medium.jpg
+2329,Alopecosa kochi,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Alopecosa,kochi,Koch's Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2329/medium.jpg
+22839,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/22839/medium.jpg
+27250,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/27250/medium.jpg
+27251,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/27251/medium.jpg
+65455,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/65455/medium.jpg
+120,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/120/medium.jpg
+1925,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/1925/medium.jpg
+1930,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/1930/medium.jpg
+1945,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/1945/medium.jpg
+2945,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/2945/medium.jpg
+2946,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/2946/medium.jpg
+6433,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/6433/medium.jpg
+11928,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/11928/medium.jpg
+11929,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/11929/medium.jpg
+11930,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/11930/medium.jpg
+88221,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/88221/medium.jpg
+193820,Calisoga longitarsis,Animalia,Arthropoda,Arachnida,Araneae,Nemesiidae,Calisoga,longitarsis,False Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/193820/medium.jpg
+22840,Arctosa littoralis,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Arctosa,littoralis,Beach Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/22840/medium.jpg
+22841,Arctosa littoralis,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Arctosa,littoralis,Beach Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/22841/medium.jpg
+110649,Arctosa littoralis,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Arctosa,littoralis,Beach Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/110649/medium.jpg
+23047,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/23047/medium.jpg
+23048,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/23048/medium.jpg
+526,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/526/medium.jpg
+20624,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/20624/medium.png
+173839,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/173839/medium.jpg
+183704,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183704/medium.JPG
+192206,Pholcus phalangioides,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Pholcus,phalangioides,Skull Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192206/medium.JPG
+23926,Hadrurus arizonensis,Animalia,Arthropoda,Arachnida,Scorpiones,Hadruridae,Hadrurus,arizonensis,Desert Hairy Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/23926/medium.JPG
+181251,Hadrurus arizonensis,Animalia,Arthropoda,Arachnida,Scorpiones,Hadruridae,Hadrurus,arizonensis,Desert Hairy Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/181251/medium.jpg
+24360,Menemerus bivittatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Menemerus,bivittatus,Gray Wall Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/24360/medium.jpg
+24583,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/24583/medium.JPG
+24584,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/24584/medium.JPG
+69031,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/69031/medium.jpg
+69643,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/69643/medium.JPG
+69637,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/69637/medium.JPG
+69638,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/69638/medium.JPG
+69641,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/69641/medium.JPG
+92482,Steatoda triangulosa,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,triangulosa,Triangulate Comb-foot,http://inaturalist-open-data.s3.amazonaws.com/photos/92482/medium.JPG
+25153,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/25153/medium.jpg
+25154,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/25154/medium.jpg
+38219,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/38219/medium.jpg
+57523,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/57523/medium.JPG
+57534,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/57534/medium.JPG
+17480,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/17480/medium.jpg
+78807,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/78807/medium.JPG
+119687,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/119687/medium.jpg
+147480,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/147480/medium.JPG
+178892,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178892/medium.JPG
+184498,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184498/medium.jpg
+184497,Argiope argentata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,argentata,Silver Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184497/medium.jpg
+25227,Lyssomanes viridis,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Lyssomanes,viridis,Magnolia Green Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/25227/medium.jpg
+64454,Lyssomanes viridis,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Lyssomanes,viridis,Magnolia Green Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/64454/medium.jpg
+25705,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/25705/medium.JPG
+34585,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/34585/medium.jpg
+43161,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/43161/medium.jpg
+43162,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/43162/medium.jpg
+46232,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/46232/medium.JPG
+46233,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/46233/medium.JPG
+52661,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/52661/medium.jpg
+52662,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/52662/medium.jpg
+52663,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/52663/medium.jpg
+9683,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/9683/medium.jpg
+16314,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16314/medium.jpg
+16314,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16314/medium.jpg
+16315,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16315/medium.jpg
+16784,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16784/medium.jpg
+16785,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16785/medium.jpg
+16786,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16786/medium.jpg
+16787,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16787/medium.jpg
+68984,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68984/medium.jpg
+85491,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/85491/medium.jpg
+156197,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/156197/medium.jpg
+165796,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/165796/medium.jpg
+165797,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/165797/medium.jpg
+168622,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168622/medium.jpg
+168610,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168610/medium.jpg
+168611,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168611/medium.jpg
+168615,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168615/medium.jpg
+168616,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168616/medium.jpg
+168617,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168617/medium.jpg
+141412,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/141412/medium.jpg
+141413,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/141413/medium.jpg
+141414,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/141414/medium.jpg
+141434,Misumena vatia,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumena,vatia,Goldenrod Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/141434/medium.JPG
+25759,Trichonephila senegalensis,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,senegalensis,banded-legged golden orb-web spider,http://inaturalist-open-data.s3.amazonaws.com/photos/25759/medium.jpg
+26527,Ixodes pacificus,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,pacificus,Western Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/26527/medium.JPG
+36014,Ixodes pacificus,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,pacificus,Western Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/36014/medium.JPG
+92568,Ixodes pacificus,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,pacificus,Western Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/92568/medium.JPG
+29449,Phidippus johnsoni,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,johnsoni,Johnson's Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/29449/medium.jpg
+29450,Phidippus johnsoni,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,johnsoni,Johnson's Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/29450/medium.jpg
+29451,Phidippus johnsoni,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,johnsoni,Johnson's Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/29451/medium.jpg
+34711,Phidippus johnsoni,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,johnsoni,Johnson's Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/34711/medium.jpg
+3115,Phidippus johnsoni,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,johnsoni,Johnson's Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/3115/medium.jpg
+89021,Phidippus johnsoni,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,johnsoni,Johnson's Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/89021/medium.jpg
+30121,Argiope australis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,australis,Common Garden Orbweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/30121/medium.jpg
+30124,Argiope australis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,australis,Common Garden Orbweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/30124/medium.jpg
+30515,Hyllus diardi,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hyllus,diardi,Heavy Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/30515/medium.jpg
+208999,Hyllus diardi,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hyllus,diardi,Heavy Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/208999/medium.jpg
+209019,Hyllus diardi,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hyllus,diardi,Heavy Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/209019/medium.jpg
+30520,Crossopriza lyoni,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Crossopriza,lyoni,Tailed Daddy Longlegs Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/30520/medium.jpg
+30652,Dermacentor occidentalis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,occidentalis,Pacific Coast Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/30652/medium.jpg
+57625,Dermacentor occidentalis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,occidentalis,Pacific Coast Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/57625/medium.JPG
+87473,Dermacentor occidentalis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,occidentalis,Pacific Coast Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/87473/medium.jpg
+31149,Pelegrina aeneola,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Pelegrina,aeneola,Coppered White-cheeked Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/31149/medium.JPG
+13633345,Pelegrina aeneola,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Pelegrina,aeneola,Coppered White-cheeked Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/13633345/medium.jpg
+171950,Pelegrina aeneola,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Pelegrina,aeneola,Coppered White-cheeked Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/171950/medium.jpg
+33183,Platycryptus undatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Platycryptus,undatus,Tan Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/33183/medium.jpg
+51837,Platycryptus undatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Platycryptus,undatus,Tan Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/51837/medium.jpg
+185072,Platycryptus undatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Platycryptus,undatus,Tan Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/185072/medium.JPG
+34568,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/34568/medium.jpg
+62248,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/62248/medium.JPG
+62249,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/62249/medium.JPG
+64633,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/64633/medium.jpg
+9354,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/9354/medium.jpg
+10027,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/10027/medium.jpg
+9354,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/9354/medium.jpg
+18901,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/18901/medium.JPG
+18902,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/18902/medium.JPG
+20931,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/20931/medium.jpg
+66804,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/66804/medium.JPG
+77224,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/77224/medium.jpg
+79640,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/79640/medium.jpg
+79641,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/79641/medium.jpg
+79642,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/79642/medium.jpg
+146192,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/146192/medium.JPG
+166406,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/166406/medium.JPG
+166376,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/166376/medium.JPG
+133834,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/133834/medium.jpg
+136338,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/136338/medium.JPG
+174419,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/174419/medium.jpg
+179792,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/179792/medium.jpg
+182163,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/182163/medium.JPG
+186362,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/186362/medium.jpg
+186363,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/186363/medium.jpg
+190399,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/190399/medium.jpg
+190400,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/190400/medium.jpg
+190401,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/190401/medium.jpg
+196900,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/196900/medium.JPG
+196897,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/196897/medium.JPG
+199650,Araneus diadematus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,diadematus,Cross Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/199650/medium.JPG
+34590,Araniella displicata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araniella,displicata,Six-spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/34590/medium.jpg
+34636,Argiope aemula,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aemula,Oval St. Andrew's Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/34636/medium.jpg
+34676,Diplocentrus spitzeri,Animalia,Arthropoda,Arachnida,Scorpiones,Diplocentridae,Diplocentrus,spitzeri,Spitzer's Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/34676/medium.jpg
+35035,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/35035/medium.jpg
+35036,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/35036/medium.jpg
+63555,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63555/medium.jpg
+68843,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68843/medium.jpg
+125339,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/125339/medium.jpg
+158156,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/158156/medium.JPG
+166384,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166384/medium.JPG
+166403,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166403/medium.JPG
+175743,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/175743/medium.jpg
+187898,Pisaurina mira,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaurina,mira,American Nursery Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/187898/medium.jpg
+35043,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/35043/medium.jpg
+68988,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68988/medium.jpg
+69035,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/69035/medium.jpg
+94132,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/94132/medium.jpg
+111156,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/111156/medium.JPG
+158123,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/158123/medium.JPG
+166988,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166988/medium.JPG
+172427,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172427/medium.JPG
+207161,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/207161/medium.jpg
+198616,Dolomedes tenebrosus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,tenebrosus,Dark Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/198616/medium.jpg
+38926,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/38926/medium.jpg
+36587,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/36587/medium.jpg
+37726,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/37726/medium.jpg
+37727,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/37727/medium.jpg
+99275,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/99275/medium.jpg
+131685,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/131685/medium.JPG
+142298,Dermacentor variabilis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Dermacentor,variabilis,American Dog Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/142298/medium.JPG
+90585250,Phalangium opilio,Animalia,Arthropoda,Arachnida,Opiliones,Phalangiidae,Phalangium,opilio,European Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/90585250/medium.jpeg
+90585265,Phalangium opilio,Animalia,Arthropoda,Arachnida,Opiliones,Phalangiidae,Phalangium,opilio,European Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/90585265/medium.jpeg
+158317,Phalangium opilio,Animalia,Arthropoda,Arachnida,Opiliones,Phalangiidae,Phalangium,opilio,European Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/158317/medium.JPG
+199069,Phalangium opilio,Animalia,Arthropoda,Arachnida,Opiliones,Phalangiidae,Phalangium,opilio,European Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/199069/medium.JPG
+199070,Phalangium opilio,Animalia,Arthropoda,Arachnida,Opiliones,Phalangiidae,Phalangium,opilio,European Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/199070/medium.JPG
+44015,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/44015/medium.jpg
+44016,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/44016/medium.jpg
+55313,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/55313/medium.jpg
+68845,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/68845/medium.jpg
+139454,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/139454/medium.JPG
+139455,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/139455/medium.JPG
+140799,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/140799/medium.JPG
+140800,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/140800/medium.JPG
+143526,Leiobunum vittatum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,vittatum,Eastern Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/143526/medium.JPG
+47899,Philodromus rufus,Animalia,Arthropoda,Arachnida,Araneae,Philodromidae,Philodromus,rufus,Red Running Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/47899/medium.jpg
+47900,Philodromus rufus,Animalia,Arthropoda,Arachnida,Araneae,Philodromidae,Philodromus,rufus,Red Running Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/47900/medium.jpg
+45125,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/45125/medium.jpg
+45118,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/45118/medium.jpg
+45126,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/45126/medium.jpg
+139654,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139654/medium.jpg
+139655,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139655/medium.jpg
+139656,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139656/medium.jpg
+139657,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139657/medium.jpg
+7381302,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/7381302/medium.jpg
+143143,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143143/medium.JPG
+143133,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143133/medium.JPG
+143142,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143142/medium.JPG
+177327,Paraphidippus aurantius,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Paraphidippus,aurantius,Golden Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/177327/medium.jpg
+46265,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/46265/medium.jpg
+46276,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/46276/medium.jpg
+57056,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/57056/medium.jpg
+57057,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/57057/medium.jpg
+57330,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/57330/medium.JPG
+57331,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/57331/medium.JPG
+58496,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/58496/medium.jpg
+63738,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63738/medium.jpg
+398,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/398/medium.jpg
+67945,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/67945/medium.JPG
+68061,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68061/medium.JPG
+68063,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68063/medium.JPG
+68840,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68840/medium.jpg
+662329,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/662329/medium.jpg
+69033,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/69033/medium.jpg
+69463,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/69463/medium.jpg
+69464,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/69464/medium.jpg
+91862,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/91862/medium.JPG
+145560,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/145560/medium.JPG
+152616,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/152616/medium.JPG
+154808,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/154808/medium.jpg
+160135,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/160135/medium.jpg
+162511,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/162511/medium.jpg
+162512,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/162512/medium.JPG
+162526,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/162526/medium.jpg
+172522,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172522/medium.JPG
+172523,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172523/medium.JPG
+173391,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/173391/medium.JPG
+174273,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/174273/medium.JPG
+178445,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178445/medium.JPG
+194155,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/194155/medium.jpg
+196770,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/196770/medium.JPG
+201799,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/201799/medium.jpg
+201807,Argiope aurantia,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,aurantia,Yellow Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/201807/medium.jpg
+46664,Parabuthus raudus,Animalia,Arthropoda,Arachnida,Scorpiones,Buthidae,Parabuthus,raudus,Rough Thick-tailed Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/46664/medium.jpg
+46665,Zeria monteiri,Animalia,Arthropoda,Arachnida,Solifugae,Solpugidae,Zeria,monteiri,Pale Moon Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/46665/medium.jpg
+46666,Zeria monteiri,Animalia,Arthropoda,Arachnida,Solifugae,Solpugidae,Zeria,monteiri,Pale Moon Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/46666/medium.jpg
+46965,Aceria brachytarsa,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aceria,brachytarsa,California Black Walnut Pouch Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/46965/medium.JPG
+46966,Aceria brachytarsa,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aceria,brachytarsa,California Black Walnut Pouch Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/46966/medium.JPG
+46967,Aceria brachytarsa,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aceria,brachytarsa,California Black Walnut Pouch Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/46967/medium.JPG
+46968,Aceria brachytarsa,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aceria,brachytarsa,California Black Walnut Pouch Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/46968/medium.JPG
+47681,Avicularia rufa,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Avicularia,rufa,Yellow-banded Pinktoe Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/47681/medium.jpg
+47682,Avicularia rufa,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Avicularia,rufa,Yellow-banded Pinktoe Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/47682/medium.jpg
+48151,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/48151/medium.jpg
+48156,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/48156/medium.jpg
+48152,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/48152/medium.jpg
+48155,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/48155/medium.jpg
+126003,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/126003/medium.jpg
+162723,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/162723/medium.JPG
+165666,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/165666/medium.JPG
+168582,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/168582/medium.JPG
+168588,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/168588/medium.JPG
+168590,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/168590/medium.JPG
+177568,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/177568/medium.JPG
+177570,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/177570/medium.JPG
+188671,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/188671/medium.jpg
+188746,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/188746/medium.jpg
+188747,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/188747/medium.jpg
+188748,Neoscona crucifera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,crucifera,Hentz's Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/188748/medium.jpg
+48870,Aphonopelma johnnycashi,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,johnnycashi,Johnny Cash Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/48870/medium.jpg
+9165,Aphonopelma johnnycashi,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,johnnycashi,Johnny Cash Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/9165/medium.jpg
+50472,Neriene litigiosa,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Neriene,litigiosa,Sierra Dome Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/50472/medium.jpg
+3990,Neriene litigiosa,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Neriene,litigiosa,Sierra Dome Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/3990/medium.jpg
+3991,Neriene litigiosa,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Neriene,litigiosa,Sierra Dome Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/3991/medium.jpg
+3992,Neriene litigiosa,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Neriene,litigiosa,Sierra Dome Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/3992/medium.jpg
+172042,Neriene litigiosa,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Neriene,litigiosa,Sierra Dome Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172042/medium.jpg
+172043,Neriene litigiosa,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Neriene,litigiosa,Sierra Dome Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172043/medium.JPG
+52879,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/52879/medium.jpg
+56704,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/56704/medium.JPG
+61008,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/61008/medium.jpg
+121,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/121/medium.jpg
+69032,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/69032/medium.jpg
+81602,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/81602/medium.jpg
+108806,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/108806/medium.jpg
+155294,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/155294/medium.JPG
+168073,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/168073/medium.jpg
+173608,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/173608/medium.jpg
+173611,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/173611/medium.jpg
+180955,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/180955/medium.jpg
+188062,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/188062/medium.jpg
+189907,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/189907/medium.JPG
+216519,Latrodectus hesperus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hesperus,Western Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/216519/medium.jpg
+51825,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/51825/medium.jpg
+51840,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/51840/medium.jpg
+64039,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/64039/medium.jpg
+92372,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/92372/medium.JPG
+126017,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/126017/medium.jpg
+149060,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/149060/medium.JPG
+149071,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/149071/medium.JPG
+149072,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/149072/medium.JPG
+165731,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/165731/medium.JPG
+165714,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/165714/medium.JPG
+172500,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/172500/medium.JPG
+172501,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/172501/medium.JPG
+172502,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/172502/medium.JPG
+172503,Micrathena gracilis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,gracilis,Spined Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/172503/medium.JPG
+52452,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/52452/medium.jpg
+171820,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/171820/medium.jpg
+175159,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/175159/medium.jpg
+180541,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/180541/medium.jpg
+183130,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183130/medium.jpg
+183131,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183131/medium.jpg
+183132,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183132/medium.jpg
+183133,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183133/medium.jpg
+183134,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183134/medium.jpg
+183135,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183135/medium.jpg
+183136,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/183136/medium.jpg
+187194,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/187194/medium.jpg
+196785,Nephila pilipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,pilipes,Giant Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/196785/medium.jpg
+54187,Paruroctonus silvestrii,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Paruroctonus,silvestrii,California common scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/54187/medium.jpg
+54328,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/54328/medium.JPG
+54329,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/54329/medium.JPG
+54330,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/54330/medium.JPG
+146803,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/146803/medium.JPG
+146804,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/146804/medium.JPG
+146802,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/146802/medium.JPG
+163082,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/163082/medium.JPG
+163083,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/163083/medium.JPG
+162039,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/162039/medium.JPG
+162040,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/162040/medium.JPG
+162041,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/162041/medium.JPG
+162042,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/162042/medium.JPG
+198487,Araneus trifolium,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,trifolium,Shamrock Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/198487/medium.jpg
+54396,Anuroctonus phaiodactylus,Animalia,Arthropoda,Arachnida,Scorpiones,Chactidae,Anuroctonus,phaiodactylus,Eastern Swollenstinger Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/54396/medium.JPG
+54397,Anuroctonus phaiodactylus,Animalia,Arthropoda,Arachnida,Scorpiones,Chactidae,Anuroctonus,phaiodactylus,Eastern Swollenstinger Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/54397/medium.JPG
+54404,Anuroctonus phaiodactylus,Animalia,Arthropoda,Arachnida,Scorpiones,Chactidae,Anuroctonus,phaiodactylus,Eastern Swollenstinger Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/54404/medium.JPG
+55315,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/55315/medium.jpg
+68851,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/68851/medium.jpg
+68986,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/68986/medium.jpg
+75725,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/75725/medium.jpg
+95163,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/95163/medium.jpg
+95161,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/95161/medium.jpg
+95164,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/95164/medium.jpg
+95159,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/95159/medium.jpg
+95160,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/95160/medium.jpg
+114646,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/114646/medium.jpg
+114644,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/114644/medium.jpg
+114645,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/114645/medium.jpg
+114647,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/114647/medium.jpg
+118638,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/118638/medium.JPG
+122385,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/122385/medium.jpg
+172382,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/172382/medium.JPG
+174521,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/174521/medium.JPG
+174522,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/174522/medium.JPG
+184730,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/184730/medium.JPG
+185070,Phidippus audax,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,audax,Bold Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/185070/medium.jpg
+57035,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/57035/medium.jpg
+57036,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/57036/medium.jpg
+57040,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/57040/medium.jpg
+57041,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/57041/medium.jpg
+57042,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/57042/medium.jpg
+57152,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/57152/medium.jpg
+59042,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/59042/medium.jpg
+59043,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/59043/medium.jpg
+62741,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/62741/medium.JPG
+62842,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/62842/medium.jpg
+62843,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/62843/medium.jpg
+62844,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/62844/medium.jpg
+63011,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63011/medium.JPG
+63012,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63012/medium.JPG
+63017,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63017/medium.JPG
+63010,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63010/medium.JPG
+63009,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63009/medium.JPG
+63013,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63013/medium.JPG
+63023,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/63023/medium.JPG
+730,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/730/medium.jpg
+731,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/731/medium.jpg
+732,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/732/medium.jpg
+1260,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/1260/medium.jpg
+5152,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/5152/medium.jpg
+5153,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/5153/medium.jpg
+5154,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/5154/medium.jpg
+5155,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/5155/medium.jpg
+6390,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/6390/medium.jpg
+18271,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/18271/medium.jpg
+18272,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/18272/medium.jpg
+18273,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/18273/medium.jpg
+18290,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/18290/medium.jpg
+19211,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/19211/medium.jpg
+99858,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/99858/medium.jpg
+99859,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/99859/medium.jpg
+99860,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/99860/medium.jpg
+99861,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/99861/medium.jpg
+99862,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/99862/medium.jpg
+99863,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/99863/medium.jpg
+105218,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/105218/medium.JPG
+154983,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/154983/medium.jpg
+161582,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/161582/medium.jpg
+168576,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/168576/medium.jpg
+168577,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/168577/medium.jpg
+169855,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/169855/medium.jpg
+169856,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/169856/medium.jpg
+172769,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/172769/medium.jpg
+188343,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/188343/medium.jpg
+188345,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/188345/medium.jpg
+190074,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/190074/medium.jpg
+190075,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/190075/medium.jpg
+190077,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/190077/medium.jpg
+190078,Aphonopelma iodius,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,iodius,Desert Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/190078/medium.jpg
+58894,Aceria elongata,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aceria,elongata,Crimson Erineum Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/58894/medium.JPG
+60206,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/60206/medium.jpg
+60197,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/60197/medium.jpg
+63596,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63596/medium.jpg
+63597,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63597/medium.jpg
+840,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/840/medium.jpg
+18870,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/18870/medium.jpg
+67946,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/67946/medium.jpg
+91830,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/91830/medium.JPG
+125697,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/125697/medium.jpg
+22730,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/22730/medium.jpg
+157547,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/157547/medium.jpg
+162703,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/162703/medium.JPG
+165789,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/165789/medium.JPG
+165790,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/165790/medium.JPG
+174276,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/174276/medium.JPG
+175951,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/175951/medium.JPG
+178465,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178465/medium.JPG
+179850,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/179850/medium.JPG
+179851,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/179851/medium.JPG
+184678,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184678/medium.jpg
+184679,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184679/medium.jpg
+187479,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/187479/medium.jpg
+191059,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/191059/medium.jpg
+191058,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/191058/medium.JPG
+191060,Argiope trifasciata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,trifasciata,Banded Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/191060/medium.jpg
+64083,Aphonopelma hentzi,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,hentzi,Texas Brown Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/64083/medium.jpg
+180734,Aphonopelma hentzi,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,hentzi,Texas Brown Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/180734/medium.jpg
+196913,Aphonopelma hentzi,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,hentzi,Texas Brown Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/196913/medium.JPG
+63097,Cyrtophora moluccensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyrtophora,moluccensis,Dome Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63097/medium.jpg
+63416,Cyrtophora moluccensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyrtophora,moluccensis,Dome Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63416/medium.jpg
+89632,Cyrtophora moluccensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyrtophora,moluccensis,Dome Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/89632/medium.JPG
+89666,Cyrtophora moluccensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyrtophora,moluccensis,Dome Web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/89666/medium.JPG
+63401,Nephila kuhli,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,kuhli,Black Golden Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/63401/medium.jpg
+194966,Nephila kuhli,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephila,kuhli,Black Golden Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/194966/medium.jpg
+63412,Tylorida ventralis,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tylorida,ventralis,Big-bellied Tylorida,http://inaturalist-open-data.s3.amazonaws.com/photos/63412/medium.jpg
+63734,Micrathena sagittata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,sagittata,Arrow-shaped Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/63734/medium.jpg
+159168,Micrathena sagittata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,sagittata,Arrow-shaped Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/159168/medium.jpg
+63920,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/63920/medium.jpg
+2181,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/2181/medium.jpg
+74929,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/74929/medium.jpg
+76647,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/76647/medium.jpg
+76648,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/76648/medium.jpg
+78664,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/78664/medium.jpg
+92558,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/92558/medium.JPG
+145561,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/145561/medium.JPG
+185660,Gasteracantha cancriformis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Gasteracantha,cancriformis,Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/185660/medium.jpg
+63921,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/63921/medium.jpg
+1960,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/1960/medium.jpg
+2178,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2178/medium.jpg
+15351,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/15351/medium.jpg
+20601,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/20601/medium.jpg
+72809,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/72809/medium.jpg
+97834,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/97834/medium.jpg
+91863,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/91863/medium.JPG
+153325,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/153325/medium.jpeg
+156726,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/156726/medium.jpg
+139196,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139196/medium.jpg
+139252,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139252/medium.jpg
+139331,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139331/medium.jpg
+177420,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/177420/medium.JPG
+185661,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/185661/medium.jpg
+185663,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/185663/medium.jpg
+188250,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/188250/medium.jpg
+207494,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/207494/medium.jpg
+199806,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/199806/medium.jpg
+201919,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/201919/medium.jpg
+202163,Trichonephila clavipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,clavipes,Golden Silk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/202163/medium.jpg
+64036,Araneus marmoreus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,marmoreus,Marbled Orb Weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/64036/medium.jpg
+91887,Araneus marmoreus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,marmoreus,Marbled Orb Weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/91887/medium.JPG
+64455,Heteropoda venatoria,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,venatoria,Giant Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/64455/medium.jpg
+170153,Heteropoda venatoria,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,venatoria,Giant Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170153/medium.jpg
+180523,Heteropoda venatoria,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,venatoria,Giant Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/180523/medium.jpg
+184943,Heteropoda venatoria,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,venatoria,Giant Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184943/medium.jpg
+64456,Leucauge argyrobapta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,argyrobapta,Mabel Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/64456/medium.jpg
+68047,Leucauge argyrobapta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,argyrobapta,Mabel Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/68047/medium.JPG
+174591,Leucauge argyrobapta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,argyrobapta,Mabel Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/174591/medium.jpg
+64634,Mecaphesa asperata,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Mecaphesa,asperata,Northern Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/64634/medium.jpg
+155775,Mecaphesa asperata,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Mecaphesa,asperata,Northern Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/155775/medium.JPG
+155790,Mecaphesa asperata,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Mecaphesa,asperata,Northern Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/155790/medium.JPG
+170338,Mecaphesa asperata,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Mecaphesa,asperata,Northern Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170338/medium.JPG
+66360,Neoscona oaxacensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,oaxacensis,Western Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/66360/medium.JPG
+156552,Neoscona oaxacensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,oaxacensis,Western Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/156552/medium.jpg
+166861,Neoscona oaxacensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,oaxacensis,Western Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/166861/medium.JPG
+184700,Neoscona oaxacensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,oaxacensis,Western Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/184700/medium.jpg
+184701,Neoscona oaxacensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,oaxacensis,Western Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/184701/medium.jpg
+113,Badumna longinqua,Animalia,Arthropoda,Arachnida,Araneae,Desidae,Badumna,longinqua,Grey House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/113/medium.jpg
+114,Badumna longinqua,Animalia,Arthropoda,Arachnida,Araneae,Desidae,Badumna,longinqua,Grey House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/114/medium.jpg
+190268,Badumna longinqua,Animalia,Arthropoda,Arachnida,Araneae,Desidae,Badumna,longinqua,Grey House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/190268/medium.jpg
+310,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/310/medium.jpg
+311,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/311/medium.jpg
+4212,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/4212/medium.jpg
+71795,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/71795/medium.JPG
+71797,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/71797/medium.JPG
+174236,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/174236/medium.jpg
+199372,Thelacantha brevispina,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Thelacantha,brevispina,Asian Spinybacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/199372/medium.JPG
+591,Tigrosa helluo,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Tigrosa,helluo,Wetland Giant Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/591/medium.jpg
+97181,Tigrosa helluo,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Tigrosa,helluo,Wetland Giant Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/97181/medium.JPG
+158718,Tigrosa helluo,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Tigrosa,helluo,Wetland Giant Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/158718/medium.jpg
+194218,Tigrosa helluo,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Tigrosa,helluo,Wetland Giant Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/194218/medium.JPG
+194217,Tigrosa helluo,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Tigrosa,helluo,Wetland Giant Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/194217/medium.JPG
+754,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/754/medium.jpg
+1989,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/1989/medium.jpg
+14809,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/14809/medium.jpg
+77882,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/77882/medium.JPG
+80922,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/80922/medium.jpg
+85252,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/85252/medium.jpg
+182023,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/182023/medium.JPG
+182025,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/182025/medium.JPG
+206533,Atypoides riversi,Animalia,Arthropoda,Arachnida,Araneae,Antrodiaetidae,Atypoides,riversi,California Turret Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/206533/medium.jpg
+1618,Metepeira arizonica,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Metepeira,arizonica,Arizona Labyrinth Orb-Weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/1618/medium.jpg
+1621,Metepeira arizonica,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Metepeira,arizonica,Arizona Labyrinth Orb-Weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/1621/medium.jpg
+2229,Olios giganteus,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Olios,giganteus,Giant Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2229/medium.jpg
+2232,Olios giganteus,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Olios,giganteus,Giant Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2232/medium.jpg
+2231,Scotophaeus blackwalli,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Scotophaeus,blackwalli,Mouse Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2231/medium.jpg
+2233,Scotophaeus blackwalli,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Scotophaeus,blackwalli,Mouse Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2233/medium.jpg
+2288,Loxosceles deserta,Animalia,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,deserta,Desert Recluse,http://inaturalist-open-data.s3.amazonaws.com/photos/2288/medium.jpg
+2289,Loxosceles deserta,Animalia,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,deserta,Desert Recluse,http://inaturalist-open-data.s3.amazonaws.com/photos/2289/medium.jpg
+4027,Myrmaplata plataleoides,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Myrmaplata,plataleoides,Red Weaver Ant-mimicking Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/4027/medium.jpg
+4214,Myrmaplata plataleoides,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Myrmaplata,plataleoides,Red Weaver Ant-mimicking Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/4214/medium.jpg
+5319,Eriophora ravilla,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eriophora,ravilla,Tropical Orbweaver Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/5319/medium.jpg
+5320,Eriophora ravilla,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eriophora,ravilla,Tropical Orbweaver Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/5320/medium.jpg
+139417,Eriophora ravilla,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eriophora,ravilla,Tropical Orbweaver Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139417/medium.jpg
+199803,Eriophora ravilla,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eriophora,ravilla,Tropical Orbweaver Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/199803/medium.jpg
+5491,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/5491/medium.jpg
+5492,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/5492/medium.jpg
+68836,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/68836/medium.jpg
+68841,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/68841/medium.jpg
+94327,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/94327/medium.jpg
+130525,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/130525/medium.jpg
+130526,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/130526/medium.jpg
+145548,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/145548/medium.JPG
+154847,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/154847/medium.JPG
+154848,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/154848/medium.JPG
+154849,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/154849/medium.JPG
+131944,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/131944/medium.JPG
+131949,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/131949/medium.JPG
+139456,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/139456/medium.JPG
+139457,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/139457/medium.JPG
+139555,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/139555/medium.jpg
+139653,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/139653/medium.jpg
+144500,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/144500/medium.jpg
+144540,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/144540/medium.jpg
+198302,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/198302/medium.JPG
+198303,Leucauge venusta,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,venusta,Orchard Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/198303/medium.JPG
+5596,Herpyllus propinquus,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Herpyllus,propinquus,Western Parson Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/5596/medium.jpg
+9305,Phytoptus avellanae,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Phytoptidae,Phytoptus,avellanae,Big Bud Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/9305/medium.jpg
+9654,Pisaura mirabilis,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaura,mirabilis,European Nursery Web spider,http://inaturalist-open-data.s3.amazonaws.com/photos/9654/medium.jpg
+9655,Pisaura mirabilis,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaura,mirabilis,European Nursery Web spider,http://inaturalist-open-data.s3.amazonaws.com/photos/9655/medium.jpg
+109075,Pisaura mirabilis,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Pisaura,mirabilis,European Nursery Web spider,http://inaturalist-open-data.s3.amazonaws.com/photos/109075/medium.jpg
+14021,Tetragnatha versicolor,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tetragnatha,versicolor,Versicolor Long-jawed Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/14021/medium.jpg
+15720,Sphodros atlanticus,Animalia,Arthropoda,Arachnida,Araneae,Atypidae,Sphodros,atlanticus,Atlantic Purseweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/15720/medium.jpg
+15721,Sphodros atlanticus,Animalia,Arthropoda,Arachnida,Araneae,Atypidae,Sphodros,atlanticus,Atlantic Purseweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/15721/medium.jpg
+16363,Habronattus oregonensis,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Habronattus,oregonensis,Oregon Paradise Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16363/medium.jpg
+16364,Habronattus oregonensis,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Habronattus,oregonensis,Oregon Paradise Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16364/medium.jpg
+16365,Habronattus oregonensis,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Habronattus,oregonensis,Oregon Paradise Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/16365/medium.jpg
+17113,Hottentotta tamulus,Animalia,Arthropoda,Arachnida,Scorpiones,Buthidae,Hottentotta,tamulus,Indian Red Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/17113/medium.jpg
+17114,Hottentotta tamulus,Animalia,Arthropoda,Arachnida,Scorpiones,Buthidae,Hottentotta,tamulus,Indian Red Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/17114/medium.jpg
+17216,Larinioides cornutus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,cornutus,Furrow Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/17216/medium.jpg
+17217,Larinioides cornutus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,cornutus,Furrow Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/17217/medium.jpg
+178321,Larinioides cornutus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,cornutus,Furrow Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/178321/medium.jpg
+197931,Larinioides cornutus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,cornutus,Furrow Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/197931/medium.JPG
+68312,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/68312/medium.jpg
+68313,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/68313/medium.jpg
+68316,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/68316/medium.jpg
+92790,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/92790/medium.jpg
+112254,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/112254/medium.jpg
+117776,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/117776/medium.JPG
+128953,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/128953/medium.jpg
+208640,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/208640/medium.JPG
+208641,Ixodes scapularis,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,scapularis,Blacklegged Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/208641/medium.JPG
+90584782,Porrhothele antipodiana,Animalia,Arthropoda,Arachnida,Araneae,Porrhothelidae,Porrhothele,antipodiana,Black Tunnelweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/90584782/medium.jpeg
+68837,Neoscona domiciliorum,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,domiciliorum,Red-femured Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/68837/medium.jpg
+69021,Neoscona domiciliorum,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,domiciliorum,Red-femured Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/69021/medium.jpg
+172526,Neoscona domiciliorum,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,domiciliorum,Red-femured Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/172526/medium.JPG
+172525,Neoscona domiciliorum,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,domiciliorum,Red-femured Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/172525/medium.JPG
+178183,Neoscona domiciliorum,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,domiciliorum,Red-femured Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/178183/medium.jpg
+68839,Eris militaris,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Eris,militaris,Bronze Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/68839/medium.jpg
+68957,Eris militaris,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Eris,militaris,Bronze Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/68957/medium.jpg
+69034,Eris militaris,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Eris,militaris,Bronze Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/69034/medium.jpg
+188445,Eris militaris,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Eris,militaris,Bronze Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/188445/medium.JPG
+68842,Larinioides sclopetarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,sclopetarius,Grey Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68842/medium.jpg
+168254,Larinioides sclopetarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,sclopetarius,Grey Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168254/medium.jpg
+168255,Larinioides sclopetarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,sclopetarius,Grey Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168255/medium.jpg
+184763,Larinioides sclopetarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,sclopetarius,Grey Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184763/medium.JPG
+184762,Larinioides sclopetarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,sclopetarius,Grey Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184762/medium.JPG
+184764,Larinioides sclopetarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Larinioides,sclopetarius,Grey Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184764/medium.JPG
+68844,Mecynogea lemniscata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Mecynogea,lemniscata,Basilica Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/68844/medium.jpg
+139049,Mecynogea lemniscata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Mecynogea,lemniscata,Basilica Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139049/medium.jpg
+68849,Leiobunum verrucosum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,verrucosum,Warty Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/68849/medium.jpg
+117392,Leiobunum verrucosum,Animalia,Arthropoda,Arachnida,Opiliones,Sclerosomatidae,Leiobunum,verrucosum,Warty Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/117392/medium.jpg
+69037,Uloborus glomosus,Animalia,Arthropoda,Arachnida,Araneae,Uloboridae,Uloborus,glomosus,Featherlegged Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/69037/medium.jpg
+69038,Uloborus glomosus,Animalia,Arthropoda,Arachnida,Araneae,Uloboridae,Uloborus,glomosus,Featherlegged Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/69038/medium.jpg
+69414,Argiope appensa,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,appensa,Hawaiian Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/69414/medium.jpg
+75372,Argiope appensa,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,appensa,Hawaiian Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/75372/medium.jpg
+178916,Argiope appensa,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,appensa,Hawaiian Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178916/medium.jpg
+199369,Argiope appensa,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,appensa,Hawaiian Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/199369/medium.JPG
+70151,Dolomedes minor,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,minor,Nurseryweb spider,http://inaturalist-open-data.s3.amazonaws.com/photos/70151/medium.JPG
+70733,Araneus quadratus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,quadratus,Four-spot Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/70733/medium.jpg
+132658,Araneus quadratus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,quadratus,Four-spot Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/132658/medium.jpg
+72704,Mituliodon tarantulinus,Animalia,Arthropoda,Arachnida,Araneae,Miturgidae,Mituliodon,tarantulinus,Little Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/72704/medium.JPG
+73721,Holconia immanis,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Holconia,immanis,Grey Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/73721/medium.JPG
+73742,Leucauge dromedaria,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,dromedaria,Silver Orb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/73742/medium.JPG
+74218,Kukulcania hibernalis,Animalia,Arthropoda,Arachnida,Araneae,Filistatidae,Kukulcania,hibernalis,Southern House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/74218/medium.JPG
+150585,Kukulcania hibernalis,Animalia,Arthropoda,Arachnida,Araneae,Filistatidae,Kukulcania,hibernalis,Southern House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/150585/medium.jpg
+150586,Kukulcania hibernalis,Animalia,Arthropoda,Arachnida,Araneae,Filistatidae,Kukulcania,hibernalis,Southern House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/150586/medium.jpg
+150587,Kukulcania hibernalis,Animalia,Arthropoda,Arachnida,Araneae,Filistatidae,Kukulcania,hibernalis,Southern House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/150587/medium.jpg
+150588,Kukulcania hibernalis,Animalia,Arthropoda,Arachnida,Araneae,Filistatidae,Kukulcania,hibernalis,Southern House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/150588/medium.jpg
+75288,Eresus kollari,Animalia,Arthropoda,Arachnida,Araneae,Eresidae,Eresus,kollari,Ladybird Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/75288/medium.jpg
+75734,Sphodros rufipes,Animalia,Arthropoda,Arachnida,Araneae,Atypidae,Sphodros,rufipes,Red-legged Purseweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/75734/medium.jpg
+76431,Salsa fuliginata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Salsa,fuliginata,Sooty Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/76431/medium.JPG
+96754,Peucetia viridans,Animalia,Arthropoda,Arachnida,Araneae,Oxyopidae,Peucetia,viridans,Green Lynx Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/96754/medium.jpg
+184699,Peucetia viridans,Animalia,Arthropoda,Arachnida,Araneae,Oxyopidae,Peucetia,viridans,Green Lynx Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184699/medium.jpg
+97346,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/97346/medium.JPG
+97345,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/97345/medium.JPG
+158723,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/158723/medium.JPG
+142486,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142486/medium.JPG
+142487,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142487/medium.JPG
+142488,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142488/medium.JPG
+142489,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142489/medium.JPG
+142490,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142490/medium.JPG
+142491,Dolomedes vittatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,vittatus,Banded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142491/medium.JPG
+103363,Pardosa moesta,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Pardosa,moesta,Shiny Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/103363/medium.jpg
+104809,Argiope florida,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,florida,Florida Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/104809/medium.jpg
+208474,Argiope florida,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,florida,Florida Garden Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/208474/medium.jpg
+81836,Trichonephila fenestrata,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,fenestrata,Hairy Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/81836/medium.jpg
+169599,Trichonephila fenestrata,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,fenestrata,Hairy Golden Orb-weaving Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/169599/medium.JPG
+82249,Harpactira tigrina,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Harpactira,tigrina,Golden Baboon Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/82249/medium.jpg
+83741,Eustala anastera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eustala,anastera,Humpbacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/83741/medium.JPG
+83745,Eustala anastera,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eustala,anastera,Humpbacked Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/83745/medium.JPG
+92139,Mastigoproctus floridanus,Animalia,Arthropoda,Arachnida,Uropygi,Thelyphonidae,Mastigoproctus,floridanus,Florida vinegaroon,http://inaturalist-open-data.s3.amazonaws.com/photos/92139/medium.jpg
+92140,Mastigoproctus floridanus,Animalia,Arthropoda,Arachnida,Uropygi,Thelyphonidae,Mastigoproctus,floridanus,Florida vinegaroon,http://inaturalist-open-data.s3.amazonaws.com/photos/92140/medium.jpg
+92255,Dolomedes triton,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,triton,Six-spotted Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/92255/medium.jpg
+120193,Dolomedes triton,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,triton,Six-spotted Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/120193/medium.jpg
+131083,Dolomedes triton,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,triton,Six-spotted Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/131083/medium.JPG
+145553,Dolomedes triton,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,triton,Six-spotted Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/145553/medium.JPG
+215410,Dolomedes triton,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,triton,Six-spotted Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/215410/medium.jpg
+92484,Scytodes thoracica,Animalia,Arthropoda,Arachnida,Araneae,Scytodidae,Scytodes,thoracica,Spitting Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/92484/medium.JPG
+107408,Dolomedes scriptus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,scriptus,Striped Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/107408/medium.jpg
+158206,Dolomedes scriptus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,scriptus,Striped Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/158206/medium.JPG
+184437,Dolomedes scriptus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,scriptus,Striped Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184437/medium.JPG
+115992,Eriophyes cerasicrumena,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Eriophyes,cerasicrumena,Black Cherry Leaf Gall,http://inaturalist-open-data.s3.amazonaws.com/photos/115992/medium.jpg
+172364,Eriophyes cerasicrumena,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Eriophyes,cerasicrumena,Black Cherry Leaf Gall,http://inaturalist-open-data.s3.amazonaws.com/photos/172364/medium.JPG
+172365,Eriophyes cerasicrumena,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Eriophyes,cerasicrumena,Black Cherry Leaf Gall,http://inaturalist-open-data.s3.amazonaws.com/photos/172365/medium.JPG
+120072,Pirata piraticus,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Pirata,piraticus,Pirate Otter-spider,http://inaturalist-open-data.s3.amazonaws.com/photos/120072/medium.jpg
+120074,Pirata piraticus,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Pirata,piraticus,Pirate Otter-spider,http://inaturalist-open-data.s3.amazonaws.com/photos/120074/medium.jpg
+124092,Sphodros niger,Animalia,Arthropoda,Arachnida,Araneae,Atypidae,Sphodros,niger,Black Purseweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/124092/medium.jpg
+124091,Sphodros niger,Animalia,Arthropoda,Arachnida,Araneae,Atypidae,Sphodros,niger,Black Purseweb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/124091/medium.jpg
+126626,Argiope keyserlingi,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,keyserlingi,St. Andrew's Cross Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/126626/medium.JPG
+126734,Zenodorus orbiculatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Zenodorus,orbiculatus,Ant-eater Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/126734/medium.JPG
+126837,Hygropoda lineata,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Hygropoda,lineata,Northern Lined Hygropoda,http://inaturalist-open-data.s3.amazonaws.com/photos/126837/medium.JPG
+129440,Opistophthalmus wahlbergii,Animalia,Arthropoda,Arachnida,Scorpiones,Scorpionidae,Opistophthalmus,wahlbergii,Kalahari Burrowing Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/129440/medium.jpg
+146100,Micrathena mitrata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,mitrata,White Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/146100/medium.jpg
+146101,Micrathena mitrata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Micrathena,mitrata,White Micrathena,http://inaturalist-open-data.s3.amazonaws.com/photos/146101/medium.jpg
+147003,Tetragnatha elongata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tetragnatha,elongata,Elongate Stilt Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/147003/medium.JPG
+147018,Tetragnatha elongata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tetragnatha,elongata,Elongate Stilt Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/147018/medium.JPG
+147066,Castianeira descripta,Animalia,Arthropoda,Arachnida,Araneae,Corinnidae,Castianeira,descripta,Redspotted Antmimic,http://inaturalist-open-data.s3.amazonaws.com/photos/147066/medium.jpg
+147065,Castianeira descripta,Animalia,Arthropoda,Arachnida,Araneae,Corinnidae,Castianeira,descripta,Redspotted Antmimic,http://inaturalist-open-data.s3.amazonaws.com/photos/147065/medium.jpg
+147070,Castianeira descripta,Animalia,Arthropoda,Arachnida,Araneae,Corinnidae,Castianeira,descripta,Redspotted Antmimic,http://inaturalist-open-data.s3.amazonaws.com/photos/147070/medium.jpg
+148468,Aculus tetanothrix,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aculus,tetanothrix,Willow Bead Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/148468/medium.JPG
+154944,Aculus tetanothrix,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aculus,tetanothrix,Willow Bead Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/154944/medium.jpg
+193430,Aculus tetanothrix,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aculus,tetanothrix,Willow Bead Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/193430/medium.jpg
+148551,Cyclosa turbinata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyclosa,turbinata,Humped Trashline Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/148551/medium.JPG
+148565,Cyclosa turbinata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyclosa,turbinata,Humped Trashline Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/148565/medium.JPG
+150094,Verrucosa arenata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Verrucosa,arenata,Arrowhead Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/150094/medium.JPG
+169777,Verrucosa arenata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Verrucosa,arenata,Arrowhead Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/169777/medium.JPG
+169778,Verrucosa arenata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Verrucosa,arenata,Arrowhead Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/169778/medium.JPG
+150592,Plexippus paykulli,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Plexippus,paykulli,Pantropical Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/150592/medium.jpg
+150593,Plexippus paykulli,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Plexippus,paykulli,Pantropical Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/150593/medium.jpg
+151097,Hogna radiata,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Hogna,radiata,Radiated Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/151097/medium.JPG
+153108,Mecaphesa celer,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Mecaphesa,celer,Swift Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/153108/medium.jpg
+153721,Heliophanus cupreus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Heliophanus,cupreus,Copper Sun Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/153721/medium.jpg
+153748,Zygiella x-notata,Animalia,Arthropoda,Arachnida,Araneae,Phonognathidae,Zygiella,x-notata,Silver-sided Sector Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/153748/medium.jpg
+154931,Vasates aceriscrumena,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Vasates,aceriscrumena,Maple Spindle Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/154931/medium.JPG
+154988,Serradigitus gertschi,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Serradigitus,gertschi,Sawfinger Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/154988/medium.jpg
+155258,Aceria parulmi,Animalia,Arthropoda,Arachnida,Sarcoptiformes,Eriophyidae,Aceria,parulmi,Elm Finger Gall Mite,http://inaturalist-open-data.s3.amazonaws.com/photos/155258/medium.JPG
+156952,Parasteatoda tepidariorum,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Parasteatoda,tepidariorum,Common House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/156952/medium.JPG
+192432,Parasteatoda tepidariorum,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Parasteatoda,tepidariorum,Common House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192432/medium.jpg
+192433,Parasteatoda tepidariorum,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Parasteatoda,tepidariorum,Common House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192433/medium.jpg
+192434,Parasteatoda tepidariorum,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Parasteatoda,tepidariorum,Common House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192434/medium.jpg
+157538,Portia schultzi,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Portia,schultzi,Longleg Dandy,http://inaturalist-open-data.s3.amazonaws.com/photos/157538/medium.jpg
+157539,Araneus apricus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,apricus,Green-pea Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/157539/medium.jpg
+157723,Tmarus angulatus,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Tmarus,angulatus,Tuberculated Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/157723/medium.JPG
+157898,Frontinella pyramitela,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Frontinella,pyramitela,Bowl and Doily Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/157898/medium.JPG
+157915,Frontinella pyramitela,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Frontinella,pyramitela,Bowl and Doily Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/157915/medium.JPG
+158687,Latrodectus variolus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,variolus,Northern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/158687/medium.jpg
+158688,Latrodectus variolus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,variolus,Northern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/158688/medium.jpg
+158685,Latrodectus variolus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,variolus,Northern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/158685/medium.jpg
+158689,Latrodectus variolus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,variolus,Northern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/158689/medium.jpg
+158690,Latrodectus variolus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,variolus,Northern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/158690/medium.jpg
+158714,Araneus bicentenarius,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,bicentenarius,Giant Lichen Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/158714/medium.JPG
+162776,Salticus scenicus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,scenicus,Zebra Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/162776/medium.JPG
+162777,Salticus scenicus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,scenicus,Zebra Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/162777/medium.JPG
+133838,Salticus scenicus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,scenicus,Zebra Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/133838/medium.jpg
+133837,Salticus scenicus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,scenicus,Zebra Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/133837/medium.jpg
+199651,Salticus scenicus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,scenicus,Zebra Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/199651/medium.JPG
+162825,Sergiolus capulatus,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Sergiolus,capulatus,Variegated Ground Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/162825/medium.jpg
+184052,Sergiolus capulatus,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Sergiolus,capulatus,Variegated Ground Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184052/medium.JPG
+184053,Sergiolus capulatus,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Sergiolus,capulatus,Variegated Ground Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184053/medium.JPG
+184054,Sergiolus capulatus,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Sergiolus,capulatus,Variegated Ground Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/184054/medium.JPG
+165107,Misumenoides formosipes,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumenoides,formosipes,White-banded Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/165107/medium.jpg
+166339,Misumenoides formosipes,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumenoides,formosipes,White-banded Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166339/medium.jpg
+168271,Misumenoides formosipes,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumenoides,formosipes,White-banded Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168271/medium.jpg
+168272,Misumenoides formosipes,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Misumenoides,formosipes,White-banded Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168272/medium.jpg
+166425,Steatoda borealis,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,borealis,Boreal Combfoot,http://inaturalist-open-data.s3.amazonaws.com/photos/166425/medium.JPG
+166422,Steatoda borealis,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,borealis,Boreal Combfoot,http://inaturalist-open-data.s3.amazonaws.com/photos/166422/medium.JPG
+166412,Steatoda borealis,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Steatoda,borealis,Boreal Combfoot,http://inaturalist-open-data.s3.amazonaws.com/photos/166412/medium.JPG
+166640,Oecobius navus,Animalia,Arthropoda,Arachnida,Araneae,Oecobiidae,Oecobius,navus,Wall Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166640/medium.jpg
+166744,Meta menardi,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Meta,menardi,European cave spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166744/medium.jpg
+166921,Argyrodes elevatus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Argyrodes,elevatus,Dew-drop Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166921/medium.jpg
+166922,Argyrodes elevatus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Argyrodes,elevatus,Dew-drop Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166922/medium.jpg
+166923,Argyrodes elevatus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Argyrodes,elevatus,Dew-drop Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166923/medium.jpg
+166924,Argyrodes elevatus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Argyrodes,elevatus,Dew-drop Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/166924/medium.jpg
+167091,Amyciaea forticeps,Animalia,Arthropoda,Arachnida,Araneae,Thomisidae,Amyciaea,forticeps,Ant-like Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/167091/medium.jpg
+167591,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/167591/medium.jpg
+167592,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/167592/medium.jpg
+167593,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/167593/medium.jpg
+167594,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/167594/medium.jpg
+167595,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/167595/medium.jpg
+167596,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/167596/medium.jpg
+142150,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/142150/medium.jpg
+142151,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/142151/medium.jpg
+212003,Isopedella leai,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Isopedella,leai,Cinnamon Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/212003/medium.jpg
+167607,Latrodectus hasselti,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hasselti,Redback Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/167607/medium.jpg
+167608,Latrodectus hasselti,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,hasselti,Redback Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/167608/medium.jpg
+168393,Hyptiotes cavatus,Animalia,Arthropoda,Arachnida,Araneae,Uloboridae,Hyptiotes,cavatus,triangle weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/168393/medium.JPG
+168403,Hyptiotes cavatus,Animalia,Arthropoda,Arachnida,Araneae,Uloboridae,Hyptiotes,cavatus,triangle weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/168403/medium.JPG
+168396,Hentzia palmarum,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hentzia,palmarum,Common Hentz Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168396/medium.JPG
+168619,Leucauge fastigata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,fastigata,Pear-shaped Opadometa,http://inaturalist-open-data.s3.amazonaws.com/photos/168619/medium.jpg
+190593,Leucauge fastigata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,fastigata,Pear-shaped Opadometa,http://inaturalist-open-data.s3.amazonaws.com/photos/190593/medium.jpg
+190783,Leucauge fastigata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,fastigata,Pear-shaped Opadometa,http://inaturalist-open-data.s3.amazonaws.com/photos/190783/medium.jpg
+190784,Leucauge fastigata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,fastigata,Pear-shaped Opadometa,http://inaturalist-open-data.s3.amazonaws.com/photos/190784/medium.jpg
+190785,Leucauge fastigata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,fastigata,Pear-shaped Opadometa,http://inaturalist-open-data.s3.amazonaws.com/photos/190785/medium.jpg
+168640,Trichonephila plumipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,plumipes,Tiger Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168640/medium.jpg
+168639,Trichonephila plumipes,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Trichonephila,plumipes,Tiger Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/168639/medium.jpg
+170846,Rabidosa rabida,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,rabida,Rabid Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170846/medium.jpg
+170841,Rabidosa rabida,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,rabida,Rabid Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170841/medium.jpg
+178178,Rabidosa rabida,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,rabida,Rabid Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178178/medium.jpg
+192539,Rabidosa rabida,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,rabida,Rabid Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192539/medium.JPG
+192541,Rabidosa rabida,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,rabida,Rabid Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192541/medium.JPG
+216047,Rabidosa rabida,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,rabida,Rabid Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/216047/medium.jpg
+170884,Herennia multipuncta,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Herennia,multipuncta,Ornamental Tree Trunk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170884/medium.jpg
+170885,Herennia multipuncta,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Herennia,multipuncta,Ornamental Tree Trunk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170885/medium.jpg
+170977,Herennia multipuncta,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Herennia,multipuncta,Ornamental Tree Trunk Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/170977/medium.jpg
+132271,Cyrtophora citricola,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyrtophora,citricola,Tropical Tent-web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/132271/medium.jpg
+176320,Cyrtophora citricola,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Cyrtophora,citricola,Tropical Tent-web Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/176320/medium.jpg
+132354,Nuctenea umbratica,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Nuctenea,umbratica,Walnut Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/132354/medium.jpg
+132633,Nuctenea umbratica,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Nuctenea,umbratica,Walnut Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/132633/medium.jpg
+4132,Chthonius tenuis,Animalia,Arthropoda,Arachnida,Pseudoscorpiones,Chthoniidae,Chthonius,tenuis,Dark-clawed Chthonid,http://inaturalist-open-data.s3.amazonaws.com/photos/4132/medium.jpg
+14785,Ixodes ricinus,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Ixodes,ricinus,Castor Bean Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/14785/medium.jpg
+133133,Dolomedes fimbriatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,fimbriatus,Raft Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133133/medium.jpg
+133137,Dolomedes fimbriatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,fimbriatus,Raft Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133137/medium.jpg
+133138,Dolomedes fimbriatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,fimbriatus,Raft Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133138/medium.jpg
+133139,Dolomedes fimbriatus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,fimbriatus,Raft Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133139/medium.jpg
+133399,Agalenatea redii,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Agalenatea,redii,Gorse Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/133399/medium.jpg
+133442,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133442/medium.jpg
+133443,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133443/medium.jpg
+133444,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133444/medium.jpg
+133752,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133752/medium.jpg
+133753,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133753/medium.jpg
+143463,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143463/medium.jpg
+143460,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143460/medium.jpg
+143461,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143461/medium.jpg
+143462,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143462/medium.jpg
+143464,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143464/medium.jpg
+143465,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143465/medium.jpg
+143466,Agelena labyrinthica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelena,labyrinthica,Labyrinth spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143466/medium.jpg
+133755,Arctosa perita,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Arctosa,perita,Sand Bear Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133755/medium.jpg
+133835,Argiope bruennichi,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,bruennichi,Wasp Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133835/medium.jpg
+133836,Argiope bruennichi,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,bruennichi,Wasp Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/133836/medium.jpg
+134409,Heteropoda maxima,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,maxima,Giant Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/134409/medium.jpg
+134410,Heteropoda maxima,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,maxima,Giant Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/134410/medium.jpg
+134411,Heteropoda maxima,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,maxima,Giant Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/134411/medium.jpg
+134412,Heteropoda maxima,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,maxima,Giant Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/134412/medium.jpg
+134413,Heteropoda maxima,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,maxima,Giant Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/134413/medium.jpg
+134414,Heteropoda maxima,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,maxima,Giant Huntsman Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/134414/medium.jpg
+138206,Phidippus clarus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,clarus,Brilliant Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/138206/medium.JPG
+139241,Eriophora fuliginea,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Eriophora,fuliginea,Tropical Orb Weaver,http://inaturalist-open-data.s3.amazonaws.com/photos/139241/medium.jpg
+139561,Amblyomma americanum,Animalia,Arthropoda,Arachnida,Ixodida,Ixodidae,Amblyomma,americanum,Lone Star Tick,http://inaturalist-open-data.s3.amazonaws.com/photos/139561/medium.jpg
+139564,Yunohamella lyrica,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Yunohamella,lyrica,Lyric Cobweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/139564/medium.jpg
+139574,Naphrys pulex,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Naphrys,pulex,flea jumping spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139574/medium.jpg
+139575,Naphrys pulex,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Naphrys,pulex,flea jumping spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139575/medium.jpg
+139576,Naphrys pulex,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Naphrys,pulex,flea jumping spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139576/medium.jpg
+139577,Naphrys pulex,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Naphrys,pulex,flea jumping spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139577/medium.jpg
+139578,Naphrys pulex,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Naphrys,pulex,flea jumping spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139578/medium.jpg
+139579,Naphrys pulex,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Naphrys,pulex,flea jumping spider,http://inaturalist-open-data.s3.amazonaws.com/photos/139579/medium.jpg
+140150,Nicodamus peregrinus,Animalia,Arthropoda,Arachnida,Araneae,Nicodamidae,Nicodamus,peregrinus,Red-and-black Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/140150/medium.JPG
+142154,Badumna insignis,Animalia,Arthropoda,Arachnida,Araneae,Desidae,Badumna,insignis,Black House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/142154/medium.jpg
+143124,Philodromus marxi,Animalia,Arthropoda,Arachnida,Araneae,Philodromidae,Philodromus,marxi,Metallic Crab Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/143124/medium.JPG
+144235,Araneus cavaticus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Araneus,cavaticus,Barn Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/144235/medium.jpg
+171254,Attulus fasciger,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Attulus,fasciger,Asiatic Wall Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/171254/medium.JPG
+171249,Attulus fasciger,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Attulus,fasciger,Asiatic Wall Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/171249/medium.JPG
+172297,Nephilengys malabarensis,Animalia,Arthropoda,Arachnida,Araneae,Nephilidae,Nephilengys,malabarensis,Asian Hermit Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172297/medium.jpg
+172374,Cheiracanthium inclusum,Animalia,Arthropoda,Arachnida,Araneae,Cheiracanthiidae,Cheiracanthium,inclusum,Agrarian Sac Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172374/medium.JPG
+172375,Cheiracanthium inclusum,Animalia,Arthropoda,Arachnida,Araneae,Cheiracanthiidae,Cheiracanthium,inclusum,Agrarian Sac Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/172375/medium.JPG
+172391,Pelegrina galathea,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Pelegrina,galathea,Peppered Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/172391/medium.JPG
+172392,Pelegrina galathea,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Pelegrina,galathea,Peppered Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/172392/medium.JPG
+173166,Telamonia dimidiata,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Telamonia,dimidiata,Two-striped Telamonia,http://inaturalist-open-data.s3.amazonaws.com/photos/173166/medium.jpg
+173177,Telamonia dimidiata,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Telamonia,dimidiata,Two-striped Telamonia,http://inaturalist-open-data.s3.amazonaws.com/photos/173177/medium.jpg
+174220,Argiope lobata,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Argiope,lobata,Lobed Argiope,http://inaturalist-open-data.s3.amazonaws.com/photos/174220/medium.jpg
+174223,Latrodectus tredecimguttatus,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,tredecimguttatus,European Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/174223/medium.jpg
+174225,Loxosceles rufescens,Animalia,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,rufescens,Mediterranean recluse,http://inaturalist-open-data.s3.amazonaws.com/photos/174225/medium.jpg
+268633382,Holocnemus pluchei,Animalia,Arthropoda,Arachnida,Araneae,Pholcidae,Holocnemus,pluchei,Marbled Cellar Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/268633382/medium.jpeg
+175445,Herpyllus ecclesiasticus,Animalia,Arthropoda,Arachnida,Araneae,Gnaphosidae,Herpyllus,ecclesiasticus,Parson Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/175445/medium.JPG
+177456,Psalmopoeus reduncus,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Psalmopoeus,reduncus,Costa Rican orangemouth tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/177456/medium.JPG
+178266,Plebs eburnus,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Plebs,eburnus,Bush Orb Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178266/medium.jpg
+178293,Hibana gracilis,Animalia,Arthropoda,Arachnida,Araneae,Anyphaenidae,Hibana,gracilis,garden ghost spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178293/medium.JPG
+178306,Pityohyphantes costatus,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Pityohyphantes,costatus,hammock spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178306/medium.JPG
+178305,Pityohyphantes costatus,Animalia,Arthropoda,Arachnida,Araneae,Linyphiidae,Pityohyphantes,costatus,hammock spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178305/medium.JPG
+178603,Peucetia viridis,Animalia,Arthropoda,Arachnida,Araneae,Oxyopidae,Peucetia,viridis,African Green Lynx Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/178603/medium.JPG
+179676,Aphonopelma chalcodes,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,chalcodes,Desert Blonde Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/179676/medium.jpg
+194161,Aphonopelma chalcodes,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,chalcodes,Desert Blonde Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/194161/medium.JPG
+199294,Aphonopelma chalcodes,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,chalcodes,Desert Blonde Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/199294/medium.jpg
+180851,Latrodectus mactans,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,mactans,Southern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/180851/medium.jpg
+187886,Latrodectus mactans,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,mactans,Southern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/187886/medium.jpg
+187885,Latrodectus mactans,Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,mactans,Southern Black Widow,http://inaturalist-open-data.s3.amazonaws.com/photos/187885/medium.jpg
+181644,Centruroides vittatus,Animalia,Arthropoda,Arachnida,Scorpiones,Buthidae,Centruroides,vittatus,Striped Bark Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/181644/medium.JPG
+181803,Rabidosa punctulata,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Rabidosa,punctulata,Dotted Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/181803/medium.JPG
+181882,Neoscona orizabensis,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Neoscona,orizabensis,Orizaba Spotted Orbweaver,http://inaturalist-open-data.s3.amazonaws.com/photos/181882/medium.jpg
+182614,Phintella vittata,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phintella,vittata,Banded Phintella,http://inaturalist-open-data.s3.amazonaws.com/photos/182614/medium.jpg
+182645,Phintella vittata,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phintella,vittata,Banded Phintella,http://inaturalist-open-data.s3.amazonaws.com/photos/182645/medium.jpg
+184213,Leucauge decorata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,decorata,Decorative Vleispider,http://inaturalist-open-data.s3.amazonaws.com/photos/184213/medium.JPG
+208987,Leucauge decorata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,decorata,Decorative Vleispider,http://inaturalist-open-data.s3.amazonaws.com/photos/208987/medium.jpg
+209026,Leucauge decorata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,decorata,Decorative Vleispider,http://inaturalist-open-data.s3.amazonaws.com/photos/209026/medium.jpg
+209027,Leucauge decorata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Leucauge,decorata,Decorative Vleispider,http://inaturalist-open-data.s3.amazonaws.com/photos/209027/medium.jpg
+184578,Hyllus semicupreus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hyllus,semicupreus,Heavy-bodied Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/184578/medium.JPG
+184589,Hyllus semicupreus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hyllus,semicupreus,Heavy-bodied Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/184589/medium.JPG
+184591,Hyllus semicupreus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Hyllus,semicupreus,Heavy-bodied Jumper,http://inaturalist-open-data.s3.amazonaws.com/photos/184591/medium.JPG
+189546,Smeringurus mesaensis,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Smeringurus,mesaensis,Dune Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/189546/medium.jpg
+189547,Smeringurus mesaensis,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Smeringurus,mesaensis,Dune Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/189547/medium.jpg
+189548,Smeringurus mesaensis,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Smeringurus,mesaensis,Dune Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/189548/medium.jpg
+190093,Phidippus comatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,comatus,Hairy Tufted Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/190093/medium.jpg
+190094,Phidippus comatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Phidippus,comatus,Hairy Tufted Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/190094/medium.jpg
+190403,Menemerus semilimbatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Menemerus,semilimbatus,Half-edged Wall Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/190403/medium.JPG
+190402,Menemerus semilimbatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Menemerus,semilimbatus,Half-edged Wall Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/190402/medium.JPG
+190404,Menemerus semilimbatus,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Menemerus,semilimbatus,Half-edged Wall Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/190404/medium.JPG
+190573,Tylorida striata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tylorida,striata,Striated Tylorida,http://inaturalist-open-data.s3.amazonaws.com/photos/190573/medium.jpg
+190609,Tylorida striata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tylorida,striata,Striated Tylorida,http://inaturalist-open-data.s3.amazonaws.com/photos/190609/medium.jpg
+190610,Tylorida striata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tylorida,striata,Striated Tylorida,http://inaturalist-open-data.s3.amazonaws.com/photos/190610/medium.jpg
+190611,Tylorida striata,Animalia,Arthropoda,Arachnida,Araneae,Tetragnathidae,Tylorida,striata,Striated Tylorida,http://inaturalist-open-data.s3.amazonaws.com/photos/190611/medium.jpg
+190812,Olios milleti,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Olios,milleti,Green Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/190812/medium.jpg
+2882228,Hickmania troglodytes,Animalia,Arthropoda,Arachnida,Araneae,Gradungulidae,Hickmania,troglodytes,Tasmanian Cave Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/2882228/medium.JPG
+192918,Agelenopsis aperta,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelenopsis,aperta,Desert Grass Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192918/medium.JPG
+192919,Agelenopsis aperta,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelenopsis,aperta,Desert Grass Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192919/medium.JPG
+192923,Agelenopsis aperta,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelenopsis,aperta,Desert Grass Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192923/medium.JPG
+192924,Agelenopsis aperta,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Agelenopsis,aperta,Desert Grass Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/192924/medium.JPG
+207669,Evarcha jucunda,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Evarcha,jucunda,Mediterranean white-banded spider,http://inaturalist-open-data.s3.amazonaws.com/photos/207669/medium.JPG
+214805,Eratigena duellica,Animalia,Arthropoda,Arachnida,Araneae,Agelenidae,Eratigena,duellica,Giant House Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/214805/medium.jpg
+215508,Mopsus mormon,Animalia,Arthropoda,Arachnida,Araneae,Salticidae,Mopsus,mormon,Green Jumping Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/215508/medium.JPG
+216520,Vaejovis cashi,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Vaejovis,cashi,Cash's Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/216520/medium.jpg
+216561,Xerolycosa nemoralis,Animalia,Arthropoda,Arachnida,Araneae,Lycosidae,Xerolycosa,nemoralis,Burnt Wolf Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/216561/medium.jpg
+216577,Opilio canestrinii,Animalia,Arthropoda,Arachnida,Opiliones,Phalangiidae,Opilio,canestrinii,Canestrini's Harvestman,http://inaturalist-open-data.s3.amazonaws.com/photos/216577/medium.jpg
+216720,Holconia westralia,Animalia,Arthropoda,Arachnida,Araneae,Sparassidae,Holconia,westralia,Western Australian Banded Huntsman,http://inaturalist-open-data.s3.amazonaws.com/photos/216720/medium.JPG
+216721,Austracantha minax,Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Austracantha,minax,Australian Jewel Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/216721/medium.jpg
+194151,Paruroctonus boreus,Animalia,Arthropoda,Arachnida,Scorpiones,Vaejovidae,Paruroctonus,boreus,Northern Scorpion,http://inaturalist-open-data.s3.amazonaws.com/photos/194151/medium.jpg
+199486,Dolomedes albineus,Animalia,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,albineus,Whitebanded Fishing Spider,http://inaturalist-open-data.s3.amazonaws.com/photos/199486/medium.jpg
+201469,Aphonopelma gabeli,Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Aphonopelma,gabeli,Chiricahuan Gray Tarantula,http://inaturalist-open-data.s3.amazonaws.com/photos/201469/medium.JPG

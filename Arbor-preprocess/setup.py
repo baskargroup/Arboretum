@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='arbor_preprocess',
+    name='arbor_process',
     version='0.1.0',
     packages=find_packages(),
     include_package_data=True,
@@ -10,7 +10,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Bella Yang',
     author_email='your_email@example.com',
-    url='https://github.com/yourusername/arbor_preprocess',
+    url='https://github.com/yourusername/arbor_process',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
