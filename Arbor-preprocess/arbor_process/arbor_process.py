@@ -1,4 +1,4 @@
-from generate_capped_small_chunks import FileProcessor, load_config
+from gen_filtered_shuffled_chunks import FileProcessor, load_config
 from metadata_processor import MetadataProcessor
 from get_imgs import GetImages
 from gen_img_txt_pair import GenImgTxtPair
@@ -7,10 +7,11 @@ import asyncio
 def main():
     # Example calls to the functions; modify these calls based on actual use case
     # get data distribution
-    config = load_config('config.json')
-    params = config.get('metadata_filter_and_shuffle_info', {})
-    fp = FileProcessor(**params)
-    fp.process_files()
+    config = load_config(args.config)
+    params = config.get('metadata_processor_info', {})
+    mp = MetadataProcessor(**params)
+    processor.process_all_files()
+
 
     # processor.process_single_file('path_to_single_file.parquet')
     config = load_config('config.json')

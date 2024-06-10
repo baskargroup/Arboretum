@@ -24,8 +24,8 @@ class GetImages:
         asyncio.run(image_downloader.download_images())
     """
 
-    def __init__(self, input_folder, output_folder, start_index=0, end_index=None, concurrent_downloads=1000):
-        self.input_folder = input_folder
+    def __init__(self, processed_metadata_folder, output_folder, start_index=0, end_index=None, concurrent_downloads=1000):
+        self.input_folder = processed_metadata_folder
         self.output_folder = output_folder
         self.start_index = start_index
         self.end_index = end_index

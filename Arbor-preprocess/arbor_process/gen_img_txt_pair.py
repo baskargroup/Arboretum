@@ -27,18 +27,19 @@ class GenImgTxtPair:
         textgen.create_image_text_pairs()
     """
 
-    def __init__(self, metadata, img_folder, output_base_folder):
+    def __init__(self, processed_metadata_folder, img_folder, generate_tar = False):
         """
         Initialize the GenImgTxtPair class with metadata, image folder, and output base folder.
 
         Args:
             metadata (str): Path to the directory containing processed parquet files.
             img_folder (str): Path to the directory containing downloaded images in subfolders.
-            output_base_folder (str): Path to the directory saving the img-text pair data in tar files.
+            generate_tar (bool): Flag to determine whether to generate tar files. Defaults to False
         """
-        self.metadata = metadata
+        self.metadata = processed_metadata_folder
         self.img_folder = img_folder
-        self.output_base_folder = output_base_folder
+        self.output_base_folder = f'{img_folder}_tar'
+        self.generate_tar = generate_tar
 
     @staticmethod
     def create_files_and_json(output_folder, **kwargs):
@@ -112,13 +113,10 @@ class GenImgTxtPair:
         imagelist = [int(os.path.basename(i).split('.')[0]) for i in glob.glob(f'{subfolder_path}/*.jpg')]
         df_s['photo_id'] = df_s['photo_id'].astype(int)
         df = df_s[df_s['photo_id'].isin(imagelist)]
-        elapsed_time = time.time() - start_time
-        print(f"Metadata filtering for {subfolder_name} completed in {elapsed_time:.2f} seconds.")
-
+        
         columns = ['photo_id', 'scientificName', 'kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species', 'common_name']
         values = df[columns]
-        start_time = time.time()
-
+        
         with ThreadPoolExecutor() as executor:
             futures = [executor.submit(self.create_files_and_json, subfolder_path, **row.to_dict()) for _, row in values.iterrows()]
 
@@ -126,7 +124,7 @@ class GenImgTxtPair:
             future.result()
 
         elapsed_time = time.time() - start_time
-        print(f"Metadata files for {subfolder_name} created in {elapsed_time:.2f} seconds.")
+        print(f"Text files for {subfolder_name} created in {elapsed_time:.2f} seconds.")
 
     def create_image_text_pairs(self):
         """
@@ -134,19 +132,21 @@ class GenImgTxtPair:
         """
         subfolders = [os.path.join(self.img_folder, subfolder) for subfolder in os.listdir(self.img_folder) if os.path.isdir(os.path.join(self.img_folder, subfolder))]
 
-        os.makedirs(self.output_base_folder, exist_ok=True)
+        if self.generate_tar:
+                os.makedirs(self.output_base_folder, exist_ok=True)
 
         for subfolder in subfolders:
             subfolder_name = os.path.basename(subfolder)
-            output_tar_file = os.path.join(self.output_base_folder, subfolder_name)
             self.process_subfolder(subfolder)
-
-            start_time = time.time()
-            tar_path = f'{output_tar_file}.tar.gz'
-            with tarfile.open(tar_path, 'w:gz') as tar:
-                tar.add(subfolder, arcname=os.path.basename(output_tar_file))
-            elapsed_time = time.time() - start_time
-            print(f"Tar file for {subfolder_name} created: {tar_path} in {elapsed_time:.2f} seconds.")
+            
+            if self.generate_tar:
+                start_time = time.time()
+                output_tar_file = os.path.join(self.output_base_folder, subfolder_name)
+                tar_path = f'{output_tar_file}.tar'
+                with tarfile.open(tar_path, 'w') as tar:
+                    tar.add(subfolder, arcname=os.path.basename(output_tar_file))
+                elapsed_time = time.time() - start_time
+                print(f"Tar file for {subfolder_name} created: {tar_path} in {elapsed_time:.2f} seconds.")
 
 def load_config(config_path):
     """

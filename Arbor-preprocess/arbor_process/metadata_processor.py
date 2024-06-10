@@ -4,6 +4,7 @@ import json
 import os
 import glob
 from concurrent.futures import ThreadPoolExecutor
+from plotting_func import generate_plots 
 
 """
     MetadataProcessor is a class that processes metadata files in parquet format.
@@ -18,10 +19,19 @@ from concurrent.futures import ThreadPoolExecutor
     outputs:
     - CSV files containing the counts of species and categories
     
+    in config.json:
+    "metadata_processor_info": {
+        "source_folder": "Dev_Folders/metadataChunks_w_common/",
+        "destination_folder": "Dev_Folders/data_v0/",
+        "categories": ["Aves", "Arachnida", "Insecta", "Plantae", "Fungi", "Mollusca", "Reptilia"]
+    }
     Example usage:
-    processor = MetadataProcessor(source_folder='source_folder', destination_folder='destination_folder', categories=['Aves', 'Arachnida', 'Insecta', 'Plantae', 'Fungi', 'Mollusca', 'Reptilia'])
-    processor.process_all_files()
     
+    config = load_config(args.config)
+    params = config.get('metadata_processor_info', {})
+    processor = MetadataProcessor(**params)
+    processor.process_all_files()
+
     The source_folder is the folder containing the parquet files.
     The destination_folder is the folder where the results will be saved.
     The categories are the list of categories to filter the metadata.
@@ -33,15 +43,16 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 class MetadataProcessor:
-    def __init__(self, source_folder='source_folder', destination_folder='destination_folder', categories=None):
+    def __init__(self,source_folder,destination_folder,categories = None):
         """
         Initialize the MetadataProcessor with source and destination folders and categories.
         """
-        if categories is None:
-            categories = ['Aves', 'Arachnida', 'Insecta', 'Plantae', 'Fungi', 'Mollusca', 'Reptilia']
         self.source_folder = source_folder
         self.destination_folder = destination_folder
         self.categories = categories
+        if self.categories is None:
+            self.categories = ['Aves', 'Arachnida', 'Insecta', 'Plantae', 'Fungi', 'Mollusca', 'Reptilia']
+        
 
     @property
     def source_folder(self):
@@ -107,27 +118,43 @@ class MetadataProcessor:
                 (df_parquet['phylum'].isin(self.categories))
         )
         df_filtered = df_parquet[category_filter]
+        
         species_count = df_filtered['species'].value_counts().reset_index()
         species_count.columns = ['species', 'count']
 
+        
         counts = {category: len(df_filtered[df_filtered[category_type] == category])
                   for category, category_type in [('Aves', 'class'), ('Arachnida', 'class'),
                                                   ('Insecta', 'class'), ('Plantae', 'kingdom'),
                                                   ('Fungi', 'kingdom'), ('Mollusca', 'phylum'),
                                                   ('Reptilia', 'class')] if category in self.categories}
         counts_df = pd.DataFrame(counts.items(), columns=['category', 'count'])
-        return species_count, counts_df
+
+        df_filtered['category'] = df_filtered.apply(
+            lambda row: next((category for category, category_type in [('Aves', 'class'), ('Arachnida', 'class'),
+                                                                        ('Insecta', 'class'), ('Plantae', 'kingdom'),
+                                                                        ('Fungi', 'kingdom'), ('Mollusca', 'phylum'),
+                                                                        ('Reptilia', 'class')] if row[category_type] == category), 'Other'),
+            axis=1)
+        
+        # Get the species count within each category
+        species_count_within_category = (
+            df_filtered.groupby(['category', 'species'])
+            .size()
+            .reset_index(name='count')
+        )
+             
+        return species_count_within_category
 
     def process_single_file(self, file):
         """
         Process a single parquet file and save the results.
         """
         df_parquet = pd.read_parquet(file)
-        species_count, counts_df = self._filter_and_count(df_parquet)
+        species_count = self._filter_and_count(df_parquet)
 
         base_name = os.path.basename(file)
-        counts_df.to_csv(f"{self.destination_folder}/counts_{base_name}.csv", index=False)
-        species_count.to_csv(f"{self.destination_folder}/species_counts_{base_name}.csv", index=False)
+        species_count.to_csv(f"{self.destination_folder}/{base_name}_sample_counts_per_species.csv", index=False)
         print(f"Processed file: {file}")
 
     def process_all_files(self):
@@ -145,16 +172,29 @@ class MetadataProcessor:
         """
         Combine results from individual files into summary files.
         """
-        counts_files = glob.glob(os.path.join(self.destination_folder, 'counts_*.csv'))
-        counts = pd.concat([pd.read_csv(file) for file in counts_files])
-        group_counts = counts.groupby('category')['count'].sum().reset_index()
-        group_counts.to_csv(f"{self.destination_folder}/group_counts.csv", index=False)
-
-        species_counts_files = glob.glob(os.path.join(self.destination_folder, 'species_counts_*.csv'))
+        species_counts_files = glob.glob(os.path.join(self.destination_folder, '*_sample_counts_per_species.csv'))
         species_counts = pd.concat([pd.read_csv(file) for file in species_counts_files])
-        species_group_counts = species_counts.groupby('species')['count'].sum().reset_index()
-        species_group_counts.to_csv(f"{self.destination_folder}/species_group_counts.csv", index=False)
+        species_group_counts = species_counts.groupby(['category','species'])['count'].sum().reset_index()
+        species_group_counts.to_csv(f"{self.destination_folder}/combined_sample_counts_per_species.csv", index=False)
+        
+        generate_plots(f"{self.destination_folder}/combined_sample_counts_per_species.csv"
+                      ,f"{self.destination_folder}", min_threshold = 30,max_threshold = 1000)
+                      
         print("Metadata counts have been processed and saved successfully.")
+
+def load_config(config_path):
+    """
+    Load configuration from a JSON file.
+
+    Args:
+        - config_path: Path to the configuration JSON file.
+
+    Returns:
+        - config: Dictionary containing configuration parameters.
+    """
+    with open(config_path, 'r') as config_file:
+        config = json.load(config_file)
+    return config
 
 def main():
     parser = argparse.ArgumentParser(description="Process metadata files.")
@@ -165,22 +205,11 @@ def main():
     if not os.path.exists(args.config):
         raise FileNotFoundError(f"Config file '{args.config}' does not exist.")
 
-    # Load configuration from JSON file
-    with open(args.config, 'r') as config_file:
-        config = json.load(config_file)
+    config = load_config(args.config)
+    
+    params = config.get('metadata_processor_info', {})
 
-    # Access the nested metadata_processor_info
-    processor_info = config.get('metadata_processor_info', {})
-
-    source_folder = processor_info.get('source_folder', 'source_directory')
-    destination_folder = processor_info.get('destination_folder', 'destination_directory')
-    categories = processor_info.get('categories', None)
-
-    processor = MetadataProcessor(
-        source_folder=source_folder,
-        destination_folder=destination_folder,
-        categories=categories
-    )
+    processor = MetadataProcessor(**params)
     processor.process_all_files()
 
 # Example usage:

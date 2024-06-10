@@ -1,36 +1,36 @@
 {
     "metadata_processor_info": {
-        "source_folder": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/",
-        "destination_folder": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/outputs/",
+        "source_folder": "Dev_Folders/metadata_samples_w_common/",
+        "destination_folder": "Dev_Folders/data_v2/species_count_data",
         "categories": ["Aves", "Arachnida", "Insecta", "Plantae", "Fungi", "Mollusca", "Reptilia"]
     },
 
     "metadata_filter_and_shuffle_info": {
-    "species_count_data": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/species_group_counts.csv",
-    "directory": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/",
+    "species_count_data": "Dev_Folders/data_v2/species_count_data/combined_sample_counts_per_species.csv",
+    "directory": "Dev_Folders/metadata_samples_w_common/",
     "rare_threshold": 10,
     "cap_threshold": 12,
     "part_size": 50,
-    "rare_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/rare_cases",
-    "cap_filtered_dir_train": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/tmp_cap_filtered",
-    "capped_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/overthecap_cases",
-    "merged_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/merged_cases",
+    "rare_dir": "Dev_Folders/data_v2/rare_cases",
+    "cap_filtered_dir_train": "Dev_Folders/data_v2/tmp_cap_filtered",
+    "capped_dir": "Dev_Folders/data_v2/overthecap_cases",
+    "merged_dir": "Dev_Folders/data_v2/processed_metadata",
     "files_per_chunk": 10,
     "random_seed": 42
     },
 
-    "img_text_gen_info": {
-        "metadata" : "Dev_Folders/data_v0/merged_cases", 
-        "img_folder" :"Dev_Folders/data_v0/img_txt", 
-        "output_base_folder" : "Dev_Folders/data_v0/img_txt_tar"
+      "image_download_info": {
+        "processed_metadata_folder" : "Dev_Folders/data_v2/processed_metadata", 
+        "output_folder" :"Dev_Folders/data_v2/img_txt", 
+        "start_index" : 0,
+        "end_index" : 100,
+        "concurrent_downloads" : 1000
         },
 
-    "image_download_info": {
-        "input_folder" : "Dev_Folders/data_v0/merged_cases", 
-        "output_folder" :"Dev_Folders/data_v0/img_txt", 
-        "start_index" : 0,
-        "end_index" : 2,
-        "concurrent_downloads" : 1000
+    "img_text_gen_info": {
+        "processed_metadata_folder" : "Dev_Folders/data_v2/processed_metadata", 
+        "img_folder" :"Dev_Folders/data_v2/img_txt",
+        "generate_tar" : false
         }
 
 }

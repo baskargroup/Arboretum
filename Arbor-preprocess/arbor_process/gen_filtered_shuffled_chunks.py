@@ -45,13 +45,11 @@ class FileProcessor:
         
     Example usage:
     config = load_config('config.json')
-    processor = FileProcessor(**config)
     params = config.get('metadata_filter_and_shuffle_info', {})
     processor = FileProcessor(**params)
     processor.process_files()
 
     """
-
     
     def __init__(self, **kwargs):
         self.species_count_data = kwargs.get('species_count_data')
@@ -136,7 +134,7 @@ class FileProcessor:
         for i in tqdm(range(0, len(all_files), self.files_per_chunk), desc="Merging files"):
             chunk_files = all_files[i:i + self.files_per_chunk]
             merged_df = pd.concat([pd.read_parquet(file) for file in chunk_files], ignore_index=True)
-            chunk_filename = os.path.join(self.merged_dir, f'chunks_{i // self.files_per_chunk + 1:04d}.parquet')
+            chunk_filename = os.path.join(self.merged_dir, f'processed_chunks_{i // self.files_per_chunk + 1:04d}.parquet')
             merged_df.to_parquet(chunk_filename, index=False)
             print(f'Saved merged chunk: {chunk_filename}')
 
@@ -176,7 +174,7 @@ def main():
     processor.process_files()
 
 # Example usage:
-# python generate_capped_small_chunks.py --config ../config.json
+# python gen_filtered_shuffled_chunks.py --config ../config.json
 
 if __name__ == "__main__":
     main()
