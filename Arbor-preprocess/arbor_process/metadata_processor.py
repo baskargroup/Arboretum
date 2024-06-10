@@ -4,7 +4,7 @@ import json
 import os
 import glob
 from concurrent.futures import ThreadPoolExecutor
-from plotting_func import generate_plots 
+from .plotting_func import generate_plots 
 
 """
     MetadataProcessor is a class that processes metadata files in parquet format.

@@ -1,4 +1,4 @@
-from gen_filtered_shuffled_chunks import FileProcessor, load_config
+from gen_filtered_shuffled_chunks import GenShuffledChunks, load_config
 from metadata_processor import MetadataProcessor
 from get_imgs import GetImages
 from gen_img_txt_pair import GenImgTxtPair
@@ -16,9 +16,8 @@ def main():
     # processor.process_single_file('path_to_single_file.parquet')
     config = load_config('config.json')
     params = config.get('metadata_filter_and_shuffle_info', {})
-    processor = FileProcessor(**params)
-    processor.process_files()
-    mp.process_all_files()
+    gen_shuffled_chunks = GenShuffledChunks(**params)
+    gen_shuffled_chunks.process_files()
 
     # download images 
     config = load_config('config.json')

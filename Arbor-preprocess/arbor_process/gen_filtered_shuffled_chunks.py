@@ -8,7 +8,7 @@ import json
 import argparse
 from tqdm import tqdm
 
-class FileProcessor:
+class GenShuffledChunks:
     """
     Class to process data files. Filters rare cases, caps frequent cases, and shuffles the data into specified parts.
 
@@ -46,8 +46,8 @@ class FileProcessor:
     Example usage:
     config = load_config('config.json')
     params = config.get('metadata_filter_and_shuffle_info', {})
-    processor = FileProcessor(**params)
-    processor.process_files()
+    gen_shuffled_chunks = GenShuffledChunks(**params)
+    gen_shuffled_chunks.process_files()
 
     """
     
@@ -170,8 +170,8 @@ def main():
     config = load_config(args.config)
     
     params = config.get('metadata_filter_and_shuffle_info', {})
-    processor = FileProcessor(**params)
-    processor.process_files()
+    gen_shuffled_chunks = GenShuffledChunks(**params)
+    gen_shuffled_chunks.process_files()
 
 # Example usage:
 # python gen_filtered_shuffled_chunks.py --config ../config.json

@@ -1,103 +1,117 @@
-Metadata Processor:
-    MetadataProcessor is a class that processes metadata files in parquet format.
-    It filters the metadata based on categories and counts the number of species and categories.
-    The results are saved in CSV files.
-    
-    inputs:
-    - source_folder: the folder containing the parquet files
-    - destination_folder: the folder where the results will be saved
-    - categories: a list of categories to filter the metadata
-    
-    outputs:
-    - CSV files containing the counts of species and categories
-    
-    Example usage:
-    processor = MetadataProcessor(source_folder='source_folder', destination_folder='destination_folder', categories=['Aves', 'Arachnida', 'Insecta', 'Plantae', 'Fungi', 'Mollusca', 'Reptilia'])
-    processor.process_all_files()
-    
-    The source_folder is the folder containing the parquet files.
-    The destination_folder is the folder where the results will be saved.
-    The categories are the list of categories to filter the metadata.
-    
-    The process_all_files method processes all parquet files in the source folder.
-    It uses multithreading to process multiple files concurrently.
-    The results are saved in CSV files in the destination folder.
+# README
 
-File Processor:
-    FileProcessor is a class to process data files. Filters rare cases, caps frequent cases, and shuffles the data into specified parts.
+## Overview
+This script contains classes for processing metadata files, data files, downloading images, and generating text labels for images. It can be run as a Python script or from the command line.
 
-    inputs:
-        - species_count_data: Path to the species count data file.
-        - directory: Path to the directory containing the original parquet files.
-        - rare_threshold: Threshold for rare cases (default: 10). If any species has less than this count, it will be considered rare.
-        - cap_threshold: Threshold for frequent cases (default: 1000). If any species has more than this count, it will be capped.
-        - part_size: Size of each part after shuffling (default: 500). The data will be shuffled and split into parts of this size.
-        - rare_dir: Directory to save rare cases (default: 'rare_cases'). 
-        - cap_filtered_dir_train: Directory to save capped and filtered cases (default: 'cap_filtered_train').
-        - capped_dir: Directory to save capped cases (default: 'capped_cases').
-        - merged_dir: Directory to save merged shuffled files (default: 'merged_cases').
-        - files_per_chunk: Number of files to merge into a single chunk (default: 5).
-        - random_seed: Random seed for shuffling (default: 42).
-    
-    outputs:
-        - Saves rare cases, capped cases, and shuffled parts in specified directories.
+## Classes and Their Descriptions
 
-    in config.json:
-        "metadata_filter_and_shuffle_info": {
-        "species_count_data": "path/to/species_counts.csv",
-        "directory": "path/to/data",
-        "rare_threshold": 10,
-        "cap_threshold": 12,
-        "part_size": 50,
-        "rare_dir": "path/to/rare_cases",
-        "cap_filtered_dir_train": "path/to/cap_filtered_train",
-        "capped_dir": "path/to/capped_cases",
-        "merged_dir": "path/to/merged_cases",
-        "files_per_chunk": 10,
-        "random_seed": 42
-    }
-        
-    Example usage:
-    config = load_config('config.json')
-    processor = FileProcessor(**config)
-    params = config.get('metadata_filter_and_shuffle_info', {})
-    processor = FileProcessor(**params)
-    processor.process_files()
+### 1. MetadataProcessor
+- **Description**: Processes metadata files in parquet format. Filters the metadata based on categories and counts the number of species and categories. Saves the results in CSV files.
 
+- **Inputs**:
+  - `source_folder`: The folder containing the parquet files.
+  - `destination_folder`: The folder where the results will be saved.
+  - `categories`: A list of categories to filter the metadata.
 
-GetImage:
-    GetImage is a class to download images from URLs stored in parquet files asynchronously.
+- **Outputs**:
+  - CSV files containing the counts of species and categories.
 
-    Inputs:
-        - input_folder: Path to the folder containing parquet files.
-        - output_folder: Path to the folder where images will be saved.
-        - start_index: Index of the first parquet file to process (default: 0).
-        - end_index: Index of the last parquet file to process (default: None).
-        - concurrent_downloads: Number of concurrent downloads (default: 1000).
+### 2. GenShuffledChunks
+- **Description**: Processes data files by filtering rare cases, capping frequent cases, and shuffling the data into specified parts.
 
-    Example usage:
-        config = load_config(args.config)
-        params = config.get('image_download_info', {})
-        image_downloader = GetImages(**params)
-        asyncio.run(image_downloader.download_images())
+- **Inputs**:
+  - `species_count_data`: Path to the species count data file.
+  - `directory`: Path to the directory containing the original parquet files.
+  - `rare_threshold`: Threshold for rare cases (default: 10).
+  - `cap_threshold`: Threshold for frequent cases (default: 1000).
+  - `part_size`: Size of each part after shuffling (default: 500).
+  - `rare_dir`: Directory to save rare cases (default: 'rare_cases').
+  - `cap_filtered_dir_train`: Directory to save capped and filtered cases (default: 'cap_filtered_train').
+  - `capped_dir`: Directory to save capped cases (default: 'capped_cases').
+  - `merged_dir`: Directory to save merged shuffled files (default: 'merged_cases').
+  - `files_per_chunk`: Number of files to merge into a single chunk (default: 5).
+  - `random_seed`: Random seed for shuffling (default: 42).
 
-GenImgTxtPair:
-    GenImgTxtPair is a class to generate text labels for the downloaded images.
+- **Outputs**:
+  - Saves rare cases, capped cases, and shuffled parts in specified directories.
 
-    Inputs:
-        - metadata: Path to the directory containing processed parquet files.
-        - img_folder: Path to the directory containing downloaded images in subfolders.
-        - output_base_folder: Path to the directory saving the img-text pair data in tar files.
+### 3. GetImages
+- **Description**: Downloads images from URLs stored in parquet files asynchronously.
 
-    Outputs:
-        - Generate 10 text labels in .txt and .json format for each image and save with each image.
-        - Make tar files from each img-text subfolder.
+- **Inputs**:
+  - `input_folder`: Path to the folder containing parquet files.
+  - `output_folder`: Path to the folder where images will be saved.
+  - `start_index`: Index of the first parquet file to process (default: 0).
+  - `end_index`: Index of the last parquet file to process (default: None).
+  - `concurrent_downloads`: Number of concurrent downloads (default: 1000).
 
-    Example usage:
-        config = load_config(args.config)
-        params = config.get('img_text_gen_info', {})
-        textgen = GenImgTxtPair(**params)
-        textgen.create_image_text_pairs()
-    
+- **Outputs**:
+  - Downloads images to `output_folder`.
 
+### 4. GenImgTxtPair
+- **Description**: Generates text labels for downloaded images.
 
+- **Inputs**:
+  - `metadata`: Path to the directory containing processed parquet files.
+  - `img_folder`: Path to the directory containing downloaded images in subfolders.
+  - `output_base_folder`: Path to the directory saving the img-text pair data in tar files.
+
+- **Outputs**:
+  - Generates 10 text labels in .txt and .json format for each image and saves them with each image.
+  - Makes tar files from each img-text subfolder.
+
+## To Use
+
+### 1. Adjust the `config.json` File
+- The `config.json` file contains the arguments for different classes. Ensure it is updated with the correct paths and parameters before running the script.
+
+### 2. Running as a Python Script
+- To run the entire script sequentially, you can use the provided example script. Comment out any step you do not want to run.
+
+```python
+from arbor_process import *
+import asyncio
+import json
+
+# Load configuration
+config = load_config('config.json')
+
+# Step 1: Process metadata
+params = config.get('metadata_processor_info', {})
+mp = MetadataProcessor(**params)
+mp.process_all_files()
+
+# Step 2: Generate shuffled chunks of metadata
+params = config.get('metadata_filter_and_shuffle_info', {})
+gen_shuffled_chunks = GenShuffledChunks(**params)
+gen_shuffled_chunks.process_files()
+
+# Step 3: Download images
+params = config.get('image_download_info', {})
+gi = GetImages(**params)
+asyncio.run(gi.download_images())
+
+# Step 4: Generate text pairs and create tar files (optional)
+params = config.get('img_text_gen_info', {})
+textgen = GenImgTxtPair(**params)
+textgen.create_image_text_pairs()
+```
+
+### 3. Running from the Command Line
+- Update the `config.json` file with the path to the file and use the following commands to run each step individually.
+
+```bash
+# Step 1: Process metadata
+python arbor_process/metadata_processor.py --config config.json
+
+# Step 2: Generate shuffled chunks of metadata
+python arbor_process/gen_filtered_shuffled_chunks.py --config config.json
+
+# Step 3: Download images
+python arbor_process/get_imgs.py --config config.json
+
+# Step 4: Generate text pairs and create tar files (optional)
+python arbor_process/gen_img_txt_pair.py --config config.json
+```
+
+By following these instructions, you can effectively use the script to process metadata, data files, download images, and generate text labels.
