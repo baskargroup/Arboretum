@@ -7,7 +7,7 @@ import asyncio
 def main():
     # Example calls to the functions; modify these calls based on actual use case
     # get data distribution
-    config = load_config(args.config)
+    config = load_config('config.json')
     params = config.get('metadata_processor_info', {})
     mp = MetadataProcessor(**params)
     processor.process_all_files()
