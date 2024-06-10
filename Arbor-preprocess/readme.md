@@ -23,7 +23,7 @@ Metadata Processor:
     It uses multithreading to process multiple files concurrently.
     The results are saved in CSV files in the destination folder.
 
-File Processor
+File Processor:
     FileProcessor is a class to process data files. Filters rare cases, caps frequent cases, and shuffles the data into specified parts.
 
     inputs:
@@ -63,3 +63,41 @@ File Processor
     params = config.get('metadata_filter_and_shuffle_info', {})
     processor = FileProcessor(**params)
     processor.process_files()
+
+
+GetImage:
+    GetImage is a class to download images from URLs stored in parquet files asynchronously.
+
+    Inputs:
+        - input_folder: Path to the folder containing parquet files.
+        - output_folder: Path to the folder where images will be saved.
+        - start_index: Index of the first parquet file to process (default: 0).
+        - end_index: Index of the last parquet file to process (default: None).
+        - concurrent_downloads: Number of concurrent downloads (default: 1000).
+
+    Example usage:
+        config = load_config(args.config)
+        params = config.get('image_download_info', {})
+        image_downloader = GetImages(**params)
+        asyncio.run(image_downloader.download_images())
+
+GenImgTxtPair:
+    GenImgTxtPair is a class to generate text labels for the downloaded images.
+
+    Inputs:
+        - metadata: Path to the directory containing processed parquet files.
+        - img_folder: Path to the directory containing downloaded images in subfolders.
+        - output_base_folder: Path to the directory saving the img-text pair data in tar files.
+
+    Outputs:
+        - Generate 10 text labels in .txt and .json format for each image and save with each image.
+        - Make tar files from each img-text subfolder.
+
+    Example usage:
+        config = load_config(args.config)
+        params = config.get('img_text_gen_info', {})
+        textgen = GenImgTxtPair(**params)
+        textgen.create_image_text_pairs()
+    
+
+
