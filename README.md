@@ -37,7 +37,23 @@ To edit the websites contents edit the `index.html` file. It contains different 
 
 ## Model validation
 
-For validating the zero-shot accuracy of our trained models and comparing to other benchmarks, we use the [VLHub](https://github.com/penfever/vlhub) repository with some slight modifications. See the README in the linked repo for basic instructions on usage of VLHub for evaluation.
+For validating the zero-shot accuracy of our trained models and comparing to other benchmarks, we use the [VLHub](https://github.com/penfever/vlhub) repository with some slight modifications.
+
+### Pre-Run
+
+After cloning this repository and navigating to the `Arboretum/model_validation` directory, we recommend installing all the project requirements into a conda container; `pip install -r requirements.txt`. Also, before executing a command in VLHub, please add `Arboretum/model_validation/src` to your PYTHONPATH.
+
+```bash
+export PYTHONPATH="$PYTHONPATH:$PWD/src";
+```
+
+### Base Command
+
+A basic Arboretum model evaluation command can be launched as follows:
+
+```bash
+python src/training/main.py --batch-size=32 --workers=8 --imagenet-val "/imagenet/val/" --model="resnet50" --zeroshot-frequency=1 --linear-probe=True --image-size=224 --resume "/PATH/TO/WEIGHTS.pth" --report-to wandb
+```
 
 To use the open_clip model, you have to first run the `model_validation/load_openclip.py` script to get the model weights from Huggingface and save them locally. The Birds 525 dataset can be downloaded here [here](https://www.kaggle.com/datasets/gpiosenka/100-bird-species) and the IP102 Insects dataset can be found [here](https://drive.google.com/drive/folders/1svFSy2Da3cVMvekBwe13mzyx38XZ9xWo). Once you've downloaded the dataset you can reproduce our model evaluations by running `model_validation/src/training/main.py` with specifying the dataset with the `--ds-filter` argument.
 
@@ -54,6 +70,65 @@ To use the open_clip model, you have to first run the `model_validation/load_ope
 - Suggestions, improvements and comments are welcome, simply open an issue or contact me. You can find my contact information at [https://pages.cs.huji.ac.il/eliahu-horwitz/](https://pages.cs.huji.ac.il/eliahu-horwitz/)
 
 ## Acknowledgments
+
+If you find this repository useful, please consider citing these related papers --
+
+VLHub
+
+```bibtex
+@article{
+  feuer2023distributionally,
+  title={Distributionally Robust Classification on a Data Budget},
+  author={Benjamin Feuer and Ameya Joshi and Minh Pham and Chinmay Hegde},
+  journal={Transactions on Machine Learning Research},
+  issn={2835-8856},
+  year={2023},
+  url={https://openreview.net/forum?id=D5Z2E8CNsD},
+  note={}
+}
+```
+
+BioCLIP
+
+```bibtex
+@misc{stevens2024bioclip,
+      title={BioCLIP: A Vision Foundation Model for the Tree of Life}, 
+      author={Samuel Stevens and Jiaman Wu and Matthew J Thompson and Elizabeth G Campolongo and Chan Hee Song and David Edward Carlyn and Li Dong and Wasila M Dahdul and Charles Stewart and Tanya Berger-Wolf and Wei-Lun Chao and Yu Su},
+      year={2024},
+      eprint={2311.18803},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
+OpenCLIP
+
+```bibtex
+@software{ilharco_gabriel_2021_5143773,
+  author       = {Ilharco, Gabriel and
+                  Wortsman, Mitchell and
+                  Wightman, Ross and
+                  Gordon, Cade and
+                  Carlini, Nicholas and
+                  Taori, Rohan and
+                  Dave, Achal and
+                  Shankar, Vaishaal and
+                  Namkoong, Hongseok and
+                  Miller, John and
+                  Hajishirzi, Hannaneh and
+                  Farhadi, Ali and
+                  Schmidt, Ludwig},
+  title        = {OpenCLIP},
+  month        = jul,
+  year         = 2021,
+  note         = {If you use this software, please cite it as below.},
+  publisher    = {Zenodo},
+  version      = {0.1},
+  doi          = {10.5281/zenodo.5143773},
+  url          = {https://doi.org/10.5281/zenodo.5143773}
+}
+```
+
 Parts of this project page were adopted from the [Nerfies](https://nerfies.github.io/) page.
 
 ## Website License
