@@ -17,8 +17,20 @@
     "merged_dir": "/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/data_v0/merged_cases",
     "files_per_chunk": 10,
     "random_seed": 42
-    }
+    },
 
-    
+    "img_text_gen_info": {
+        "metadata" : "Dev_Folders/data_v0/merged_cases", 
+        "img_folder" :"Dev_Folders/data_v0/img_txt", 
+        "output_base_folder" : "Dev_Folders/data_v0/img_txt_tar"
+        },
+
+    "image_download_info": {
+        "input_folder" : "Dev_Folders/data_v0/merged_cases", 
+        "output_folder" :"Dev_Folders/data_v0/img_txt", 
+        "start_index" : 0,
+        "end_index" : 2,
+        "concurrent_downloads" : 1000
+        }
 
 }
