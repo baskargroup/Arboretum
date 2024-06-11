@@ -78,7 +78,7 @@ For BioCLIP-Rare, IP102 Insects, Confounding Species, Fungi and Deepweeds, our p
 | BioCLIP Rare        | https://huggingface.co/datasets/imageomics/rare-species                | model_validation/metadata/bioclip-rare-metadata.csv | --bioclip-rare --taxon MY_TAXON     |
 | Birds525            | https://www.kaggle.com/datasets/gpiosenka/100-bird-species             | model_validation/metadata/birds525_metadata.csv     | --birds /birds525 --ds-filter birds |
 | Confounding Species | TBD                                                                    | model_validation/metadata/confounding_species.csv   | --confounding                       |
-| Deepweeds           | https://www.kaggle.com/datasets/imsparsh/deepweeds                     | TBD                                                 | TBD                                 |
+| Deepweeds           | https://www.kaggle.com/datasets/imsparsh/deepweeds                     | model_validation/metadata/deepweeds_metadata.csv    | --deepweeds                         |
 | Fungi               | http://ptak.felk.cvut.cz/plants/DanishFungiDataset/DF20M-images.tar.gz | model_validation/metadata/fungi_metadata.csv        | --fungi                             |
 | IP102 Insects       | https://www.kaggle.com/datasets/rtlmhjbn/ip02-dataset                  | model_validation/metadata/ins2_metadata.csv         | --insects2                          |
 
