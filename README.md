@@ -1,59 +1,137 @@
 
 
 # Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity
-## [Project page](https://baskargroup.github.io/Arboretum/)
 
+<!-- Banner links -->
+<div style="text-align:center;">
+  <a href="https://baskargroup.github.io/Arboretum/" target="_blank">
+    <img src="https://img.shields.io/badge/Project%20Page-Visit-blue" alt="Project Page" style="margin-right:10px;">
+  </a>
+  <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face">
+  </a>
+  <a href="https://github.com/baskargroup/Arboretum" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Visit-lightgrey" alt="GitHub">
+  </a>
+</div>
 
-### Academic Project Page Template
-This is an academic paper project page template.
+![Banner Image](static/images/banner.png)
 
-
-Example project pages built using this template are:
-- https://vision.huji.ac.il/spectral_detuning/
-- https://vision.huji.ac.il/podd/
-- https://dreamix-video-editing.github.io
-- https://vision.huji.ac.il/conffusion/
-- https://vision.huji.ac.il/3d_ads/
-- https://vision.huji.ac.il/ssrl_ad/
-- https://vision.huji.ac.il/deepsim/
-
-
-
-## Start using the template
-To start using the template click on `Use this Template`.
-
-The template uses html for controlling the content and css for controlling the style. 
-To edit the websites contents edit the `index.html` file. It contains different HTML "building blocks", use whichever ones you need and comment out the rest.  
-
-**IMPORTANT!** Make sure to replace the `favicon.ico` under `static/images/` with one of your own, otherwise your favicon is going to be a dreambooth image of me.
-
-## Components
-- Teaser video
-- Images Carousel
-- Youtube embedding
-- Video Carousel
-- PDF Poster
-- Bibtex citation
+### Contents
+- [Model validation](#model-validation)
+- [Pre-Run](#pre-run)
+- [Base Command](#base-command)
+- [Baseline Models](#baseline-models)
+- [Existing Benchmarks](#existing-benchmarks)
+- [Acknowledgments](#acknowledgments)
 
 ## Model validation
 
-For validating the zero-shot accuracy of our trained models and comparing to other benchmarks, we use the [VLHub](https://github.com/penfever/vlhub) repository with some slight modifications. See the README in the linked repo for basic instructions on usage of VLHub for evaluation.
+For validating the zero-shot accuracy of our trained models and comparing to other benchmarks, we use the [VLHub](https://github.com/penfever/vlhub) repository with some slight modifications.
 
-To use the open_clip model, you have to first run the `model_validation/load_openclip.py` script to get the model weights from Huggingface and save them locally. The Birds 525 dataset can be downloaded here [here](https://www.kaggle.com/datasets/gpiosenka/100-bird-species) and the IP102 Insects dataset can be found [here](https://drive.google.com/drive/folders/1svFSy2Da3cVMvekBwe13mzyx38XZ9xWo). Once you've downloaded the dataset you can reproduce our model evaluations by running `model_validation/src/training/main.py` with specifying the dataset with the `--ds-filter` argument.
+### Pre-Run
 
-## Tips:
-- The `index.html` file contains comments instructing you what to replace, you should follow these comments.
-- The `meta` tags in the `index.html` file are used to provide metadata about your paper 
-(e.g. helping search engine index the website, showing a preview image when sharing the website, etc.)
-- The resolution of images and videos can usually be around 1920-2048, there rarely a need for better resolution that take longer to load. 
-- All the images and videos you use should be compressed to allow for fast loading of the website (and thus better indexing by search engines). For images, you can use [TinyPNG](https://tinypng.com), for videos you can need to find the tradeoff between size and quality.
-- When using large video files (larger than 10MB), it's better to use youtube for hosting the video as serving the video from the website can take time.
-- Using a tracker can help you analyze the traffic and see where users came from. [statcounter](https://statcounter.com) is a free, easy to use tracker that takes under 5 minutes to set up. 
-- This project page can also be made into a github pages website.
-- Replace the favicon to one of your choosing (the default one is of the Hebrew University). 
-- Suggestions, improvements and comments are welcome, simply open an issue or contact me. You can find my contact information at [https://pages.cs.huji.ac.il/eliahu-horwitz/](https://pages.cs.huji.ac.il/eliahu-horwitz/)
+After cloning this repository and navigating to the `Arboretum/model_validation` directory, we recommend installing all the project requirements into a conda container; `pip install -r requirements.txt`. Also, before executing a command in VLHub, please add `Arboretum/model_validation/src` to your PYTHONPATH.
+
+```bash
+export PYTHONPATH="$PYTHONPATH:$PWD/src";
+```
+
+### Base Command
+
+A basic Arboretum model evaluation command can be launched as follows. This example would evaluate a CLIP-ResNet50 checkpoint whose weights resided at the path designated via the `--resume` flag on the ImageNet validation set, and would report the results to Weights and Biases.
+
+```bash
+python src/training/main.py --batch-size=32 --workers=8 --imagenet-val "/imagenet/val/" --model="resnet50" --zeroshot-frequency=1 --image-size=224 --resume "/PATH/TO/WEIGHTS.pth" --report-to wandb
+```
+
+### Baseline Models
+
+We compare our trained checkpoints to three strong baselines. We describe our baselines in the table below, including the required flags to evaluate them.
+
+
+| Model Name  | Origin                                       | Path to checkpoint                        | Runtime Flags                                           |
+|-------------|----------------------------------------------|-------------------------------------------|---------------------------------------------------------|
+| BioCLIP     | https://arxiv.org/abs/2311.18803             | https://huggingface.co/imageomics/bioclip | --model ViT-B-16 --resume "/PATH/TO/bioclip_ckpt.bin"   |
+| OpenAI CLIP | https://arxiv.org/abs/2103.00020             | Downloads automatically                   | --model ViT-B-16 --pretrained=openai                    |
+| MetaCLIP-cc | https://github.com/facebookresearch/MetaCLIP | Downloads automatically                   | --model ViT-L-14-quickgelu --pretrained=metaclip_fullcc |
+
+
+### Existing Benchmarks
+
+In the Arboretum paper, we report results on the following established benchmarks from prior scientific literature: [Birds525](https://www.kaggle.com/datasets/gpiosenka/100-bird-species), [BioCLIP-Rare](https://huggingface.co/datasets/imageomics/rare-species), [IP102 Insects](https://www.kaggle.com/datasets/rtlmhjbn/ip02-dataset), [Fungi](http://ptak.felk.cvut.cz/plants/DanishFungiDataset/DF20M-images.tar.gz), [Deepweeds](https://www.kaggle.com/datasets/imsparsh/deepweeds), and [Confounding Species](https://arxiv.org/abs/2306.02507).
+
+For BioCLIP-Rare, IP102 Insects, Confounding Species, Fungi and Deepweeds, our package expects a valid path to each image to exist in its corresponding metadata file; therefore, **metadata CSV paths must be updated before running each benchmark.**
+
+| Benchmark Name      | Images URL                                                             | Metadata Path                                       | Runtime Flag(s)                     |
+|---------------------|------------------------------------------------------------------------|-----------------------------------------------------|-------------------------------------|
+| BioCLIP Rare        | https://huggingface.co/datasets/imageomics/rare-species                | model_validation/metadata/bioclip-rare-metadata.csv | --bioclip-rare --taxon MY_TAXON     |
+| Birds525            | https://www.kaggle.com/datasets/gpiosenka/100-bird-species             | model_validation/metadata/birds525_metadata.csv     | --birds /birds525 --ds-filter birds |
+| Confounding Species | TBD                                                                    | model_validation/metadata/confounding_species.csv   | --confounding                       |
+| Deepweeds           | https://www.kaggle.com/datasets/imsparsh/deepweeds                     | model_validation/metadata/deepweeds_metadata.csv    | --deepweeds                         |
+| Fungi               | http://ptak.felk.cvut.cz/plants/DanishFungiDataset/DF20M-images.tar.gz | model_validation/metadata/fungi_metadata.csv        | --fungi                             |
+| IP102 Insects       | https://www.kaggle.com/datasets/rtlmhjbn/ip02-dataset                  | model_validation/metadata/ins2_metadata.csv         | --insects2                          |
 
 ## Acknowledgments
+
+If you find this repository useful, please consider citing these related papers --
+
+VLHub
+
+```bibtex
+@article{
+  feuer2023distributionally,
+  title={Distributionally Robust Classification on a Data Budget},
+  author={Benjamin Feuer and Ameya Joshi and Minh Pham and Chinmay Hegde},
+  journal={Transactions on Machine Learning Research},
+  issn={2835-8856},
+  year={2023},
+  url={https://openreview.net/forum?id=D5Z2E8CNsD},
+  note={}
+}
+```
+
+BioCLIP
+
+```bibtex
+@misc{stevens2024bioclip,
+      title={BioCLIP: A Vision Foundation Model for the Tree of Life}, 
+      author={Samuel Stevens and Jiaman Wu and Matthew J Thompson and Elizabeth G Campolongo and Chan Hee Song and David Edward Carlyn and Li Dong and Wasila M Dahdul and Charles Stewart and Tanya Berger-Wolf and Wei-Lun Chao and Yu Su},
+      year={2024},
+      eprint={2311.18803},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
+OpenCLIP
+
+```bibtex
+@software{ilharco_gabriel_2021_5143773,
+  author       = {Ilharco, Gabriel and
+                  Wortsman, Mitchell and
+                  Wightman, Ross and
+                  Gordon, Cade and
+                  Carlini, Nicholas and
+                  Taori, Rohan and
+                  Dave, Achal and
+                  Shankar, Vaishaal and
+                  Namkoong, Hongseok and
+                  Miller, John and
+                  Hajishirzi, Hannaneh and
+                  Farhadi, Ali and
+                  Schmidt, Ludwig},
+  title        = {OpenCLIP},
+  month        = jul,
+  year         = 2021,
+  note         = {If you use this software, please cite it as below.},
+  publisher    = {Zenodo},
+  version      = {0.1},
+  doi          = {10.5281/zenodo.5143773},
+  url          = {https://doi.org/10.5281/zenodo.5143773}
+}
+```
+
 Parts of this project page were adopted from the [Nerfies](https://nerfies.github.io/) page.
 
 ## Website License
