@@ -21,6 +21,7 @@
 - [Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity](#arboretum-a-large-multimodal-dataset-enabling-ai-for-biodiversity)
     - [Contents](#contents)
   - [Data Preprocessing](#data-preprocessing)
+  - [Model Training](#model-training)
   - [Model Validation](#model-validation)
     - [Pre-Run](#pre-run)
     - [Base Command](#base-command)
@@ -39,6 +40,37 @@ The library contains scripts to generate machine learning-ready image-text pairs
 2. *Filtering metadata* based on user-defined thresholds and generating shuffled chunks.
 3. *Downloading images* based on URLs in the metadata.
 4. *Generating text labels* for the images.
+
+## Model Training
+
+We train three models using a modified version of the [BioCLIP / OpenCLIP](https://github.com/Imageomics/bioclip/tree/main/src/training) codebase. Each model is trained for 40 epochs on Arboretum-40M, on 2 nodes, 8xH100 GPUs, on NYU's [Greene](https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene) high-performance compute cluster.
+
+We optimize our hyperparameters prior to training with [Ray](https://docs.ray.io/en/latest/index.html). Our standard training parameters are as follows:
+
+```
+--dataset-type webdataset 
+--pretrained openai 
+--text_type random 
+--dataset-resampled 
+--warmup 5000 
+--batch-size 4096 
+--accum-freq 1 
+--epochs 40
+--workers 8 
+--model ViT-B-16 
+--lr 0.0005 
+--wd 0.0004 
+--precision bf16 
+--beta1 0.98 
+--beta2 0.99 
+--eps 1.0e-6 
+--local-loss 
+--gather-with-grad 
+--ddp-static-graph 
+--grad-checkpointing
+```
+
+For more extensive documentation of the training process and the significance of each hyperparameter, we recommend referencing the OpenCLIP and BioCLIP documentation, respectively.
 
 ## Model Validation
 
