@@ -10,7 +10,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     description='A package for preprocessing data in the Arboretum project.',
-    long_description=open('README.md').read(),
+    long_description=open('README_arbor_process.md').read(),
     long_description_content_type='text/markdown',
     author='Baskar Group',
     url='https://github.com/baskargroup/Arboretum/tree/main/Arbor-preprocess',

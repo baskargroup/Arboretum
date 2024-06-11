@@ -32,7 +32,7 @@
 
 ## Data Preprocessing
 
-**Before using this script, please download the metadata from [Hugging Face](https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum)** and pre-process the data using the `arbor_process` library. The library is located in the `Arboretum/Arbor-preprocess` directory. A detailed description can be found in the [Arbor-preprocess/README](Arbor-preprocess/README%20(znjubery@iastate.edu).md) file.
+**Before using this script, please download the metadata from [Hugging Face](https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum)** and pre-process the data using the `arbor_process` library. The library is located in the `Arboretum/Arbor-preprocess` directory. A detailed description can be found in the [Arbor-preprocess/README](Arbor-preprocess/README_arbor_process.md) file.
 
 The library contains scripts to generate machine learning-ready image-text pairs from the downloaded metadata in four steps:
 
