@@ -10,9 +10,6 @@
   <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank">
     <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face">
   </a>
-  <a href="https://github.com/baskargroup/Arboretum" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-Visit-lightgrey" alt="GitHub">
-  </a>
 </div>
 
 ![Banner Image](static/images/banner.png)
