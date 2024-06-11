@@ -1,44 +1,29 @@
 from arbor_process import *
+import asyncio
 import json
 
-# to do : download metadata from hugging face
+# download metadata from hugging face
+# update config.json with the path to the file
 
-# get distribitions from metadata (source full path : /work/mech-ai-scratch/znjubery/2024/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/')
-'''
-source = '/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/metadataChunks_w_common/'
-destination = '/work/mech-ai-scratch/nirmal/bio_clip/git/Arboretum/Arbor-preprocess/Dev_Folders/outputs/'
-processor = MetadataProcessor(source, destination)
-processor.process_all_files()
-'''
- 
-# to do : notebook or gradio or plotly to interactively investigate the data
-   
-# capped filtered metadata
+# Load configuration
 config = load_config('config.json')
-processor = FileProcessor(**config)
+
+# Step 1: Process metadata
+params = config.get('metadata_processor_info', {})
+mp = MetadataProcessor(**params)
+mp.process_all_files()
+
+# Step 2: Generate shuffled chunks of metadata
 params = config.get('metadata_filter_and_shuffle_info', {})
-processor = FileProcessor(**params)
-processor.process_files()
+gen_shuffled_chunks = GenShuffledChunks(**params)
+gen_shuffled_chunks.process_files()
 
-'''
+# Step 3: Download images
+params = config.get('image_download_info', {})
+gi = GetImages(**params)
+asyncio.run(gi.download_images())
 
-# to do:  add # of species filter
-'''
-
-''' 
-# get images
-
-import asyncio
-asyncio.run(download_images(
-input_folder='Dev_Folders/data_v0/merged_cases', 
-output_folder='Dev_Folders/data_v0/img_txt',
- start_index=0, end_index=2, 
- concurrent_downloads=1000)) 
-'''
-
-# generate image_text 
-'''
-create_image_text_pairs(metadata='Dev_Folders/data_v0/merged_cases', 
-img_folder='Dev_Folders/data_v0/img_txt',
-output_base_folder='Dev_Folders/data_v0/img_txt_tar')
-'''
+# Step 4: Generate text pairs and create tar files (optional)
+params = config.get('img_text_gen_info', {})
+textgen = GenImgTxtPair(**params)
+textgen.create_image_text_pairs()
