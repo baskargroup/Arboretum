@@ -18,12 +18,28 @@
 ![Banner Image](static/images/banner.png)
 
 ### Contents
-- [Model validation](#model-validation)
-- [Pre-Run](#pre-run)
-- [Base Command](#base-command)
-- [Baseline Models](#baseline-models)
-- [Existing Benchmarks](#existing-benchmarks)
-- [Acknowledgments](#acknowledgments)
+- [Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity](#arboretum-a-large-multimodal-dataset-enabling-ai-for-biodiversity)
+    - [Contents](#contents)
+  - [Data Preprocessing](#data-preprocessing)
+  - [Model validation](#model-validation)
+    - [Pre-Run](#pre-run)
+    - [Base Command](#base-command)
+    - [Baseline Models](#baseline-models)
+    - [Existing Benchmarks](#existing-benchmarks)
+  - [Acknowledgments](#acknowledgments)
+  - [Website License](#website-license)
+
+## Data Preprocessing
+
+**Before using this script, please download the metadata from [Hugging Face](https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum)** and pre-process the data using the `arbor_process` library. A detailed description of this library can be found in the [Arbor-preprocess/README](Arbor-preprocess/README%20(znjubery@iastate.edu).md) directory.
+
+The library contains scripts to generate machine learning-ready image-text pairs from the downloaded metadata in four steps:
+
+1. *Processing metadata files* to obtain category and species distribution.
+2. *Filtering metadata* based on user-defined thresholds and generating shuffled chunks.
+3. *Downloading images* based on URLs in the metadata.
+4. *Generating text labels* for the images.
+
 
 ## Model validation
 
