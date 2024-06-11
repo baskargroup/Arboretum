@@ -10,9 +10,6 @@
   <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank">
     <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face">
   </a>
-  <a href="https://github.com/baskargroup/Arboretum" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-Visit-lightgrey" alt="GitHub">
-  </a>
 </div>
 
 ![Banner Image](static/images/banner.png)
@@ -106,12 +103,15 @@ We compare our trained checkpoints to three strong baselines. We describe our ba
 
 ### Existing Benchmarks
 
-In the Arboretum paper, we report results on the following established benchmarks from prior scientific literature: [Birds525](https://www.kaggle.com/datasets/gpiosenka/100-bird-species), [BioCLIP-Rare](https://huggingface.co/datasets/imageomics/rare-species), [IP102 Insects](https://www.kaggle.com/datasets/rtlmhjbn/ip02-dataset), [Fungi](http://ptak.felk.cvut.cz/plants/DanishFungiDataset/DF20M-images.tar.gz), [Deepweeds](https://www.kaggle.com/datasets/imsparsh/deepweeds), and [Confounding Species](https://arxiv.org/abs/2306.02507).
+In the Arboretum paper, we report results on the following established benchmarks from prior scientific literature: [Birds525](https://www.kaggle.com/datasets/gpiosenka/100-bird-species), [BioCLIP-Rare](https://huggingface.co/datasets/imageomics/rare-species), [IP102 Insects](https://www.kaggle.com/datasets/rtlmhjbn/ip02-dataset), [Fungi](http://ptak.felk.cvut.cz/plants/DanishFungiDataset/DF20M-images.tar.gz), [Deepweeds](https://www.kaggle.com/datasets/imsparsh/deepweeds), and [Confounding Species](https://arxiv.org/abs/2306.02507). We also introduce three new benchmarks: Arboretum-Balanced, Arboretum-LifeStages, and Arboretum-Unseen.
 
-For BioCLIP-Rare, IP102 Insects, Confounding Species, Fungi and Deepweeds, our package expects a valid path to each image to exist in its corresponding metadata file; therefore, **metadata CSV paths must be updated before running each benchmark.**
+Our package expects a valid path to each image to exist in its corresponding metadata file; therefore, **metadata CSV paths must be updated before running each benchmark.**
 
 | Benchmark Name      | Images URL                                                             | Metadata Path                                       | Runtime Flag(s)                     |
 |---------------------|------------------------------------------------------------------------|-----------------------------------------------------|-------------------------------------|
+| Arboretum-Balanced  | https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum               | model_validation/metadata/arboretum_test_metadata.csv | --arbor-val --taxon MY_TAXON      |
+| Arboretum-Lifestages | https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum              | model_validation/metadata/final_lifestages_metadata.csv | --lifestages --taxon MY_TAXON   |
+| Arboretum-Rare      | https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum               | model_validation/metadata/arboretum_rare_combined_metadata.csv | --arbor-rare --taxon MY_TAXON |
 | BioCLIP Rare        | https://huggingface.co/datasets/imageomics/rare-species                | model_validation/metadata/bioclip-rare-metadata.csv | --bioclip-rare --taxon MY_TAXON     |
 | Birds525            | https://www.kaggle.com/datasets/gpiosenka/100-bird-species             | model_validation/metadata/birds525_metadata.csv     | --birds /birds525 --ds-filter birds |
 | Confounding Species | TBD                                                                    | model_validation/metadata/confounding_species.csv   | --confounding                       |
