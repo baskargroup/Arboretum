@@ -18,7 +18,7 @@ This repository contains scripts to generate machine learning-ready image-text p
 Use any of the following methods:
 - Clone the repository and navigate to Arbor-preprocess and run the script.
 - Clone the repository and navigate to Arbor-preprocess and `pip install .` to use as a package.
-- **To do** `pip install arbor-process` or `conda install arbor-process`.
+- Or `pip install arbor-process` https://pypi.org/project/arbor-process/V
 
 ### To Test the Installation
 
