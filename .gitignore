@@ -167,3 +167,5 @@ slurm/45892348_train.out
 bird_categories.txt
 scripts/main_slurm.sh
 src/evals/eval_utils/inat_eval.py
+*/__pycache__/
+__pycache__/*
