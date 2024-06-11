@@ -108,7 +108,7 @@ We compare our trained checkpoints to three strong baselines. We describe our ba
 
 In the Arboretum paper, we report results on the following established benchmarks from prior scientific literature: [Birds525](https://www.kaggle.com/datasets/gpiosenka/100-bird-species), [BioCLIP-Rare](https://huggingface.co/datasets/imageomics/rare-species), [IP102 Insects](https://www.kaggle.com/datasets/rtlmhjbn/ip02-dataset), [Fungi](http://ptak.felk.cvut.cz/plants/DanishFungiDataset/DF20M-images.tar.gz), [Deepweeds](https://www.kaggle.com/datasets/imsparsh/deepweeds), and [Confounding Species](https://arxiv.org/abs/2306.02507). We also introduce three new benchmarks: Arboretum-Balanced, Arboretum-LifeStages, and Arboretum-Unseen.
 
-For BioCLIP-Rare, IP102 Insects, Confounding Species, Fungi and Deepweeds, our package expects a valid path to each image to exist in its corresponding metadata file; therefore, **metadata CSV paths must be updated before running each benchmark.**
+Our package expects a valid path to each image to exist in its corresponding metadata file; therefore, **metadata CSV paths must be updated before running each benchmark.**
 
 | Benchmark Name      | Images URL                                                             | Metadata Path                                       | Runtime Flag(s)                     |
 |---------------------|------------------------------------------------------------------------|-----------------------------------------------------|-------------------------------------|
