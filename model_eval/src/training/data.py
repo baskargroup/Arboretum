@@ -669,6 +669,15 @@ def get_csv_test(args, preprocess_fns, target_ds):
     elif target_ds == "arbor-test":
         target_ds_path = "./metadata/arboretum_test_metadata.csv"
         capkey = "taxon!" + args.taxon
+    elif target_ds == "lifestages":
+        target_ds_path = "./metadata/final_lifestages_metadata.csv"
+        capkey = "preproc!class_out"
+    elif target_ds == "plantvillage":
+        target_ds_path = "./metadata/plt_vil_metadata.csv"
+        capkey = "preproc!class"
+    elif target_ds == "deepweeds":
+        target_ds_path = "./metadata/deepweeds_metadata.csv"
+        capkey = "preproc!Species"   
     elif target_ds == "bioclip-rare":
         target_ds_path = "./metadata/bioclip_rare_metadata_n.csv"
         capkey = "taxon!" + args.taxon
@@ -1612,7 +1621,16 @@ def get_data(args, preprocess_fns, epoch=0):
     
     if args.arbor_val:
         data["arbor-test"] = get_csv_test(args, preprocess_fns, "arbor-test")
-    
+        
+    if args.lifestages:
+        data["lifestages"] = get_csv_test(args, preprocess_fns, "lifestages")
+        
+    if args.plantvillage:
+        data["plantvillage"] = get_csv_test(args, preprocess_fns, "plantvillage")    
+        
+    if args.deepweeds:
+        data["deepweeds"] = get_csv_test(args, preprocess_fns, "deepweeds")    
+        
     if args.bioclip_rare:
         data["bioclip-rare"] = get_csv_test(args, preprocess_fns, "bioclip-rare")
     

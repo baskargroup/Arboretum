@@ -488,6 +488,30 @@ def zero_shot_eval(model, data, epoch, args):
         top1, top5 = run(model, classifier, data['birds'].dataloader, args)
         logging.info('Finished zero-shot Birds-525 for model {}.\n Top1 was {}, top5 was {}'.format(args.pretrained,top1, top5))
         import sys; sys.exit()
+    if 'lifestages' in data:
+        logging.info("Starting zero-shot lifestages.")
+        args.classnames = get_lifestages_classes()
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['lifestages'].dataloader, args)
+        results['lifestages-top1'] = top1
+        results['lifestages-top5'] = top5
+    if 'deepweeds' in data:
+        logging.info("Starting zero-shot deepweeds.")
+        args.classnames = get_deepweeds_classes()
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['deepweeds'].dataloader, args)
+        results['deepweeds-top1'] = top1
+        results['deepweeds-top5'] = top5
+    if 'plantvillage' in data:
+        logging.info("Starting zero-shot plantvillage.")
+        args.classnames = get_plantvillage_classes()
+        args.prob_size = len(args.classnames)
+        classifier = zero_shot_classifier(model, args.classnames, inat_template, args)
+        top1, top5 = run(model, classifier, data['plantvillage'].dataloader, args)
+        results['plantvillage-top1'] = top1
+        results['plantvillage-top5'] = top5
     if 'arbor-rare' in data:
         logging.info("Starting zero-shot arbor-rare.")
         args.classnames = get_arboretum_rare_classes(args.taxon)

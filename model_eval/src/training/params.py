@@ -725,6 +725,15 @@ def parse_args():
         "--insects2", action="store_true", help="Run insects2 test set"
     )
     parser.add_argument(
+        "--lifestages", action="store_true", help="Run Lifestages test set"
+    )
+    parser.add_argument(
+        "--deepweeds", action="store_true", help="Run Deepweeds test set"
+    )
+    parser.add_argument(
+        "--plantvillage", action="store_true", help="Run Plant Village test set"
+    )
+    parser.add_argument(
         "--taxon", type=str, default="kingdom", help="Taxon hierarchy level", choices=["kingdom", "phylum", "class", "order", "family", "genus", "species", "scientific_name", "common_name"]
     )
     parser.add_argument("--tokenizer_path", type=str, default=None, help="Path to tokenizer.")

@@ -28,6 +28,36 @@ def get_insecta_id_dict():
     return insecta_id_dict
 
 try:
+    lifestages_path = Path("./metadata/final_lifestages_metadata.csv")
+    lifestages_df = pd.read_csv(lifestages_path)
+except:
+    lifestages_path = Path("vlhub/metadata/final_lifestages_metadata.csv")
+    lifestages_df = pd.read_csv(lifestages_path)
+
+def get_lifestages_classes():
+    return list(lifestages_df["class_out"].unique())
+    
+try:
+    deepweeds_path = Path("./metadata/deepweeds_metadata.csv")
+    deepweeds_df = pd.read_csv(deepweeds_path)
+except:
+    deepweeds_path = Path("vlhub/metadata/deepweeds_metadata.csv")
+    deepweeds_df = pd.read_csv(deepweeds_path)
+
+def get_deepweeds_classes():
+    return list(deepweeds_df["Species"].unique())
+    
+try:
+    plantvillage_path = Path("./metadata/plt_vil_metadata.csv")
+    plantvillage_df = pd.read_csv(plantvillage_path)
+except:
+    plantvillage_path = Path("vlhub/metadata/plt_vil_metadata.csv")
+    plantvillage_df = pd.read_csv(plantvillage_path)
+
+def get_plantvillage_classes():
+    return list(plantvillage_df["class"].unique())
+
+try:
     arbor_rare_path = Path("./metadata/arboretum_rare_combined_metadata.csv")
     arbor_rare_df = pd.read_csv(arbor_rare_path)
 except:
