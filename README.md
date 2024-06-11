@@ -15,7 +15,7 @@
   </a>
 </div>
 
-![Banner Image](static/images/7_categories.png)
+![Banner Image](static/images/banner.png)
 
 ### Contents
 - [Model validation](#model-validation)
