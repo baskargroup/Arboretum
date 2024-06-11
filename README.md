@@ -15,9 +15,9 @@
   </a>
 </div>
 
+![Banner Image](static/images/7_categories.png)
 
 ### Contents
-- [Introduction](#introduction)
 - [Model validation](#model-validation)
 - [Pre-Run](#pre-run)
 - [Base Command](#base-command)
