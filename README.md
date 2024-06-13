@@ -1,21 +1,21 @@
-
-
 # Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity
-
 <!-- Banner links -->
-<div style="text-align:center;">
+<div style="text-align:center; margin-top: 20px;">
   <a href="https://baskargroup.github.io/Arboretum/" target="_blank">
     <img src="https://img.shields.io/badge/Project%20Page-Visit-blue" alt="Project Page" style="margin-right:10px;">
   </a>
   <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank">
-    <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face" style="margin-right:10px;">
   </a>
   <a href="https://pypi.org/project/arbor-process/" target="_blank">
     <img src="https://img.shields.io/badge/PyPI-arbor--process%200.1.0-orange" alt="PyPI arbor-process 0.1.0">
   </a>
 </div>
 
+<hr style="margin: 10px 0; border: 0; border-top: 0.5px solid #ccc;">
+
 ![Banner Image](static/images/banner.png)
+<hr style="margin: 10px 0; border: 0; border-top: 0.5px solid #ccc;">
 
 ### Contents
 - [Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity](#arboretum-a-large-multimodal-dataset-enabling-ai-for-biodiversity)
