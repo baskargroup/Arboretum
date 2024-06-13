@@ -375,9 +375,7 @@
 </section>
 
 <!-- end of data feature -->
-
-<!-- data prep work -->
-<section class="hero is-small is-light">
+<!-- <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">Data Preparation Pipeline</h2>
@@ -394,6 +392,30 @@
       </div>
     </div>
   </div>
+</section> -->
+
+<!-- dataprep -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Data Preparation</h2>
+      <!-- Explanation text space -->
+      <div class="content">
+        <p>
+          Our <a href="https://github.com/baskargroup/Arboretum/blob/main/Arbor-preprocess/README_arbor_process.md" target="_blank" class="underline-link">Github</a> includes the pipeline and <a href="https://pypi.org/project/arbor-process/" target="_blank" class="underline-link">arbor-process</a> package installation instructions for the data preparation. 
+          The metadata can be downloaded from <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank" class="underline-link">HF</a>. This procedure will generate machine learning-ready image-text pairs from the downloaded metadata in four steps:
+        </p>
+      </div>
+      <!-- Static Image with Caption -->
+      <div class="image-container" style="text-align: center;">
+        <img src="static/images/dataprep.png" alt="lifestages" style="width: 80%; height: auto;">
+        <!-- <p class="caption has-text-centered">
+          (a) Example images from Arboretum-Unseen. (b) ARBORETUM-LIFE-STAGES with 20 class labels: four life stages 
+            (egg, larva, pupa, and adult) for five distinct insect species
+        </p> -->
+      </div>
+    </div>
+  </div>
 </section>
 
 <style>
@@ -401,56 +423,7 @@
     text-decoration: underline;
   }
 </style>
-<!-- end of data prep -->
-
-
-
-<!-- data prep work -->
-<!-- <section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Data Benchmark</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <p class="description">
-            This section provides an overview of the data benchmark. The the steps involved in collecting, processing, and 
-            preparing the data for analysis. It covers various techniques and tools used to ensure data quality and consistency.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!-- end of data prep -->
-
-
-
-<!-- Benchmark Lifestages -->
-<!-- <section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">New Benchmark</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <p class="short-description">
-            From Arboretum, we created three new benchmark datasets for fine-grained image classification. 
-            They are- Arboretum-Balanced, Arboretum-Unseen and Arboretum-LifeStages
-          </p>
-
-          <div class="publication-video" id="video-container">
-            <img src="static/images/lifestages.png" alt="Video placeholder" id="video-placeholder" style="cursor: pointer; width: 100%;">
-          </div>
-          <p class="description">
-            (a) Example images from Arboretum-Unseen. (b) ARBORETUM-LIFE-STAGES with 20 class labels: four life stages 
-            (egg, larva, pupa, and adult) for five distinct insect species
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!-- end Benchmark Lifestages -->
+<!-- end of dataprep -->
 
 
 <!-- Lifestages -->
@@ -458,13 +431,11 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">New Benchmark</h2>
-      <!-- Explanation text space -->
       <div class="content">
         <p>
           From Arboretum, we created three new benchmark datasets for fine-grained image classification. They are- Arboretum-Balanced, Arboretum-Unseen and Arboretum-LifeStages
         </p>
       </div>
-      <!-- Static Image with Caption -->
       <div class="image-container" style="text-align: center;">
         <img src="static/images/lifestages.png" alt="lifestages" style="width: 80%; height: auto;">
         <p class="caption has-text-centered">
@@ -476,7 +447,6 @@
   </div>
 </section>
 <!-- End Lifestages -->
-
 
 
 <!-- ArborCLIP model -->
