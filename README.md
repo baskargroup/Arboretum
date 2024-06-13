@@ -10,6 +10,9 @@
   <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank">
     <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face">
   </a>
+  <a href="https://pypi.org/project/arbor-process/" target="_blank">
+    <img src="https://img.shields.io/badge/PyPI-arbor--process%200.1.0-orange" alt="PyPI arbor-process 0.1.0">
+  </a>
 </div>
 
 ![Banner Image](static/images/banner.png)
