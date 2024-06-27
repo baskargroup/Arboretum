@@ -374,33 +374,6 @@
   </div>
 </section>
 
-<!-- end of data feature -->
-
-<!-- dataprep -->
-<!-- <section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Data Preparation</h2>
-      <div class="content">
-        <p>
-          Our <a href="https://github.com/baskargroup/Arboretum/blob/main/Arbor-preprocess/README_arbor_process.md" target="_blank" class="underline-link">Github</a> includes the pipeline and <a href="https://pypi.org/project/arbor-process/" target="_blank" class="underline-link">arbor-process</a> package installation instructions for the data preparation. 
-          The metadata can be downloaded from <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank" class="underline-link">HF</a>. This procedure will generate machine learning-ready image-text pairs from the downloaded metadata in four steps:
-        </p>
-      </div>
-      <div class="image-container" style="text-align: center;">
-        <img src="static/images/dataprep.png" alt="datprep" style="width: 80%; height: auto;">
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  .underline-link {
-    text-decoration: underline;
-  }
-</style> -->
-<!-- end of dataprep -->
-
 <!-- dataprep -->
 <section class="hero is-small" style="margin-bottom: 1rem;">
   <div class="hero-body" style="padding-bottom: 1rem;">
@@ -414,10 +387,6 @@
       </div>
       <div class="image-container" style="text-align: center;">
         <img src="static/images/dataprep.png" alt="datprep" style="width: 80%; height: auto;">
-        <!-- <p class="caption has-text-centered">
-          (a) Example images from Arboretum-Unseen. (b) ARBORETUM-LIFE-STAGES with 20 class labels: four life stages 
-            (egg, larva, pupa, and adult) for five distinct insect species
-        </p> -->
       </div>
     </div>
   </div>
@@ -444,21 +413,6 @@
     </div>
   </div>
 </section>
-
-
-<!-- Main Datasets Section -->
-<!-- <section class="hero is-medium" style="margin-bottom: 1rem;">
-  <div class="hero-body" style="padding-bottom: 1rem;">
-    <div class="container">
-      <h1 class="title is-3">Dataset Benchmarks</h2>
-      <div class="content">
-        <p>
-        <b>ARBORETUM</b> consists of several benchmark datasets - <b>ARBORETUM-40M</b> and <b>New Benchmarks</b>.
-        </p>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <!-- Arboretum40M Subsection -->
 <section class="hero is-small" style="margin-bottom: 1rem;">
@@ -507,11 +461,11 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">ArborCLIP Model</h2>
+      <h2 class="title is-3">ARBORCLIP Model</h2>
       <!-- Explanation text space -->
       <div class="content">
         <p>
-          We use ARBORETUM-40M to train new CLIP-style foundation models (ArborCLIP), and then evaluate them on zero-shot image classification tasks. 
+          We use <b>ARBORETUM-40M</b> to train new CLIP-style foundation models (ArborCLIP), and then evaluate them on zero-shot image classification tasks. 
           A ViT-B/16 backbone initialized from the OpenAI CLIP weights, a ViT-L/14 from the MetaCLIP and a ViT-B/16 from the BioCLIP checkpoint.
           The ArborCLIP model is designed to analyze and categorize various plant species using advanced machine learning techniques. 
           It leverages a vast dataset and sophisticated algorithms to achieve high accuracy in species recognition.
