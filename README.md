@@ -29,6 +29,7 @@
     - [Existing Benchmarks](#existing-benchmarks)
   - [Acknowledgments](#acknowledgments)
   - [Website License](#website-license)
+  - [Citation](#citation)
 
 ## Data Preprocessing
 
@@ -186,3 +187,17 @@ Parts of this project page were adopted from the [Nerfies](https://nerfies.githu
 
 ## Website License
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+
+## Citation
+```bibtex
+@misc{yang2024arboretumlargemultimodaldataset,
+        title={Arboretum: A Large Multimodal Dataset Enabling AI for Biodiversity}, 
+        author={Chih-Hsuan Yang, Benjamin Feuer, Zaki Jubery, Zi K. Deng, Andre Nakkab, Md Zahid Hasan, Shivani Chiranjeevi, Kelly Marshall, Nirmal Baishnab, Asheesh K Singh, Arti Singh, Soumik Sarkar, Nirav Merchant, Chinmay Hegde, Baskar Ganapathysubramanian},
+        year={2024},
+        eprint={2406.17720},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2406.17720}, 
+  }
+```
