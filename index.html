@@ -407,7 +407,7 @@
 
 
 <!-- Lifestages -->
-<section class="hero is-small">
+<!-- <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">New Benchmark</h2>
@@ -425,17 +425,17 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- End Lifestages -->
 
 <!-- Main Datasets Section -->
 <section class="hero is-medium">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-2">Datasets</h1>
+      <h1 class="title is-2">Dataset Benchmarks</h2>
       <div class="content">
         <p>
-          This section contains information about various datasets used in our project.
+        <b>ARBORETUM</b> consists of several benchmark datasets - <b>ARBORETUM-40M</b> and <b>New Benchmarks</b>.
         </p>
       </div>
     </div>
@@ -446,10 +446,32 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">New Benchmark</h2>
+      <h2 class="title is-3">ARBORETUM-40M</h3>
       <div class="content">
         <p>
-          From Arboretum, we created three new benchmark datasets for fine-grained image classification. They are- Arboretum-Balanced, Arboretum-Unseen and Arboretum-LifeStages
+        <b>ARBORETUM-40M</b> is a subset comprising approximately 40M samples and 33K species from the seven <b>ARBORETUM</b> categories (iNaturalist prior to January 27, 2024).
+        It contains 30 to maximum of 50,000 samples per species. We conducted semi-global shuffling and divided the data into mini-batches of approximately 50,000 samples each. From these
+        mini-batches, 95% were randomly selected for training and validation, while the remaining 5% were reserved for testing.
+        </p>
+      </div>
+      <div class="image-container" style="text-align: center;">
+        <img src="static/images/arboretum40m.png" alt="lifestages" style="width: 80%; height: auto;">
+        <p class="caption has-text-centered">
+          Training data sources used in ARBORETUM-40M and Diversity in Different Taxonomy Levels. We integrate taxonomic labels into the images to train the models.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- New Benchmark Subsection -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">New Benchmark</h3>
+      <div class="content">
+        <p>
+          From <b>ARBORETUM</b>, we created three new benchmark datasets for fine-grained image classification. They are- <b>Arboretum-Balanced</b>, <b>Arboretum-Unseen</b> and <b>Arboretum-LifeStages</b>.
         </p>
       </div>
       <div class="image-container" style="text-align: center;">
