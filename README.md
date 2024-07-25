@@ -145,13 +145,17 @@ VLHub
 BioCLIP
 
 ```bibtex
-@misc{stevens2024bioclip,
-      title={BioCLIP: A Vision Foundation Model for the Tree of Life}, 
-      author={Samuel Stevens and Jiaman Wu and Matthew J Thompson and Elizabeth G Campolongo and Chan Hee Song and David Edward Carlyn and Li Dong and Wasila M Dahdul and Charles Stewart and Tanya Berger-Wolf and Wei-Lun Chao and Yu Su},
-      year={2024},
-      eprint={2311.18803},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@INPROCEEDINGS{Stevens2024-hc,
+  title     = "{BioCLIP}: A Vision Foundation Model for the Tree of Life",
+  author    = "Stevens, Samuel and Wu, Jiaman and Thompson, Matthew J and
+               Campolongo, Elizabeth G and Song, Chan Hee and Carlyn, David
+               Edward and Dong, Li and Dahdul, Wasila M and Stewart, Charles and
+               Berger-Wolf, Tanya and Chao, Wei-Lun and Su, Yu",
+  booktitle = "Proceedings of the IEEE/CVF Conference on Computer Vision and
+               Pattern Recognition (CVPR)",
+  pages     = "19412--19424",
+  year      =  2024,
+  url       = "https://openaccess.thecvf.com/content/CVPR2024/papers/Stevens_BioCLIP_A_Vision_Foundation_Model_for_the_Tree_of_Life_CVPR_2024_paper.pdf"
 }
 ```
 
