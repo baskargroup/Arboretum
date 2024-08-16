@@ -73,6 +73,20 @@ We optimize our hyperparameters prior to training with [Ray](https://docs.ray.io
 
 For more extensive documentation of the training process and the significance of each hyperparameter, we recommend referencing the OpenCLIP and BioCLIP documentation, respectively.
 
+
+## Model weights
+
+**See the [ArborCLIP](https://huggingface.co/ChihHsuan-Yang/ArborCLIP) model card on HuggingFace to download the trained model checkpoints.**
+
+We released three trained model checkpoints in the [ArborCLIP](https://huggingface.co/ChihHsuan-Yang/ArborCLIP) model card on HuggingFace. These CLIP-style models were trained on [ARBORETUM-40M](https://baskargroup.github.io/Arboretum/) for the following configurations: 
+
+- **ARBORCLIP-O:** Trained a ViT-B/16 backbone initialized from the [OpenCLIP's](https://github.com/mlfoundations/open_clip) checkpoint. The training was conducted for 40 epochs.
+- **ARBORCLIP-B:** Trained a ViT-B/16 backbone initialized from the [BioCLIP's](https://github.com/Imageomics/BioCLIP) checkpoint. The training was conducted for 8 epochs.
+- **ARBORCLIP-M:** Trained a ViT-L/14 backbone initialized from the [MetaCLIP's](https://github.com/facebookresearch/MetaCLIP) checkpoint. The training was conducted for 12 epochs.
+
+
+These models were developed for the benefit of the AI community as an open-source product. Thus, we request that any derivative products are also open-source.
+
 ## Model Validation
 
 For validating the zero-shot accuracy of our trained models and comparing to other benchmarks, we use the [VLHub](https://github.com/penfever/vlhub) repository with some slight modifications.
