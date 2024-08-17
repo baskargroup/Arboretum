@@ -5,7 +5,10 @@
     <img src="https://img.shields.io/badge/Project%20Page-Visit-blue" alt="Project Page" style="margin-right:10px;">
   </a>
   <a href="https://huggingface.co/datasets/ChihHsuan-Yang/Arboretum" target="_blank">
-    <img src="https://img.shields.io/badge/Hugging%20Face-Visit-yellow" alt="Hugging Face" style="margin-right:10px;">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Dataset%20Card-yellow" alt="Hugging Face Dataset" style="margin-right:10px;">
+  </a>
+  <a href="https://huggingface.co/ChihHsuan-Yang/ArborCLIP" target="_blank">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Model%20Card-green" alt="Hugging Face Dataset" style="margin-right:10px;">
   </a>
   <a href="https://pypi.org/project/arbor-process/" target="_blank">
     <img src="https://img.shields.io/badge/PyPI-arbor--process%200.1.0-orange" alt="PyPI arbor-process 0.1.0">
@@ -76,7 +79,7 @@ For more extensive documentation of the training process and the significance of
 
 ## Model weights
 
-**See the [ArborCLIP](https://huggingface.co/ChihHsuan-Yang/ArborCLIP) model card on HuggingFace to download the trained model checkpoints.**
+**See the [ArborCLIP](https://huggingface.co/ChihHsuan-Yang/ArborCLIP) Model card on HuggingFace to download the trained model checkpoints.**
 
 We released three trained model checkpoints in the [ArborCLIP](https://huggingface.co/ChihHsuan-Yang/ArborCLIP) model card on HuggingFace. These CLIP-style models were trained on [ARBORETUM-40M](https://baskargroup.github.io/Arboretum/) for the following configurations: 
 
